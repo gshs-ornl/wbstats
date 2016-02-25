@@ -1,0 +1,17 @@
+citHeader("To cite worldbank in publications use:")
+
+citEntry(entry = "Manual",
+  title        = "worldbank: Programmatic Access to the World Bank API",
+  author       = personList(as.person("Jesse Piburn")),
+  organization = "Oak Ridge National Laboratory",
+  address      = "Oak Ridge, Tennessee",
+  year         = "2016",
+  url          = "http://web.ornl.gov/sci/gist/",
+
+  textVersion  =
+  paste("Jesse Piburn (2016).",
+        "worldbank: Programmatic Access to the World Bank API.",
+        "Oak Ridge National Laboratory.",
+        "Oak Ridge, Tennessee.",
+        "URL http://web.ornl.gov/sci/gist/.")
+)

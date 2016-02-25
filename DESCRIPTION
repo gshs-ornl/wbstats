@@ -1,9 +1,9 @@
 Package: worldbank
 Type: Package
-Title: Programmatic Access to the World Bank API
-Description: A package for searching and downloading data from the World Bank API
+Title: worldbank: Programmatic Access to the World Bank API
+Description: A package for searching and downloading data from the World Bank API.
 Version: 0.1
-Date: 2016-02-25
+Date: 2016-03-18
 Authors@R: c(
   person("Jesse", "Piburn", email = "piburnjo@ornl.gov", role = c("aut", "cre")),
   person("Oak Ridge National Laboratory", role = "cph")
