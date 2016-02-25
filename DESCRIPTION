@@ -1,0 +1,23 @@
+Package: worldbank
+Type: Package
+Title: Programmatic Access to the World Bank API
+Description: A package for searching and downloading data from the World Bank API
+Version: 0.1
+Date: 2016-02-25
+Authors@R: c(
+  person("Jesse", "Piburn", email = "piburnjo@ornl.gov", role = c("aut", "cre")),
+  person("Oak Ridge National Laboratory", role = "cph")
+  )
+Maintainer: Jesse Piburn <piburnjo@ornl.gov>
+License: MIT + file LICENSE
+LazyData: TRUE
+Depends:
+    R (>= 2.10)
+Imports:
+    httr,
+    jsonlite
+Suggests:
+    ggplot2,
+    knitr,
+    lubridate (>= 1.5.0)
+VignetteBuilder: knitr
