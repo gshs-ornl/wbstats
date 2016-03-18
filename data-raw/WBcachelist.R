@@ -1,6 +1,6 @@
 # cached results of World Bank API information ----------------------
 
-library(worldbank)
+library(wbstats)
 
 wb_cachelist <- wbcache(lang = "en")
 

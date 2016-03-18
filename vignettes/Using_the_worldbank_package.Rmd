@@ -1,19 +1,19 @@
 ---
-title: "Introduction to the worldbank R-package"
+title: "Introduction to the wbstats R-package"
 author: "Jesse Piburn"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using_the_worldbank_package}
+  %\VignetteIndexEntry{Using_the_wbstats_package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 # Introduction
 
-The World Bank^[<http://www.worldbank.org/>] is a tremendous source of global socio-economic data; spanning several decades and dozens of topics, it has the potential to shed light on numerous global issues. To help provide access to this rich source of information, The World Bank themselves, provide a well structured RESTful API^[<http://data.worldbank.org/developers>]. While this API is very useful for integration into web services and other high-level applications, it becomes quickly overwhelming for researchers who have neither the time nor the expertise to develop software to interface with the API. This leaves the researcher to rely on manual bulk downloads of spreadsheets of the data they are interested in. This too is can quickly become overwhelming, as the work is manual, time consuming, and not easily reproducible. The goal of the `worldbank` R-package is to provide a bridge between these alternatives and allow researchers to focus on their research questions and not the question of accessing the data. The `worldbank` R-package allows researchers to quickly search and download the data of their particular interest in a programmatic and reproducible fashion; this facilitates a seamless integration into their workflow and allows analysis to be quickly rerun on different areas of interest and with realtime access to the latest available data.
+The World Bank^[<http://www.worldbank.org/>] is a tremendous source of global socio-economic data; spanning several decades and dozens of topics, it has the potential to shed light on numerous global issues. To help provide access to this rich source of information, The World Bank themselves, provide a well structured RESTful API^[<http://data.worldbank.org/developers>]. While this API is very useful for integration into web services and other high-level applications, it becomes quickly overwhelming for researchers who have neither the time nor the expertise to develop software to interface with the API. This leaves the researcher to rely on manual bulk downloads of spreadsheets of the data they are interested in. This too is can quickly become overwhelming, as the work is manual, time consuming, and not easily reproducible. The goal of the `wbstats` R-package is to provide a bridge between these alternatives and allow researchers to focus on their research questions and not the question of accessing the data. The `wbstats` R-package allows researchers to quickly search and download the data of their particular interest in a programmatic and reproducible fashion; this facilitates a seamless integration into their workflow and allows analysis to be quickly rerun on different areas of interest and with realtime access to the latest available data.
 
-### Highlighted features of the `worldbank` R-package: 
+### Highlighted features of the `wbstats` R-package: 
 
 - Access to all annual, quarterly, and monthly data available in the API
 - Support for searching and downloading data in multiple languages
@@ -31,9 +31,9 @@ To access what countries or regions are available you can use the `countries` da
 
 ## Finding available data with `wb_cachelist`
 
-For performance and ease of use, a cached version of useful information is provided with the `worldbank` R-package. This data is called `wb_cachelist` and provides a snapshot of available countries, indicators, and other relevant information. `wb_cachelist` is by default the the source from which `wbsearch()` and `wb()` uses to find matching information. The structure of `wb_cachelist` is as follows
+For performance and ease of use, a cached version of useful information is provided with the `wbstats` R-package. This data is called `wb_cachelist` and provides a snapshot of available countries, indicators, and other relevant information. `wb_cachelist` is by default the the source from which `wbsearch()` and `wb()` uses to find matching information. The structure of `wb_cachelist` is as follows
 ```{r}
-library(worldbank)
+library(wbstats)
 
 str(wb_cachelist, max.level = 1)
 ```
@@ -43,7 +43,7 @@ str(wb_cachelist, max.level = 1)
 For the most recent information on available data from the World Bank API `wbcache()` downloads an updated version of the information stored in `wb_cachelist`. `wb_cachelist` is simply a saved return of `wbcache(lang = "en")`. To use this updated information in  `wbsearch()` or `wb()`, set the `cache` parameter to the saved `list` returned from `wbcache()`. It is always a good idea to use this updated information to insure that you have access to the latest available information, such as newly added indicators or data sources.
 
 ```{r}
-library(worldbank)
+library(wbstats)
 
 # default language is english
 new_cache <- wbcache()
@@ -53,12 +53,12 @@ new_cache <- wbcache()
 
 `wbsearch()` searches through the `indicators` data frame to find indicators that match a search pattern. An example of the structure of this data frame is below
 ```{r, echo=FALSE, results='asis'}
-knitr::kable(head(worldbank::wb_cachelist$indicators[4310:4311, ]))
+knitr::kable(head(wbstats::wb_cachelist$indicators[4310:4311, ]))
 ```
 
 By default the search is done over the `indicator` and `indicatorDesc` fields and returns the columns `indicatorID` and `indicator` of the matching rows. The `indicatorID` values are inputs into `wb()`, the function for downloading the data. To return all columns for the `indicators` data frame, you can set `extra = TRUE`.
 ```{r}
-library(worldbank)
+library(wbstats)
 
 unemploy_vars <- wbsearch(pattern = "unemployment")
 head(unemploy_vars)
@@ -67,7 +67,7 @@ head(unemploy_vars)
 
 Other fields can be searched by simply changing the `fields` parameter. For example
 ```{r}
-library(worldbank)
+library(wbstats)
 
 blmbrg_vars <- wbsearch(pattern = "Bloomberg", fields = "sourceOrg")
 head(blmbrg_vars)
@@ -76,7 +76,7 @@ head(blmbrg_vars)
 
 Regular expressions are also supported.
 ```{r}
-library(worldbank)
+library(wbstats)
 
 # 'poverty' OR 'unemployment' OR 'employment'
 povemply_vars <- wbsearch(pattern = "poverty|unemployment|employment")
@@ -87,7 +87,7 @@ head(povemply_vars)
 
 The default cached data in `wb_cachelist` is in English. To search indicators in a different language, you can download an updated copy of `wb_cachelist` using `wbcache()`, with the `lang` parameter set to the language of interest and then set this as the `cache` parameter in `wbsearch()`. Other languages are supported in so far as they are supported by the original data sources. Some sources provide full support for other languages, while some have very limited support. If the data source does not have a translation for a certain field or indicator then the result is `NA`, this may result in a varying number matches depending upon the language you select.
 ```{r}
-library(worldbank)
+library(wbstats)
 
 # download wbcache in spanish
 wb_cachelist_es <- wbcache(lang = "es")
@@ -104,7 +104,7 @@ Once you have found the set of indicators that you would like to explore further
 
 The default value for the `country` parameter is a special value of `all` which as you might expect, returns data on the selected `indicator` for every available country or region.
 ```{r}
-library(worldbank)
+library(wbstats)
 
 # Population, total
 pop_data <- wb(indicator = "SP.POP.TOTL", startdate = 2000, enddate = 2002)
@@ -114,7 +114,7 @@ head(pop_data)
 
 If you are interested in only some subset of countries or regions you can pass along the specific codes to the `country` parameter. The country and region codes that can be passed to the `country` parameter correspond to the coded values from the `iso2c`, `iso3c`, `regionID`, `adminID`, and `incomeID` from the `countries` data frame in `wb_cachelist` or the return of `wbcache()`. Any values from the above columns can mixed together and passed to the same call
 ```{r}
-library(worldbank)
+library(wbstats)
 
 # Population, total
 # country values: iso3c, iso2c, regionID, adminID, incomeID
@@ -126,7 +126,7 @@ head(pop_data)
 
 Queries with multiple indicators return the data in a long data format
 ```{r}
-library(worldbank)
+library(wbstats)
 
 pop_gdp_data <- wb(country = c("US", "NO"), indicator = c("SP.POP.TOTL", "NY.GDP.MKTP.CD"),
                startdate = 1971, enddate = 1971)
@@ -137,7 +137,7 @@ head(pop_gdp_data)
 ### Using `mrv`
 If you do not know the latest date an indicator you are interested in is available for you country you can use the `mrv` instead of `startdate` and `enddate`. `mrv` stands for most recent value and takes a `integer` corresponding to the number of most recent values you wish to return
 ```{r}
-library(worldbank)
+library(wbstats)
 
 eg_data <- wb(country = c("IN"), indicator = 'EG.ELC.ACCS.ZS', mrv = 1)
 
@@ -146,7 +146,7 @@ eg_data
 
 You can increase this value and it will return no more than the `mrv` value. However, if `mrv` is greater than the number of available data it will return less
 ```{r}
-library(worldbank)
+library(wbstats)
 
 eg_data <- wb(country = c("IN"), indicator = 'EG.ELC.ACCS.ZS', mrv = 10)
 
@@ -156,7 +156,7 @@ eg_data
 ### Using `gapfill = TRUE`
 An additional parameter that can be used along with `mrv` is `gapfill`. `gapfill` allows you to "fill-in" the values between actual observations. The "filled-in" value for an otherwise missing date is the last observed value carried forward.The  only difference in the data call below from the one directly above is `gapfill = TRUE` (the default is `FALSE`). Note the very important difference
 ```{r}
-library(worldbank)
+library(wbstats)
 
 eg_data <- wb(country = c("IN"), indicator = 'EG.ELC.ACCS.ZS', mrv = 10, gapfill = TRUE)
 
@@ -168,7 +168,7 @@ Because `gapfill` returns data that does reflect actual observed values, use thi
 ### Using `POSIXct = TRUE`
 The default format for the `date` column is not conducive to sorting or plotting, especially when downloading sub annual data, such as monthly or quarterly data. To address this, if `TRUE`, the `POSIXct` parameter adds the additional columns `date_ct` and `granularity`. `date_ct` converts the default date into a `POSIXct`. `granularity` denotes the time resolution that the date represents. This option requires the use of the package `lubridate (>= 1.5.0)`. If `POSIXct = TRUE` and `lubridate (>= 1.5.0)` is not available, a `warning` is produced and the option is ignored
 ```{r}
-library(worldbank)
+library(wbstats)
 
 oil_data <- wb(indicator = "CRUDE_BRENT", mrv = 10, freq = "M", POSIXct = TRUE)
 
@@ -177,7 +177,7 @@ head(oil_data)
 
 The `POSIXct = TRUE` option makes plotting and sorting dates much easier.
 ```{r, fig.height = 4, fig.width = 7.5}
-library(worldbank)
+library(wbstats)
 library(ggplot2)
 
 oil_data <- wb(indicator = c("CRUDE_DUBAI", "CRUDE_BRENT", "CRUDE_WTI", "CRUDE_PETRO"),
@@ -189,7 +189,7 @@ ggplot(oil_data, aes(x = date_ct, y = value, colour = indicator)) + geom_line(si
 
 The `POSIXct = TRUE` option also makes plotting time series with different time coverage seamless
 ```{r, fig.height = 4, fig.width = 7.5}
-library(worldbank)
+library(wbstats)
 library(ggplot2)
 
 # querying seperate for differing time coverage example
@@ -209,7 +209,7 @@ There are a few behaviors of the World Bank API that being aware of could help e
 ## Non-overlaping time frames
 If you make a query with `wb()` and the `startdate` and `enddate` no not overlap at all with the available data, then all of the data is returned instead of nothing.
 ```{r}
-library(worldbank)
+library(wbstats)
 
 pop_data <- wb(country = "US", indicator = "SP.POP.TOTL", 
                startdate = 1800, enddate = 1805, POSIXct = TRUE)
@@ -222,7 +222,7 @@ min(pop_data$date_ct)
 ## Most Recent Values
 If you use the `mrv` parameter in `wb()` with mutliple countries or regions, it searches for the most recent dates for which any country or region in your selection has data and then returns the data for those dates. In other words the `mrv` value is not determined on a country by country basis, rather it is determined across the entire selection.
 ```{r}
-library(worldbank)
+library(wbstats)
 
 eg_data_1 <- wb(country = c("IN", "AF"), indicator = 'EG.FEC.RNEW.ZS', mrv = 1)
 eg_data_1
@@ -236,7 +236,7 @@ eg_data_2
 Not all data sources support all languages. If an indicator does not have a translation for a particular language, the non-supported fields will return as `NA`. This could potentially result in a differing number of matching indicators from `wbsearch()`
 ```{r}
 
-library(worldbank)
+library(wbstats)
 
 # english
 cache_en <- wbcache()

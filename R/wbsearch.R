@@ -26,7 +26,7 @@
 #' @export
 wbsearch <- function(pattern = "poverty", fields = c("indicator", "indicatorDesc"), extra = FALSE, cache){
 
-  if (missing(cache)) cache <- worldbank::wb_cachelist
+  if (missing(cache)) cache <- wbstats::wb_cachelist
 
   ind_cache <- cache$indicators
 

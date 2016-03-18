@@ -100,7 +100,7 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
   base_url <- url_list$base_url
   utils_url <- url_list$utils_url
 
-  if (missing(cache)) cache <- worldbank::wb_cachelist
+  if (missing(cache)) cache <- wbstats::wb_cachelist
 
   # check country ----------
   if (!("all" %in% country)) {

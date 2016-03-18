@@ -1,6 +1,6 @@
-Package: worldbank
+Package: wbstats
 Type: Package
-Title: worldbank: Programmatic Access to the World Bank API
+Title: wbstats: Programmatic Access to the World Bank API
 Description: A package for searching and downloading data from the World Bank API.
 Version: 0.1
 Date: 2016-03-18
