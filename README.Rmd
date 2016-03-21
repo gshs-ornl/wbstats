@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# wbstats: An R package for programmatically accessing the World Bank API.
+# wbstats: An R package for searching and downloading data from the World Bank API.
 
 
 You can install the latest development version from github with
@@ -259,3 +259,7 @@ sum(is.na(cache_en$indicators$indicator))
 cache_es <- wbcache(lang = "es")
 sum(is.na(cache_es$indicators$indicator))
 ```
+
+
+# Legal
+The World Bank Group, or any of its member instutions, do not support or endorse this software and are not libable for any findings or conclusions that come from the use of this software.

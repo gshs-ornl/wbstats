@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-wbstats: An R package for programmatically accessing the World Bank API.
-========================================================================
+wbstats: An R package for searching and downloading data from the World Bank API.
+=================================================================================
 
 You can install the latest development version from github with
 
@@ -425,6 +425,11 @@ cache_es <- wbcache(lang = "es")
 sum(is.na(cache_es$indicators$indicator))
 #> [1] 14053
 ```
+
+Legal
+=====
+
+The World Bank Group, or any of its member instutions, do not support or endorse this software and are not libable for any findings or conclusions that come from the use of this software.
 
 [1] <http://www.worldbank.org/>
 
