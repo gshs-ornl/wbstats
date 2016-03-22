@@ -4,7 +4,7 @@
 \name{wbstats}
 \alias{wbstats}
 \alias{wbstats-package}
-\title{wbstats: A package for programmatically accessing the World Bank API.}
+\title{wbstats: An R package for searching and downloading data from the World Bank API.}
 \description{
 The wbstats package provides structured access to all of the information
 available from the World Bank API including; support for mutliple languages,

@@ -4,7 +4,7 @@
 #' By default functions \code{\link{wb}} and \code{\link{wbsearch}} use this
 #' data for the \code{cache} parameter.
 #'
-#' This data was updated using \code{\link{wbcache}} on March 18, 2016
+#' This data was updated using \code{\link{wbcache}} on March 22, 2016
 #'
 #' @format A list containing 7 data frames:
 #' \itemize{
