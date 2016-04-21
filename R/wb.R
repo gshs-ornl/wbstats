@@ -107,7 +107,8 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
 
     cache_cn <- cache$countries
     cn_check <- cache_cn[ , c("iso3c", "iso2c", "regionID", "adminID", "incomeID")]
-    cn_check <- na.omit(unique(unlist(cn_check, use.names = FALSE)))
+    cn_check <- unique(unlist(cn_check, use.names = FALSE))
+    cn_check <- cn_check[!is.na(cn_check)]
 
     good_cn_index <- country %in% cn_check
     good_cn <- country[good_cn_index]
@@ -131,7 +132,7 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
   # check indicator ----------
   cache_ind <- cache$indicators
   ind_check <- cache_ind[, "indicatorID"]
-  ind_check <- na.omit(ind_check) # should never be needed but make sure
+  ind_check <- ind_check[!is.na(ind_check)] # should never be needed but make sure
 
   good_ind_index <- indicator %in% ind_check
   good_ind <- indicator[good_ind_index]
@@ -208,7 +209,6 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
 
     full_url <- paste0(base_url, lang, "/countries/", country_url, "/indicators/", i, "?", param_url)
 
-    #return_df <- try(jsonlite::fromJSON(full_url,  flatten = TRUE)[[2]], silent = TRUE)
     return_df <- try(wbget(full_url), silent = TRUE)
     }
   )
