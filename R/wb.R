@@ -107,7 +107,8 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
 
     cache_cn <- cache$countries
     cn_check <- cache_cn[ , c("iso3c", "iso2c", "regionID", "adminID", "incomeID")]
-    cn_check <- na.omit(unique(unlist(cn_check, use.names = FALSE)))
+    cn_check <- unique(unlist(cn_check, use.names = FALSE))
+    cn_check <- cn_check[!is.na(cn_check)]
 
     good_cn_index <- country %in% cn_check
     good_cn <- country[good_cn_index]
