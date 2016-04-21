@@ -1,14 +1,16 @@
 Package: wbstats
 Type: Package
-Title: wbstats: Programmatic Access to the World Bank API
-Description: A package for searching and downloading data from the World Bank API.
+Title: Programmatic Access to Data and Statistics from the World Bank API
+Description: Tools for searching and downloading data and statistics from
+  the World Bank Data API and the World Bank Data Catalog API.
 Version: 0.1
-Date: 2016-03-18
+Date: 2016-04-21
 Authors@R: c(
   person("Jesse", "Piburn", email = "piburnjo@ornl.gov", role = c("aut", "cre")),
-  person("Oak Ridge National Laboratory", role = "cph")
+  person("UT-Battelle, LLC", role = "cph")
   )
 Maintainer: Jesse Piburn <piburnjo@ornl.gov>
+URL: https://github.com/GIST-ORNL/wbstats
 License: MIT + file LICENSE
 LazyData: TRUE
 Depends:
