@@ -21,6 +21,7 @@
 #' }
 #' @examples
 #' wbcountries()
+#'
 #' wbcountries(lang = "es")
 #' @export
 wbcountries <- function(lang = c("en", "es", "fr", "ar", "zh")) {
@@ -84,7 +85,7 @@ wbcountries <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 #' \item \code{zh}: Mandarin
 #' }
 #' @examples
-#' wbindicators()
+#' # default is english. To specific another language use argument lang
 #' wbindicators(lang = "es")
 #' @export
 wbindicators <- function(lang = c("en", "es", "fr", "ar", "zh")) {
@@ -142,6 +143,7 @@ wbindicators <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 #' }
 #' @examples
 #' wbtopics()
+#'
 #' wbtopics(lang = "es")
 #' @export
 wbtopics <- function(lang = c("en", "es", "fr", "ar", "zh")) {
@@ -190,6 +192,7 @@ wbtopics <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 #' }
 #' @examples
 #' wblending()
+#'
 #' wblending(lang = "es")
 #' @export
 wblending <- function(lang = c("en", "es", "fr", "ar", "zh")) {
@@ -238,6 +241,7 @@ wblending <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 #' }
 #' @examples
 #' wbincome()
+#'
 #' wbincome(lang = "es")
 #' @export
 wbincome <- function(lang = c("en", "es", "fr", "ar", "zh")) {
@@ -286,6 +290,7 @@ wbincome <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 #' }
 #' @examples
 #' wbsources()
+#'
 #' wbsources(lang = "es")
 #' @export
 wbsources <- function(lang = c("en", "es", "fr", "ar", "zh")) {
@@ -424,7 +429,7 @@ wbdatacatalog <- function() {
 #' Saving this return and using it has the \code{cache} parameter in \code{\link{wb}} and \code{\link{wbsearch}}
 #' replaces the default cached version \code{\link{wb_cachelist}} that comes with the package itself
 #' @examples
-#' wbcache()
+#' # default is english. To specific another language use argument lang
 #' wbcache(lang = "es")
 #' @export
 wbcache <- function(lang = c("en", "es", "fr", "ar", "zh")) {

@@ -31,10 +31,6 @@ wbsearch(pattern = "education")
 
 wbsearch(pattern = "Food and Agriculture Organization", fields = "sourceOrg")
 
-# search in a language other than english
-wb_cache_es <- wbcache(lang = "es")
-wbsearch(pattern = "pobreza", cache = wb_cache_es)
-
 # with regular expression operators
 # 'poverty' OR 'unemployment' OR 'employment'
 wbsearch(pattern = "poverty|unemployment|employment")

@@ -32,6 +32,7 @@ The options for \code{lang} are:
 }
 \examples{
 wblending()
+
 wblending(lang = "es")
 }
 

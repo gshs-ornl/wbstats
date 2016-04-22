@@ -31,7 +31,7 @@ The options for \code{lang} are:
 }
 }
 \examples{
-wbindicators()
+# default is english. To specific another language use argument lang
 wbindicators(lang = "es")
 }
 

@@ -32,6 +32,7 @@ The options for \code{lang} are:
 }
 \examples{
 wbincome()
+
 wbincome(lang = "es")
 }
 

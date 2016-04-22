@@ -32,6 +32,7 @@ The options for \code{lang} are:
 }
 \examples{
 wbtopics()
+
 wbtopics(lang = "es")
 }
 
