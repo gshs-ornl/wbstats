@@ -16,8 +16,16 @@ knitr::opts_chunk$set(
 
 # wbstats: An R package for searching and downloading data from the World Bank API.
 
+You can install:
 
-You can install the latest development version from github with
+The latest release version from CRAN with
+```{r, eval = FALSE}
+install.packages("wbstats")
+```
+
+or
+
+The latest development version from github with
 ```{r, eval = FALSE}
 devtools::install_github("GIST-ORNL/wbstats")
 ```
