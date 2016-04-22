@@ -2,7 +2,17 @@
 wbstats: An R package for searching and downloading data from the World Bank API.
 =================================================================================
 
-You can install the latest development version from github with
+You can install:
+
+The latest release version from CRAN with
+
+``` r
+install.packages("wbstats")
+```
+
+or
+
+The latest development version from github with
 
 ``` r
 devtools::install_github("GIST-ORNL/wbstats")
@@ -41,7 +51,7 @@ library(wbstats)
 str(wb_cachelist, max.level = 1)
 #> List of 7
 #>  $ countries  :'data.frame': 264 obs. of  14 variables:
-#>  $ indicators :'data.frame': 15688 obs. of  6 variables:
+#>  $ indicators :'data.frame': 16630 obs. of  6 variables:
 #>  $ sources    :'data.frame': 39 obs. of  4 variables:
 #>  $ datacatalog:'data.frame': 10 obs. of  25 variables:
 #>  $ topics     :'data.frame': 21 obs. of  3 variables:
@@ -66,10 +76,10 @@ Search available data with `wbsearch()`
 
 `wbsearch()` searches through the `indicators` data frame to find indicators that match a search pattern. An example of the structure of this data frame is below
 
-|      | indicatorID    | indicator                                        | indicatorDesc                                                                                                                                                                                                                                            | sourceOrg                                  | sourceID | source                       |
-|------|:---------------|:-------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------|:---------|:-----------------------------|
-| 4310 | DT.IXF.DPPG.CD | Interest forgiven (current US$)                  | Interest forgiven is the amount of interest due or in arrears that was written off or forgiven in any given year. Data are in current U.S. dollars.                                                                                                      | World Bank, International Debt Statistics. | 2        | World Development Indicators |
-| 4311 | DT.IXR.DPPG.CD | Interest rescheduled (capitalized) (current US$) | Interest rescheduled is the amount of interest due or in arrears that was rescheduled in any given year. (Interest capitalized is the interest that became part of the stock of debt due to a rescheduling operation.) Data are in current U.S. dollars. | World Bank, International Debt Statistics. | 2        | World Development Indicators |
+|      | indicatorID       | indicator                                          | indicatorDesc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | sourceOrg                                  | sourceID | source                       |
+|------|:------------------|:---------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------|:---------|:-----------------------------|
+| 4310 | DT.IXA.DPPG.CD.CG | Net change in interest arrears (current US$)       | Net change in interest arrears is the variation in the total amount of interest in arrears between two consecutive years. Data are in current U.S. dollars.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | World Bank, International Debt Statistics. | 2        | World Development Indicators |
+| 4311 | DT.IXA.OFFT.CD    | Interest arrears, official creditors (current US$) | Interest in arrears on long-term debt is defined as interest payment due but not paid, on a cumulative basis. Debt from official creditors includes loans from international organizations (multilateral loans) and loans from governments (bilateral loans). Loans from international organization include loans and credits from the World Bank, regional development banks, and other multilateral and intergovernmental agencies. Excluded are loans from funds administered by an international organization on behalf of a single donor government; these are classified as loans from governments. Government loans include loans from governments and their agencies (including central banks), loans from autonomous bodies, and direct loans from official export credit agencies. Long-term external debt is defined as debt that has an original or extended maturity of more than one year and that is owed to nonresidents by residents of an economy and repayable in currency, goods, or services. Data are in current U.S. dollars. | World Bank, International Debt Statistics. | 2        | World Development Indicators |
 
 By default the search is done over the `indicator` and `indicatorDesc` fields and returns the columns `indicatorID` and `indicator` of the matching rows. The `indicatorID` values are inputs into `wb()`, the function for downloading the data. To return all columns for the `indicators` data frame, you can set `extra = TRUE`.
 
@@ -79,12 +89,12 @@ library(wbstats)
 unemploy_vars <- wbsearch(pattern = "unemployment")
 head(unemploy_vars)
 #>             indicatorID                             indicator
-#> 1747 ccx_unempr_pop_eld           Unemployment rate - elderly
-#> 1748 ccx_unempr_pop_fem            Unemployment rate - female
-#> 1749 ccx_unempr_pop_mal              Unemployment rate - male
-#> 1750 ccx_unempr_pop_rur             Unemployment rate - rural
-#> 1751 ccx_unempr_pop_tot Unemployment rate in total population
-#> 1752 ccx_unempr_pop_urb             Unemployment rate - urban
+#> 1750 ccx_unempr_pop_eld           Unemployment rate - elderly
+#> 1751 ccx_unempr_pop_fem            Unemployment rate - female
+#> 1752 ccx_unempr_pop_mal              Unemployment rate - male
+#> 1753 ccx_unempr_pop_rur             Unemployment rate - rural
+#> 1754 ccx_unempr_pop_tot Unemployment rate in total population
+#> 1755 ccx_unempr_pop_urb             Unemployment rate - urban
 ```
 
 Other fields can be searched by simply changing the `fields` parameter. For example
@@ -95,12 +105,12 @@ library(wbstats)
 blmbrg_vars <- wbsearch(pattern = "Bloomberg", fields = "sourceOrg")
 head(blmbrg_vars)
 #>      indicatorID                             indicator
-#> 1494      BARLEY                Barley, $/mt, current$
-#> 1786     CHICKEN     Meat, chicken, cents/kg, current$
-#> 1810 CRUDE_BRENT    Crude oil, Brendt, $/bbl, current$
-#> 1811 CRUDE_DUBAI     Crude oil, Dubai, $/bbl, current$
-#> 1813   CRUDE_WTI       Crude oil, WTI, $/bbl, current$
-#> 5358  GFDD.OM.02 Stock market return (%, year-on-year)
+#> 1496      BARLEY                Barley, $/mt, current$
+#> 1789     CHICKEN     Meat, chicken, cents/kg, current$
+#> 1813 CRUDE_BRENT    Crude oil, Brendt, $/bbl, current$
+#> 1814 CRUDE_DUBAI     Crude oil, Dubai, $/bbl, current$
+#> 1816   CRUDE_WTI       Crude oil, WTI, $/bbl, current$
+#> 5370  GFDD.OM.02 Stock market return (%, year-on-year)
 ```
 
 Regular expressions are also supported.
@@ -112,13 +122,13 @@ library(wbstats)
 povemply_vars <- wbsearch(pattern = "poverty|unemployment|employment")
 
 head(povemply_vars)
-#>            indicatorID                                indicator
-#> 1   1.0.HCount.1.25usd          Poverty Headcount ($1.25 a day)
-#> 2     1.0.HCount.10usd Under Middle Class ($10 a day) Headcount
-#> 3    1.0.HCount.2.5usd          Poverty Headcount ($2.50 a day)
-#> 4 1.0.HCount.Mid10to50    Middle Class ($10-50 a day) Headcount
-#> 5      1.0.HCount.Ofcl  Official Moderate Poverty Rate-National
-#> 6  1.0.HCount.Poor4uds             Poverty Headcount ($4 a day)
+#>            indicatorID                               indicator
+#> 1   1.0.HCount.1.90usd         Poverty Headcount ($1.90 a day)
+#> 2    1.0.HCount.2.5usd         Poverty Headcount ($2.50 a day)
+#> 3 1.0.HCount.Mid10to50   Middle Class ($10-50 a day) Headcount
+#> 4      1.0.HCount.Ofcl Official Moderate Poverty Rate-National
+#> 5  1.0.HCount.Poor4uds            Poverty Headcount ($4 a day)
+#> 6  1.0.HCount.Vul4to10      Vulnerable ($4-10 a day) Headcount
 ```
 
 The default cached data in `wb_cachelist` is in English. To search indicators in a different language, you can download an updated copy of `wb_cachelist` using `wbcache()`, with the `lang` parameter set to the language of interest and then set this as the `cache` parameter in `wbsearch()`. Other languages are supported in so far as they are supported by the original data sources. Some sources provide full support for other languages, while some have very limited support. If the data source does not have a translation for a certain field or indicator then the result is `NA`, this may result in a varying number matches depending upon the language you select.
@@ -133,12 +143,12 @@ gini_vars <- wbsearch(pattern = "Coeficiente de Gini", cache = wb_cachelist_es)
 
 head(gini_vars)
 #>         indicatorID                                       indicator
-#> 139        3.0.Gini                             Coeficiente de Gini
-#> 140 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
-#> 149   3.0.TheilInd1                          Índice de Theil, GE(1)
-#> 162        3.1.Gini                                     Gini, Rural
-#> 164   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
-#> 175        3.2.Gini                                    Gini, Urbano
+#> 136        3.0.Gini                             Coeficiente de Gini
+#> 137 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
+#> 146   3.0.TheilInd1                          Índice de Theil, GE(1)
+#> 159        3.1.Gini                                     Gini, Rural
+#> 161   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
+#> 172        3.2.Gini                                    Gini, Urbano
 ```
 
 Downloading data with `wb()`
@@ -185,8 +195,8 @@ head(pop_data)
 #>       value date indicatorID         indicator iso2c
 #> 1    102393 2012 SP.POP.TOTL Population, total    AW
 #> 2  29726803 2012 SP.POP.TOTL Population, total    AF
-#> 3 260544871 2012 SP.POP.TOTL Population, total    7E
-#> 4 323348718 2012 SP.POP.TOTL Population, total    XR
+#> 3 259879171 2012 SP.POP.TOTL Population, total    7E
+#> 4 323348755 2012 SP.POP.TOTL Population, total    XR
 #> 5 922840423 2012 SP.POP.TOTL Population, total    ZG
 #>                                   country
 #> 1                                   Aruba
@@ -329,7 +339,7 @@ ggplot(oil_data, aes(x = date_ct, y = value, colour = indicator)) + geom_line(si
   labs(title = "Crude Oil Price Comparisons", x = "Date", y = "US Dollars")
 ```
 
-![](README-unnamed-chunk-17-1.png)<!-- -->
+![](README-unnamed-chunk-18-1.png)<!-- -->
 
 The `POSIXct = TRUE` option also makes plotting time series with different time coverage seamless
 
@@ -347,7 +357,7 @@ ggplot(metal_data, aes(x = date_ct, y = value, colour = indicator)) + geom_line(
   labs(title = "Precious Metal Prices", x = "Date", y = "US Dollars")
 ```
 
-![](README-unnamed-chunk-18-1.png)<!-- -->
+![](README-unnamed-chunk-19-1.png)<!-- -->
 
 Some Sharp Corners
 ==================
@@ -423,7 +433,7 @@ sum(is.na(cache_en$indicators$indicator))
 # spanish
 cache_es <- wbcache(lang = "es")
 sum(is.na(cache_es$indicators$indicator))
-#> [1] 14053
+#> [1] 14909
 ```
 
 Legal
