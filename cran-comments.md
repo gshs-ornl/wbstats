@@ -2,8 +2,7 @@
 
 This is a resubmission. In this version I have:
 
-* resolved NOTE on na.omit
-* lowered the number of examples to limit their total time
+* added urls to the description
 
 ## Test environments
 * local win install, R 3.2.0
