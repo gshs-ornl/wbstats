@@ -29,6 +29,7 @@ The World Bank[1] is a tremendous source of global socio-economic data; spanning
 -   Support for searching and downloading data in multiple languages
 -   Access to the World Bank Data Catalog Metadata, providing among other information; update schedules and supported languages
 -   Ability to return `POSIXct` dates for easy integration into plotting and time-series analysis techniques
+-   Returns data in long format for direct integration with packages like `ggplot2` and `dplyr`
 -   Support for Most Recent Value queries
 -   Support for `grep` style searching for data descriptions and names
 -   Ability to download data not only by country, but by aggregates as well, such as High Income or South Asia
@@ -330,7 +331,7 @@ The `POSIXct = TRUE` option makes plotting and sorting dates much easier.
 ``` r
 library(wbstats)
 library(ggplot2)
-#> Warning: package 'ggplot2' was built under R version 3.2.3
+#> Warning: package 'ggplot2' was built under R version 3.2.5
 
 oil_data <- wb(indicator = c("CRUDE_DUBAI", "CRUDE_BRENT", "CRUDE_WTI", "CRUDE_PETRO"),
                startdate = "2012M01", enddate = "2014M12", freq = "M", POSIXct = TRUE)

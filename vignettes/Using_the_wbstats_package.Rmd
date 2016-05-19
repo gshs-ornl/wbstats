@@ -19,6 +19,7 @@ The World Bank^[<http://www.worldbank.org/>] is a tremendous source of global so
 - Support for searching and downloading data in multiple languages
 - Access to the World Bank Data Catalog Metadata, providing among other information; update schedules and supported languages
 - Ability to return `POSIXct` dates for easy integration into plotting and time-series analysis techniques
+- Returns data in long format for direct integration with packages like `ggplot2` and `dplyr`
 - Support for Most Recent Value queries
 - Support for `grep` style searching for data descriptions and names
 - Ability to download data not only by country, but by aggregates as well, such as High Income or South Asia
