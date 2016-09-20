@@ -51,12 +51,12 @@ library(wbstats)
 
 str(wb_cachelist, max.level = 1)
 #> List of 7
-#>  $ countries  :'data.frame': 264 obs. of  14 variables:
-#>  $ indicators :'data.frame': 16630 obs. of  6 variables:
-#>  $ sources    :'data.frame': 39 obs. of  4 variables:
+#>  $ countries  :'data.frame': 304 obs. of  14 variables:
+#>  $ indicators :'data.frame': 16879 obs. of  6 variables:
+#>  $ sources    :'data.frame': 41 obs. of  4 variables:
 #>  $ datacatalog:'data.frame': 10 obs. of  25 variables:
 #>  $ topics     :'data.frame': 21 obs. of  3 variables:
-#>  $ income     :'data.frame': 10 obs. of  2 variables:
+#>  $ income     :'data.frame': 7 obs. of  2 variables:
 #>  $ lending    :'data.frame': 4 obs. of  2 variables:
 ```
 
@@ -77,10 +77,10 @@ Search available data with `wbsearch()`
 
 `wbsearch()` searches through the `indicators` data frame to find indicators that match a search pattern. An example of the structure of this data frame is below
 
-|      | indicatorID       | indicator                                          | indicatorDesc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | sourceOrg                                  | sourceID | source                       |
-|------|:------------------|:---------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------|:---------|:-----------------------------|
-| 4310 | DT.IXA.DPPG.CD.CG | Net change in interest arrears (current US$)       | Net change in interest arrears is the variation in the total amount of interest in arrears between two consecutive years. Data are in current U.S. dollars.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | World Bank, International Debt Statistics. | 2        | World Development Indicators |
-| 4311 | DT.IXA.OFFT.CD    | Interest arrears, official creditors (current US$) | Interest in arrears on long-term debt is defined as interest payment due but not paid, on a cumulative basis. Debt from official creditors includes loans from international organizations (multilateral loans) and loans from governments (bilateral loans). Loans from international organization include loans and credits from the World Bank, regional development banks, and other multilateral and intergovernmental agencies. Excluded are loans from funds administered by an international organization on behalf of a single donor government; these are classified as loans from governments. Government loans include loans from governments and their agencies (including central banks), loans from autonomous bodies, and direct loans from official export credit agencies. Long-term external debt is defined as debt that has an original or extended maturity of more than one year and that is owed to nonresidents by residents of an economy and repayable in currency, goods, or services. Data are in current U.S. dollars. | World Bank, International Debt Statistics. | 2        | World Development Indicators |
+|      | indicatorID    | indicator                                         | indicatorDesc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | sourceOrg                                  | sourceID | source                       |
+|------|:---------------|:--------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------|:---------|:-----------------------------|
+| 4310 | DT.IXA.PRVT.CD | Interest arrears, private creditors (current US$) | Interest in arrears on long-term debt is defined as interest payment due but not paid, on a cumulative basis. Debt from private creditors include bonds that are either publicly issued or privately placed; commercial bank loans from private banks and other private financial institutions; and other private credits from manufacturers, exporters, and other suppliers of goods, and bank credits covered by a guarantee of an export credit agency. Long-term external debt is defined as debt that has an original or extended maturity of more than one year and that is owed to nonresidents by residents of an economy and repayable in currency, goods, or services. Data are in current U.S. dollars. | World Bank, International Debt Statistics. | 2        | World Development Indicators |
+| 4311 | DT.IXF.DPPG.CD | Interest forgiven (current US$)                   | Interest forgiven is the amount of interest due or in arrears that was written off or forgiven in any given year. Data are in current U.S. dollars.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | World Bank, International Debt Statistics. | 2        | World Development Indicators |
 
 By default the search is done over the `indicator` and `indicatorDesc` fields and returns the columns `indicatorID` and `indicator` of the matching rows. The `indicatorID` values are inputs into `wb()`, the function for downloading the data. To return all columns for the `indicators` data frame, you can set `extra = TRUE`.
 
@@ -90,12 +90,12 @@ library(wbstats)
 unemploy_vars <- wbsearch(pattern = "unemployment")
 head(unemploy_vars)
 #>             indicatorID                             indicator
-#> 1750 ccx_unempr_pop_eld           Unemployment rate - elderly
-#> 1751 ccx_unempr_pop_fem            Unemployment rate - female
-#> 1752 ccx_unempr_pop_mal              Unemployment rate - male
-#> 1753 ccx_unempr_pop_rur             Unemployment rate - rural
-#> 1754 ccx_unempr_pop_tot Unemployment rate in total population
-#> 1755 ccx_unempr_pop_urb             Unemployment rate - urban
+#> 1749 ccx_unempr_pop_eld           Unemployment rate - elderly
+#> 1750 ccx_unempr_pop_fem            Unemployment rate - female
+#> 1751 ccx_unempr_pop_mal              Unemployment rate - male
+#> 1752 ccx_unempr_pop_rur             Unemployment rate - rural
+#> 1753 ccx_unempr_pop_tot Unemployment rate in total population
+#> 1754 ccx_unempr_pop_urb             Unemployment rate - urban
 ```
 
 Other fields can be searched by simply changing the `fields` parameter. For example
@@ -106,12 +106,12 @@ library(wbstats)
 blmbrg_vars <- wbsearch(pattern = "Bloomberg", fields = "sourceOrg")
 head(blmbrg_vars)
 #>      indicatorID                             indicator
-#> 1496      BARLEY                Barley, $/mt, current$
-#> 1789     CHICKEN     Meat, chicken, cents/kg, current$
-#> 1813 CRUDE_BRENT    Crude oil, Brendt, $/bbl, current$
-#> 1814 CRUDE_DUBAI     Crude oil, Dubai, $/bbl, current$
-#> 1816   CRUDE_WTI       Crude oil, WTI, $/bbl, current$
-#> 5370  GFDD.OM.02 Stock market return (%, year-on-year)
+#> 1495      BARLEY                Barley, $/mt, current$
+#> 1788     CHICKEN     Meat, chicken, cents/kg, current$
+#> 1811 CRUDE_BRENT    Crude oil, Brendt, $/bbl, current$
+#> 1812 CRUDE_DUBAI     Crude oil, Dubai, $/bbl, current$
+#> 1814   CRUDE_WTI       Crude oil, WTI, $/bbl, current$
+#> 5412  GFDD.OM.02 Stock market return (%, year-on-year)
 ```
 
 Regular expressions are also supported.
@@ -167,9 +167,9 @@ pop_data <- wb(indicator = "SP.POP.TOTL", startdate = 2000, enddate = 2002)
 
 head(pop_data)
 #>       value date indicatorID         indicator iso2c
-#> 1 293501628 2002 SP.POP.TOTL Population, total    1A
-#> 2 287358599 2001 SP.POP.TOTL Population, total    1A
-#> 3 281355774 2000 SP.POP.TOTL Population, total    1A
+#> 1 293402563 2002 SP.POP.TOTL Population, total    1A
+#> 2 287291826 2001 SP.POP.TOTL Population, total    1A
+#> 3 281326250 2000 SP.POP.TOTL Population, total    1A
 #> 4   6532561 2002 SP.POP.TOTL Population, total    S3
 #> 5   6497461 2001 SP.POP.TOTL Population, total    S3
 #> 6   6454716 2000 SP.POP.TOTL Population, total    S3
@@ -191,20 +191,21 @@ library(wbstats)
 # country values: iso3c, iso2c, regionID, adminID, incomeID
 pop_data <- wb(country = c("ABW","AF", "SSF", "ECA", "NOC"),
                indicator = "SP.POP.TOTL", startdate = 2012, enddate = 2012)
+#> Warning in wb(country = c("ABW", "AF", "SSF", "ECA", "NOC"), indicator =
+#> "SP.POP.TOTL", : The following country values are not valid and are being
+#> excluded from the request: NOC
 
 head(pop_data)
 #>       value date indicatorID         indicator iso2c
 #> 1    102393 2012 SP.POP.TOTL Population, total    AW
 #> 2  29726803 2012 SP.POP.TOTL Population, total    AF
-#> 3 259879171 2012 SP.POP.TOTL Population, total    7E
-#> 4 323348755 2012 SP.POP.TOTL Population, total    XR
-#> 5 922840423 2012 SP.POP.TOTL Population, total    ZG
-#>                                   country
-#> 1                                   Aruba
-#> 2                             Afghanistan
-#> 3 Europe & Central Asia (developing only)
-#> 4                    High income: nonOECD
-#> 5  Sub-Saharan Africa (all income levels)
+#> 3 403830537 2012 SP.POP.TOTL Population, total    7E
+#> 4 922855109 2012 SP.POP.TOTL Population, total    ZG
+#>                                         country
+#> 1                                         Aruba
+#> 2                                   Afghanistan
+#> 3 Europe & Central Asia (excluding high income)
+#> 4                            Sub-Saharan Africa
 ```
 
 Queries with multiple indicators return the data in a long data format
@@ -216,16 +217,11 @@ pop_gdp_data <- wb(country = c("US", "NO"), indicator = c("SP.POP.TOTL", "NY.GDP
                startdate = 1971, enddate = 1971)
 
 head(pop_gdp_data)
-#>          value date    indicatorID                          indicator
-#> 1 3.903039e+06 1971    SP.POP.TOTL                  Population, total
-#> 2 2.076610e+08 1971    SP.POP.TOTL                  Population, total
-#> 3 1.458311e+10 1971 NY.GDP.MKTP.CD GDP at market prices (current US$)
-#> 4 1.167770e+12 1971 NY.GDP.MKTP.CD GDP at market prices (current US$)
-#>   iso2c       country
-#> 1    NO        Norway
-#> 2    US United States
-#> 3    NO        Norway
-#> 4    US United States
+#>          value date    indicatorID         indicator iso2c       country
+#> 1 3.903039e+06 1971    SP.POP.TOTL Population, total    NO        Norway
+#> 2 2.076610e+08 1971    SP.POP.TOTL Population, total    US United States
+#> 3 1.458311e+10 1971 NY.GDP.MKTP.CD GDP (current US$)    NO        Norway
+#> 4 1.167770e+12 1971 NY.GDP.MKTP.CD GDP (current US$)    US United States
 ```
 
 ### Using `mrv`
@@ -311,19 +307,19 @@ oil_data <- wb(indicator = "CRUDE_BRENT", mrv = 10, freq = "M", POSIXct = TRUE)
 
 head(oil_data)
 #>   value    date indicatorID                          indicator iso2c
-#> 1 57.93 2015M02 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 2 48.07 2015M01 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 3 62.33 2014M12 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 4 78.44 2014M11 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 5 87.27 2014M10 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 6 97.34 2014M09 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#> 1 46.14 2016M08 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#> 2 45.07 2016M07 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#> 3 48.48 2016M06 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#> 4 47.13 2016M05 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#> 5 42.25 2016M04 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#> 6 39.07 2016M03 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
 #>   country    date_ct granularity
-#> 1   World 2015-02-01     monthly
-#> 2   World 2015-01-01     monthly
-#> 3   World 2014-12-01     monthly
-#> 4   World 2014-11-01     monthly
-#> 5   World 2014-10-01     monthly
-#> 6   World 2014-09-01     monthly
+#> 1   World 2016-08-01     monthly
+#> 2   World 2016-07-01     monthly
+#> 3   World 2016-06-01     monthly
+#> 4   World 2016-05-01     monthly
+#> 5   World 2016-04-01     monthly
+#> 6   World 2016-03-01     monthly
 ```
 
 The `POSIXct = TRUE` option makes plotting and sorting dates much easier.
@@ -377,9 +373,9 @@ pop_data <- wb(country = "US", indicator = "SP.POP.TOTL",
                startdate = 1800, enddate = 1805, POSIXct = TRUE)
 
 nrow(pop_data)
-#> [1] 55
+#> [1] 56
 max(pop_data$date_ct)
-#> [1] "2014-01-01"
+#> [1] "2015-01-01"
 min(pop_data$date_ct)
 #> [1] "1960-01-01"
 ```
@@ -434,7 +430,7 @@ sum(is.na(cache_en$indicators$indicator))
 # spanish
 cache_es <- wbcache(lang = "es")
 sum(is.na(cache_es$indicators$indicator))
-#> [1] 14909
+#> [1] 15169
 ```
 
 Legal
