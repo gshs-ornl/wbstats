@@ -105,23 +105,21 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
   if (missing(cache)) cache <- wbstats::wb_cachelist
 
   # check country ----------
-  if(country == "all"){
+  if ("all" %in% country) {
 
     country_url <- "all"
 
-  } else if(country == "aggregates"){
+  } else if ("aggregates" %in% country) {
 
-    cache_cn <- cache$countries[which(cache$countries$region == "Aggregates") , ]
-    cn_index <- levels(as.factor(cache_cn$iso3c))
-    country_url <- paste0(cn_index, collapse = ";")
+    cache_cn <- cache$countries[cache$countries$region == "Aggregates" , "iso3c" ]
+    country_url <- paste0(cache_cn, collapse = ";")
 
-  } else if(country == "countries_only"){
+  } else if ("countries_only" %in% country) {
 
-    cache_cn <- cache$countries[which(cache$countries$region != "Aggregates") , ]
-    cn_index <- levels(as.factor(cache_cn$iso3c))
-    country_url <- paste0(cn_index, collapse = ";")
+    cache_cn <- cache$countries[cache$countries$region != "Aggregates" , "iso3c" ]
+    country_url <- paste0(cache_cn, collapse = ";")
 
-  }else{
+  } else {
 
     cache_cn <- cache$countries
     cn_check <- cache_cn[ , c("iso3c", "iso2c", "regionID", "adminID", "incomeID")]

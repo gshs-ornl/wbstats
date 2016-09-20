@@ -23,7 +23,7 @@ By default functions \code{\link{wb}} and \code{\link{wbsearch}} use this
 data for the \code{cache} parameter.
 }
 \details{
-This data was updated using \code{\link{wbcache}} on April 21, 2016
+This data was updated using \code{\link{wbcache}} on May 19, 2016
 }
 \keyword{datasets}
 
