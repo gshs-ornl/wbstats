@@ -4,7 +4,9 @@
 #'
 #' @param country Character vector of country or region codes. Default value is special code of \code{all}.
 #'  Other permissible values are codes in the following fields from the \code{\link{wb_cachelist}} \code{country}
-#'  data frame. \code{iso3c}, \code{iso2c}, \code{regionID}, \code{adminID}, \code{incomeID}, and \code{lendingID}
+#'  data frame. \code{iso3c}, \code{iso2c}, \code{regionID}, \code{adminID}, \code{incomeID}, and \code{lendingID}.
+#'  Additional special values include \code{aggregates}, which returns only aggregates, and \code{countries_only},
+#'  which returns all countries without aggregates.
 #' @param indicator Character vector of indicator codes. These codes correspond to the \code{indicatorID} column
 #'  from the \code{indicator} data frame of \code{\link{wbcache}} or \code{\link{wb_cachelist}}, or
 #'  the result of \code{\link{wbindicators}}
@@ -103,7 +105,23 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
   if (missing(cache)) cache <- wbstats::wb_cachelist
 
   # check country ----------
-  if (!("all" %in% country)) {
+  if(country == "all"){
+
+    country_url <- "all"
+
+  } else if(country == "aggregates"){
+
+    cache_cn <- cache$countries[which(cache$countries$region == "Aggregates") , ]
+    cn_index <- levels(as.factor(cache_cn$iso3c))
+    country_url <- paste0(cn_index, collapse = ";")
+
+  } else if(country == "countries_only"){
+
+    cache_cn <- cache$countries[which(cache$countries$region != "Aggregates") , ]
+    cn_index <- levels(as.factor(cache_cn$iso3c))
+    country_url <- paste0(cn_index, collapse = ";")
+
+  }else{
 
     cache_cn <- cache$countries
     cn_check <- cache_cn[ , c("iso3c", "iso2c", "regionID", "adminID", "incomeID")]
@@ -122,12 +140,7 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
 
     country_url <- paste0(good_cn, collapse = ";")
 
-  } else {
-
-    country_url <- "all"
-
   }
-
 
   # check indicator ----------
   cache_ind <- cache$indicators
