@@ -11,7 +11,9 @@ wb(country = "all", indicator, startdate, enddate, mrv, gapfill, freq, cache,
 \arguments{
 \item{country}{Character vector of country or region codes. Default value is special code of \code{all}.
 Other permissible values are codes in the following fields from the \code{\link{wb_cachelist}} \code{country}
-data frame. \code{iso3c}, \code{iso2c}, \code{regionID}, \code{adminID}, \code{incomeID}, and \code{lendingID}}
+data frame. \code{iso3c}, \code{iso2c}, \code{regionID}, \code{adminID}, \code{incomeID}, and \code{lendingID}.
+Additional special values include \code{aggregates}, which returns only aggregates, and \code{countries_only},
+which returns all countries without aggregates.}
 
 \item{indicator}{Character vector of indicator codes. These codes correspond to the \code{indicatorID} column
 from the \code{indicator} data frame of \code{\link{wbcache}} or \code{\link{wb_cachelist}}, or
@@ -96,6 +98,12 @@ Not all data returns have support for langauges other than english. If the speci
 
  # increase the mrv value to increase the number of maximum number of returns
  wb(country = c("IN"), indicator = 'EG.ELC.ACCS.ZS', mrv = 35)
+
+ # GDP at market prices (current US$) for only available countries
+ wb(country = "countries_only", indicator = "NY.GDP.MKTP.CD", startdate = 2000, enddate = 2016)
+
+ # GDP at market prices (current US$) for only available aggregate regions
+ wb(country = "aggregates", indicator = "NY.GDP.MKTP.CD", startdate = 2000, enddate = 2016)
 
  # if you want to "fill-in" the values in between actual observations use gapfill = TRUE
  # this highlights a very important difference.
