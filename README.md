@@ -33,6 +33,7 @@ The World Bank[1] is a tremendous source of global socio-economic data; spanning
 -   Support for Most Recent Value queries
 -   Support for `grep` style searching for data descriptions and names
 -   Ability to download data not only by country, but by aggregates as well, such as High Income or South Asia
+-   Ability to specify `countries_only` or `aggregates` when querying data
 
 Getting Started
 ===============
@@ -52,7 +53,7 @@ library(wbstats)
 str(wb_cachelist, max.level = 1)
 #> List of 7
 #>  $ countries  :'data.frame': 304 obs. of  14 variables:
-#>  $ indicators :'data.frame': 16879 obs. of  6 variables:
+#>  $ indicators :'data.frame': 15999 obs. of  6 variables:
 #>  $ sources    :'data.frame': 41 obs. of  4 variables:
 #>  $ datacatalog:'data.frame': 10 obs. of  25 variables:
 #>  $ topics     :'data.frame': 21 obs. of  3 variables:
@@ -77,10 +78,10 @@ Search available data with `wbsearch()`
 
 `wbsearch()` searches through the `indicators` data frame to find indicators that match a search pattern. An example of the structure of this data frame is below
 
-|      | indicatorID    | indicator                                         | indicatorDesc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | sourceOrg                                  | sourceID | source                       |
-|------|:---------------|:--------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------|:---------|:-----------------------------|
-| 4310 | DT.IXA.PRVT.CD | Interest arrears, private creditors (current US$) | Interest in arrears on long-term debt is defined as interest payment due but not paid, on a cumulative basis. Debt from private creditors include bonds that are either publicly issued or privately placed; commercial bank loans from private banks and other private financial institutions; and other private credits from manufacturers, exporters, and other suppliers of goods, and bank credits covered by a guarantee of an export credit agency. Long-term external debt is defined as debt that has an original or extended maturity of more than one year and that is owed to nonresidents by residents of an economy and repayable in currency, goods, or services. Data are in current U.S. dollars. | World Bank, International Debt Statistics. | 2        | World Development Indicators |
-| 4311 | DT.IXF.DPPG.CD | Interest forgiven (current US$)                   | Interest forgiven is the amount of interest due or in arrears that was written off or forgiven in any given year. Data are in current U.S. dollars.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | World Bank, International Debt Statistics. | 2        | World Development Indicators |
+|      | indicatorID       | indicator                                                                                                             | indicatorDesc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | sourceOrg                                                                                              | sourceID | source               |
+|------|:------------------|:----------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------|:---------|:---------------------|
+| 4310 | PRJ.ATT.2529.4.FE | Projection: Percentage of the population age 25-29 by highest level of educational attainment. Post Secondary. Female | Share of the population of the stated age group that has completed post-secondary or tertiary education as the highest level of educational attainment. Projections are based on collected census and survey data for the base year (around 2010) and the Medium Shared Socioeconomic Pathways (SSP2) projection model. The SSP2 is a middle-of-the-road scenario that combines medium fertility with medium mortality, medium migration, and the Global Education Trend (GET) education scenario. For more information and other projection models, consult the Wittgenstein Centre for Demography and Global Human Capital's website: <http://www.oeaw.ac.at/vid/dataexplorer/>                   | Wittgenstein Centre for Demography and Global Human Capital: <http://www.oeaw.ac.at/vid/dataexplorer/> | 12       | Education Statistics |
+| 4311 | PRJ.ATT.2529.3.MF | Projection: Percentage of the population age 25-29 by highest level of educational attainment. Upper Secondary. Total | Share of the population of the stated age group that has completed upper secondary or incomplete post-secondary education as the highest level of educational attainment. Projections are based on collected census and survey data for the base year (around 2010) and the Medium Shared Socioeconomic Pathways (SSP2) projection model. The SSP2 is a middle-of-the-road scenario that combines medium fertility with medium mortality, medium migration, and the Global Education Trend (GET) education scenario. For more information and other projection models, consult the Wittgenstein Centre for Demography and Global Human Capital's website: <http://www.oeaw.ac.at/vid/dataexplorer/> | Wittgenstein Centre for Demography and Global Human Capital: <http://www.oeaw.ac.at/vid/dataexplorer/> | 12       | Education Statistics |
 
 By default the search is done over the `indicator` and `indicatorDesc` fields and returns the columns `indicatorID` and `indicator` of the matching rows. The `indicatorID` values are inputs into `wb()`, the function for downloading the data. To return all columns for the `indicators` data frame, you can set `extra = TRUE`.
 
@@ -89,13 +90,20 @@ library(wbstats)
 
 unemploy_vars <- wbsearch(pattern = "unemployment")
 head(unemploy_vars)
-#>             indicatorID                             indicator
-#> 1749 ccx_unempr_pop_eld           Unemployment rate - elderly
-#> 1750 ccx_unempr_pop_fem            Unemployment rate - female
-#> 1751 ccx_unempr_pop_mal              Unemployment rate - male
-#> 1752 ccx_unempr_pop_rur             Unemployment rate - rural
-#> 1753 ccx_unempr_pop_tot Unemployment rate in total population
-#> 1754 ccx_unempr_pop_urb             Unemployment rate - urban
+#>    indicatorID
+#> 35   WP15177.9
+#> 36   WP15177.8
+#> 37   WP15177.7
+#> 38   WP15177.6
+#> 39   WP15177.5
+#> 40   WP15177.4
+#>                                                                                        indicator
+#> 35         Received government transfers in the past year, income, richest 60% (% ages 15+) [w2]
+#> 36         Received government transfers in the past year, income, poorest 40% (% ages 15+) [w2]
+#> 37 Received government transfers in the past year, secondary education or more (% ages 15+) [w2]
+#> 38   Received government transfers in the past year, primary education or less (% ages 15+) [w2]
+#> 39                Received government transfers in the past year, older adults (% ages 25+) [w2]
+#> 40              Received government transfers in the past year, young adults (% ages 15-24) [w2]
 ```
 
 Other fields can be searched by simply changing the `fields` parameter. For example
@@ -105,13 +113,13 @@ library(wbstats)
 
 blmbrg_vars <- wbsearch(pattern = "Bloomberg", fields = "sourceOrg")
 head(blmbrg_vars)
-#>      indicatorID                             indicator
-#> 1495      BARLEY                Barley, $/mt, current$
-#> 1788     CHICKEN     Meat, chicken, cents/kg, current$
-#> 1811 CRUDE_BRENT    Crude oil, Brendt, $/bbl, current$
-#> 1812 CRUDE_DUBAI     Crude oil, Dubai, $/bbl, current$
-#> 1814   CRUDE_WTI       Crude oil, WTI, $/bbl, current$
-#> 5412  GFDD.OM.02 Stock market return (%, year-on-year)
+#>        indicatorID                             indicator
+#> 878   WHEAT_US_HRW        Wheat, US, HRW, $/mt, current$
+#> 2080      SUGAR_US         Sugar, US, cents/kg, current$
+#> 3973  RUBBER1_MYSG Rubber, Singapore, cents/kg, current$
+#> 10583   GFDD.SM.01                Stock price volatility
+#> 10591   GFDD.OM.02 Stock market return (%, year-on-year)
+#> 14187    CRUDE_WTI       Crude oil, WTI, $/bbl, current$
 ```
 
 Regular expressions are also supported.
@@ -123,13 +131,20 @@ library(wbstats)
 povemply_vars <- wbsearch(pattern = "poverty|unemployment|employment")
 
 head(povemply_vars)
-#>            indicatorID                               indicator
-#> 1   1.0.HCount.1.90usd         Poverty Headcount ($1.90 a day)
-#> 2    1.0.HCount.2.5usd         Poverty Headcount ($2.50 a day)
-#> 3 1.0.HCount.Mid10to50   Middle Class ($10-50 a day) Headcount
-#> 4      1.0.HCount.Ofcl Official Moderate Poverty Rate-National
-#> 5  1.0.HCount.Poor4uds            Poverty Headcount ($4 a day)
-#> 6  1.0.HCount.Vul4to10      Vulnerable ($4-10 a day) Headcount
+#>    indicatorID
+#> 35   WP15177.9
+#> 36   WP15177.8
+#> 37   WP15177.7
+#> 38   WP15177.6
+#> 39   WP15177.5
+#> 40   WP15177.4
+#>                                                                                        indicator
+#> 35         Received government transfers in the past year, income, richest 60% (% ages 15+) [w2]
+#> 36         Received government transfers in the past year, income, poorest 40% (% ages 15+) [w2]
+#> 37 Received government transfers in the past year, secondary education or more (% ages 15+) [w2]
+#> 38   Received government transfers in the past year, primary education or less (% ages 15+) [w2]
+#> 39                Received government transfers in the past year, older adults (% ages 25+) [w2]
+#> 40              Received government transfers in the past year, young adults (% ages 15-24) [w2]
 ```
 
 The default cached data in `wb_cachelist` is in English. To search indicators in a different language, you can download an updated copy of `wb_cachelist` using `wbcache()`, with the `lang` parameter set to the language of interest and then set this as the `cache` parameter in `wbsearch()`. Other languages are supported in so far as they are supported by the original data sources. Some sources provide full support for other languages, while some have very limited support. If the data source does not have a translation for a certain field or indicator then the result is `NA`, this may result in a varying number matches depending upon the language you select.
@@ -143,13 +158,13 @@ wb_cachelist_es <- wbcache(lang = "es")
 gini_vars <- wbsearch(pattern = "Coeficiente de Gini", cache = wb_cachelist_es)
 
 head(gini_vars)
-#>         indicatorID                                       indicator
-#> 136        3.0.Gini                             Coeficiente de Gini
-#> 137 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
-#> 146   3.0.TheilInd1                          Índice de Theil, GE(1)
-#> 159        3.1.Gini                                     Gini, Rural
-#> 161   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
-#> 172        3.2.Gini                                    Gini, Urbano
+#>           indicatorID                                       indicator
+#> 15826   3.2.TheilInd1                   Índice de Theil, GE(1),Urbano
+#> 15828        3.2.Gini                                    Gini, Urbano
+#> 15839   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
+#> 15841        3.1.Gini                                     Gini, Rural
+#> 15854   3.0.TheilInd1                          Índice de Theil, GE(1)
+#> 15863 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
 ```
 
 Downloading data with `wb()`
@@ -271,16 +286,16 @@ eg_data <- wb(country = c("IN"), indicator = 'EG.ELC.ACCS.ZS', mrv = 10, gapfill
 
 eg_data
 #>    value date    indicatorID                               indicator iso2c
-#> 1   78.7 2015 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
-#> 2   78.7 2014 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
-#> 3   78.7 2013 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
-#> 4   78.7 2012 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
-#> 5   75.0 2011 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
-#> 6   75.0 2010 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
-#> 7   62.3 2009 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
-#> 8   62.3 2008 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
-#> 9   62.3 2007 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
-#> 10  62.3 2006 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
+#> 1   78.7 2016 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
+#> 2   78.7 2015 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
+#> 3   78.7 2014 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
+#> 4   78.7 2013 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
+#> 5   78.7 2012 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
+#> 6   75.0 2011 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
+#> 7   75.0 2010 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
+#> 8   62.3 2009 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
+#> 9   62.3 2008 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
+#> 10  62.3 2007 EG.ELC.ACCS.ZS Access to electricity (% of population)    IN
 #>    country
 #> 1    India
 #> 2    India
@@ -307,19 +322,19 @@ oil_data <- wb(indicator = "CRUDE_BRENT", mrv = 10, freq = "M", POSIXct = TRUE)
 
 head(oil_data)
 #>   value    date indicatorID                          indicator iso2c
-#> 1 46.14 2016M08 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 2 45.07 2016M07 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 3 48.48 2016M06 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 4 47.13 2016M05 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 5 42.25 2016M04 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 6 39.07 2016M03 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#> 1 49.73 2016M10 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#> 2 46.19 2016M09 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#> 3 46.14 2016M08 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#> 4 45.07 2016M07 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#> 5 48.48 2016M06 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#> 6 47.13 2016M05 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
 #>   country    date_ct granularity
-#> 1   World 2016-08-01     monthly
-#> 2   World 2016-07-01     monthly
-#> 3   World 2016-06-01     monthly
-#> 4   World 2016-05-01     monthly
-#> 5   World 2016-04-01     monthly
-#> 6   World 2016-03-01     monthly
+#> 1   World 2016-10-01     monthly
+#> 2   World 2016-09-01     monthly
+#> 3   World 2016-08-01     monthly
+#> 4   World 2016-07-01     monthly
+#> 5   World 2016-06-01     monthly
+#> 6   World 2016-05-01     monthly
 ```
 
 The `POSIXct = TRUE` option makes plotting and sorting dates much easier.
@@ -430,7 +445,7 @@ sum(is.na(cache_en$indicators$indicator))
 # spanish
 cache_es <- wbcache(lang = "es")
 sum(is.na(cache_es$indicators$indicator))
-#> [1] 15169
+#> [1] 14252
 ```
 
 Legal

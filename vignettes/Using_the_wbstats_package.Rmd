@@ -23,6 +23,7 @@ The World Bank^[<http://www.worldbank.org/>] is a tremendous source of global so
 - Support for Most Recent Value queries
 - Support for `grep` style searching for data descriptions and names
 - Ability to download data not only by country, but by aggregates as well, such as High Income or South Asia
+- Ability to specify `countries_only` or `aggregates` when querying data
 
 # Getting Started
 
