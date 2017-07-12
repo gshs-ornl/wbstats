@@ -4,8 +4,8 @@ Title: Programmatic Access to Data and Statistics from the World Bank API
 Description: Tools for searching and downloading data and statistics from
   the World Bank Data API (<http://data.worldbank.org/developers/api-overview>)
   and the World Bank Data Catalog API (<http://data.worldbank.org/developers/data-catalog-api>).
-Version: 0.1.1
-Date: 2016-12-08
+Version: 0.1.2
+Date: 2017-07-12
 Authors@R: c(
   person("Jesse", "Piburn", email = "piburnjo@ornl.gov", role = c("aut", "cre")),
   person("UT-Battelle, LLC", role = "cph")
@@ -24,3 +24,4 @@ Suggests:
     knitr,
     lubridate (>= 1.5.0)
 VignetteBuilder: knitr
+RoxygenNote: 6.0.1
