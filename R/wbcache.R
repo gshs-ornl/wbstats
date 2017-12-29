@@ -45,12 +45,16 @@ wbcountries <- function(lang = c("en", "es", "fr", "ar", "zh")) {
                       "latitude" = "lat",
                       "region.id" = "regionID",
                       "region.value" = "region",
+                      "region.iso2code" = "region_iso2c",
                       "adminregion.id" = "adminID",
                       "adminregion.value" = "admin",
+                      "adminregion.iso2code" = "admin_iso2c",
                       "incomeLevel.id" = "incomeID",
                       "incomeLevel.value" = "income",
+                      "incomeLevel.iso2code" = "income_iso2c",
                       "lendingType.id" = "lendingID",
-                      "lendingType.value" = "lending")
+                      "lendingType.value" = "lending",
+                      "lendingType.iso2code" = "lending_iso2c")
 
   countries_df <- wbformatcols(countries_df, countries_cols)
 
@@ -58,6 +62,8 @@ wbcountries <- function(lang = c("en", "es", "fr", "ar", "zh")) {
   # do not do replace all for the df because Namibia's iso2c code is "NA"
   if ("regionID" %in% names(countries_df)) countries_df[countries_df$regionID == "NA", "regionID"] <- NA
   if ("incomeID" %in% names(countries_df)) countries_df[countries_df$incomeID == "NA", "incomeID"] <- NA
+  if ("region_iso2c" %in% names(countries_df)) countries_df[countries_df$region_iso2c == "NA", "region_iso2c"] <- NA
+  if ("income_iso2c" %in% names(countries_df)) countries_df[countries_df$income_iso2c == "NA", "income_iso2c"] <- NA
 
   countries_df
 }
@@ -108,6 +114,7 @@ wbindicators <- function(lang = c("en", "es", "fr", "ar", "zh")) {
   # "defaultName" = "newName"
   indicators_cols <- c("id" = "indicatorID",
                        "name" = "indicator",
+                       "unit" = "unit",
                        "sourceNote" = "indicatorDesc",
                        "sourceOrganization" = "sourceOrg",
                        "source.id" = "sourceID",
@@ -209,7 +216,8 @@ wblending <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 
   # "defaultName" = "newName"
   lending_cols <- c("id" = "lendingID",
-                    "value" = "lending")
+                    "value" = "lending",
+                    "iso2code" = "iso2c")
 
   lending_df <- wbformatcols(lending_df, lending_cols)
 
@@ -258,7 +266,8 @@ wbincome <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 
   # "defaultName" = "newName"
   income_cols <- c("id" = "incomeID",
-                   "value" = "income")
+                   "value" = "income",
+                   "iso2code" = "iso2c")
 
   income_df <- wbformatcols(income_df, income_cols)
 
@@ -309,7 +318,11 @@ wbsources <- function(lang = c("en", "es", "fr", "ar", "zh")) {
   sources_cols <- c("id" = "sourceID",
                     "name" = "source",
                     "description" = "sourceDesc",
-                    "url" = "sourceURL")
+                    "url" = "sourceURL",
+                    "code" = "sourceAbbr",
+                    "lastupdated" = "lastUpdated",
+                    "dataavailability" = "dataAvail",
+                    "metadataavailability" = "metadataAvail")
 
   sources_df <- wbformatcols(sources_df, sources_cols)
 
