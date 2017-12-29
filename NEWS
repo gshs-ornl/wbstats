@@ -1,7 +1,17 @@
-wbstats v0.1.1 (Release date: 09/20/2016)
+wbstats v0.2 (Release date: 12/29/2017)
 ==============
+Bug fixes:
+* wbdatacatalog() now returns all catalog entries instead of first 10
 
 Changes:
+* Now uses Version 2 of the World Bank API.
+* More explicit error messaging when encountering API call errors
+* v2 of the API returns some new columns the old version didn't. Including
+  data of last update for all available data sources
 
+
+wbstats v0.1.1 (Release date: 09/20/2016)
+==============
+Changes:
 * Add 'aggregates' and 'countries_only' options to wb() per bapfeld pr
 * update cached data in wb_cachelist

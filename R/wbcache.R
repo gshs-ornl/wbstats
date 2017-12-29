@@ -335,14 +335,13 @@ wbdatacatalog <- function() {
   url_list <- wburls()
   base_url <- url_list$base_url
 
-  catalog_url <- paste0(base_url, "/v2/datacatalog?format=json")
-  catalog_return <- wbget.dc(catalog_url)
+  catalog_url <- paste0(base_url, "datacatalog?format=json")
+  catalog_return <- wbget_dc(catalog_url)
 
   # the return is not very nice
   # so we have to do some leg work
-  catalog <- catalog_return$datacatalog$metatype
 
-  catalog_list <- lapply(catalog, FUN = function(i) {
+  catalog_list <- lapply(catalog_return, FUN = function(i) {
 
     i_vec <- i$value
     names(i_vec) <- i$id
@@ -384,7 +383,10 @@ wbdatacatalog <- function() {
                     "apiaccessurl" = "apiURL",
                     "apisourceid" = "SourceID",
                     "mobileapp" = "mobileApp",
-                    "datanotes" = "dataNotes")
+                    "datanotes" = "dataNotes",
+                    "sourceurl" = "sourceURL",
+                    "apilocation" = "apiLocation",
+                    "listofcountriesregionssubnationaladmins" = "geoCoverage")
 
   catalog_df <- wbformatcols(catalog_df, catalog_cols)
 

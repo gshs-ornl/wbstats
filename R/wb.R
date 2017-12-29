@@ -159,7 +159,7 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
   bad_ind <- indicator[!good_ind_index]
 
   if (length(bad_ind) > 0) warning(paste0("The following indicator values are not valid and are being excluded from the request: ",
-                                         paste(bad_ind, collapse = ",")))
+                                          paste(bad_ind, collapse = ",")))
 
 
   ## check date and other parameters. add to list if not missing ----------
@@ -171,13 +171,13 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
 
   if (!(missing(startdate) & missing(enddate))) {
 
-  #
-  # something here to check the inputs but i'll come back to this
-  #
+    #
+    # something here to check the inputs but i'll come back to this
+    #
 
-   date_url <- paste0("date=", startdate, ":", enddate)
+    date_url <- paste0("date=", startdate, ":", enddate)
 
-   param_url_list[length(param_url_list) + 1] <- date_url
+    param_url_list[length(param_url_list) + 1] <- date_url
 
   }
 
@@ -226,8 +226,8 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
 
     full_url <- paste0(base_url, lang, "/countries/", country_url, "/indicators/", i, "?", param_url)
 
-    return_df <- try(wbget(full_url), silent = TRUE)
-    }
+    return_df <- try(wbget(full_url, indicator = i), silent = FALSE)
+  }
   )
 
 
@@ -271,13 +271,3 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
 
   out_df
 }
-
-
-
-
-
-
-
-
-
-

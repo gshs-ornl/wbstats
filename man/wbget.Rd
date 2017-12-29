@@ -4,10 +4,12 @@
 \alias{wbget}
 \title{Call the World Bank API and return a formatted data frame}
 \usage{
-wbget(url)
+wbget(url_string, indicator)
 }
 \arguments{
-\item{url}{A charcter string. A formatted url string without page information}
+\item{url_string}{A character string. A formatted url string}
+
+\item{indicator}{A character string. indicatorID for request. Used for error returns}
 }
 \value{
 A data frame
