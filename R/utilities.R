@@ -66,6 +66,9 @@ wbdate2POSIXct <- function(df, date_col) {
       return(df)
     }
 
+    # lastUpdated field
+    df$lastUpdated <- lubridate::as_date(df$lastUpdated)
+
     # add new columns
     df$date_ct <- as.Date.POSIXct(NA)
     df$granularity <- NA
@@ -186,6 +189,7 @@ wbget <- function(url_string, indicator) {
   return_list <- jsonlite::fromJSON(return_json,  flatten = TRUE)
 
   n_pages <- return_list[[1]]$pages
+  lastUpdated <- return_list[[1]]$lastupdated
 
   if (n_pages > 1) {
 
@@ -216,6 +220,7 @@ wbget <- function(url_string, indicator) {
 
   }
 
+  return_df$lastUpdated <- lastUpdated
   return_df
 
 }

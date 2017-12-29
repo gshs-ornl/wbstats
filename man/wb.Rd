@@ -6,12 +6,13 @@
 \usage{
 wb(country = "all", indicator, startdate, enddate, mrv, gapfill, freq, cache,
   lang = c("en", "es", "fr", "ar", "zh"), removeNA = TRUE,
-  POSIXct = FALSE, includedec = FALSE)
+  POSIXct = FALSE, include_dec = FALSE, include_unit = FALSE,
+  include_obsStatus = FALSE)
 }
 \arguments{
 \item{country}{Character vector of country or region codes. Default value is special code of \code{all}.
 Other permissible values are codes in the following fields from the \code{\link{wb_cachelist}} \code{country}
-data frame. \code{iso3c}, \code{iso2c}, \code{regionID}, \code{adminID}, \code{incomeID}, and \code{lendingID}.
+data frame. \code{iso3c}, \code{iso2c}, \code{regionID}, \code{adminID}, and \code{incomeID}.
 Additional special values include \code{aggregates}, which returns only aggregates, and \code{countries_only},
 which returns all countries without aggregates.}
 
@@ -52,7 +53,13 @@ if \code{FALSE}, no blank or \code{NA} values are removed from the return.}
 denotes the time resolution that the date represents.  Useful for subannual data and mixing subannual
 with annual data. If \code{FALSE}, these fields are not added.}
 
-\item{includedec}{if \code{TRUE}, the column \code{decimal} is not removed from the return. if \code{FALSE},
+\item{include_dec}{if \code{TRUE}, the column \code{decimal} is not removed from the return. if \code{FALSE},
+this column is removed}
+
+\item{include_unit}{if \code{TRUE}, the column \code{unit} is not removed from the return. if \code{FALSE},
+this column is removed}
+
+\item{include_obsStatus}{if \code{TRUE}, the column \code{obsStatus} is not removed from the return. if \code{FALSE},
 this column is removed}
 }
 \value{
@@ -78,15 +85,14 @@ Not all data returns have support for langauges other than english. If the speci
  \code{2016-01-01}. If this package is not available and the \code{POSIXct} parameter is set to \code{TRUE},
  the parameter is ignored and a \code{warning} is produced.
 
- The \code{includedec} is defaulted to \code{FALSE} because as of writing, all returns have a value of \code{0}
- for the \code{decimal} column. This column might be used in the future by the API, therefore the option to include
- the column is available.
+ The \code{include_dec}, \code{include_unit}, and \code{include_obsStatus} are defaulted to \code{FALSE}
+ because as of writing, all returns have a value of \code{0}, \code{NA}, and \code{NA}, respectively.
+ These columns might be used in the future by the API, therefore the option to include the column is available.
 
  If there is no data available that matches the request parameters, an empty data frame is returned along with a
  \code{warning}. This design is for easy aggregation of multiple calls.
-
- @examples
-
+}
+\examples{
  # GDP at market prices (current US$) for all available countries and regions
  wb(indicator = "NY.GDP.MKTP.CD", startdate = 2000, enddate = 2016)
 

@@ -4,7 +4,7 @@
 #'
 #' @param country Character vector of country or region codes. Default value is special code of \code{all}.
 #'  Other permissible values are codes in the following fields from the \code{\link{wb_cachelist}} \code{country}
-#'  data frame. \code{iso3c}, \code{iso2c}, \code{regionID}, \code{adminID}, \code{incomeID}, and \code{lendingID}.
+#'  data frame. \code{iso3c}, \code{iso2c}, \code{regionID}, \code{adminID}, and \code{incomeID}.
 #'  Additional special values include \code{aggregates}, which returns only aggregates, and \code{countries_only},
 #'  which returns all countries without aggregates.
 #' @param indicator Character vector of indicator codes. These codes correspond to the \code{indicatorID} column
@@ -34,7 +34,11 @@
 #'  \code{date_ct} converts the default date into a \code{\link[base]{POSIXct}}. \code{granularity}
 #'  denotes the time resolution that the date represents.  Useful for subannual data and mixing subannual
 #'  with annual data. If \code{FALSE}, these fields are not added.
-#' @param includedec if \code{TRUE}, the column \code{decimal} is not removed from the return. if \code{FALSE},
+#' @param include_dec if \code{TRUE}, the column \code{decimal} is not removed from the return. if \code{FALSE},
+#'  this column is removed
+#' @param include_unit if \code{TRUE}, the column \code{unit} is not removed from the return. if \code{FALSE},
+#'  this column is removed
+#' @param include_obsStatus if \code{TRUE}, the column \code{obsStatus} is not removed from the return. if \code{FALSE},
 #'  this column is removed
 #' @return Data frame with all available requested data.
 #'
@@ -54,15 +58,14 @@
 #'  \code{2016-01-01}. If this package is not available and the \code{POSIXct} parameter is set to \code{TRUE},
 #'  the parameter is ignored and a \code{warning} is produced.
 #'
-#'  The \code{includedec} is defaulted to \code{FALSE} because as of writing, all returns have a value of \code{0}
-#'  for the \code{decimal} column. This column might be used in the future by the API, therefore the option to include
-#'  the column is available.
+#'  The \code{include_dec}, \code{include_unit}, and \code{include_obsStatus} are defaulted to \code{FALSE}
+#'  because as of writing, all returns have a value of \code{0}, \code{NA}, and \code{NA}, respectively.
+#'  These columns might be used in the future by the API, therefore the option to include the column is available.
 #'
 #'  If there is no data available that matches the request parameters, an empty data frame is returned along with a
 #'  \code{warning}. This design is for easy aggregation of multiple calls.
 #'
-#'  @examples
-#'
+#' @examples
 #'  # GDP at market prices (current US$) for all available countries and regions
 #'  wb(indicator = "NY.GDP.MKTP.CD", startdate = 2000, enddate = 2016)
 #'
@@ -100,7 +103,8 @@
 #'  wb(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12, freq = "M")
 #' @export
 wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, freq, cache,
-               lang = c("en", "es", "fr", "ar", "zh"), removeNA = TRUE, POSIXct = FALSE, includedec = FALSE) {
+               lang = c("en", "es", "fr", "ar", "zh"), removeNA = TRUE, POSIXct = FALSE,
+               include_dec = FALSE, include_unit = FALSE, include_obsStatus = FALSE) {
 
   lang <- match.arg(lang)
 
@@ -243,7 +247,10 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
                 "indicator.id" = "indicatorID",
                 "indicator.value" = "indicator",
                 "country.id" = "iso2c",
-                "country.value" = "country")
+                "country.value" = "country",
+                "countryiso3code" = "iso3c",
+                "obs_status" = "obsStatus",
+                "unit" = "unit")
 
   if (length(out_list) == 0) {
 
@@ -261,11 +268,37 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
   # a little clean up ----------
   out_df$value <- as.numeric(out_df$value)
 
-  if (!includedec) out_df$decimal <- NULL
-
   out_df <- wbformatcols(out_df, out_cols)
 
+  if (!include_dec) out_df$decimal <- NULL
+  if (!include_unit) out_df$unit <- NULL
+  if (!include_obsStatus) out_df$obsStatus <- NULL
+
   if (removeNA) out_df <- out_df[!is.na(out_df$value), ]
+
+  # iso3c column is NA for non-countries although they have iso3c codes in the countries data.frame
+  # find the ones that are NA and fill them in if they match with info in the countries data.frame
+  # this will error out on some indicators like "NE.GDI.FPRV.IFC.ZS" becasue they return iso3c codes in
+  # what is expecting iso2c codes.
+  # will need to write an exception to catch and do the reverse of what this code does. Find iso2c based on iso3c
+  #
+  #
+  # Start here-------------------------------------------------------------
+  #
+  #
+  na_iso3c <- which(is.na(out_df$iso3c) & !(is.na(out_df$iso2c)))
+
+
+  if (!length(na_iso3c) == 0) {
+
+  iso2c <- unique(out_df[na_iso3c, "iso2c"])
+  iso23_df <- cache$countries[cache$countries$iso2c %in% iso2c, c("iso2c","iso3c")]
+
+    for(i in 1:nrow(iso23_df)) {
+      out_df[out_df$iso2c == iso23_df[i, "iso2c"], "iso3c"]<- iso23_df[i,"iso3c"]
+    }
+
+  }
 
   if (POSIXct) out_df <- wbdate2POSIXct(out_df, "date")
 
