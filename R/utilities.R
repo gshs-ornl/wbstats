@@ -187,7 +187,6 @@ wbget <- function(url_string, indicator) {
 
   return_json <- call_api(url_string = url_string, indicator = indicator)
 
-  #
   return_list <- jsonlite::fromJSON(return_json, simplifyVector = FALSE)
 
   if ("message" %in% names(return_list[[1]])) {
