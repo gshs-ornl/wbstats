@@ -5,11 +5,11 @@ citEntry(entry = "Manual",
   author       = personList(as.person("Jesse Piburn")),
   organization = "Oak Ridge National Laboratory",
   address      = "Oak Ridge, Tennessee",
-  year         = "2016",
+  year         = "2018",
   url          = "http://web.ornl.gov/sci/gist/",
 
   textVersion  =
-  paste("Jesse Piburn (2016).",
+  paste("Jesse Piburn (2018).",
         "wbstats: Programmatic Access to the World Bank API.",
         "Oak Ridge National Laboratory.",
         "Oak Ridge, Tennessee.",
