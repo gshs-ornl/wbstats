@@ -276,26 +276,37 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
 
   if (removeNA) out_df <- out_df[!is.na(out_df$value), ]
 
-  # iso3c column is NA for non-countries although they have iso3c codes in the countries data.frame
-  # find the ones that are NA and fill them in if they match with info in the countries data.frame
-  # this will error out on some indicators like "NE.GDI.FPRV.IFC.ZS" becasue they return iso3c codes in
-  # what is expecting iso2c codes.
-  # will need to write an exception to catch and do the reverse of what this code does. Find iso2c based on iso3c
-  #
-  #
-  # Start here-------------------------------------------------------------
-  #
-  #
-  na_iso3c <- which(is.na(out_df$iso3c) & !(is.na(out_df$iso2c)))
+  # handle iso3c in iso2c bug ----------
+  iso3c_in_iso2c_cols <- which(out_df$iso2c %in% cache$countries$iso3c)
 
+  if (!length(iso3c_in_iso2c_cols) == 0) {
+
+    iso3c_in_iso2c <- unique(out_df[iso3c_in_iso2c_cols, "iso2c"])
+    iso23_df <- cache$countries[cache$countries$iso3c %in% iso3c_in_iso2c, c("iso2c","iso3c")]
+
+    for (i in 1:nrow(iso23_df)) {
+
+      replace_rows <- which(out_df$iso2c == iso23_df[i, "iso3c"])
+
+      out_df[replace_rows, "iso3c"]<- iso23_df[i,"iso3c"]
+      out_df[replace_rows, "iso2c"]<- iso23_df[i,"iso2c"]
+    }
+
+  }
+
+  # handle blank iso3c ----------
+  na_iso3c <- which(is.na(out_df$iso3c) & !(is.na(out_df$iso2c)))
 
   if (!length(na_iso3c) == 0) {
 
-  iso2c <- unique(out_df[na_iso3c, "iso2c"])
-  iso23_df <- cache$countries[cache$countries$iso2c %in% iso2c, c("iso2c","iso3c")]
+    iso2c <- unique(out_df[na_iso3c, "iso2c"])
+    iso23_df <- cache$countries[cache$countries$iso2c %in% iso2c, c("iso2c", "iso3c")]
 
-    for(i in 1:nrow(iso23_df)) {
-      out_df[out_df$iso2c == iso23_df[i, "iso2c"], "iso3c"]<- iso23_df[i,"iso3c"]
+    for (i in 1:nrow(iso23_df)) {
+
+      replace_rows <- which(out_df$iso2c == iso23_df[i, "iso2c"])
+      out_df[replace_rows, "iso3c"] <- iso23_df[i, "iso3c"]
+
     }
 
   }
