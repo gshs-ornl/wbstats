@@ -234,11 +234,11 @@ If you use the `mrv` parameter in `wb()` with mutliple countries or regions, it 
 ```{r}
 library(wbstats)
 
-eg_data_1 <- wb(country = c("IN", "AF"), indicator = 'EG.FEC.RNEW.ZS', mrv = 1)
-eg_data_1
+per_data_1 <- wb(country = "all", indicator = 'per_lm_ac.cov_pop_tot', mrv = 1)
+per_data_1
 
-eg_data_2 <- wb(country = c("IN", "AF"), indicator = 'EG.FEC.RNEW.ZS', mrv = 2)
-eg_data_2
+per_data_2 <- wb(country = "all", indicator = 'per_lm_ac.cov_pop_tot', mrv = 2)
+per_data_2
 
 ```
 

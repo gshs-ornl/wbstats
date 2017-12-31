@@ -178,7 +178,7 @@ head(oil_data)
 ```
 
 The `POSIXct = TRUE` option makes plotting and sorting dates much easier.
-```{r, fig.height = 4, fig.width = 7.5}
+```{r vig-ex-posixct-1, fig.height = 4, fig.width = 7.5, fig.path = "figures/"}
 library(wbstats)
 library(ggplot2)
 
@@ -190,7 +190,7 @@ ggplot(oil_data, aes(x = date_ct, y = value, colour = indicator)) + geom_line(si
 ```
 
 The `POSIXct = TRUE` option also makes plotting time series with different time coverage seamless
-```{r, fig.height = 4, fig.width = 7.5}
+```{r vig-ex-posixct-2, fig.height = 4, fig.width = 7.5, fig.path = "figures/"}
 library(wbstats)
 library(ggplot2)
 
@@ -208,29 +208,16 @@ ggplot(metal_data, aes(x = date_ct, y = value, colour = indicator)) + geom_line(
 # Some Sharp Corners
 There are a few behaviors of the World Bank API that being aware of could help explain some potentially unexpected results. These results are known but no special actions are taken to mitigate them as they are the result of the API itself and artifically limiting the inputs or results could potentially causes problems or create unnecessary rescrictions in the future. 
 
-## Non-overlaping time frames
-If you make a query with `wb()` and the `startdate` and `enddate` no not overlap at all with the available data, then all of the data is returned instead of nothing.
-```{r}
-library(wbstats)
-
-pop_data <- wb(country = "US", indicator = "SP.POP.TOTL", 
-               startdate = 1800, enddate = 1805, POSIXct = TRUE)
-
-nrow(pop_data)
-max(pop_data$date_ct)
-min(pop_data$date_ct)
-```
-
 ## Most Recent Values
 If you use the `mrv` parameter in `wb()` with mutliple countries or regions, it searches for the most recent dates for which any country or region in your selection has data and then returns the data for those dates. In other words the `mrv` value is not determined on a country by country basis, rather it is determined across the entire selection.
 ```{r}
 library(wbstats)
 
-eg_data_1 <- wb(country = c("IN", "AF"), indicator = 'EG.FEC.RNEW.ZS', mrv = 1)
-eg_data_1
+per_data_1 <- wb(country = "all", indicator = 'per_lm_ac.cov_pop_tot', mrv = 1)
+per_data_1
 
-eg_data_2 <- wb(country = c("IN", "AF"), indicator = 'EG.FEC.RNEW.ZS', mrv = 2)
-eg_data_2
+per_data_2 <- wb(country = "all", indicator = 'per_lm_ac.cov_pop_tot', mrv = 2)
+per_data_2
 
 ```
 

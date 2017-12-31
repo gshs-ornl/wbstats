@@ -158,13 +158,13 @@ wb_cachelist_es <- wbcache(lang = "es")
 gini_vars <- wbsearch(pattern = "Coeficiente de Gini", cache = wb_cachelist_es)
 
 head(gini_vars)
-#>           indicatorID                                       indicator
-#> 14774   3.2.TheilInd1                   Índice de Theil, GE(1),Urbano
-#> 14776        3.2.Gini                                    Gini, Urbano
-#> 14787   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
-#> 14789        3.1.Gini                                     Gini, Rural
-#> 14792   3.0.TheilInd1                          Índice de Theil, GE(1)
-#> 14801 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
+#>         indicatorID                                       indicator
+#> 822   3.2.TheilInd1                   Índice de Theil, GE(1),Urbano
+#> 824        3.2.Gini                                    Gini, Urbano
+#> 835   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
+#> 837        3.1.Gini                                     Gini, Rural
+#> 840   3.0.TheilInd1                          Índice de Theil, GE(1)
+#> 849 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
 ```
 
 Downloading data with `wb()`
@@ -400,35 +400,39 @@ If you use the `mrv` parameter in `wb()` with mutliple countries or regions, it 
 ``` r
 library(wbstats)
 
-eg_data_1 <- wb(country = c("IN", "AF"), indicator = 'EG.FEC.RNEW.ZS', mrv = 1)
-eg_data_1
-#>   iso3c date    value    indicatorID
-#> 1   AFG 2014 16.74900 EG.FEC.RNEW.ZS
-#> 2   IND 2014 36.53617 EG.FEC.RNEW.ZS
-#>                                                            indicator iso2c
-#> 1 Renewable energy consumption (% of total final energy consumption)    AF
-#> 2 Renewable energy consumption (% of total final energy consumption)    IN
-#>       country
-#> 1 Afghanistan
-#> 2       India
+per_data_1 <- wb(country = "all", indicator = 'per_lm_ac.cov_pop_tot', mrv = 1)
+per_data_1
+#>     iso3c date     value  indicatorID                          indicator
+#> 17    ARM 2014 0.8872044 Performance. Coverage (%) - Active Labor Market
+#> 35    CMR 2014 0.9365870 Performance. Coverage (%) - Active Labor Market
+#> 70    IDN 2014 4.2099258 Performance. Coverage (%) - Active Labor Market
+#> 155   VNM 2014 8.9763930 Performance. Coverage (%) - Active Labor Market
+#>     iso2c   country
+#> 17     AM   Armenia
+#> 35     CM  Cameroon
+#> 70     ID Indonesia
+#> 155    VN   Vietnam
 
-eg_data_2 <- wb(country = c("IN", "AF"), indicator = 'EG.FEC.RNEW.ZS', mrv = 2)
-eg_data_2
-#>   iso3c date    value    indicatorID
-#> 1   AFG 2014 16.74900 EG.FEC.RNEW.ZS
-#> 2   AFG 2013 14.27845 EG.FEC.RNEW.ZS
-#> 3   IND 2014 36.53617 EG.FEC.RNEW.ZS
-#> 4   IND 2013 37.73270 EG.FEC.RNEW.ZS
-#>                                                            indicator iso2c
-#> 1 Renewable energy consumption (% of total final energy consumption)    AF
-#> 2 Renewable energy consumption (% of total final energy consumption)    AF
-#> 3 Renewable energy consumption (% of total final energy consumption)    IN
-#> 4 Renewable energy consumption (% of total final energy consumption)    IN
-#>       country
-#> 1 Afghanistan
-#> 2 Afghanistan
-#> 3       India
-#> 4       India
+per_data_2 <- wb(country = "all", indicator = 'per_lm_ac.cov_pop_tot', mrv = 2)
+per_data_2
+#>     iso3c date      value  indicatorID                          indicator
+#> 33    ARM 2014  0.8872044 Performance. Coverage (%) - Active Labor Market
+#> 34    ARM 2013  3.2058376 Performance. Coverage (%) - Active Labor Market
+#> 68    KHM 2013  1.2168315 Performance. Coverage (%) - Active Labor Market
+#> 69    CMR 2014  0.9365870 Performance. Coverage (%) - Active Labor Market
+#> 76    CHL 2013 20.4540718 Performance. Coverage (%) - Active Labor Market
+#> 139   IDN 2014  4.2099258 Performance. Coverage (%) - Active Labor Market
+#> 196   MDA 2013  0.9159697 Performance. Coverage (%) - Active Labor Market
+#> 309   VNM 2014  8.9763930 Performance. Coverage (%) - Active Labor Market
+#>     iso2c   country
+#> 33     AM   Armenia
+#> 34     AM   Armenia
+#> 68     KH  Cambodia
+#> 69     CM  Cameroon
+#> 76     CL     Chile
+#> 139    ID Indonesia
+#> 196    MD   Moldova
+#> 309    VN   Vietnam
 ```
 
 Searching in other languages
