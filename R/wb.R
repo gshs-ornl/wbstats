@@ -276,6 +276,14 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
 
   if (removeNA) out_df <- out_df[!is.na(out_df$value), ]
 
+  # Namibia bug ----------
+  # if only Namibia is requested it's iso2c code "NA" is automatically converted
+  # to logical NA by jsonlite::fromJSON and there currently does not seem to be an
+  # option to handle that within that function so look if thats the case and fix it
+  namibia_na <- which(is.na(out_df$iso2c) & out_df$country == "Namibia")
+
+  if (!length(namibia_na) == 0) out_df[namibia_na, "iso2c"] <- "NA"
+
   # handle iso3c in iso2c bug ----------
   iso3c_in_iso2c_cols <- which(out_df$iso2c %in% cache$countries$iso3c)
 
@@ -288,8 +296,8 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
 
       replace_rows <- which(out_df$iso2c == iso23_df[i, "iso3c"])
 
-      out_df[replace_rows, "iso3c"]<- iso23_df[i,"iso3c"]
-      out_df[replace_rows, "iso2c"]<- iso23_df[i,"iso2c"]
+      out_df[replace_rows, "iso3c"] <- iso23_df[i,"iso3c"]
+      out_df[replace_rows, "iso2c"] <- iso23_df[i,"iso2c"]
     }
 
   }
