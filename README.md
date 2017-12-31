@@ -52,13 +52,13 @@ library(wbstats)
 
 str(wb_cachelist, max.level = 1)
 #> List of 7
-#>  $ countries  :'data.frame': 304 obs. of  14 variables:
-#>  $ indicators :'data.frame': 16907 obs. of  6 variables:
-#>  $ sources    :'data.frame': 42 obs. of  4 variables:
-#>  $ datacatalog:'data.frame': 10 obs. of  25 variables:
+#>  $ countries  :'data.frame': 304 obs. of  18 variables:
+#>  $ indicators :'data.frame': 16978 obs. of  7 variables:
+#>  $ sources    :'data.frame': 43 obs. of  8 variables:
+#>  $ datacatalog:'data.frame': 238 obs. of  29 variables:
 #>  $ topics     :'data.frame': 21 obs. of  3 variables:
-#>  $ income     :'data.frame': 7 obs. of  2 variables:
-#>  $ lending    :'data.frame': 4 obs. of  2 variables:
+#>  $ income     :'data.frame': 7 obs. of  3 variables:
+#>  $ lending    :'data.frame': 4 obs. of  3 variables:
 ```
 
 Accessing updated available data with `wbcache()`
@@ -78,10 +78,10 @@ Search available data with `wbsearch()`
 
 `wbsearch()` searches through the `indicators` data frame to find indicators that match a search pattern. An example of the structure of this data frame is below
 
-|      | indicatorID | indicator                             | indicatorDesc | sourceOrg                                                              | sourceID | source                                              |
-|------|:------------|:--------------------------------------|:--------------|:-----------------------------------------------------------------------|:---------|:----------------------------------------------------|
-| 4310 | REV.OTHR.CR | Total Other Revenue (in IDR)          | NA            | Ministry of Finance, SIKD (Information System for Sub-National Budget) | 45       | Indonesia Database for Policy and Economic Research |
-| 4311 | REV.OSRV.CR | Total Own Source Revenue/PAD (in IDR) | NA            | Ministry of Finance, SIKD (Information System for Sub-National Budget) | 45       | Indonesia Database for Policy and Economic Research |
+|      | indicatorID              | indicator                                                     | unit | indicatorDesc                                                                                              | sourceOrg | sourceID | source                                                              |
+|------|:-------------------------|:--------------------------------------------------------------|:-----|:-----------------------------------------------------------------------------------------------------------|:----------|:---------|:--------------------------------------------------------------------|
+| 4310 | per\_sa\_su.ben\_q5\_urb | Benefits incidence in richest quintile (%) - Subsidies -urban | NA   | Percentage of benefits going to the richestquintile relative to the total benefits going to the population | ASPIRE    | 29       | The Atlas of Social Protection: Indicators of Resilience and Equity |
+| 4311 | per\_sa\_su.ben\_q5\_tot | Benefits incidence in richest quintile (%) - Subsidies        | NA   | Percentage of benefits going to the richestquintile relative to the total benefits going to the population | ASPIRE    | 29       | The Atlas of Social Protection: Indicators of Resilience and Equity |
 
 By default the search is done over the `indicator` and `indicatorDesc` fields and returns the columns `indicatorID` and `indicator` of the matching rows. The `indicatorID` values are inputs into `wb()`, the function for downloading the data. To return all columns for the `indicators` data frame, you can set `extra = TRUE`.
 
@@ -90,20 +90,20 @@ library(wbstats)
 
 unemploy_vars <- wbsearch(pattern = "unemployment")
 head(unemploy_vars)
-#>    indicatorID
-#> 35   WP15177.9
-#> 36   WP15177.8
-#> 37   WP15177.7
-#> 38   WP15177.6
-#> 39   WP15177.5
-#> 40   WP15177.4
-#>                                                                                        indicator
-#> 35         Received government transfers in the past year, income, richest 60% (% ages 15+) [w2]
-#> 36         Received government transfers in the past year, income, poorest 40% (% ages 15+) [w2]
-#> 37 Received government transfers in the past year, secondary education or more (% ages 15+) [w2]
-#> 38   Received government transfers in the past year, primary education or less (% ages 15+) [w2]
-#> 39                Received government transfers in the past year, older adults (% ages 25+) [w2]
-#> 40              Received government transfers in the past year, young adults (% ages 15-24) [w2]
+#>               indicatorID
+#> 1849       SL.UEM.TOTL.ZS
+#> 1850    SL.UEM.TOTL.NE.ZS
+#> 1851    SL.UEM.TOTL.MA.ZS
+#> 1852 SL.UEM.TOTL.MA.NE.ZS
+#> 1853    SL.UEM.TOTL.FE.ZS
+#> 1854 SL.UEM.TOTL.FE.NE.ZS
+#>                                                                  indicator
+#> 1849   Unemployment, total (% of total labor force) (modeled ILO estimate)
+#> 1850      Unemployment, total (% of total labor force) (national estimate)
+#> 1851     Unemployment, male (% of male labor force) (modeled ILO estimate)
+#> 1852        Unemployment, male (% of male labor force) (national estimate)
+#> 1853 Unemployment, female (% of female labor force) (modeled ILO estimate)
+#> 1854    Unemployment, female (% of female labor force) (national estimate)
 ```
 
 Other fields can be searched by simply changing the `fields` parameter. For example
@@ -114,12 +114,12 @@ library(wbstats)
 blmbrg_vars <- wbsearch(pattern = "Bloomberg", fields = "sourceOrg")
 head(blmbrg_vars)
 #>        indicatorID                             indicator
-#> 252   WHEAT_US_HRW        Wheat, US, HRW, $/mt, current$
-#> 1918      SUGAR_US         Sugar, US, cents/kg, current$
-#> 4244  RUBBER1_MYSG Rubber, Singapore, cents/kg, current$
-#> 13542       BARLEY                Barley, $/mt, current$
-#> 15337   GFDD.SM.01                Stock price volatility
-#> 15345   GFDD.OM.02 Stock market return (%, year-on-year)
+#> 1489  RUBBER1_MYSG Rubber, Singapore, cents/kg, current$
+#> 3279  WHEAT_US_HRW        Wheat, US, HRW, $/mt, current$
+#> 4465      SUGAR_US         Sugar, US, cents/kg, current$
+#> 7985    GFDD.SM.01                Stock price volatility
+#> 7993    GFDD.OM.02 Stock market return (%, year-on-year)
+#> 10633       BARLEY                Barley, $/mt, current$
 ```
 
 Regular expressions are also supported.
@@ -131,20 +131,20 @@ library(wbstats)
 povemply_vars <- wbsearch(pattern = "poverty|unemployment|employment")
 
 head(povemply_vars)
-#>    indicatorID
-#> 35   WP15177.9
-#> 36   WP15177.8
-#> 37   WP15177.7
-#> 38   WP15177.6
-#> 39   WP15177.5
-#> 40   WP15177.4
-#>                                                                                        indicator
-#> 35         Received government transfers in the past year, income, richest 60% (% ages 15+) [w2]
-#> 36         Received government transfers in the past year, income, poorest 40% (% ages 15+) [w2]
-#> 37 Received government transfers in the past year, secondary education or more (% ages 15+) [w2]
-#> 38   Received government transfers in the past year, primary education or less (% ages 15+) [w2]
-#> 39                Received government transfers in the past year, older adults (% ages 25+) [w2]
-#> 40              Received government transfers in the past year, young adults (% ages 15-24) [w2]
+#>          indicatorID
+#> 437 UIS.GTVP.4.GPV.M
+#> 438 UIS.GTVP.4.GPV.F
+#> 439   UIS.GTVP.4.GPV
+#> 443 UIS.GTVP.3.GPV.M
+#> 444 UIS.GTVP.3.GPV.F
+#> 445   UIS.GTVP.3.GPV
+#>                                                                                                             indicator
+#> 437     Percentage of male students in post-secondary non-tertiary education enrolled in general programmes, male (%)
+#> 438 Percentage of female students in post-secondary non-tertiary education enrolled in general programmes, female (%)
+#> 439    Percentage of students in post-secondary non-tertiary education enrolled in general programmes, both sexes (%)
+#> 443                 Percentage of male students in upper secondary education enrolled in general programmes, male (%)
+#> 444             Percentage of female students in upper secondary education enrolled in general programmes, female (%)
+#> 445                Percentage of students in upper secondary education enrolled in general programmes, both sexes (%)
 ```
 
 The default cached data in `wb_cachelist` is in English. To search indicators in a different language, you can download an updated copy of `wb_cachelist` using `wbcache()`, with the `lang` parameter set to the language of interest and then set this as the `cache` parameter in `wbsearch()`. Other languages are supported in so far as they are supported by the original data sources. Some sources provide full support for other languages, while some have very limited support. If the data source does not have a translation for a certain field or indicator then the result is `NA`, this may result in a varying number matches depending upon the language you select.
@@ -159,12 +159,12 @@ gini_vars <- wbsearch(pattern = "Coeficiente de Gini", cache = wb_cachelist_es)
 
 head(gini_vars)
 #>           indicatorID                                       indicator
-#> 13378   3.2.TheilInd1                   Índice de Theil, GE(1),Urbano
-#> 13380        3.2.Gini                                    Gini, Urbano
-#> 13391   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
-#> 13393        3.1.Gini                                     Gini, Rural
-#> 13406   3.0.TheilInd1                          Índice de Theil, GE(1)
-#> 13415 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
+#> 10099   3.2.TheilInd1                   Índice de Theil, GE(1),Urbano
+#> 10101        3.2.Gini                                    Gini, Urbano
+#> 10112   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
+#> 10114        3.1.Gini                                     Gini, Rural
+#> 10117   3.0.TheilInd1                          Índice de Theil, GE(1)
+#> 10126 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
 ```
 
 Downloading data with `wb()`
@@ -181,13 +181,13 @@ library(wbstats)
 pop_data <- wb(indicator = "SP.POP.TOTL", startdate = 2000, enddate = 2002)
 
 head(pop_data)
-#>       value date indicatorID         indicator iso2c
-#> 1 296026575 2002 SP.POP.TOTL Population, total    1A
-#> 2 289850357 2001 SP.POP.TOTL Population, total    1A
-#> 3 283832016 2000 SP.POP.TOTL Population, total    1A
-#> 4   6623792 2002 SP.POP.TOTL Population, total    S3
-#> 5   6577216 2001 SP.POP.TOTL Population, total    S3
-#> 6   6530691 2000 SP.POP.TOTL Population, total    S3
+#>   iso3c date     value indicatorID         indicator iso2c
+#> 1   ARB 2002 296026575 SP.POP.TOTL Population, total    1A
+#> 2   ARB 2001 289850357 SP.POP.TOTL Population, total    1A
+#> 3   ARB 2000 283832016 SP.POP.TOTL Population, total    1A
+#> 4   CSS 2002   6623792 SP.POP.TOTL Population, total    S3
+#> 5   CSS 2001   6577216 SP.POP.TOTL Population, total    S3
+#> 6   CSS 2000   6530691 SP.POP.TOTL Population, total    S3
 #>                  country
 #> 1             Arab World
 #> 2             Arab World
@@ -211,11 +211,11 @@ pop_data <- wb(country = c("ABW","AF", "SSF", "ECA", "NOC"),
 #> excluded from the request: NOC
 
 head(pop_data)
-#>       value date indicatorID         indicator iso2c
-#> 1    102577 2012 SP.POP.TOTL Population, total    AW
-#> 2  30696958 2012 SP.POP.TOTL Population, total    AF
-#> 3 407706585 2012 SP.POP.TOTL Population, total    7E
-#> 4 926548177 2012 SP.POP.TOTL Population, total    ZG
+#>   iso3c date     value indicatorID         indicator iso2c
+#> 1   ABW 2012    102577 SP.POP.TOTL Population, total    AW
+#> 2   AFG 2012  30696958 SP.POP.TOTL Population, total    AF
+#> 3   ECA 2012 407706585 SP.POP.TOTL Population, total    7E
+#> 4   SSF 2012 926548177 SP.POP.TOTL Population, total    ZG
 #>                                         country
 #> 1                                         Aruba
 #> 2                                   Afghanistan
@@ -232,11 +232,16 @@ pop_gdp_data <- wb(country = c("US", "NO"), indicator = c("SP.POP.TOTL", "NY.GDP
                startdate = 1971, enddate = 1971)
 
 head(pop_gdp_data)
-#>          value date    indicatorID         indicator iso2c       country
-#> 1 3.903039e+06 1971    SP.POP.TOTL Population, total    NO        Norway
-#> 2 2.076610e+08 1971    SP.POP.TOTL Population, total    US United States
-#> 3 1.458311e+10 1971 NY.GDP.MKTP.CD GDP (current US$)    NO        Norway
-#> 4 1.167770e+12 1971 NY.GDP.MKTP.CD GDP (current US$)    US United States
+#>   iso3c date        value    indicatorID         indicator iso2c
+#> 1   NOR 1971 3.903039e+06    SP.POP.TOTL Population, total    NO
+#> 2   USA 1971 2.076610e+08    SP.POP.TOTL Population, total    US
+#> 3   NOR 1971 1.458311e+10 NY.GDP.MKTP.CD GDP (current US$)    NO
+#> 4   USA 1971 1.167770e+12 NY.GDP.MKTP.CD GDP (current US$)    US
+#>         country
+#> 1        Norway
+#> 2 United States
+#> 3        Norway
+#> 4 United States
 ```
 
 ### Using `mrv`
@@ -249,10 +254,10 @@ library(wbstats)
 eg_data <- wb(country = c("IN"), indicator = 'EG.ELC.ACCS.ZS', mrv = 1)
 
 eg_data
-#>      value date    indicatorID                               indicator
-#> 1 79.16926 2014 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#>   iso2c country
-#> 1    IN   India
+#>   iso3c date    value    indicatorID
+#> 1   IND 2014 79.16926 EG.ELC.ACCS.ZS
+#>                                 indicator iso2c country
+#> 1 Access to electricity (% of population)    IN   India
 ```
 
 You can increase this value and it will return no more than the `mrv` value. However, if `mrv` is greater than the number of available data it will return less
@@ -263,28 +268,28 @@ library(wbstats)
 eg_data <- wb(country = c("IN"), indicator = 'EG.ELC.ACCS.ZS', mrv = 10)
 
 eg_data
-#>       value date    indicatorID                               indicator
-#> 1  79.16926 2014 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 2  77.73752 2013 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 3  79.90000 2012 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 4  67.60000 2011 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 5  76.30000 2010 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 6  75.00000 2009 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 7  70.61525 2008 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 8  69.21004 2007 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 9  67.90000 2006 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 10 66.43195 2005 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#>    iso2c country
-#> 1     IN   India
-#> 2     IN   India
-#> 3     IN   India
-#> 4     IN   India
-#> 5     IN   India
-#> 6     IN   India
-#> 7     IN   India
-#> 8     IN   India
-#> 9     IN   India
-#> 10    IN   India
+#>    iso3c date    value    indicatorID
+#> 1    IND 2014 79.16926 EG.ELC.ACCS.ZS
+#> 2    IND 2013 77.73752 EG.ELC.ACCS.ZS
+#> 3    IND 2012 79.90000 EG.ELC.ACCS.ZS
+#> 4    IND 2011 67.60000 EG.ELC.ACCS.ZS
+#> 5    IND 2010 76.30000 EG.ELC.ACCS.ZS
+#> 6    IND 2009 75.00000 EG.ELC.ACCS.ZS
+#> 7    IND 2008 70.61525 EG.ELC.ACCS.ZS
+#> 8    IND 2007 69.21004 EG.ELC.ACCS.ZS
+#> 9    IND 2006 67.90000 EG.ELC.ACCS.ZS
+#> 10   IND 2005 66.43195 EG.ELC.ACCS.ZS
+#>                                  indicator iso2c country
+#> 1  Access to electricity (% of population)    IN   India
+#> 2  Access to electricity (% of population)    IN   India
+#> 3  Access to electricity (% of population)    IN   India
+#> 4  Access to electricity (% of population)    IN   India
+#> 5  Access to electricity (% of population)    IN   India
+#> 6  Access to electricity (% of population)    IN   India
+#> 7  Access to electricity (% of population)    IN   India
+#> 8  Access to electricity (% of population)    IN   India
+#> 9  Access to electricity (% of population)    IN   India
+#> 10 Access to electricity (% of population)    IN   India
 ```
 
 ### Using `gapfill = TRUE`
@@ -297,28 +302,28 @@ library(wbstats)
 eg_data <- wb(country = c("IN"), indicator = 'EG.ELC.ACCS.ZS', mrv = 10, gapfill = TRUE)
 
 eg_data
-#>       value date    indicatorID                               indicator
-#> 1  79.16926 2016 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 2  79.16926 2015 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 3  79.16926 2014 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 4  77.73752 2013 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 5  79.90000 2012 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 6  67.60000 2011 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 7  76.30000 2010 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 8  75.00000 2009 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 9  70.61525 2008 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#> 10 69.21004 2007 EG.ELC.ACCS.ZS Access to electricity (% of population)
-#>    iso2c country
-#> 1     IN   India
-#> 2     IN   India
-#> 3     IN   India
-#> 4     IN   India
-#> 5     IN   India
-#> 6     IN   India
-#> 7     IN   India
-#> 8     IN   India
-#> 9     IN   India
-#> 10    IN   India
+#>    iso3c date    value    indicatorID
+#> 1    IND 2017 79.16926 EG.ELC.ACCS.ZS
+#> 2    IND 2016 79.16926 EG.ELC.ACCS.ZS
+#> 3    IND 2015 79.16926 EG.ELC.ACCS.ZS
+#> 4    IND 2014 79.16926 EG.ELC.ACCS.ZS
+#> 5    IND 2013 77.73752 EG.ELC.ACCS.ZS
+#> 6    IND 2012 79.90000 EG.ELC.ACCS.ZS
+#> 7    IND 2011 67.60000 EG.ELC.ACCS.ZS
+#> 8    IND 2010 76.30000 EG.ELC.ACCS.ZS
+#> 9    IND 2009 75.00000 EG.ELC.ACCS.ZS
+#> 10   IND 2008 70.61525 EG.ELC.ACCS.ZS
+#>                                  indicator iso2c country
+#> 1  Access to electricity (% of population)    IN   India
+#> 2  Access to electricity (% of population)    IN   India
+#> 3  Access to electricity (% of population)    IN   India
+#> 4  Access to electricity (% of population)    IN   India
+#> 5  Access to electricity (% of population)    IN   India
+#> 6  Access to electricity (% of population)    IN   India
+#> 7  Access to electricity (% of population)    IN   India
+#> 8  Access to electricity (% of population)    IN   India
+#> 9  Access to electricity (% of population)    IN   India
+#> 10 Access to electricity (% of population)    IN   India
 ```
 
 Because `gapfill` returns data that does reflect actual observed values, use this option with care.
@@ -333,20 +338,20 @@ library(wbstats)
 oil_data <- wb(indicator = "CRUDE_BRENT", mrv = 10, freq = "M", POSIXct = TRUE)
 
 head(oil_data)
-#>   value    date indicatorID                          indicator iso2c
-#> 1 46.89 2017M06 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 2 50.87 2017M05 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 3 52.98 2017M04 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 4 51.97 2017M03 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 5 55.49 2017M02 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 6 54.89 2017M01 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#>   iso3c    date value indicatorID                          indicator iso2c
+#> 1   WLD 2017M10 57.62 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#> 2   WLD 2017M09 55.16 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#> 3   WLD 2017M08 51.37 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#> 4   WLD 2017M07 48.69 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#> 5   WLD 2017M06 46.89 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
+#> 6   WLD 2017M05 50.87 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
 #>   country    date_ct granularity
-#> 1   World 2017-06-01     monthly
-#> 2   World 2017-05-01     monthly
-#> 3   World 2017-04-01     monthly
-#> 4   World 2017-03-01     monthly
-#> 5   World 2017-02-01     monthly
-#> 6   World 2017-01-01     monthly
+#> 1   World 2017-10-01     monthly
+#> 2   World 2017-09-01     monthly
+#> 3   World 2017-08-01     monthly
+#> 4   World 2017-07-01     monthly
+#> 5   World 2017-06-01     monthly
+#> 6   World 2017-05-01     monthly
 ```
 
 The `POSIXct = TRUE` option makes plotting and sorting dates much easier.
@@ -362,7 +367,7 @@ ggplot(oil_data, aes(x = date_ct, y = value, colour = indicator)) + geom_line(si
   labs(title = "Crude Oil Price Comparisons", x = "Date", y = "US Dollars")
 ```
 
-![](README-unnamed-chunk-18-1.png)
+![](tools/figures/read-me-ex-posixct-1-1.png)
 
 The `POSIXct = TRUE` option also makes plotting time series with different time coverage seamless
 
@@ -380,7 +385,7 @@ ggplot(metal_data, aes(x = date_ct, y = value, colour = indicator)) + geom_line(
   labs(title = "Precious Metal Prices", x = "Date", y = "US Dollars")
 ```
 
-![](README-unnamed-chunk-19-1.png)
+![](tools/figures/read-me-ex-posixct-2-1.png)
 
 Some Sharp Corners
 ==================
@@ -397,13 +402,20 @@ library(wbstats)
 
 pop_data <- wb(country = "US", indicator = "SP.POP.TOTL", 
                startdate = 1800, enddate = 1805, POSIXct = TRUE)
+#> Warning in wb(country = "US", indicator = "SP.POP.TOTL", startdate =
+#> 1800, : No data was returned for any requested country and indicator.
+#> Returning empty data frame
 
 nrow(pop_data)
-#> [1] 57
+#> [1] 0
 max(pop_data$date_ct)
-#> [1] "2016-01-01"
+#> Warning in max(pop_data$date_ct): no non-missing arguments to max;
+#> returning -Inf
+#> [1] -Inf
 min(pop_data$date_ct)
-#> [1] "1960-01-01"
+#> Warning in min(pop_data$date_ct): no non-missing arguments to min;
+#> returning Inf
+#> [1] Inf
 ```
 
 Most Recent Values
@@ -416,9 +428,9 @@ library(wbstats)
 
 eg_data_1 <- wb(country = c("IN", "AF"), indicator = 'EG.FEC.RNEW.ZS', mrv = 1)
 eg_data_1
-#>      value date    indicatorID
-#> 1 16.74900 2014 EG.FEC.RNEW.ZS
-#> 2 36.53617 2014 EG.FEC.RNEW.ZS
+#>   iso3c date    value    indicatorID
+#> 1   AFG 2014 16.74900 EG.FEC.RNEW.ZS
+#> 2   IND 2014 36.53617 EG.FEC.RNEW.ZS
 #>                                                            indicator iso2c
 #> 1 Renewable energy consumption (% of total final energy consumption)    AF
 #> 2 Renewable energy consumption (% of total final energy consumption)    IN
@@ -428,11 +440,11 @@ eg_data_1
 
 eg_data_2 <- wb(country = c("IN", "AF"), indicator = 'EG.FEC.RNEW.ZS', mrv = 2)
 eg_data_2
-#>      value date    indicatorID
-#> 1 16.74900 2014 EG.FEC.RNEW.ZS
-#> 2 14.27845 2013 EG.FEC.RNEW.ZS
-#> 3 36.53617 2014 EG.FEC.RNEW.ZS
-#> 4 37.73270 2013 EG.FEC.RNEW.ZS
+#>   iso3c date    value    indicatorID
+#> 1   AFG 2014 16.74900 EG.FEC.RNEW.ZS
+#> 2   AFG 2013 14.27845 EG.FEC.RNEW.ZS
+#> 3   IND 2014 36.53617 EG.FEC.RNEW.ZS
+#> 4   IND 2013 37.73270 EG.FEC.RNEW.ZS
 #>                                                            indicator iso2c
 #> 1 Renewable energy consumption (% of total final energy consumption)    AF
 #> 2 Renewable energy consumption (% of total final energy consumption)    AF
@@ -462,7 +474,7 @@ sum(is.na(cache_en$indicators$indicator))
 # spanish
 cache_es <- wbcache(lang = "es")
 sum(is.na(cache_es$indicators$indicator))
-#> [1] 14978
+#> [1] 15084
 ```
 
 Legal

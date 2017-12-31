@@ -199,7 +199,7 @@ head(oil_data)
 ```
 
 The `POSIXct = TRUE` option makes plotting and sorting dates much easier.
-```{r, fig.height = 4, fig.width = 7.5}
+```{r read-me-ex-posixct-1, fig.height = 4, fig.width = 7.5, fig.path = "tools/figures/"}
 library(wbstats)
 library(ggplot2)
 
@@ -211,7 +211,7 @@ ggplot(oil_data, aes(x = date_ct, y = value, colour = indicator)) + geom_line(si
 ```
 
 The `POSIXct = TRUE` option also makes plotting time series with different time coverage seamless
-```{r, fig.height = 4, fig.width = 7.5}
+```{r read-me-ex-posixct-2, fig.height = 4, fig.width = 7.5, fig.path = "tools/figures/"}
 library(wbstats)
 library(ggplot2)
 
