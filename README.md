@@ -159,12 +159,12 @@ gini_vars <- wbsearch(pattern = "Coeficiente de Gini", cache = wb_cachelist_es)
 
 head(gini_vars)
 #>           indicatorID                                       indicator
-#> 10099   3.2.TheilInd1                   Índice de Theil, GE(1),Urbano
-#> 10101        3.2.Gini                                    Gini, Urbano
-#> 10112   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
-#> 10114        3.1.Gini                                     Gini, Rural
-#> 10117   3.0.TheilInd1                          Índice de Theil, GE(1)
-#> 10126 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
+#> 14774   3.2.TheilInd1                   Índice de Theil, GE(1),Urbano
+#> 14776        3.2.Gini                                    Gini, Urbano
+#> 14787   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
+#> 14789        3.1.Gini                                     Gini, Rural
+#> 14792   3.0.TheilInd1                          Índice de Theil, GE(1)
+#> 14801 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
 ```
 
 Downloading data with `wb()`
@@ -391,32 +391,6 @@ Some Sharp Corners
 ==================
 
 There are a few behaviors of the World Bank API that being aware of could help explain some potentially unexpected results. These results are known but no special actions are taken to mitigate them as they are the result of the API itself and artifically limiting the inputs or results could potentially causes problems or create unnecessary rescrictions in the future.
-
-Non-overlaping time frames
---------------------------
-
-If you make a query with `wb()` and the `startdate` and `enddate` no not overlap at all with the available data, then all of the data is returned instead of nothing.
-
-``` r
-library(wbstats)
-
-pop_data <- wb(country = "US", indicator = "SP.POP.TOTL", 
-               startdate = 1800, enddate = 1805, POSIXct = TRUE)
-#> Warning in wb(country = "US", indicator = "SP.POP.TOTL", startdate =
-#> 1800, : No data was returned for any requested country and indicator.
-#> Returning empty data frame
-
-nrow(pop_data)
-#> [1] 0
-max(pop_data$date_ct)
-#> Warning in max(pop_data$date_ct): no non-missing arguments to max;
-#> returning -Inf
-#> [1] -Inf
-min(pop_data$date_ct)
-#> Warning in min(pop_data$date_ct): no non-missing arguments to min;
-#> returning Inf
-#> [1] Inf
-```
 
 Most Recent Values
 ------------------

@@ -229,19 +229,6 @@ ggplot(metal_data, aes(x = date_ct, y = value, colour = indicator)) + geom_line(
 # Some Sharp Corners
 There are a few behaviors of the World Bank API that being aware of could help explain some potentially unexpected results. These results are known but no special actions are taken to mitigate them as they are the result of the API itself and artifically limiting the inputs or results could potentially causes problems or create unnecessary rescrictions in the future. 
 
-## Non-overlaping time frames
-If you make a query with `wb()` and the `startdate` and `enddate` no not overlap at all with the available data, then all of the data is returned instead of nothing.
-```{r}
-library(wbstats)
-
-pop_data <- wb(country = "US", indicator = "SP.POP.TOTL", 
-               startdate = 1800, enddate = 1805, POSIXct = TRUE)
-
-nrow(pop_data)
-max(pop_data$date_ct)
-min(pop_data$date_ct)
-```
-
 ## Most Recent Values
 If you use the `mrv` parameter in `wb()` with mutliple countries or regions, it searches for the most recent dates for which any country or region in your selection has data and then returns the data for those dates. In other words the `mrv` value is not determined on a country by country basis, rather it is determined across the entire selection.
 ```{r}
