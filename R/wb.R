@@ -40,6 +40,8 @@
 #'  this column is removed
 #' @param include_obsStatus if \code{TRUE}, the column \code{obsStatus} is not removed from the return. if \code{FALSE},
 #'  this column is removed
+#' @param include_lastUpdated if \code{TRUE}, the column \code{lastUpdated} is not removed from the return. if \code{FALSE},
+#'  this column is removed. If \code{TRUE} and \code{POSIXct = TRUE} then column will be of class \code{\link[base]{Date}}
 #' @return Data frame with all available requested data.
 #'
 #' @note Not all data returns have support for langauges other than english. If the specific return
@@ -61,6 +63,8 @@
 #'  The \code{include_dec}, \code{include_unit}, and \code{include_obsStatus} are defaulted to \code{FALSE}
 #'  because as of writing, all returns have a value of \code{0}, \code{NA}, and \code{NA}, respectively.
 #'  These columns might be used in the future by the API, therefore the option to include the column is available.
+#'
+#'  The \code{include_lastUpdated} is defaulted to \code{FALSE} as well to limit the
 #'
 #'  If there is no data available that matches the request parameters, an empty data frame is returned along with a
 #'  \code{warning}. This design is for easy aggregation of multiple calls.
@@ -104,7 +108,8 @@
 #' @export
 wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, freq, cache,
                lang = c("en", "es", "fr", "ar", "zh"), removeNA = TRUE, POSIXct = FALSE,
-               include_dec = FALSE, include_unit = FALSE, include_obsStatus = FALSE) {
+               include_dec = FALSE, include_unit = FALSE, include_obsStatus = FALSE,
+               include_lastUpdated = FALSE) {
 
   lang <- match.arg(lang)
 
@@ -270,9 +275,11 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
 
   out_df <- wbformatcols(out_df, out_cols)
 
+  if (POSIXct) out_df <- wbdate2POSIXct(out_df, "date")
   if (!include_dec) out_df$decimal <- NULL
   if (!include_unit) out_df$unit <- NULL
   if (!include_obsStatus) out_df$obsStatus <- NULL
+  if (!include_lastUpdated) out_df$lastUpdated <- NULL
 
   if (removeNA) out_df <- out_df[!is.na(out_df$value), ]
 
@@ -319,7 +326,6 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
 
   }
 
-  if (POSIXct) out_df <- wbdate2POSIXct(out_df, "date")
 
   out_df
 }

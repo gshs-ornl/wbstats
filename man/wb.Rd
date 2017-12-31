@@ -7,7 +7,7 @@
 wb(country = "all", indicator, startdate, enddate, mrv, gapfill, freq, cache,
   lang = c("en", "es", "fr", "ar", "zh"), removeNA = TRUE,
   POSIXct = FALSE, include_dec = FALSE, include_unit = FALSE,
-  include_obsStatus = FALSE)
+  include_obsStatus = FALSE, include_lastUpdated = FALSE)
 }
 \arguments{
 \item{country}{Character vector of country or region codes. Default value is special code of \code{all}.
@@ -61,6 +61,9 @@ this column is removed}
 
 \item{include_obsStatus}{if \code{TRUE}, the column \code{obsStatus} is not removed from the return. if \code{FALSE},
 this column is removed}
+
+\item{include_lastUpdated}{if \code{TRUE}, the column \code{lastUpdated} is not removed from the return. if \code{FALSE},
+this column is removed. If \code{TRUE} and \code{POSIXct = TRUE} then column will be of class \code{\link[base]{Date}}}
 }
 \value{
 Data frame with all available requested data.
@@ -88,6 +91,8 @@ Not all data returns have support for langauges other than english. If the speci
  The \code{include_dec}, \code{include_unit}, and \code{include_obsStatus} are defaulted to \code{FALSE}
  because as of writing, all returns have a value of \code{0}, \code{NA}, and \code{NA}, respectively.
  These columns might be used in the future by the API, therefore the option to include the column is available.
+
+ The \code{include_lastUpdated} is defaulted to \code{FALSE} as well to limit the
 
  If there is no data available that matches the request parameters, an empty data frame is returned along with a
  \code{warning}. This design is for easy aggregation of multiple calls.

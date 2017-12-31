@@ -186,9 +186,29 @@ call_api <- function(url_string, indicator) {
 wbget <- function(url_string, indicator) {
 
   return_json <- call_api(url_string = url_string, indicator = indicator)
-  return_list <- jsonlite::fromJSON(return_json,  flatten = TRUE)
+
+  #
+  return_list <- jsonlite::fromJSON(return_json, simplifyVector = FALSE)
+
+  if ("message" %in% names(return_list[[1]])) {
+
+    message_list <- return_list[[1]]$message[[1]]
+
+    stop(sprintf("World Bank API request failed for indicator %s The following message was returned from the server\nid: %s\nkey: %s\nvalue: %s",
+                 indicator,
+                 message_list$id,
+                 message_list$key,
+                 message_list$value),
+         call. = FALSE)
+
+  }
 
   n_pages <- return_list[[1]]$pages
+
+  if (n_pages == 0) return(NA) # a blank data frame will be returned to the user
+
+  return_list <- jsonlite::fromJSON(return_json,  flatten = TRUE)
+
   lastUpdated <- return_list[[1]]$lastupdated
 
   if (n_pages > 1) {
