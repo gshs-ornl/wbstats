@@ -1,4 +1,4 @@
-wbstats v0.2 (Release date: 12/29/2017)
+wbstats v0.1.9 (Release date: 12/31/2017)
 ==============
 Bug fixes:
 * wbdatacatalog() now returns all catalog entries instead of first 10
