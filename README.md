@@ -30,7 +30,7 @@ The World Bank[1] is a tremendous source of global socio-economic data; spanning
 -   Support for searching and downloading data in multiple languages
 -   Access to the World Bank Data Catalog Metadata, providing among other information; update schedules and supported languages
 -   Ability to return `POSIXct` dates for easy integration into plotting and time-series analysis techniques
--   Returns data in long format for direct integration with packages like `ggplot2` and `dplyr`
+-   Returns data in either long (default) or wide format for direct integration with packages like `ggplot2` and `dplyr`
 -   Support for Most Recent Value queries
 -   Support for `grep` style searching for data descriptions and names
 -   Ability to download data not only by country, but by aggregates as well, such as High Income or South Asia
@@ -159,13 +159,13 @@ wb_cachelist_es <- wbcache(lang = "es")
 gini_vars <- wbsearch(pattern = "Coeficiente de Gini", cache = wb_cachelist_es)
 
 head(gini_vars)
-#>         indicatorID                                       indicator
-#> 822   3.2.TheilInd1                   Índice de Theil, GE(1),Urbano
-#> 824        3.2.Gini                                    Gini, Urbano
-#> 835   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
-#> 837        3.1.Gini                                     Gini, Rural
-#> 840   3.0.TheilInd1                          Índice de Theil, GE(1)
-#> 849 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
+#>           indicatorID                                       indicator
+#> 12701   3.2.TheilInd1                   Índice de Theil, GE(1),Urbano
+#> 12703        3.2.Gini                                    Gini, Urbano
+#> 12714   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
+#> 12716        3.1.Gini                                     Gini, Rural
+#> 12719   3.0.TheilInd1                          Índice de Theil, GE(1)
+#> 12728 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
 ```
 
 Downloading data with `wb()`
@@ -229,10 +229,10 @@ Queries with multiple indicators return the data in a long data format
 ``` r
 library(wbstats)
 
-pop_gdp_data <- wb(country = c("US", "NO"), indicator = c("SP.POP.TOTL", "NY.GDP.MKTP.CD"),
-               startdate = 1971, enddate = 1971)
+pop_gdp_long <- wb(country = c("US", "NO"), indicator = c("SP.POP.TOTL", "NY.GDP.MKTP.CD"),
+                   startdate = 1971, enddate = 1971)
 
-head(pop_gdp_data)
+head(pop_gdp_long)
 #>   iso3c date        value    indicatorID         indicator iso2c
 #> 1   NOR 1971 3.903039e+06    SP.POP.TOTL Population, total    NO
 #> 2   USA 1971 2.076610e+08    SP.POP.TOTL Population, total    US
@@ -243,6 +243,20 @@ head(pop_gdp_data)
 #> 2 United States
 #> 3        Norway
 #> 4 United States
+```
+
+or wide format if parameter `return_wide = TRUE`. Note that to necessitate a this transformation,`indicator` column is dropped.
+
+``` r
+library(wbstats)
+
+pop_gdp_wide <- wb(country = c("US", "NO"), indicator = c("SP.POP.TOTL", "NY.GDP.MKTP.CD"),
+               startdate = 1971, enddate = 1971, return_wide = TRUE)
+
+head(pop_gdp_wide)
+#>   iso3c date iso2c       country NY.GDP.MKTP.CD SP.POP.TOTL
+#> 1   NOR 1971    NO        Norway   1.458311e+10     3903039
+#> 2   USA 1971    US United States   1.167770e+12   207661000
 ```
 
 ### Using `mrv`
