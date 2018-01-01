@@ -107,6 +107,12 @@ Not all data returns have support for langauges other than english. If the speci
  # GDP at market prices (current US$) for all available countries and regions
  wb(indicator = "NY.GDP.MKTP.CD", startdate = 2000, enddate = 2016)
 
+ # GDP and Population in long format for the most recent 20 observations
+ wb(indicator = c("SP.POP.TOTL","NY.GDP.MKTP.CD"), mrv = 20)
+
+ # GDP and Population in wide format for the most recent 20 observations
+ wb(indicator = c("SP.POP.TOTL","NY.GDP.MKTP.CD"), mrv = 20, return_wide = TRUE)
+
  # query using regionID or incomeID
  # High Income Countries and Sub-Saharan Africa (all income levels)
  wb(country = c("HIC", "SSF"), indicator = "NY.GDP.MKTP.CD", startdate = 1985, enddate = 1985)
