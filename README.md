@@ -160,12 +160,12 @@ gini_vars <- wbsearch(pattern = "Coeficiente de Gini", cache = wb_cachelist_es)
 
 head(gini_vars)
 #>           indicatorID                                       indicator
-#> 12701   3.2.TheilInd1                   Índice de Theil, GE(1),Urbano
-#> 12703        3.2.Gini                                    Gini, Urbano
-#> 12714   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
-#> 12716        3.1.Gini                                     Gini, Rural
-#> 12719   3.0.TheilInd1                          Índice de Theil, GE(1)
-#> 12728 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
+#> 14774   3.2.TheilInd1                   Índice de Theil, GE(1),Urbano
+#> 14776        3.2.Gini                                    Gini, Urbano
+#> 14787   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
+#> 14789        3.1.Gini                                     Gini, Rural
+#> 14792   3.0.TheilInd1                          Índice de Theil, GE(1)
+#> 14801 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
 ```
 
 Downloading data with `wb()`
@@ -224,7 +224,7 @@ head(pop_data)
 #> 4                            Sub-Saharan Africa
 ```
 
-Queries with multiple indicators return the data in a long data format
+Queries with multiple indicators return the data in a long data format by default
 
 ``` r
 library(wbstats)
@@ -245,13 +245,13 @@ head(pop_gdp_long)
 #> 4 United States
 ```
 
-or wide format if parameter `return_wide = TRUE`. Note that to necessitate a this transformation,`indicator` column is dropped.
+or a wide format if parameter `return_wide = TRUE`. Note that to necessitate a this transformation the `indicator` column is dropped.
 
 ``` r
 library(wbstats)
 
 pop_gdp_wide <- wb(country = c("US", "NO"), indicator = c("SP.POP.TOTL", "NY.GDP.MKTP.CD"),
-               startdate = 1971, enddate = 1971, return_wide = TRUE)
+                   startdate = 1971, enddate = 1971, return_wide = TRUE)
 
 head(pop_gdp_wide)
 #>   iso3c date iso2c       country NY.GDP.MKTP.CD SP.POP.TOTL

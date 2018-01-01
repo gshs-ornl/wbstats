@@ -148,7 +148,7 @@ pop_data <- wb(country = c("ABW","AF", "SSF", "ECA", "NOC"),
 head(pop_data)
 ```
 
-Queries with multiple indicators return the data in a long data format
+Queries with multiple indicators return the data in a long data format by default
 ```{r}
 library(wbstats)
 
@@ -158,7 +158,7 @@ pop_gdp_long <- wb(country = c("US", "NO"), indicator = c("SP.POP.TOTL", "NY.GDP
 head(pop_gdp_long)
 ```
 
-or wide format if parameter `return_wide = TRUE`. Note that to necessitate a this transformation,`indicator` column is dropped.
+or a wide format if parameter `return_wide = TRUE`. Note that to necessitate a this transformation the `indicator` column is dropped.
 ```{r}
 library(wbstats)
 
