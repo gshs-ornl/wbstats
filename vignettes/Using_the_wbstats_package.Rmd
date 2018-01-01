@@ -15,11 +15,12 @@ The World Bank^[<http://www.worldbank.org/>] is a tremendous source of global so
 
 ### Highlighted features of the `wbstats` R-package: 
 
+- Uses version 2 of the World Bank API that provides access to more indicators and metadata than the previous API version
 - Access to all annual, quarterly, and monthly data available in the API
 - Support for searching and downloading data in multiple languages
 - Access to the World Bank Data Catalog Metadata, providing among other information; update schedules and supported languages
 - Ability to return `POSIXct` dates for easy integration into plotting and time-series analysis techniques
-- Returns data in long format for direct integration with packages like `ggplot2` and `dplyr`
+- Returns data in either long (default) or wide format for direct integration with packages like `ggplot2` and `dplyr`
 - Support for Most Recent Value queries
 - Support for `grep` style searching for data descriptions and names
 - Ability to download data not only by country, but by aggregates as well, such as High Income or South Asia
@@ -126,14 +127,24 @@ pop_data <- wb(country = c("ABW","AF", "SSF", "ECA", "NOC"),
 head(pop_data)
 ```
 
-Queries with multiple indicators return the data in a long data format
+Queries with multiple indicators return the data in a long data format by default
 ```{r}
 library(wbstats)
 
-pop_gdp_data <- wb(country = c("US", "NO"), indicator = c("SP.POP.TOTL", "NY.GDP.MKTP.CD"),
-               startdate = 1971, enddate = 1971)
+pop_gdp_long <- wb(country = c("US", "NO"), indicator = c("SP.POP.TOTL", "NY.GDP.MKTP.CD"),
+                   startdate = 1971, enddate = 1971)
 
-head(pop_gdp_data)
+head(pop_gdp_long)
+```
+
+or a wide format if parameter `return_wide = TRUE`. Note that to necessitate a this transformation the `indicator` column is dropped.
+```{r}
+library(wbstats)
+
+pop_gdp_wide <- wb(country = c("US", "NO"), indicator = c("SP.POP.TOTL", "NY.GDP.MKTP.CD"),
+                   startdate = 1971, enddate = 1971, return_wide = TRUE)
+
+head(pop_gdp_wide)
 ```
 
 ### Using `mrv`

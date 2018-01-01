@@ -12,7 +12,7 @@
 
 <meta name="author" content="Jesse Piburn" />
 
-<meta name="date" content="2017-12-31" />
+<meta name="date" content="2018-01-01" />
 
 <title>Introduction to the wbstats R-package</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Introduction to the wbstats R-package</h1>
 <h4 class="author"><em>Jesse Piburn</em></h4>
-<h4 class="date"><em>2017-12-31</em></h4>
+<h4 class="date"><em>2018-01-01</em></h4>
 
 
 
@@ -80,11 +80,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="highlighted-features-of-the-wbstats-r-package" class="section level3">
 <h3>Highlighted features of the <code>wbstats</code> R-package:</h3>
 <ul>
+<li>Uses version 2 of the World Bank API that provides access to more indicators and metadata than the previous API version</li>
 <li>Access to all annual, quarterly, and monthly data available in the API</li>
 <li>Support for searching and downloading data in multiple languages</li>
 <li>Access to the World Bank Data Catalog Metadata, providing among other information; update schedules and supported languages</li>
 <li>Ability to return <code>POSIXct</code> dates for easy integration into plotting and time-series analysis techniques</li>
-<li>Returns data in long format for direct integration with packages like <code>ggplot2</code> and <code>dplyr</code></li>
+<li>Returns data in either long (default) or wide format for direct integration with packages like <code>ggplot2</code> and <code>dplyr</code></li>
 <li>Support for Most Recent Value queries</li>
 <li>Support for <code>grep</code> style searching for data descriptions and names</li>
 <li>Ability to download data not only by country, but by aggregates as well, such as High Income or South Asia</li>
@@ -138,23 +139,23 @@ new_cache &lt;-<span class="st"> </span><span class="kw">wbcache</span>()</code>
 <tbody>
 <tr class="odd">
 <td>4310</td>
-<td align="left">per_sa_su.ben_q5_urb</td>
-<td align="left">Benefits incidence in richest quintile (%) - Subsidies -urban</td>
+<td align="left">UIS.E.5.B</td>
+<td align="left">Enrolment in tertiary education, ISCED 5 programmes, both sexes (number)</td>
 <td align="left">NA</td>
-<td align="left">Percentage of benefits going to the richestquintile relative to the total benefits going to the population</td>
-<td align="left">ASPIRE</td>
-<td align="left">29</td>
-<td align="left">The Atlas of Social Protection: Indicators of Resilience and Equity</td>
+<td align="left">Total number of students enrolled in public and private short-cycle tertiary education programmes (ISCED 5).</td>
+<td align="left">UNESCO Institute for Statistics</td>
+<td align="left">12</td>
+<td align="left">Education Statistics</td>
 </tr>
 <tr class="even">
 <td>4311</td>
-<td align="left">per_sa_su.ben_q5_tot</td>
-<td align="left">Benefits incidence in richest quintile (%) - Subsidies</td>
+<td align="left">UIS.E.4.PU.F</td>
+<td align="left">Enrolment in post-secondary non-tertiary education, public institutions, female (number)</td>
 <td align="left">NA</td>
-<td align="left">Percentage of benefits going to the richestquintile relative to the total benefits going to the population</td>
-<td align="left">ASPIRE</td>
-<td align="left">29</td>
-<td align="left">The Atlas of Social Protection: Indicators of Resilience and Equity</td>
+<td align="left">Total number of females enrolled in public post-secondary non-tertiary education institutions regardless of age. Public education Institutions are controlled and managed directly by a public education authority or agency of the country where it is located or by a government agency directly or by a governing body (council, committee etc.), most of whose members are either appointed by a public authority of the country where it is located or elected by public franchise.</td>
+<td align="left">UNESCO Institute for Statistics</td>
+<td align="left">12</td>
+<td align="left">Education Statistics</td>
 </tr>
 </tbody>
 </table>
@@ -163,32 +164,32 @@ new_cache &lt;-<span class="st"> </span><span class="kw">wbcache</span>()</code>
 
 unemploy_vars &lt;-<span class="st"> </span><span class="kw">wbsearch</span>(<span class="dt">pattern =</span> <span class="st">&quot;unemployment&quot;</span>)
 <span class="kw">head</span>(unemploy_vars)</code></pre></div>
-<pre><code>##               indicatorID
-## 1849       SL.UEM.TOTL.ZS
-## 1850    SL.UEM.TOTL.NE.ZS
-## 1851    SL.UEM.TOTL.MA.ZS
-## 1852 SL.UEM.TOTL.MA.NE.ZS
-## 1853    SL.UEM.TOTL.FE.ZS
-## 1854 SL.UEM.TOTL.FE.NE.ZS
-##                                                                  indicator
-## 1849   Unemployment, total (% of total labor force) (modeled ILO estimate)
-## 1850      Unemployment, total (% of total labor force) (national estimate)
-## 1851     Unemployment, male (% of male labor force) (modeled ILO estimate)
-## 1852        Unemployment, male (% of male labor force) (national estimate)
-## 1853 Unemployment, female (% of female labor force) (modeled ILO estimate)
-## 1854    Unemployment, female (% of female labor force) (national estimate)</code></pre>
+<pre><code>##    indicatorID
+## 35   WP15177.9
+## 36   WP15177.8
+## 37   WP15177.7
+## 38   WP15177.6
+## 39   WP15177.5
+## 40   WP15177.4
+##                                                                                        indicator
+## 35         Received government transfers in the past year, income, richest 60% (% ages 15+) [w2]
+## 36         Received government transfers in the past year, income, poorest 40% (% ages 15+) [w2]
+## 37 Received government transfers in the past year, secondary education or more (% ages 15+) [w2]
+## 38   Received government transfers in the past year, primary education or less (% ages 15+) [w2]
+## 39                Received government transfers in the past year, older adults (% ages 25+) [w2]
+## 40              Received government transfers in the past year, young adults (% ages 15-24) [w2]</code></pre>
 <p>Other fields can be searched by simply changing the <code>fields</code> parameter. For example</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(wbstats)
 
 blmbrg_vars &lt;-<span class="st"> </span><span class="kw">wbsearch</span>(<span class="dt">pattern =</span> <span class="st">&quot;Bloomberg&quot;</span>, <span class="dt">fields =</span> <span class="st">&quot;sourceOrg&quot;</span>)
 <span class="kw">head</span>(blmbrg_vars)</code></pre></div>
 <pre><code>##        indicatorID                             indicator
-## 1489  RUBBER1_MYSG Rubber, Singapore, cents/kg, current$
-## 3279  WHEAT_US_HRW        Wheat, US, HRW, $/mt, current$
-## 4465      SUGAR_US         Sugar, US, cents/kg, current$
-## 7985    GFDD.SM.01                Stock price volatility
-## 7993    GFDD.OM.02 Stock market return (%, year-on-year)
-## 10633       BARLEY                Barley, $/mt, current$</code></pre>
+## 262   WHEAT_US_HRW        Wheat, US, HRW, $/mt, current$
+## 766       SUGAR_US         Sugar, US, cents/kg, current$
+## 2563  RUBBER1_MYSG Rubber, Singapore, cents/kg, current$
+## 9488    GFDD.SM.01                Stock price volatility
+## 9496    GFDD.OM.02 Stock market return (%, year-on-year)
+## 12003       BARLEY                Barley, $/mt, current$</code></pre>
 <p>Regular expressions are also supported.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(wbstats)
 
@@ -196,20 +197,20 @@ blmbrg_vars &lt;-<span class="st"> </span><span class="kw">wbsearch</span>(<span
 povemply_vars &lt;-<span class="st"> </span><span class="kw">wbsearch</span>(<span class="dt">pattern =</span> <span class="st">&quot;poverty|unemployment|employment&quot;</span>)
 
 <span class="kw">head</span>(povemply_vars)</code></pre></div>
-<pre><code>##          indicatorID
-## 437 UIS.GTVP.4.GPV.M
-## 438 UIS.GTVP.4.GPV.F
-## 439   UIS.GTVP.4.GPV
-## 443 UIS.GTVP.3.GPV.M
-## 444 UIS.GTVP.3.GPV.F
-## 445   UIS.GTVP.3.GPV
-##                                                                                                             indicator
-## 437     Percentage of male students in post-secondary non-tertiary education enrolled in general programmes, male (%)
-## 438 Percentage of female students in post-secondary non-tertiary education enrolled in general programmes, female (%)
-## 439    Percentage of students in post-secondary non-tertiary education enrolled in general programmes, both sexes (%)
-## 443                 Percentage of male students in upper secondary education enrolled in general programmes, male (%)
-## 444             Percentage of female students in upper secondary education enrolled in general programmes, female (%)
-## 445                Percentage of students in upper secondary education enrolled in general programmes, both sexes (%)</code></pre>
+<pre><code>##    indicatorID
+## 35   WP15177.9
+## 36   WP15177.8
+## 37   WP15177.7
+## 38   WP15177.6
+## 39   WP15177.5
+## 40   WP15177.4
+##                                                                                        indicator
+## 35         Received government transfers in the past year, income, richest 60% (% ages 15+) [w2]
+## 36         Received government transfers in the past year, income, poorest 40% (% ages 15+) [w2]
+## 37 Received government transfers in the past year, secondary education or more (% ages 15+) [w2]
+## 38   Received government transfers in the past year, primary education or less (% ages 15+) [w2]
+## 39                Received government transfers in the past year, older adults (% ages 25+) [w2]
+## 40              Received government transfers in the past year, young adults (% ages 15-24) [w2]</code></pre>
 <p>The default cached data in <code>wb_cachelist</code> is in English. To search indicators in a different language, you can download an updated copy of <code>wb_cachelist</code> using <code>wbcache()</code>, with the <code>lang</code> parameter set to the language of interest and then set this as the <code>cache</code> parameter in <code>wbsearch()</code>. Other languages are supported in so far as they are supported by the original data sources. Some sources provide full support for other languages, while some have very limited support. If the data source does not have a translation for a certain field or indicator then the result is <code>NA</code>, this may result in a varying number matches depending upon the language you select.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(wbstats)
 
@@ -219,13 +220,13 @@ wb_cachelist_es &lt;-<span class="st"> </span><span class="kw">wbcache</span>(<s
 gini_vars &lt;-<span class="st"> </span><span class="kw">wbsearch</span>(<span class="dt">pattern =</span> <span class="st">&quot;Coeficiente de Gini&quot;</span>, <span class="dt">cache =</span> wb_cachelist_es)
 
 <span class="kw">head</span>(gini_vars)</code></pre></div>
-<pre><code>##           indicatorID                                       indicator
-## 10162   3.2.TheilInd1                   Índice de Theil, GE(1),Urbano
-## 10164        3.2.Gini                                    Gini, Urbano
-## 10175   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
-## 10177        3.1.Gini                                     Gini, Rural
-## 10180   3.0.TheilInd1                          Índice de Theil, GE(1)
-## 10189 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)</code></pre>
+<pre><code>##          indicatorID                                       indicator
+## 9145   3.2.TheilInd1                   Índice de Theil, GE(1),Urbano
+## 9147        3.2.Gini                                    Gini, Urbano
+## 9158   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
+## 9160        3.1.Gini                                     Gini, Rural
+## 9163   3.0.TheilInd1                          Índice de Theil, GE(1)
+## 9172 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)</code></pre>
 </div>
 <div id="downloading-data-with-wb" class="section level2">
 <h2>Downloading data with <code>wb()</code></h2>
@@ -272,13 +273,13 @@ pop_data &lt;-<span class="st"> </span><span class="kw">wb</span>(<span class="d
 ## 2                                   Afghanistan
 ## 3 Europe &amp; Central Asia (excluding high income)
 ## 4                            Sub-Saharan Africa</code></pre>
-<p>Queries with multiple indicators return the data in a long data format</p>
+<p>Queries with multiple indicators return the data in a long data format by default</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(wbstats)
 
-pop_gdp_data &lt;-<span class="st"> </span><span class="kw">wb</span>(<span class="dt">country =</span> <span class="kw">c</span>(<span class="st">&quot;US&quot;</span>, <span class="st">&quot;NO&quot;</span>), <span class="dt">indicator =</span> <span class="kw">c</span>(<span class="st">&quot;SP.POP.TOTL&quot;</span>, <span class="st">&quot;NY.GDP.MKTP.CD&quot;</span>),
-               <span class="dt">startdate =</span> <span class="dv">1971</span>, <span class="dt">enddate =</span> <span class="dv">1971</span>)
+pop_gdp_long &lt;-<span class="st"> </span><span class="kw">wb</span>(<span class="dt">country =</span> <span class="kw">c</span>(<span class="st">&quot;US&quot;</span>, <span class="st">&quot;NO&quot;</span>), <span class="dt">indicator =</span> <span class="kw">c</span>(<span class="st">&quot;SP.POP.TOTL&quot;</span>, <span class="st">&quot;NY.GDP.MKTP.CD&quot;</span>),
+                   <span class="dt">startdate =</span> <span class="dv">1971</span>, <span class="dt">enddate =</span> <span class="dv">1971</span>)
 
-<span class="kw">head</span>(pop_gdp_data)</code></pre></div>
+<span class="kw">head</span>(pop_gdp_long)</code></pre></div>
 <pre><code>##   iso3c date        value    indicatorID         indicator iso2c
 ## 1   NOR 1971 3.903039e+06    SP.POP.TOTL Population, total    NO
 ## 2   USA 1971 2.076610e+08    SP.POP.TOTL Population, total    US
@@ -289,6 +290,16 @@ pop_gdp_data &lt;-<span class="st"> </span><span class="kw">wb</span>(<span clas
 ## 2 United States
 ## 3        Norway
 ## 4 United States</code></pre>
+<p>or a wide format if parameter <code>return_wide = TRUE</code>. Note that to necessitate a this transformation the <code>indicator</code> column is dropped.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(wbstats)
+
+pop_gdp_wide &lt;-<span class="st"> </span><span class="kw">wb</span>(<span class="dt">country =</span> <span class="kw">c</span>(<span class="st">&quot;US&quot;</span>, <span class="st">&quot;NO&quot;</span>), <span class="dt">indicator =</span> <span class="kw">c</span>(<span class="st">&quot;SP.POP.TOTL&quot;</span>, <span class="st">&quot;NY.GDP.MKTP.CD&quot;</span>),
+                   <span class="dt">startdate =</span> <span class="dv">1971</span>, <span class="dt">enddate =</span> <span class="dv">1971</span>, <span class="dt">return_wide =</span> <span class="ot">TRUE</span>)
+
+<span class="kw">head</span>(pop_gdp_wide)</code></pre></div>
+<pre><code>##   iso3c date iso2c       country NY.GDP.MKTP.CD SP.POP.TOTL
+## 1   NOR 1971    NO        Norway   1.458311e+10     3903039
+## 2   USA 1971    US United States   1.167770e+12   207661000</code></pre>
 <div id="using-mrv" class="section level3">
 <h3>Using <code>mrv</code></h3>
 <p>If you do not know the latest date an indicator you are interested in is available for you country you can use the <code>mrv</code> instead of <code>startdate</code> and <code>enddate</code>. <code>mrv</code> stands for most recent value and takes a <code>integer</code> corresponding to the number of most recent values you wish to return</p>

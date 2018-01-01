@@ -67,10 +67,18 @@ head(pop_data)
 ## ------------------------------------------------------------------------
 library(wbstats)
 
-pop_gdp_data <- wb(country = c("US", "NO"), indicator = c("SP.POP.TOTL", "NY.GDP.MKTP.CD"),
-               startdate = 1971, enddate = 1971)
+pop_gdp_long <- wb(country = c("US", "NO"), indicator = c("SP.POP.TOTL", "NY.GDP.MKTP.CD"),
+                   startdate = 1971, enddate = 1971)
 
-head(pop_gdp_data)
+head(pop_gdp_long)
+
+## ------------------------------------------------------------------------
+library(wbstats)
+
+pop_gdp_wide <- wb(country = c("US", "NO"), indicator = c("SP.POP.TOTL", "NY.GDP.MKTP.CD"),
+                   startdate = 1971, enddate = 1971, return_wide = TRUE)
+
+head(pop_gdp_wide)
 
 ## ------------------------------------------------------------------------
 library(wbstats)
