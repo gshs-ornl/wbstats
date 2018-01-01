@@ -10,11 +10,8 @@
 * Now uses Version 2 of the World Bank API.
 
 This new version of the API returns some new columns the old version didn't.
-<<<<<<< HEAD
-Including date of last update for all available data sources
-=======
 Including data of last update for all available data sources
->>>>>>> 6b80321170414ecaab2e18b9de72e84d572731c2
+
 
 This version also provides access to over 700 indicators that were moved to the
 `WDI Database Archives`. These indicators are not available using the older API
