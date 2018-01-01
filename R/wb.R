@@ -233,7 +233,6 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, return_wide 
 
   }
 
-
   # combine the url parameters ----------
   param_url_list[length(param_url_list) + 1] <- utils_url
   param_url <- paste0(param_url_list, collapse = "&")
@@ -247,7 +246,6 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, return_wide 
     return_df <- try(wbget(full_url, indicator = i), silent = FALSE)
   }
   )
-
 
   # remove the errored out indicator returns ----------
   df_index <- sapply(df_list, is.data.frame)
