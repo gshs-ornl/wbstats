@@ -20,7 +20,11 @@
 #' @param mrv Numeric. The number of Most Recent Values to return. A replacement of \code{startdate} and \code{enddate},
 #'  this number represents the number of observations you which to return starting from the most recent date of collection.
 #'  Useful in conjuction with \code{freq}
-#' @param gapfill Logical. Works with \code{mrv}. if \code{TRUE} fills values, if not available, by back tracking to the
+#' @param return_wide Logical. If \code{TRUE} data is returned in a wide format instead of long, with a column named for each
+#' \code{indicatorID}. To necessitate this transformation, the \code{indicator} column, that provides the human readable description
+#' is dropped. This field is available through from the \code{indicator} data frame of \code{\link{wbcache}} or \code{\link{wb_cachelist}},
+#' or the result of \code{\link{wbindicators}}. Default is \code{FALSE}
+#' @param gapfill Logical. Works with \code{mrv}. If \code{TRUE} fills values, if not available, by back tracking to the
 #'  next available period (max number of periods back tracked will be limited by \code{mrv} number)
 #' @param freq Character String. For fetching quarterly ("Q"), monthly("M") or yearly ("Y") values.
 #'  Currently works along with \code{mrv}. Useful for querying high frequency data.
@@ -106,10 +110,9 @@
 #'  # should return the 12 most recent months of data
 #'  wb(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12, freq = "M")
 #' @export
-wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, freq, cache,
-               lang = c("en", "es", "fr", "ar", "zh"), removeNA = TRUE, POSIXct = FALSE,
-               include_dec = FALSE, include_unit = FALSE, include_obsStatus = FALSE,
-               include_lastUpdated = FALSE) {
+wb <- function(country = "all", indicator, startdate, enddate, mrv, return_wide = FALSE, gapfill,
+               freq, cache, lang = c("en", "es", "fr", "ar", "zh"), removeNA = TRUE, POSIXct = FALSE,
+               include_dec = FALSE, include_unit = FALSE, include_obsStatus = FALSE, include_lastUpdated = FALSE) {
 
   lang <- match.arg(lang)
 
@@ -323,6 +326,16 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, gapfill, fre
       out_df[replace_rows, "iso3c"] <- iso23_df[i, "iso3c"]
 
     }
+
+  }
+
+  # check for wide return ----------
+  if (return_wide) {
+
+    out_df$indicator <- NULL
+    out_df <- tidyr::spread_(data = out_df,
+                             key_col = "indicatorID",
+                             value_col = "value")
 
   }
 

@@ -4,10 +4,11 @@
 \alias{wb}
 \title{Download Data from the World Bank API}
 \usage{
-wb(country = "all", indicator, startdate, enddate, mrv, gapfill, freq, cache,
-  lang = c("en", "es", "fr", "ar", "zh"), removeNA = TRUE,
-  POSIXct = FALSE, include_dec = FALSE, include_unit = FALSE,
-  include_obsStatus = FALSE, include_lastUpdated = FALSE)
+wb(country = "all", indicator, startdate, enddate, mrv, return_wide = FALSE,
+  gapfill, freq, cache, lang = c("en", "es", "fr", "ar", "zh"),
+  removeNA = TRUE, POSIXct = FALSE, include_dec = FALSE,
+  include_unit = FALSE, include_obsStatus = FALSE,
+  include_lastUpdated = FALSE)
 }
 \arguments{
 \item{country}{Character vector of country or region codes. Default value is special code of \code{all}.
@@ -33,7 +34,12 @@ and for quarterly data, "2016Q1".}
 this number represents the number of observations you which to return starting from the most recent date of collection.
 Useful in conjuction with \code{freq}}
 
-\item{gapfill}{Logical. Works with \code{mrv}. if \code{TRUE} fills values, if not available, by back tracking to the
+\item{return_wide}{Logical. If \code{TRUE} data is returned in a wide format instead of long, with a column named for each
+\code{indicatorID}. To necessitate this transformation, the \code{indicator} column, that provides the human readable description
+is dropped. This field is available through from the \code{indicator} data frame of \code{\link{wbcache}} or \code{\link{wb_cachelist}},
+or the result of \code{\link{wbindicators}}. Default is \code{FALSE}}
+
+\item{gapfill}{Logical. Works with \code{mrv}. If \code{TRUE} fills values, if not available, by back tracking to the
 next available period (max number of periods back tracked will be limited by \code{mrv} number)}
 
 \item{freq}{Character String. For fetching quarterly ("Q"), monthly("M") or yearly ("Y") values.
