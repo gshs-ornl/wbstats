@@ -9,12 +9,19 @@
 ## Changes:
 * Now uses Version 2 of the World Bank API.
 
-This new version of the API returns some new columns the old version didn't.
-Including data of last update for all available data sources
+    This new version of the API returns some new columns the old version didn't. 
+    Including data of last update for all available data sources
+    This version also provides access to over 700 indicators that were moved to the `WDI Database Archives`.
+    These indicators are not available using the older API
 
-
-This version also provides access to over 700 indicators that were moved to the
-`WDI Database Archives`. These indicators are not available using the older API
+* added the parameter `return_wide` to `wb()` allowing data returns to be formatted
+  in a wide format with each queried indicator being its own column named by its
+  corresponding `indicatorID`.
+  
+    This added functionality was done by importing the `tidyr` package and using `tidyr::spread_`.
+    While it is not ideal to add a dependency for one feature I believe the
+    `tidyr` and other `tidyverse` packages are inline with future `wbstats` features and are now
+    common enough that the added dependency is worth the addition.
 
 * More explicit error messaging when encountering API call errors
 
