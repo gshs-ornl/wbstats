@@ -9,13 +9,15 @@ This is a resubmission. In this version I have:
 
 ## Test environments
 * local win install, R 3.4.0
-* win-builder (devel and release)
+* win-builder (oldrelease, devel, release)
 
 ## R CMD check results
 R CMD check results
 0 errors | 0 warnings | 0 notes
 
 R CMD check succeeded
+
+Notes on win-builder related to example timing issue noted below
 
 ## Comment on example timing
 
