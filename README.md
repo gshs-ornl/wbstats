@@ -25,6 +25,7 @@ The World Bank[1] is a tremendous source of global socio-economic data; spanning
 
 ### Highlighted features of the `wbstats` R-package:
 
+-   Uses version 2 of the World Bank API that provides access to more indicators and metadata than the previous API version
 -   Access to all annual, quarterly, and monthly data available in the API
 -   Support for searching and downloading data in multiple languages
 -   Access to the World Bank Data Catalog Metadata, providing among other information; update schedules and supported languages
@@ -78,10 +79,10 @@ Search available data with `wbsearch()`
 
 `wbsearch()` searches through the `indicators` data frame to find indicators that match a search pattern. An example of the structure of this data frame is below
 
-|      | indicatorID              | indicator                                                     | unit | indicatorDesc                                                                                              | sourceOrg | sourceID | source                                                              |
-|------|:-------------------------|:--------------------------------------------------------------|:-----|:-----------------------------------------------------------------------------------------------------------|:----------|:---------|:--------------------------------------------------------------------|
-| 4310 | per\_sa\_su.ben\_q5\_urb | Benefits incidence in richest quintile (%) - Subsidies -urban | NA   | Percentage of benefits going to the richestquintile relative to the total benefits going to the population | ASPIRE    | 29       | The Atlas of Social Protection: Indicators of Resilience and Equity |
-| 4311 | per\_sa\_su.ben\_q5\_tot | Benefits incidence in richest quintile (%) - Subsidies        | NA   | Percentage of benefits going to the richestquintile relative to the total benefits going to the population | ASPIRE    | 29       | The Atlas of Social Protection: Indicators of Resilience and Equity |
+|      | indicatorID  | indicator                                                                                | unit | indicatorDesc                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | sourceOrg                       | sourceID | source               |
+|------|:-------------|:-----------------------------------------------------------------------------------------|:-----|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------|:---------|:---------------------|
+| 4310 | UIS.E.5.B    | Enrolment in tertiary education, ISCED 5 programmes, both sexes (number)                 | NA   | Total number of students enrolled in public and private short-cycle tertiary education programmes (ISCED 5).                                                                                                                                                                                                                                                                                                                                                                             | UNESCO Institute for Statistics | 12       | Education Statistics |
+| 4311 | UIS.E.4.PU.F | Enrolment in post-secondary non-tertiary education, public institutions, female (number) | NA   | Total number of females enrolled in public post-secondary non-tertiary education institutions regardless of age. Public education Institutions are controlled and managed directly by a public education authority or agency of the country where it is located or by a government agency directly or by a governing body (council, committee etc.), most of whose members are either appointed by a public authority of the country where it is located or elected by public franchise. | UNESCO Institute for Statistics | 12       | Education Statistics |
 
 By default the search is done over the `indicator` and `indicatorDesc` fields and returns the columns `indicatorID` and `indicator` of the matching rows. The `indicatorID` values are inputs into `wb()`, the function for downloading the data. To return all columns for the `indicators` data frame, you can set `extra = TRUE`.
 
@@ -90,20 +91,20 @@ library(wbstats)
 
 unemploy_vars <- wbsearch(pattern = "unemployment")
 head(unemploy_vars)
-#>               indicatorID
-#> 1849       SL.UEM.TOTL.ZS
-#> 1850    SL.UEM.TOTL.NE.ZS
-#> 1851    SL.UEM.TOTL.MA.ZS
-#> 1852 SL.UEM.TOTL.MA.NE.ZS
-#> 1853    SL.UEM.TOTL.FE.ZS
-#> 1854 SL.UEM.TOTL.FE.NE.ZS
-#>                                                                  indicator
-#> 1849   Unemployment, total (% of total labor force) (modeled ILO estimate)
-#> 1850      Unemployment, total (% of total labor force) (national estimate)
-#> 1851     Unemployment, male (% of male labor force) (modeled ILO estimate)
-#> 1852        Unemployment, male (% of male labor force) (national estimate)
-#> 1853 Unemployment, female (% of female labor force) (modeled ILO estimate)
-#> 1854    Unemployment, female (% of female labor force) (national estimate)
+#>    indicatorID
+#> 35   WP15177.9
+#> 36   WP15177.8
+#> 37   WP15177.7
+#> 38   WP15177.6
+#> 39   WP15177.5
+#> 40   WP15177.4
+#>                                                                                        indicator
+#> 35         Received government transfers in the past year, income, richest 60% (% ages 15+) [w2]
+#> 36         Received government transfers in the past year, income, poorest 40% (% ages 15+) [w2]
+#> 37 Received government transfers in the past year, secondary education or more (% ages 15+) [w2]
+#> 38   Received government transfers in the past year, primary education or less (% ages 15+) [w2]
+#> 39                Received government transfers in the past year, older adults (% ages 25+) [w2]
+#> 40              Received government transfers in the past year, young adults (% ages 15-24) [w2]
 ```
 
 Other fields can be searched by simply changing the `fields` parameter. For example
@@ -114,12 +115,12 @@ library(wbstats)
 blmbrg_vars <- wbsearch(pattern = "Bloomberg", fields = "sourceOrg")
 head(blmbrg_vars)
 #>        indicatorID                             indicator
-#> 1489  RUBBER1_MYSG Rubber, Singapore, cents/kg, current$
-#> 3279  WHEAT_US_HRW        Wheat, US, HRW, $/mt, current$
-#> 4465      SUGAR_US         Sugar, US, cents/kg, current$
-#> 7985    GFDD.SM.01                Stock price volatility
-#> 7993    GFDD.OM.02 Stock market return (%, year-on-year)
-#> 10633       BARLEY                Barley, $/mt, current$
+#> 262   WHEAT_US_HRW        Wheat, US, HRW, $/mt, current$
+#> 766       SUGAR_US         Sugar, US, cents/kg, current$
+#> 2563  RUBBER1_MYSG Rubber, Singapore, cents/kg, current$
+#> 9488    GFDD.SM.01                Stock price volatility
+#> 9496    GFDD.OM.02 Stock market return (%, year-on-year)
+#> 12003       BARLEY                Barley, $/mt, current$
 ```
 
 Regular expressions are also supported.
@@ -131,20 +132,20 @@ library(wbstats)
 povemply_vars <- wbsearch(pattern = "poverty|unemployment|employment")
 
 head(povemply_vars)
-#>          indicatorID
-#> 437 UIS.GTVP.4.GPV.M
-#> 438 UIS.GTVP.4.GPV.F
-#> 439   UIS.GTVP.4.GPV
-#> 443 UIS.GTVP.3.GPV.M
-#> 444 UIS.GTVP.3.GPV.F
-#> 445   UIS.GTVP.3.GPV
-#>                                                                                                             indicator
-#> 437     Percentage of male students in post-secondary non-tertiary education enrolled in general programmes, male (%)
-#> 438 Percentage of female students in post-secondary non-tertiary education enrolled in general programmes, female (%)
-#> 439    Percentage of students in post-secondary non-tertiary education enrolled in general programmes, both sexes (%)
-#> 443                 Percentage of male students in upper secondary education enrolled in general programmes, male (%)
-#> 444             Percentage of female students in upper secondary education enrolled in general programmes, female (%)
-#> 445                Percentage of students in upper secondary education enrolled in general programmes, both sexes (%)
+#>    indicatorID
+#> 35   WP15177.9
+#> 36   WP15177.8
+#> 37   WP15177.7
+#> 38   WP15177.6
+#> 39   WP15177.5
+#> 40   WP15177.4
+#>                                                                                        indicator
+#> 35         Received government transfers in the past year, income, richest 60% (% ages 15+) [w2]
+#> 36         Received government transfers in the past year, income, poorest 40% (% ages 15+) [w2]
+#> 37 Received government transfers in the past year, secondary education or more (% ages 15+) [w2]
+#> 38   Received government transfers in the past year, primary education or less (% ages 15+) [w2]
+#> 39                Received government transfers in the past year, older adults (% ages 25+) [w2]
+#> 40              Received government transfers in the past year, young adults (% ages 15-24) [w2]
 ```
 
 The default cached data in `wb_cachelist` is in English. To search indicators in a different language, you can download an updated copy of `wb_cachelist` using `wbcache()`, with the `lang` parameter set to the language of interest and then set this as the `cache` parameter in `wbsearch()`. Other languages are supported in so far as they are supported by the original data sources. Some sources provide full support for other languages, while some have very limited support. If the data source does not have a translation for a certain field or indicator then the result is `NA`, this may result in a varying number matches depending upon the language you select.

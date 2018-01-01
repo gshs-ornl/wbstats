@@ -36,6 +36,7 @@ The World Bank^[<http://www.worldbank.org/>] is a tremendous source of global so
 
 ### Highlighted features of the `wbstats` R-package: 
 
+- Uses version 2 of the World Bank API that provides access to more indicators and metadata than the previous API version
 - Access to all annual, quarterly, and monthly data available in the API
 - Support for searching and downloading data in multiple languages
 - Access to the World Bank Data Catalog Metadata, providing among other information; update schedules and supported languages
