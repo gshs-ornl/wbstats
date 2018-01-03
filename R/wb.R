@@ -75,13 +75,13 @@
 #'
 #' @examples
 #'  # GDP at market prices (current US$) for all available countries and regions
-#'  wb(indicator = "NY.GDP.MKTP.CD", startdate = 2000, enddate = 2016)
+#'  \donttest{wb(indicator = "NY.GDP.MKTP.CD", startdate = 2000, enddate = 2016)}
 #'
 #'  # GDP and Population in long format for the most recent 20 observations
-#'  wb(indicator = c("SP.POP.TOTL","NY.GDP.MKTP.CD"), mrv = 20)
+#'  \donttest{wb(indicator = c("SP.POP.TOTL","NY.GDP.MKTP.CD"), mrv = 20)}
 #'
 #'  # GDP and Population in wide format for the most recent 20 observations
-#'  wb(indicator = c("SP.POP.TOTL","NY.GDP.MKTP.CD"), mrv = 20, return_wide = TRUE)
+#'  \donttest{wb(indicator = c("SP.POP.TOTL","NY.GDP.MKTP.CD"), mrv = 20, return_wide = TRUE)}
 #'
 #'  # query using regionID or incomeID
 #'  # High Income Countries and Sub-Saharan Africa (all income levels)
@@ -94,10 +94,10 @@
 #'  wb(country = c("IN"), indicator = 'EG.ELC.ACCS.ZS', mrv = 35)
 #'
 #'  # GDP at market prices (current US$) for only available countries
-#'  wb(country = "countries_only", indicator = "NY.GDP.MKTP.CD", startdate = 2000, enddate = 2016)
+#'  \donttest{wb(country = "countries_only", indicator = "NY.GDP.MKTP.CD", startdate = 2000, enddate = 2016)}
 #'
 #'  # GDP at market prices (current US$) for only available aggregate regions
-#'  wb(country = "aggregates", indicator = "NY.GDP.MKTP.CD", startdate = 2000, enddate = 2016)
+#'  \donttest{wb(country = "aggregates", indicator = "NY.GDP.MKTP.CD", startdate = 2000, enddate = 2016)}
 #'
 #'  # if you want to "fill-in" the values in between actual observations use gapfill = TRUE
 #'  # this highlights a very important difference.

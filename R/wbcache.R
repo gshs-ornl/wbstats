@@ -92,7 +92,7 @@ wbcountries <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 #' }
 #' @examples
 #' # default is english. To specific another language use argument lang
-#' wbindicators(lang = "es")
+#' \donttest{wbindicators(lang = "es")}
 #' @export
 wbindicators <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 
@@ -445,7 +445,7 @@ wbdatacatalog <- function() {
 #' replaces the default cached version \code{\link{wb_cachelist}} that comes with the package itself
 #' @examples
 #' # default is english. To specific another language use argument lang
-#' wbcache(lang = "es")
+#' \donttest{wbcache(lang = "es")}
 #' @export
 wbcache <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 

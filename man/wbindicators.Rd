@@ -32,5 +32,5 @@ The options for \code{lang} are:
 }
 \examples{
 # default is english. To specific another language use argument lang
-wbindicators(lang = "es")
+\donttest{wbindicators(lang = "es")}
 }

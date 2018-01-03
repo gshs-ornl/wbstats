@@ -47,5 +47,5 @@ replaces the default cached version \code{\link{wb_cachelist}} that comes with t
 }
 \examples{
 # default is english. To specific another language use argument lang
-wbcache(lang = "es")
+\donttest{wbcache(lang = "es")}
 }
