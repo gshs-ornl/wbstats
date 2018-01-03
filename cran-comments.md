@@ -2,6 +2,7 @@
 
 This is a resubmission. In this version I have:
 
+* added \donttest{} to long examples
 * fixed figure storage issue
 * added new package features
 * fixed misc bugs
@@ -17,12 +18,4 @@ R CMD check results
 
 R CMD check succeeded
 
-Notes on win-builder related to example timing issue noted below
-
-## Comment on example timing
-
-I have reduced the number of examples one each for functions wbcache and wbindicators.
-These functions are calling an external API and waiting for the response. This is the source of the timing issues. As these examples 
-are part of the core functionality of the package I feel that they are important and have decided to include them although they often
-take longer than 5 seconds to return.
 
