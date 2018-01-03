@@ -4,7 +4,7 @@ Title: Programmatic Access to Data and Statistics from the World Bank API
 Description: Tools for searching and downloading data and statistics from
   the World Bank Data API (<http://data.worldbank.org/developers/api-overview>)
   and the World Bank Data Catalog API (<http://data.worldbank.org/developers/data-catalog-api>).
-Version: 0.2
+Version: 0.2.0.9000
 Date: 2018-01-01
 Authors@R: c(
   person("Jesse", "Piburn", email = "piburnjo@ornl.gov", role = c("aut", "cre")),
