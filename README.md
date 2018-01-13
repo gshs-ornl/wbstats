@@ -21,14 +21,14 @@ devtools::install_github("GIST-ORNL/wbstats")
 Introduction
 ============
 
-The World Bank[1] is a tremendous source of global socio-economic data; spanning several decades and dozens of topics, it has the potential to shed light on numerous global issues. To help provide access to this rich source of information, The World Bank themselves, provide a well structured RESTful API[2]. While this API is very useful for integration into web services and other high-level applications, it becomes quickly overwhelming for researchers who have neither the time nor the expertise to develop software to interface with the API. This leaves the researcher to rely on manual bulk downloads of spreadsheets of the data they are interested in. This too is can quickly become overwhelming, as the work is manual, time consuming, and not easily reproducible. The goal of the `wbstats` R-package is to provide a bridge between these alternatives and allow researchers to focus on their research questions and not the question of accessing the data. The `wbstats` R-package allows researchers to quickly search and download the data of their particular interest in a programmatic and reproducible fashion; this facilitates a seamless integration into their workflow and allows analysis to be quickly rerun on different areas of interest and with realtime access to the latest available data.
+The World Bank[1] is a tremendous source of global socio-economic data; spanning several decades and dozens of topics, it has the potential to shed light on numerous global issues. To help provide access to this rich source of information, The World Bank themselves, provide a well structured RESTful API[2]. While this API is very useful for integration into web services and other high-level applications, it becomes quickly overwhelming for researchers who have neither the time nor the expertise to develop software to interface with the API. This leaves the researcher to rely on manual bulk downloads of spreadsheets of the data they are interested in. This too can quickly become overwhelming, as the work is manual, time consuming, and not easily reproducible. The goal of the `wbstats` R-package is to provide a bridge between these alternatives and allow researchers to focus on their research questions and not the question of accessing the data. The `wbstats` R-package allows researchers to quickly search and download the data of their particular interest in a programmatic and reproducible fashion; this facilitates a seamless integration into their workflow and allows analysis to be quickly rerun on different areas of interest and with realtime access to the latest available data.
 
 ### Highlighted features of the `wbstats` R-package:
 
 -   Uses version 2 of the World Bank API that provides access to more indicators and metadata than the previous API version
 -   Access to all annual, quarterly, and monthly data available in the API
 -   Support for searching and downloading data in multiple languages
--   Access to the World Bank Data Catalog Metadata, providing among other information; update schedules and supported languages
+-   Access to the World Bank Data Catalog Metadata, providing among other information, update schedules and supported languages
 -   Ability to return `POSIXct` dates for easy integration into plotting and time-series analysis techniques
 -   Returns data in either long (default) or wide format for direct integration with packages like `ggplot2` and `dplyr`
 -   Support for Most Recent Value queries
@@ -39,7 +39,7 @@ The World Bank[1] is a tremendous source of global socio-economic data; spanning
 Getting Started
 ===============
 
-Unless you know the country and indicator codes that you want to download the first step would be searching for the data you are interested in. `wbsearch()` provides `grep` style searching of all available indicators from the World Bank API and returns the indicator information that matches your query.
+Unless you know the country and indicator codes that you want to download, the first step would be searching for the data you are interested in. `wbsearch()` provides `grep` style searching of all available indicators from the World Bank API and returns the indicator information that matches your query.
 
 To access what countries or regions are available you can use the `countries` data frame from either `wb_cachelist` or the saved return from `wbcache()`. This data frame contains relevant information regarding each country or region. More information on how to use this for downloading data is covered later.
 
@@ -50,6 +50,7 @@ For performance and ease of use, a cached version of useful information is provi
 
 ``` r
 library(wbstats)
+#> Warning: package 'wbstats' was built under R version 3.4.3
 
 str(wb_cachelist, max.level = 1)
 #> List of 7
@@ -65,7 +66,7 @@ str(wb_cachelist, max.level = 1)
 Accessing updated available data with `wbcache()`
 -------------------------------------------------
 
-For the most recent information on available data from the World Bank API `wbcache()` downloads an updated version of the information stored in `wb_cachelist`. `wb_cachelist` is simply a saved return of `wbcache(lang = "en")`. To use this updated information in `wbsearch()` or `wb()`, set the `cache` parameter to the saved `list` returned from `wbcache()`. It is always a good idea to use this updated information to insure that you have access to the latest available information, such as newly added indicators or data sources.
+For the most recent information on available data from the World Bank API, `wbcache()` downloads an updated version of the information stored in `wb_cachelist`. `wb_cachelist` is simply a saved return of `wbcache(lang = "en")`. To use this updated information in `wbsearch()` or `wb()`, set the `cache` parameter to the saved `list` returned from `wbcache()`. It is always a good idea to use this updated information to insure that you have access to the latest available information, such as newly added indicators or data sources.
 
 ``` r
 library(wbstats)
@@ -160,12 +161,12 @@ gini_vars <- wbsearch(pattern = "Coeficiente de Gini", cache = wb_cachelist_es)
 
 head(gini_vars)
 #>           indicatorID                                       indicator
-#> 14774   3.2.TheilInd1                   Índice de Theil, GE(1),Urbano
-#> 14776        3.2.Gini                                    Gini, Urbano
-#> 14787   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
-#> 14789        3.1.Gini                                     Gini, Rural
-#> 14792   3.0.TheilInd1                          Índice de Theil, GE(1)
-#> 14801 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
+#> 11202   3.2.TheilInd1                   Índice de Theil, GE(1),Urbano
+#> 11204        3.2.Gini                                    Gini, Urbano
+#> 11215   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
+#> 11217        3.1.Gini                                     Gini, Rural
+#> 11220   3.0.TheilInd1                          Índice de Theil, GE(1)
+#> 11229 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
 ```
 
 Downloading data with `wb()`
@@ -198,7 +199,7 @@ head(pop_data)
 #> 6 Caribbean small states
 ```
 
-If you are interested in only some subset of countries or regions you can pass along the specific codes to the `country` parameter. The country and region codes that can be passed to the `country` parameter correspond to the coded values from the `iso2c`, `iso3c`, `regionID`, `adminID`, and `incomeID` from the `countries` data frame in `wb_cachelist` or the return of `wbcache()`. Any values from the above columns can mixed together and passed to the same call
+If you are interested in only some subset of countries or regions you can pass along the specific codes to the `country` parameter. The country and region codes that can be passed to the `country` parameter correspond to the coded values from the `iso2c`, `iso3c`, `regionID`, `adminID`, and `incomeID` from the `countries` data frame in `wb_cachelist` or the return of `wbcache()`. Any values from the above columns can be mixed together and passed to the same call
 
 ``` r
 library(wbstats)
@@ -245,7 +246,7 @@ head(pop_gdp_long)
 #> 4 United States
 ```
 
-or a wide format if parameter `return_wide = TRUE`. Note that to necessitate a this transformation the `indicator` column is dropped.
+or a wide format if parameter `return_wide = TRUE`. Note that to necessitate this transformation the `indicator` column is dropped.
 
 ``` r
 library(wbstats)
@@ -261,7 +262,7 @@ head(pop_gdp_wide)
 
 ### Using `mrv`
 
-If you do not know the latest date an indicator you are interested in is available for you country you can use the `mrv` instead of `startdate` and `enddate`. `mrv` stands for most recent value and takes a `integer` corresponding to the number of most recent values you wish to return
+If you do not know the latest date an indicator you are interested in is available for your country, you can use the `mrv` instead of `startdate` and `enddate`. `mrv` stands for most recent value and takes a `integer` corresponding to the number of most recent values you wish to return
 
 ``` r
 library(wbstats)
@@ -309,7 +310,7 @@ eg_data
 
 ### Using `gapfill = TRUE`
 
-An additional parameter that can be used along with `mrv` is `gapfill`. `gapfill` allows you to "fill-in" the values between actual observations. The "filled-in" value for an otherwise missing date is the last observed value carried forward.The only difference in the data call below from the one directly above is `gapfill = TRUE` (the default is `FALSE`). Note the very important difference
+An additional parameter that can be used along with `mrv` is `gapfill`. `gapfill` allows you to "fill-in" the values between actual observations. The "filled-in" value for an otherwise missing date is the last observed value carried forward. The only difference in the data call below from the one directly above is `gapfill = TRUE` (the default is `FALSE`). Note the very important difference
 
 ``` r
 library(wbstats)
@@ -345,7 +346,7 @@ Because `gapfill` returns data that does reflect actual observed values, use thi
 
 ### Using `POSIXct = TRUE`
 
-The default format for the `date` column is not conducive to sorting or plotting, especially when downloading sub annual data, such as monthly or quarterly data. To address this, if `TRUE`, the `POSIXct` parameter adds the additional columns `date_ct` and `granularity`. `date_ct` converts the default date into a `POSIXct`. `granularity` denotes the time resolution that the date represents. This option requires the use of the package `lubridate (>= 1.5.0)`. If `POSIXct = TRUE` and `lubridate (>= 1.5.0)` is not available, a `warning` is produced and the option is ignored
+The default format for the `date` column is not conducive to sorting or plotting, especially when downloading sub-annual data, such as monthly or quarterly data. To address this, if `TRUE`, the `POSIXct` parameter adds the additional columns `date_ct` and `granularity`. `date_ct` converts the default date into a `POSIXct`. `granularity` denotes the time resolution that the date represents. This option requires the use of the package `lubridate (>= 1.5.0)`. If `POSIXct = TRUE` and `lubridate (>= 1.5.0)` is not available, a `warning` is produced and the option is ignored
 
 ``` r
 library(wbstats)
@@ -467,13 +468,13 @@ sum(is.na(cache_en$indicators$indicator))
 # spanish
 cache_es <- wbcache(lang = "es")
 sum(is.na(cache_es$indicators$indicator))
-#> [1] 15084
+#> [1] 15094
 ```
 
 Legal
 =====
 
-The World Bank Group, or any of its member instutions, do not support or endorse this software and are not libable for any findings or conclusions that come from the use of this software.
+The World Bank Group, or any of its member instutions, do not support or endorse this software and are not liable for any findings or conclusions that come from the use of this software.
 
 [1] <http://www.worldbank.org/>
 
