@@ -202,13 +202,22 @@ Because `gapfill` returns data that does reflect actual observed values, use thi
 
 ### Using `POSIXct = TRUE`
 The default format for the `date` column is not conducive to sorting or plotting, especially when downloading sub annual data, such as monthly or quarterly data. To address this, if `TRUE`, the `POSIXct` parameter adds the additional columns `date_ct` and `granularity`. `date_ct` converts the default date into a `POSIXct`. `granularity` denotes the time resolution that the date represents. This option requires the use of the package `lubridate (>= 1.5.0)`. If `POSIXct = TRUE` and `lubridate (>= 1.5.0)` is not available, a `warning` is produced and the option is ignored
-```{r}
+
+
+#### NOTE: As of October 20, 2018 the GEM Commodities Database was temporarily unavailable on the World Bank API per the World Bank. Please see the GEM Commodities webpage^[<http://data.worldbank.org/developers>]
+
+This results in any indicators from that database returning a `(400) Bad Request` error. `wbstats` should report an error message but return an empty data frame.
+
+```{r error=TRUE, message=TRUE, warning=TRUE, verbose=TRUE}
 library(wbstats)
 
 oil_data <- wb(indicator = "CRUDE_BRENT", mrv = 10, freq = "M", POSIXct = TRUE)
 
-head(oil_data)
 ```
+
+
+The two examples below will also produce the following errors
+
 
 The `POSIXct = TRUE` option makes plotting and sorting dates much easier.
 ```{r read-me-ex-posixct-1, fig.height = 4, fig.width = 7.5, fig.path = "tools/figures/"}

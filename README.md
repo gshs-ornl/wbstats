@@ -160,12 +160,12 @@ gini_vars <- wbsearch(pattern = "Coeficiente de Gini", cache = wb_cachelist_es)
 
 head(gini_vars)
 #>           indicatorID                                       indicator
-#> 14774   3.2.TheilInd1                   Índice de Theil, GE(1),Urbano
-#> 14776        3.2.Gini                                    Gini, Urbano
-#> 14787   3.1.TheilInd1                   Índice de Theil, GE(1), Rural
-#> 14789        3.1.Gini                                     Gini, Rural
-#> 14792   3.0.TheilInd1                          Índice de Theil, GE(1)
-#> 14801 3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
+#> 6567         3.1.Gini                                     Gini, Rural
+#> 6570    3.0.TheilInd1                          Índice de Theil, GE(1)
+#> 6579  3.0.Gini_nozero Coeficiente de Gini (Ingreso diferente de cero)
+#> 6580         3.0.Gini                             Coeficiente de Gini
+#> 16725   3.2.TheilInd1                   Índice de Theil, GE(1),Urbano
+#> 16727        3.2.Gini                                    Gini, Urbano
 ```
 
 Downloading data with `wb()`
@@ -215,8 +215,8 @@ head(pop_data)
 #>   iso3c date     value indicatorID         indicator iso2c
 #> 1   ABW 2012    102577 SP.POP.TOTL Population, total    AW
 #> 2   AFG 2012  30696958 SP.POP.TOTL Population, total    AF
-#> 3   ECA 2012 407706585 SP.POP.TOTL Population, total    7E
-#> 4   SSF 2012 926548177 SP.POP.TOTL Population, total    ZG
+#> 3   ECA 2012 403439691 SP.POP.TOTL Population, total    7E
+#> 4   SSF 2012 927039875 SP.POP.TOTL Population, total    ZG
 #>                                         country
 #> 1                                         Aruba
 #> 2                                   Afghanistan
@@ -270,7 +270,7 @@ eg_data <- wb(country = c("IN"), indicator = 'EG.ELC.ACCS.ZS', mrv = 1)
 
 eg_data
 #>   iso3c date    value    indicatorID
-#> 1   IND 2014 79.16926 EG.ELC.ACCS.ZS
+#> 1   IND 2016 84.52682 EG.ELC.ACCS.ZS
 #>                                 indicator iso2c country
 #> 1 Access to electricity (% of population)    IN   India
 ```
@@ -284,16 +284,16 @@ eg_data <- wb(country = c("IN"), indicator = 'EG.ELC.ACCS.ZS', mrv = 10)
 
 eg_data
 #>    iso3c date    value    indicatorID
-#> 1    IND 2014 79.16926 EG.ELC.ACCS.ZS
-#> 2    IND 2013 77.73752 EG.ELC.ACCS.ZS
-#> 3    IND 2012 79.90000 EG.ELC.ACCS.ZS
-#> 4    IND 2011 67.60000 EG.ELC.ACCS.ZS
-#> 5    IND 2010 76.30000 EG.ELC.ACCS.ZS
-#> 6    IND 2009 75.00000 EG.ELC.ACCS.ZS
-#> 7    IND 2008 70.61525 EG.ELC.ACCS.ZS
-#> 8    IND 2007 69.21004 EG.ELC.ACCS.ZS
-#> 9    IND 2006 67.90000 EG.ELC.ACCS.ZS
-#> 10   IND 2005 66.43195 EG.ELC.ACCS.ZS
+#> 1    IND 2016 84.52682 EG.ELC.ACCS.ZS
+#> 2    IND 2015 88.00000 EG.ELC.ACCS.ZS
+#> 3    IND 2014 81.23951 EG.ELC.ACCS.ZS
+#> 4    IND 2013 79.59911 EG.ELC.ACCS.ZS
+#> 5    IND 2012 79.90000 EG.ELC.ACCS.ZS
+#> 6    IND 2011 67.60000 EG.ELC.ACCS.ZS
+#> 7    IND 2010 76.30000 EG.ELC.ACCS.ZS
+#> 8    IND 2009 75.00000 EG.ELC.ACCS.ZS
+#> 9    IND 2008 71.54732 EG.ELC.ACCS.ZS
+#> 10   IND 2007 69.98802 EG.ELC.ACCS.ZS
 #>                                  indicator iso2c country
 #> 1  Access to electricity (% of population)    IN   India
 #> 2  Access to electricity (% of population)    IN   India
@@ -318,16 +318,16 @@ eg_data <- wb(country = c("IN"), indicator = 'EG.ELC.ACCS.ZS', mrv = 10, gapfill
 
 eg_data
 #>    iso3c date    value    indicatorID
-#> 1    IND 2017 79.16926 EG.ELC.ACCS.ZS
-#> 2    IND 2016 79.16926 EG.ELC.ACCS.ZS
-#> 3    IND 2015 79.16926 EG.ELC.ACCS.ZS
-#> 4    IND 2014 79.16926 EG.ELC.ACCS.ZS
-#> 5    IND 2013 77.73752 EG.ELC.ACCS.ZS
+#> 1    IND 2017 84.52682 EG.ELC.ACCS.ZS
+#> 2    IND 2016 84.52682 EG.ELC.ACCS.ZS
+#> 3    IND 2015 88.00000 EG.ELC.ACCS.ZS
+#> 4    IND 2014 81.23951 EG.ELC.ACCS.ZS
+#> 5    IND 2013 79.59911 EG.ELC.ACCS.ZS
 #> 6    IND 2012 79.90000 EG.ELC.ACCS.ZS
 #> 7    IND 2011 67.60000 EG.ELC.ACCS.ZS
 #> 8    IND 2010 76.30000 EG.ELC.ACCS.ZS
 #> 9    IND 2009 75.00000 EG.ELC.ACCS.ZS
-#> 10   IND 2008 70.61525 EG.ELC.ACCS.ZS
+#> 10   IND 2008 71.54732 EG.ELC.ACCS.ZS
 #>                                  indicator iso2c country
 #> 1  Access to electricity (% of population)    IN   India
 #> 2  Access to electricity (% of population)    IN   India
@@ -347,36 +347,33 @@ Because `gapfill` returns data that does reflect actual observed values, use thi
 
 The default format for the `date` column is not conducive to sorting or plotting, especially when downloading sub annual data, such as monthly or quarterly data. To address this, if `TRUE`, the `POSIXct` parameter adds the additional columns `date_ct` and `granularity`. `date_ct` converts the default date into a `POSIXct`. `granularity` denotes the time resolution that the date represents. This option requires the use of the package `lubridate (>= 1.5.0)`. If `POSIXct = TRUE` and `lubridate (>= 1.5.0)` is not available, a `warning` is produced and the option is ignored
 
+#### NOTE: As of October 20, 2018 the GEM Commodities Database was temporarily unavailable on the World Bank API per the World Bank. Please see the GEM Commodities webpage[3]
+
+This results in any indicators from that database returning a `(400) Bad Request` error. `wbstats` should report an error message but return an empty data frame.
+
 ``` r
 library(wbstats)
 
 oil_data <- wb(indicator = "CRUDE_BRENT", mrv = 10, freq = "M", POSIXct = TRUE)
-
-head(oil_data)
-#>   iso3c    date value indicatorID                          indicator iso2c
-#> 1   WLD 2017M10 57.62 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 2   WLD 2017M09 55.16 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 3   WLD 2017M08 51.37 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 4   WLD 2017M07 48.69 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 5   WLD 2017M06 46.89 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#> 6   WLD 2017M05 50.87 CRUDE_BRENT Crude oil, Brendt, $/bbl, nominal$    1W
-#>   country    date_ct granularity
-#> 1   World 2017-10-01     monthly
-#> 2   World 2017-09-01     monthly
-#> 3   World 2017-08-01     monthly
-#> 4   World 2017-07-01     monthly
-#> 5   World 2017-06-01     monthly
-#> 6   World 2017-05-01     monthly
+#> Warning in wb(indicator = "CRUDE_BRENT", mrv = 10, freq = "M", POSIXct
+#> = TRUE): No data was returned for any requested country and indicator.
+#> Returning empty data frame
 ```
+
+The two examples below will also produce the following errors
 
 The `POSIXct = TRUE` option makes plotting and sorting dates much easier.
 
 ``` r
 library(wbstats)
 library(ggplot2)
+#> Warning: package 'ggplot2' was built under R version 3.4.4
 
 oil_data <- wb(indicator = c("CRUDE_DUBAI", "CRUDE_BRENT", "CRUDE_WTI", "CRUDE_PETRO"),
                startdate = "2012M01", enddate = "2014M12", freq = "M", POSIXct = TRUE)
+#> Warning in wb(indicator = c("CRUDE_DUBAI", "CRUDE_BRENT", "CRUDE_WTI",
+#> "CRUDE_PETRO"), : No data was returned for any requested country and
+#> indicator. Returning empty data frame
 
 ggplot(oil_data, aes(x = date_ct, y = value, colour = indicator)) + geom_line(size = 1) +
   labs(title = "Crude Oil Price Comparisons", x = "Date", y = "US Dollars")
@@ -392,7 +389,13 @@ library(ggplot2)
 
 # querying seperate for differing time coverage example
 gold_data <- wb(indicator = "GOLD", mrv = 120, freq = "M", POSIXct = TRUE)
+#> Warning in wb(indicator = "GOLD", mrv = 120, freq = "M", POSIXct = TRUE):
+#> No data was returned for any requested country and indicator. Returning
+#> empty data frame
 plat_data <- wb(indicator = "PLATINUM", mrv = 60, freq = "M", POSIXct = TRUE)
+#> Warning in wb(indicator = "PLATINUM", mrv = 60, freq = "M", POSIXct =
+#> TRUE): No data was returned for any requested country and indicator.
+#> Returning empty data frame
 
 metal_data <- rbind(gold_data, plat_data)
 
@@ -417,37 +420,21 @@ library(wbstats)
 
 per_data_1 <- wb(country = "all", indicator = 'per_lm_ac.cov_pop_tot', mrv = 1)
 per_data_1
-#>     iso3c date     value  indicatorID                          indicator
-#> 17    ARM 2014 0.8872044 Performance. Coverage (%) - Active Labor Market
-#> 35    CMR 2014 0.9365870 Performance. Coverage (%) - Active Labor Market
-#> 70    IDN 2014 4.2099258 Performance. Coverage (%) - Active Labor Market
-#> 155   VNM 2014 8.9763930 Performance. Coverage (%) - Active Labor Market
-#>     iso2c   country
-#> 17     AM   Armenia
-#> 35     CM  Cameroon
-#> 70     ID Indonesia
-#> 155    VN   Vietnam
+#>    iso3c date value           indicatorID
+#> 51   ECU 2016     0 per_lm_ac.cov_pop_tot
+#>                             indicator iso2c country
+#> 51 Coverage (%) - Active Labor Market    EC Ecuador
 
 per_data_2 <- wb(country = "all", indicator = 'per_lm_ac.cov_pop_tot', mrv = 2)
 per_data_2
-#>     iso3c date      value  indicatorID                          indicator
-#> 33    ARM 2014  0.8872044 Performance. Coverage (%) - Active Labor Market
-#> 34    ARM 2013  3.2058376 Performance. Coverage (%) - Active Labor Market
-#> 68    KHM 2013  1.2168315 Performance. Coverage (%) - Active Labor Market
-#> 69    CMR 2014  0.9365870 Performance. Coverage (%) - Active Labor Market
-#> 76    CHL 2013 20.4540718 Performance. Coverage (%) - Active Labor Market
-#> 139   IDN 2014  4.2099258 Performance. Coverage (%) - Active Labor Market
-#> 196   MDA 2013  0.9159697 Performance. Coverage (%) - Active Labor Market
-#> 309   VNM 2014  8.9763930 Performance. Coverage (%) - Active Labor Market
-#>     iso2c   country
-#> 33     AM   Armenia
-#> 34     AM   Armenia
-#> 68     KH  Cambodia
-#> 69     CM  Cameroon
-#> 76     CL     Chile
-#> 139    ID Indonesia
-#> 196    MD   Moldova
-#> 309    VN   Vietnam
+#>     iso3c date    value           indicatorID
+#> 92    CIV 2015 0.000000 per_lm_ac.cov_pop_tot
+#> 101   ECU 2016 0.000000 per_lm_ac.cov_pop_tot
+#> 142   IDN 2015 5.443194 per_lm_ac.cov_pop_tot
+#>                              indicator iso2c       country
+#> 92  Coverage (%) - Active Labor Market    CI Cote D'Ivoire
+#> 101 Coverage (%) - Active Labor Market    EC       Ecuador
+#> 142 Coverage (%) - Active Labor Market    ID     Indonesia
 ```
 
 Searching in other languages
@@ -467,7 +454,7 @@ sum(is.na(cache_en$indicators$indicator))
 # spanish
 cache_es <- wbcache(lang = "es")
 sum(is.na(cache_es$indicators$indicator))
-#> [1] 15084
+#> [1] 14791
 ```
 
 Legal
@@ -478,3 +465,5 @@ The World Bank Group, or any of its member instutions, do not support or endorse
 [1] <http://www.worldbank.org/>
 
 [2] <http://data.worldbank.org/developers>
+
+[3] <http://data.worldbank.org/developers>
