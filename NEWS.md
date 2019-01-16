@@ -1,3 +1,9 @@
+# wbstats 0.2.1.9000
+
+## Changes:
+* add non-exported .wb_url function for debugging purposes
+
+
 # wbstats 0.2.0
 ## Bug fixes:
 * `wbdatacatalog()` now returns all catalog entries instead of first 10
