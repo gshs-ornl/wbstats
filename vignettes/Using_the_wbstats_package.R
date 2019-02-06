@@ -101,14 +101,13 @@ eg_data <- wb(country = c("IN"), indicator = 'EG.ELC.ACCS.ZS', mrv = 10, gapfill
 
 eg_data
 
-## ------------------------------------------------------------------------
+## ----error=TRUE, message=TRUE, warning=TRUE, verbose=TRUE----------------
 library(wbstats)
 
 oil_data <- wb(indicator = "CRUDE_BRENT", mrv = 10, freq = "M", POSIXct = TRUE)
 
-head(oil_data)
 
-## ----vig-ex-posixct-1, fig.height = 4, fig.width = 7.5, fig.path = "figures/"----
+## ----vig-ex-posixct-1, fig.height = 4, fig.width = 7.5, fig.path = "figures/", error=TRUE,  message=TRUE, verbose=TRUE----
 library(wbstats)
 library(ggplot2)
 
@@ -118,7 +117,7 @@ oil_data <- wb(indicator = c("CRUDE_DUBAI", "CRUDE_BRENT", "CRUDE_WTI", "CRUDE_P
 ggplot(oil_data, aes(x = date_ct, y = value, colour = indicator)) + geom_line(size = 1) +
   labs(title = "Crude Oil Price Comparisons", x = "Date", y = "US Dollars")
 
-## ----vig-ex-posixct-2, fig.height = 4, fig.width = 7.5, fig.path = "figures/"----
+## ----vig-ex-posixct-2, fig.height = 4, fig.width = 7.5, fig.path = "figures/", error=TRUE,  message=TRUE, verbose=TRUE----
 library(wbstats)
 library(ggplot2)
 
