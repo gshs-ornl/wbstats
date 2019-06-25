@@ -25,4 +25,4 @@ Suggests:
     knitr,
     lubridate (>= 1.5.0)
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
