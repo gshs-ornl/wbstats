@@ -126,7 +126,7 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, return_wide 
   base_url <- url_list$base_url
   utils_url <- url_list$utils_url
 
-  if (missing(cache)) cache <- wbstats::wb_cachelist
+  if (missing(cache)) cache <- wbstats::wb_cachelist_dep
 
   # check country ----------
   if ("all" %in% country) {
