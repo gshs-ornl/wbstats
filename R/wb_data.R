@@ -15,10 +15,13 @@
 #'
 #' @examples
 wb_data <- function(indicator = "SP.POP.TOTL", country = "AFG", start_date,
-                    end_date, mrv, freq, mrnev, gapfill, footnote, scale) {
+                    end_date, mrv, freq, mrnev, gapfill, footnote, scale, cache) {
+
+  if (missing(cache)) cache <- wbstats::wb_cachelist
 
 
-  # TODO: 1. function for formatting countries
+
+  # TODO:
   #       2. function for formatting time
   #       3. check query options
   #       4. Do the cache
@@ -26,7 +29,7 @@ wb_data <- function(indicator = "SP.POP.TOTL", country = "AFG", start_date,
   base_url <- wbstats:::wb_api_parameters$base_url
 
   # format country ----------------------------------------------------------
-  country_param <- format_wb_country(country)
+  country_param <- format_wb_country(country, cache = cache)
   country_path <- paste0(wbstats:::wb_api_parameters$country, "/", country_param)
 
 

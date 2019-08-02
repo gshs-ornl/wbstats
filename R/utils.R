@@ -25,3 +25,9 @@ check_mark_text <- function() {
   else check_mark <- ""
 }
 
+unique_na <- function(x, na.rm = TRUE) {
+  x_unique <- unique(x)
+  if(na.rm) x_unique <- x_unique[!is.na(x_unique)]
+
+  x_unique
+}

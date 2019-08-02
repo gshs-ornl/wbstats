@@ -149,9 +149,80 @@ format_wb_func <- function(df, func, col_index,  ...) {
   df
 }
 
-format_wb_country <- function(x) {
+#' Format country names for API query
+#'
+#' @param x
+#' @param cache
+#'
+#' @return
+#'
+#' @noRd
+format_wb_country <- function(x, cache) {
 
-  # check and make sure everything is correct
-  paste0(x, collapse = ";")
+  x_lower <- tolower(x)
+
+  if (missing(cache)) cache <- wbstats::wb_cachelist
+  cache_cn <- cache$countries
+
+
+  if (any(x_lower %in% c("countries", "countries_only", "countries only")))
+    cn_params <- unique_na(cache_cn$iso3c[cache_cn$region != "Aggregates"])
+
+  else if (any(x_lower %in% "region"))
+    cn_params <- unique_na(cache_cn$region_iso3c)
+
+  else if (any(x_lower %in% c("admin_region", "admin region")))
+    cn_params <- unique_na(cache_cn$admin_region_iso3c)
+
+  else if (any(x_lower %in% c("income_level", "income level")))
+    cn_params <- unique_na(cache_cn$income_level_iso3c)
+
+  else if (any(x_lower %in% c("lending_type", "lending type")))
+    cn_params <- unique_na(cache_cn$lending_type_iso3c)
+
+  else if (any(x_lower %in% c("aggregates", "aggregates_only", "aggregates only" )))
+    cn_params <- unique_na(cache_cn$iso3c[cache_cn$region == "Aggregates"])
+
+  else if (any(x_lower %in% "all"))
+    cn_params <- "all"
+
+  else if (length(x_lower) == 1 && x_lower == "the motherland") {
+    message("Good choice comrade...")
+    cn_params <- "rus"
+  }
+
+  else { # any non-special values
+
+    # all of the region, lending, and income names are also listed in these 3
+    # columns so a check here checks for all of them
+    cn_check <- as.matrix(cache_cn[ , c("iso3c", "iso2c", "country")])
+
+    # don't forget everything is lowercase now
+    cn_check <- tolower(cn_check)
+
+    good_cn_index <- x_lower %in% cn_check
+    good_cn <- x_lower[good_cn_index]
+
+    if (length(good_cn) == 0)
+      stop("No valid values for the country parameter were found. Please check documentation for valid inputs")
+
+    # use x instead of x_lower to KeEp UsEr DeFiNeD cAsInG
+    bad_cn <- x[!good_cn_index]
+
+    if (length(bad_cn) > 0)
+      warning(paste0("The following country values are not valid and are being excluded from the request: ",
+                                           paste(bad_cn, collapse = ",")))
+
+    # the API only accepts IDs and not names, so if a country is listed in x
+    # find its iso3c code. This lets the user pass values like "World" or "High Income"
+    good_cn_iso3c_index <- lapply(1:ncol(cn_check), function(i) {
+      which(cn_check[1:nrow(cn_check), i] %in% x_lower)
+      })
+
+    good_cn_iso3c_index <- unique(unlist(good_cn_iso3c_index))
+    cn_params <- cn_check[good_cn_iso3c_index, 1]
+  }
+
+  paste0(cn_params, collapse = ";")
 }
 
