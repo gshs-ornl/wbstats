@@ -14,7 +14,7 @@
 #'
 #' @examples
 wb_data <- function(indicator = "SP.POP.TOTL", country = "AFG", start_date,
-                    end_date, return_wide = FALSE, mrv, freq, mrnev, gapfill, scale, cache) {
+                    end_date, return_wide = TRUE, mrv, freq, mrnev, gapfill, scale, cache) {
 
   if (missing(cache)) cache <- wbstats::wb_cachelist
 
@@ -132,16 +132,51 @@ wb_data <- function(indicator = "SP.POP.TOTL", country = "AFG", start_date,
   d <- format_wb_data(d, end_point = "data")
 
   if (return_wide) {
-    #ind_names <- unique(df[, c("indicator", "indicator_id")])
-    # TODO: add labels to columns
-    #       support named vectors
-    d$indicator <- NULL
+    context_cols <- c("iso2c", "iso3c", "country", "date")
+    extra_cols <- c("unit", "obs_status", "decimal", "footnote", "last_updated")
+
+    ind_names <- as.data.frame(unique(d[, c("indicator", "indicator_id")]))
+
+    cols_to_keep <- setdiff(names(d), "indicator")
+    if (length(unique(ind_names$indicator_id)) > 1) {
+      cols_to_keep <- setdiff(cols_to_keep, extra_cols)
+    }
+
+    d <- d[, cols_to_keep]
     d <- tidyr::spread(d, key = "indicator_id", value = "value")
 
-    # what about adding labels and named vectors
-    # attr(dfw$SP.POP.TOTL, "label") <- "a name and great label"
+    # column labels
+    for (i in 1:nrow(ind_names)) {
+      d_col_name <- ind_names$indicator_id[i]
+      d_col_label <- ind_names$indicator[i]
 
+      attr(d[[d_col_name]], "label") <- d_col_label
+    }
+
+    # named vector for indicators
+    if (!is.null(names(indicator))) {
+      for (i in 1:nrow(ind_names)) {
+        d_col_old_name <- ind_names$indicator_id[i]
+        d_col_new_name <- names(indicator[indicator == d_col_old_name])
+        if(! (d_col_new_name == "" || is.null(d_col_new_name)) )
+          names(d)[which(names(d) == d_col_old_name)] <- d_col_new_name
+      }
+    }
+
+    indicator_cols <- setdiff(names(d), c(context_cols, extra_cols))
+    d <- dplyr::select(d,
+            context_cols,
+            indicator_cols,
+            dplyr::everything()
+          )
+
+  } # end return_wide
+  else {
+    d <- dplyr::select(d,
+            "indicator_id", "indicator", "iso2c", "iso3c", "country", "date",
+            "value", "unit", "obs_status", "decimal", "footnote", "last_updated"
+          )
   }
 
-  d
+ d
 }
