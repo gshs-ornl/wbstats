@@ -5,7 +5,7 @@
 \title{Download Indicator Data from World Bank}
 \usage{
 wb_data(indicator = "SP.POP.TOTL", country = "AFG", start_date,
-  end_date, mrv, freq, mrnev, gapfill, footnote, scale, cache)
+  end_date, return_wide = FALSE, mrv, freq, mrnev, gapfill, scale, cache)
 }
 \arguments{
 \item{scale}{}

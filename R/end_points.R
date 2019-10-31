@@ -112,7 +112,18 @@ wb_languages <- function(...) {
 #'
 #' @examples
 wb_indicators <- function(...) {
-  wb_end_point("indicator", ...)
+  # source 57 are archived indicators that WB no longer supports and aren't
+  # avaialble through the standard API requests. After coorisponding with
+  # WB API developers, they suggested the best way forward for now was to
+  # simply exclude those indicators from being returned and available
+  # Date: 2019-10-31 (Happy Halloween!)
+
+  df <- wb_end_point("indicator", ...)
+  df <- df[df$source_id != 57, ]
+
+  # TODO: unlist topics column
+
+  df
 }
 
 #' Title

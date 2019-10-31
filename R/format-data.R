@@ -45,10 +45,10 @@ format_wb_data <- function(x, end_point) {
     x_names <- format_wb_tidy_names(names(x), end_point = end_point)
     names(x) <- x_names
 
-    x$value <- as.numeric(x$value)
-    x$unit <- as.character(x$unit)
-    x$obs_status <- as.character(x$obs_status)
-    x$footnote <- as.character(x$obs_status)
+    if("value" %in% x_names) x$value <- as.numeric(x$value)
+    if("unit" %in% x_names) x$unit <- as.character(x$unit)
+    if("obs_status" %in% x_names) x$obs_status <- as.character(x$obs_status)
+    if("obs_status" %in% x_names) x$footnote <- as.character(x$footnote)
   }
 
   if (end_point == "query")

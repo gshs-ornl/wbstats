@@ -6,7 +6,6 @@
 #' @param end_date
 #' @param mrv
 #' @param mrnev
-#' @param footnote
 #' @param freq
 #' @param scale
 #'
@@ -15,7 +14,7 @@
 #'
 #' @examples
 wb_data <- function(indicator = "SP.POP.TOTL", country = "AFG", start_date,
-                    end_date, mrv, freq, mrnev, gapfill, footnote, scale, cache) {
+                    end_date, return_wide = FALSE, mrv, freq, mrnev, gapfill, scale, cache) {
 
   if (missing(cache)) cache <- wbstats::wb_cachelist
 
@@ -77,13 +76,13 @@ wb_data <- function(indicator = "SP.POP.TOTL", country = "AFG", start_date,
     gapfill_query <- ifelse(gapfill, "Y", "N")
   }
 
-  # check footnote ----------
-  footnote_query <- NULL
-  if (!missing(footnote)) {
-    if (!is.logical(footnote)) stop("Values for footnote must be TRUE or FALSE")
-
-    footnote_query <- ifelse(footnote, "Y", "N")
-  }
+  # # check footnote ----------
+  # footnote_query <- NULL
+  # if (!missing(footnote)) {
+  #   if (!is.logical(footnote)) stop("Values for footnote must be TRUE or FALSE")
+  #
+  #   footnote_query <- ifelse(footnote, "Y", "N")
+  # }
 
   # check scale ----------
   scale_query <- NULL
@@ -111,21 +110,38 @@ wb_data <- function(indicator = "SP.POP.TOTL", country = "AFG", start_date,
     mrv      = mrv_query,
     mrnev    = mrnev_query,
     gapfill  = gapfill_query,
-    footnote = footnote_query,
+    footnote = "y",  #footnote_query,
     cntrycode = "y",
     per_page = wbstats:::wb_api_parameters$per_page,
     format   = wbstats:::wb_api_parameters$format
   )
 
   # be able to return this for debugging
-  ind_url <- wbstats:::build_wb_url(base_url = base_url, indicator = indicator, path_list = path_list, query_list = query_list)
+  ind_url <- wbstats:::build_wb_url(
+      base_url  = base_url,  indicator  = indicator,
+      path_list = path_list, query_list = query_list
+    )
 
   d_list <- lapply(ind_url, fetch_wb_url)
   d <- do.call(rbind, d_list)
+  if(!is.data.frame(d)) {
+    warning("No data was returned for your query. Returning an empty tibble")
+    return(tibble::tibble())
+  }
+
   d <- format_wb_data(d, end_point = "data")
 
+  if (return_wide) {
+    #ind_names <- unique(df[, c("indicator", "indicator_id")])
+    # TODO: add labels to columns
+    #       support named vectors
+    d$indicator <- NULL
+    d <- tidyr::spread(d, key = "indicator_id", value = "value")
+
+    # what about adding labels and named vectors
+    # attr(dfw$SP.POP.TOTL, "label") <- "a name and great label"
+
+  }
 
   d
-
-
 }
