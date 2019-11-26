@@ -90,59 +90,70 @@ For example \code{"F"} in the response indicates that the observation status for
 }
 }
 \examples{
-# GDP (current US$) for countries only for all available dates
-\donttest{wb_data("NY.GDP.MKTP.CD")}
+# gdp for all countries for all available dates
+\donttest{df_gdp <- wb_data("NY.GDP.MKTP.CD")}
+
+# Brazilian gdp for all available dates
+df_brazil <- wb_data("NY.GDP.MKTP.CD", country = "br")
+
+# Brazilian gdp for 2006
+df_brazil_1 <- wb_data("NY.GDP.MKTP.CD", country = "brazil", start_date = 2006)
+
+# Brazilian gdp for 2006-2010
+df_brazil_2 <- wb_data("NY.GDP.MKTP.CD", country = "BRA", start_date = 2006, end_date = 2010)
+
 
 # Population, GDP, Unemployment Rate, Birth Rate (per 1000 people)
 my_indicators <- c("SP.POP.TOTL", "NY.GDP.MKTP.CD", "SL.UEM.TOTL.ZS", "SP.DYN.CBRT.IN")
-\donttest{wb_data(my_indicators)}
+\donttest{df <- wb_data(my_indicators)}
 
 
-# you can mix the country ids
+# you pass multiple country ids of different types
 # Albania (iso2c), Georgia (iso3c), and Mongolia
 my_countries <- c("al", "geo", "mongolia")
-wb_data(my_indicators, country = my_countries, start_date = 2005, end_date = 2007)
+df <- wb_data(my_indicators, country = my_countries, start_date = 2005, end_date = 2007)
 
 # same data as above, but in long format
-wb_data(my_indicators, country = my_countries, start_date = 2005, end_date = 2007, return_wide = FALSE)
+df_long <- wb_data(my_indicators, country = my_countries, start_date = 2005, end_date = 2007, return_wide = FALSE)
 
 
 # regional population totals
 # regions correspond to the region column in wb_cachelist$countries
-wb_data("SP.POP.TOTL", country = "regions_only", start_date = 2010, end_date = 2014)
+df_region <- wb_data("SP.POP.TOTL", country = "regions_only", start_date = 2010, end_date = 2014)
 
 
 # a specific region
-wb_data("SP.POP.TOTL", country = "world", start_date = 2010, end_date = 2014)
+df_world <- wb_data("SP.POP.TOTL", country = "world", start_date = 2010, end_date = 2014)
 
 
 # if the indicator is part of a named vector the name will be the column name
 names(my_indicators) <- c("population", "gdp", "unemployment_rate", "birth_rate")
-wb_data(my_indicators, country = "world", start_date = 2010, end_date = 2014)
+df_names <- wb_data(my_indicators, country = "world", start_date = 2010, end_date = 2014)
 
 
 # custom names are ignored if returning in long format
-wb_data(my_indicators, country = "world", start_date = 2010, end_date = 2014, return_wide = FALSE)
+df_names_long <- wb_data(my_indicators, country = "world", start_date = 2010, end_date = 2014, return_wide = FALSE)
 
 # same as above but in Bulgarian
 # note that not all indicators have translations for all languages
-wb_data(my_indicators, country = "world", start_date = 2010, end_date = 2014, return_wide = FALSE, lang = "bg")
+df_names_long_bg <- wb_data(my_indicators, country = "world", start_date = 2010,
+end_date = 2014, return_wide = FALSE, lang = "bg")
 
 
 # if you do not know when the latest time an indicator is avaiable mrv can help
 # unenployment rate
-wb_data("SL.UEM.TOTL.ZS", mrv = 1)
+df_mrv <- wb_data("SL.UEM.TOTL.ZS", mrv = 1)
 
 # note the difference in mrv and mrnev
-wb_data("SL.UEM.TOTL.ZS", mrnev = 1)
+df_mrnev <- wb_data("SL.UEM.TOTL.ZS", mrnev = 1)
 
 
 # without the freq parameter the deafult temporal granularity search is yearly
 # should return the 12 most recent years of data
-wb_data(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12)
+df_annual <- wb_data(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12)
 
 
 # if another frequency is available for that indicator it can be accessed using the freq parameter
 # should return the 12 most recent months of data
-wb_data(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12, freq = "M")
+df_monthly <- wb_data(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12, freq = "M")
 }

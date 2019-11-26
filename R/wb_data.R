@@ -55,61 +55,72 @@
 #' @md
 #'
 #' @examples
-#' # GDP (current US$) for countries only for all available dates
-#' \donttest{wb_data("NY.GDP.MKTP.CD")}
+#' # gdp for all countries for all available dates
+#' \donttest{df_gdp <- wb_data("NY.GDP.MKTP.CD")}
+#'
+#' # Brazilian gdp for all available dates
+#' df_brazil <- wb_data("NY.GDP.MKTP.CD", country = "br")
+#'
+#' # Brazilian gdp for 2006
+#' df_brazil_1 <- wb_data("NY.GDP.MKTP.CD", country = "brazil", start_date = 2006)
+#'
+#' # Brazilian gdp for 2006-2010
+#' df_brazil_2 <- wb_data("NY.GDP.MKTP.CD", country = "BRA", start_date = 2006, end_date = 2010)
+#'
 #'
 #' # Population, GDP, Unemployment Rate, Birth Rate (per 1000 people)
 #' my_indicators <- c("SP.POP.TOTL", "NY.GDP.MKTP.CD", "SL.UEM.TOTL.ZS", "SP.DYN.CBRT.IN")
-#' \donttest{wb_data(my_indicators)}
+#' \donttest{df <- wb_data(my_indicators)}
 #'
 #'
-#' # you can mix the country ids
+#' # you pass multiple country ids of different types
 #' # Albania (iso2c), Georgia (iso3c), and Mongolia
 #' my_countries <- c("al", "geo", "mongolia")
-#' wb_data(my_indicators, country = my_countries, start_date = 2005, end_date = 2007)
+#' df <- wb_data(my_indicators, country = my_countries, start_date = 2005, end_date = 2007)
 #'
 #' # same data as above, but in long format
-#' wb_data(my_indicators, country = my_countries, start_date = 2005, end_date = 2007, return_wide = FALSE)
+#' df_long <- wb_data(my_indicators, country = my_countries, start_date = 2005, end_date = 2007, return_wide = FALSE)
 #'
 #'
 #' # regional population totals
 #' # regions correspond to the region column in wb_cachelist$countries
-#' wb_data("SP.POP.TOTL", country = "regions_only", start_date = 2010, end_date = 2014)
+#' df_region <- wb_data("SP.POP.TOTL", country = "regions_only", start_date = 2010, end_date = 2014)
 #'
 #'
 #' # a specific region
-#' wb_data("SP.POP.TOTL", country = "world", start_date = 2010, end_date = 2014)
+#' df_world <- wb_data("SP.POP.TOTL", country = "world", start_date = 2010, end_date = 2014)
 #'
 #'
 #' # if the indicator is part of a named vector the name will be the column name
 #' names(my_indicators) <- c("population", "gdp", "unemployment_rate", "birth_rate")
-#' wb_data(my_indicators, country = "world", start_date = 2010, end_date = 2014)
+#' df_names <- wb_data(my_indicators, country = "world", start_date = 2010, end_date = 2014)
 #'
 #'
 #' # custom names are ignored if returning in long format
-#' wb_data(my_indicators, country = "world", start_date = 2010, end_date = 2014, return_wide = FALSE)
+#' df_names_long <- wb_data(my_indicators, country = "world", start_date = 2010, end_date = 2014, return_wide = FALSE)
 #'
 #' # same as above but in Bulgarian
 #' # note that not all indicators have translations for all languages
-#' wb_data(my_indicators, country = "world", start_date = 2010, end_date = 2014, return_wide = FALSE, lang = "bg")
+#' df_names_long_bg <- wb_data(my_indicators, country = "world", start_date = 2010,
+#' end_date = 2014, return_wide = FALSE, lang = "bg")
 #'
 #'
 #' # if you do not know when the latest time an indicator is avaiable mrv can help
 #' # unenployment rate
-#' wb_data("SL.UEM.TOTL.ZS", mrv = 1)
+#' df_mrv <- wb_data("SL.UEM.TOTL.ZS", mrv = 1)
 #'
 #' # note the difference in mrv and mrnev
-#' wb_data("SL.UEM.TOTL.ZS", mrnev = 1)
+#' df_mrnev <- wb_data("SL.UEM.TOTL.ZS", mrnev = 1)
 #'
 #'
 #' # without the freq parameter the deafult temporal granularity search is yearly
 #' # should return the 12 most recent years of data
-#' wb_data(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12)
+#' df_annual <- wb_data(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12)
 #'
 #'
 #' # if another frequency is available for that indicator it can be accessed using the freq parameter
 #' # should return the 12 most recent months of data
-#' wb_data(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12, freq = "M")
+#' df_monthly <- wb_data(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12, freq = "M")
 wb_data <- function(indicator, country = "countries_only", start_date, end_date,
                     return_wide = TRUE, mrv, mrnev, cache, freq, gapfill = FALSE,
                     lang) {
@@ -119,6 +130,7 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
   # TODO: 1. add deperated warning to old functions
   #       2. what about the search function?
   #       2. function for formatting time
+  #       3. check wb_cache doci
   #       3. check query options
   #       4. Do the cache
   #
@@ -131,13 +143,9 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
 
   # check dates ----------
   date_query <- NULL
-  if (missing(start_date) !=  missing(end_date))
-    stop("Using either startdate or enddate requries supplying both. Please provide both if a date range is wanted")
-
-  if (!(missing(start_date) & missing(end_date))) {
-
-    date_query <- paste0(start_date, ":", end_date)
-  }
+  if (!missing(start_date)  &&  missing(end_date)) date_query <- paste0(start_date, ":", start_date)
+  if (missing(start_date)   && !missing(end_date)) date_query <- paste0(end_date, ":", end_date)
+  if (missing(start_date) == FALSE && missing(end_date) == FALSE) date_query <- paste0(start_date, ":", end_date)
 
   # check freq ----------
   freq_query <- NULL
@@ -220,16 +228,22 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
 
   if (return_wide) {
     context_cols <- c("iso2c", "iso3c", "country", "date")
-    extra_cols <- c("unit", "obs_status", "decimal", "footnote", "last_updated")
+    extra_cols <- c("unit", "obs_status","footnote", "last_updated")
 
     ind_names <- as.data.frame(unique(d[, c("indicator", "indicator_id")]))
 
-    cols_to_keep <- setdiff(names(d), "indicator")
+    # the decimal column is dropped here b/c support for scale=TRUE was removed
+    cols_to_keep <- setdiff(names(d), c("indicator", "decimal"))
+
+    # when you return a wide data frame with more than one indicator
+    # the extra_cols are dropped b/c they are specific to each location, indicator, date
+    # instance and they have to be rowwise so if you transpose with them it messes
+    # everything up
     if (length(unique(ind_names$indicator_id)) > 1) {
       cols_to_keep <- setdiff(cols_to_keep, extra_cols)
     }
 
-    d <- d[, cols_to_keep]
+    d <- d[ , cols_to_keep]
     d <- tidyr::spread(d, key = "indicator_id", value = "value")
 
     # column labels
@@ -259,10 +273,10 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
 
   } # end return_wide
   else {
-    d <- dplyr::select(d,
-            "indicator_id", "indicator", "iso2c", "iso3c", "country", "date",
-            "value", "unit", "obs_status", "decimal", "footnote", "last_updated"
-          )
+    # these columns are reordered for readability
+    col_order <- c("indicator_id", "indicator", "iso2c", "iso3c", "country", "date",
+                   "value", "unit", "obs_status", "footnote", "last_updated")
+    d <- d[ , col_order]
   }
 
  d
