@@ -17,11 +17,11 @@
 #' * `"income_levels_only"`
 #' * `"aggregates_only"`
 #' * `"all"`
-#' @param start_date Numeric or character. If numeric it must be in \%Y form (i.e. four digit year).
+#' @param start_date Numeric or character. If numeric it must be in `%Y`` form (i.e. four digit year).
 #'  For data at the subannual granularity the API supports a format as follows: for monthly data, "2016M01"
 #'  and for quarterly data, "2016Q1". This also accepts a special value of "YTD", useful for more frequently
 #'  updated subannual indicators.
-#' @param end_date Numeric or character. If numeric it must be in \%Y form (i.e. four digit year).
+#' @param end_date Numeric or character. If numeric it must be in `%Y`` form (i.e. four digit year).
 #'  For data at the subannual granularity the API supports a format as follows: for monthly data, "2016M01"
 #'  and for quarterly data, "2016Q1".
 #' @param return_wide Logical. If `TRUE` data is returned in a wide format instead of long,
@@ -34,7 +34,7 @@
 #' you which to return starting from the most recent date of collection. This may include missing values.
 #' Useful in conjuction with `freq`
 #' @param mrnev Numeric. The number of Most Recent Non Empty Values to return. A replacement
-#' of `start_date` and `end_date`, similar in behavior as `mrv` but excluded locations with missing values.
+#' of `start_date` and `end_date`, similar in behavior as `mrv` but excludes locations with missing values.
 #' Useful in conjuction with `freq`
 #' @param cache List of tibbles returned from [wb_cache()]. If omitted, [wb_cachelist] is used
 #' @param freq Character String. For fetching quarterly ("Q"), monthly("M") or yearly ("Y") values.
@@ -42,20 +42,11 @@
 #' @param gapfill Logical. If `TRUE` fills in missing values by carrying forward the last
 #' available value until the next available period (max number of periods back tracked will be limited by `mrv` number).
 #' Default is `FALSE`
-#' @param scale Logical. If `TRUE` data values will be scaled automatically in
-#' thousands, millions, billions or trillions. If the data is less than a thousand, no scaling will be applied.
-#' Default is `FALSE`. See note on `decimal` column below
 #' @inheritParams wb_cache
 #'
-#' @return A [tibble][tibble::tibble] of all available requested data.
+#' @return A [tibble][tibble::tbl_df] of all available requested data.
 #'
-#' @note
-#' ## Using `scale=TRUE` and the `decimal` column
-#' If the user requests `scale=TRUE`, the precision of the decimal point will be
-#' based on the value in `decimal` column. If `decimal` is 1 then the scaled value
-#' will have precision up to 1 decimal point. For example, if the data value is 2500
-#' and `decimal` is 1, then the data value will be scaled to 2.5 and `scale` will read "thousands"
-#'
+#' @details
 #' ## `obs_status` column
 #' Indicates the observation status for location, indicator and date combination.
 #' For example `"F"` in the response indicates that the observation status for that data point is "forecast".
@@ -119,17 +110,8 @@
 #' # if another frequency is available for that indicator it can be accessed using the freq parameter
 #' # should return the 12 most recent months of data
 #' wb_data(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12, freq = "M")
-#'
-#'
-#' ## using the scale parameter
-#'
-#' # not scaled
-#' pop_df <- wb_data("SP.POP.TOTL", country = "regions_only", start_date = 2010, end_date = 2014)
-#'
-#' # same data as above, but scale = TRUE. Note the billions and millions labels in the scale column
-#' pop_df_scaled <- wb_data("SP.POP.TOTL", country = "regions_only", start_date = 2010, end_date = 2014, scale = TRUE)
-wb_data <- function(indicator, country = "countries_only", start_date,
-                    end_date, return_wide = TRUE, mrv, mrnev, cache, freq, gapfill = FALSE, scale = FALSE,
+wb_data <- function(indicator, country = "countries_only", start_date, end_date,
+                    return_wide = TRUE, mrv, mrnev, cache, freq, gapfill = FALSE,
                     lang) {
 
   if (missing(cache)) cache <- wbstats::wb_cachelist
@@ -193,11 +175,12 @@ wb_data <- function(indicator, country = "countries_only", start_date,
 
   # check scale ----------
   scale_query <- NULL
-  if (!missing(scale)) {
-    if (!is.logical(scale)) stop("Values for scale must be TRUE or FALSE")
-
-    scale_query <- ifelse(scale, "Y", "N")
-  }
+  # remove support for scale parameter, it causes more problems that in solves
+  # if (!missing(scale)) {
+  #   if (!is.logical(scale)) stop("Values for scale must be TRUE or FALSE")
+  #
+  #   scale_query <- ifelse(scale, "Y", "N")
+  # }
 
   # country should be part of the path list b/c other endpoint don't require it or need more things
   path_list <- list(
@@ -214,7 +197,7 @@ wb_data <- function(indicator, country = "countries_only", start_date,
     mrv      = mrv_query,
     mrnev    = mrnev_query,
     gapfill  = gapfill_query,
-    footnote = "y",  #footnote_query,
+    footnote = "y",
     cntrycode = "y",
     per_page = wbstats:::wb_api_parameters$per_page,
     format   = wbstats:::wb_api_parameters$format

@@ -15,7 +15,6 @@ wb_data(
   cache,
   freq,
   gapfill = FALSE,
-  scale = FALSE,
   lang
 )
 }
@@ -38,12 +37,12 @@ columns. As well as the following special values
 \item \code{"all"}
 }}
 
-\item{start_date}{Numeric or character. If numeric it must be in \\%Y form (i.e. four digit year).
+\item{start_date}{Numeric or character. If numeric it must be in `\%Y`` form (i.e. four digit year).
 For data at the subannual granularity the API supports a format as follows: for monthly data, "2016M01"
 and for quarterly data, "2016Q1". This also accepts a special value of "YTD", useful for more frequently
 updated subannual indicators.}
 
-\item{end_date}{Numeric or character. If numeric it must be in \\%Y form (i.e. four digit year).
+\item{end_date}{Numeric or character. If numeric it must be in `\%Y`` form (i.e. four digit year).
 For data at the subannual granularity the API supports a format as follows: for monthly data, "2016M01"
 and for quarterly data, "2016Q1".}
 
@@ -59,7 +58,7 @@ you which to return starting from the most recent date of collection. This may i
 Useful in conjuction with \code{freq}}
 
 \item{mrnev}{Numeric. The number of Most Recent Non Empty Values to return. A replacement
-of \code{start_date} and \code{end_date}, similar in behavior as \code{mrv} but excluded locations with missing values.
+of \code{start_date} and \code{end_date}, similar in behavior as \code{mrv} but excludes locations with missing values.
 Useful in conjuction with \code{freq}}
 
 \item{cache}{List of tibbles returned from \code{\link[=wb_cache]{wb_cache()}}. If omitted, \link{wb_cachelist} is used}
@@ -71,10 +70,6 @@ Useful for querying high frequency data.}
 available value until the next available period (max number of periods back tracked will be limited by \code{mrv} number).
 Default is \code{FALSE}}
 
-\item{scale}{Logical. If \code{TRUE} data values will be scaled automatically in
-thousands, millions, billions or trillions. If the data is less than a thousand, no scaling will be applied.
-Default is \code{FALSE}. See note on \code{decimal} column below}
-
 \item{lang}{Language in which to return the results. If \code{lang} is unspecified,
 english is the default. For supported languages see \code{\link[=wb_languages]{wb_languages()}}.
 Possible values of \code{lang} are in the \code{iso2} column. A note of warning, not
@@ -82,20 +77,12 @@ all data returns have support for langauges other than english. If the specific
 return does not support your requested language by default it will return \code{NA}.}
 }
 \value{
-A \link[tibble:tibble]{tibble} of all available requested data.
+A \link[tibble:tbl_df]{tibble} of all available requested data.
 }
 \description{
 This function downloads the requested information using the World Bank API
 }
-\note{
-\subsection{Using \code{scale=TRUE} and the \code{decimal} column}{
-
-If the user requests \code{scale=TRUE}, the precision of the decimal point will be
-based on the value in \code{decimal} column. If \code{decimal} is 1 then the scaled value
-will have precision up to 1 decimal point. For example, if the data value is 2500
-and \code{decimal} is 1, then the data value will be scaled to 2.5 and \code{scale} will read "thousands"
-}
-
+\details{
 \subsection{\code{obs_status} column}{
 
 Indicates the observation status for location, indicator and date combination.
@@ -158,13 +145,4 @@ wb_data(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12)
 # if another frequency is available for that indicator it can be accessed using the freq parameter
 # should return the 12 most recent months of data
 wb_data(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12, freq = "M")
-
-
-## using the scale parameter
-
-# not scaled
-pop_df <- wb_data("SP.POP.TOTL", country = "regions_only", start_date = 2010, end_date = 2014)
-
-# same data as above, but scale = TRUE. Note the billions and millions labels in the scale column
-pop_df_scaled <- wb_data("SP.POP.TOTL", country = "regions_only", start_date = 2010, end_date = 2014, scale = TRUE)
 }
