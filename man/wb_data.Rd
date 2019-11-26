@@ -2,14 +2,169 @@
 % Please edit documentation in R/wb_data.R
 \name{wb_data}
 \alias{wb_data}
-\title{Download Indicator Data from World Bank}
+\title{Download Data from the World Bank API}
 \usage{
-wb_data(indicator = "SP.POP.TOTL", country = "AFG", start_date,
-  end_date, return_wide = TRUE, mrv, freq, mrnev, gapfill, scale, cache)
+wb_data(
+  indicator,
+  country = "countries_only",
+  start_date,
+  end_date,
+  return_wide = TRUE,
+  mrv,
+  mrnev,
+  cache,
+  freq,
+  gapfill = FALSE,
+  scale = FALSE,
+  lang
+)
 }
 \arguments{
-\item{scale}{}
+\item{indicator}{Character vector of indicator codes. These codes correspond
+to the \code{indicator_id} column from the \code{indicators} tibble of \code{\link[=wb_cache]{wb_cache()}}, \link{wb_cachelist}, or
+the result of running \code{\link[=wb_indicators]{wb_indicators()}} directly}
+
+\item{country}{Character vector of country, region, or special value codes for the
+locations you want to return data for. Permissible values can be found in the countries tibble in \link{wb_cachelist}
+or by running \code{\link[=wb_countries]{wb_countries()}} directly. Specifically, values listed in the following fields
+\code{iso3c}, \code{iso2c}, \code{country}, \code{region}, \code{admin_region}, \code{income_level} and all of the \verb{region_*}, \verb{admin_region_*}, \verb{income_level_*},
+columns. As well as the following special values
+\itemize{
+\item \code{"countries_only"} (Default)
+\item \code{"regions_only"}
+\item \code{"admin_regions_only"}
+\item \code{"income_levels_only"}
+\item \code{"aggregates_only"}
+\item \code{"all"}
+}}
+
+\item{start_date}{Numeric or character. If numeric it must be in \\%Y form (i.e. four digit year).
+For data at the subannual granularity the API supports a format as follows: for monthly data, "2016M01"
+and for quarterly data, "2016Q1". This also accepts a special value of "YTD", useful for more frequently
+updated subannual indicators.}
+
+\item{end_date}{Numeric or character. If numeric it must be in \\%Y form (i.e. four digit year).
+For data at the subannual granularity the API supports a format as follows: for monthly data, "2016M01"
+and for quarterly data, "2016Q1".}
+
+\item{return_wide}{Logical. If \code{TRUE} data is returned in a wide format instead of long,
+with a column named for each \code{indicator_id} or if the \code{indicator} argument is a named vector,
+the \code{\link[=names]{names()}} given to the indicator will be the column names. To necessitate this transformation,
+the \code{indicator} column that provides the human readable description is dropped, but provided as a column label.
+Default is \code{TRUE}}
+
+\item{mrv}{Numeric. The number of Most Recent Values to return. A replacement
+of \code{start_date} and \code{end_date}, this number represents the number of observations
+you which to return starting from the most recent date of collection. This may include missing values.
+Useful in conjuction with \code{freq}}
+
+\item{mrnev}{Numeric. The number of Most Recent Non Empty Values to return. A replacement
+of \code{start_date} and \code{end_date}, similar in behavior as \code{mrv} but excluded locations with missing values.
+Useful in conjuction with \code{freq}}
+
+\item{cache}{List of tibbles returned from \code{\link[=wb_cache]{wb_cache()}}. If omitted, \link{wb_cachelist} is used}
+
+\item{freq}{Character String. For fetching quarterly ("Q"), monthly("M") or yearly ("Y") values.
+Useful for querying high frequency data.}
+
+\item{gapfill}{Logical. If \code{TRUE} fills in missing values by carrying forward the last
+available value until the next available period (max number of periods back tracked will be limited by \code{mrv} number).
+Default is \code{FALSE}}
+
+\item{scale}{Logical. If \code{TRUE} data values will be scaled automatically in
+thousands, millions, billions or trillions. If the data is less than a thousand, no scaling will be applied.
+Default is \code{FALSE}. See note on \code{decimal} column below}
+
+\item{lang}{Language in which to return the results. If \code{lang} is unspecified,
+english is the default. For supported languages see \code{\link[=wb_languages]{wb_languages()}}.
+Possible values of \code{lang} are in the \code{iso2} column. A note of warning, not
+all data returns have support for langauges other than english. If the specific
+return does not support your requested language by default it will return \code{NA}.}
+}
+\value{
+A \link[tibble:tibble]{tibble} of all available requested data.
 }
 \description{
-Download Indicator Data from World Bank
+This function downloads the requested information using the World Bank API
+}
+\note{
+\subsection{Using \code{scale=TRUE} and the \code{decimal} column}{
+
+If the user requests \code{scale=TRUE}, the precision of the decimal point will be
+based on the value in \code{decimal} column. If \code{decimal} is 1 then the scaled value
+will have precision up to 1 decimal point. For example, if the data value is 2500
+and \code{decimal} is 1, then the data value will be scaled to 2.5 and \code{scale} will read "thousands"
+}
+
+\subsection{\code{obs_status} column}{
+
+Indicates the observation status for location, indicator and date combination.
+For example \code{"F"} in the response indicates that the observation status for that data point is "forecast".
+}
+}
+\examples{
+# GDP (current US$) for countries only for all available dates
+\donttest{wb_data("NY.GDP.MKTP.CD")}
+
+# Population, GDP, Unemployment Rate, Birth Rate (per 1000 people)
+my_indicators <- c("SP.POP.TOTL", "NY.GDP.MKTP.CD", "SL.UEM.TOTL.ZS", "SP.DYN.CBRT.IN")
+\donttest{wb_data(my_indicators)}
+
+
+# you can mix the country ids
+# Albania (iso2c), Georgia (iso3c), and Mongolia
+my_countries <- c("al", "geo", "mongolia")
+wb_data(my_indicators, country = my_countries, start_date = 2005, end_date = 2007)
+
+# same data as above, but in long format
+wb_data(my_indicators, country = my_countries, start_date = 2005, end_date = 2007, return_wide = FALSE)
+
+
+# regional population totals
+# regions correspond to the region column in wb_cachelist$countries
+wb_data("SP.POP.TOTL", country = "regions_only", start_date = 2010, end_date = 2014)
+
+
+# a specific region
+wb_data("SP.POP.TOTL", country = "world", start_date = 2010, end_date = 2014)
+
+
+# if the indicator is part of a named vector the name will be the column name
+names(my_indicators) <- c("population", "gdp", "unemployment_rate", "birth_rate")
+wb_data(my_indicators, country = "world", start_date = 2010, end_date = 2014)
+
+
+# custom names are ignored if returning in long format
+wb_data(my_indicators, country = "world", start_date = 2010, end_date = 2014, return_wide = FALSE)
+
+# same as above but in Bulgarian
+# note that not all indicators have translations for all languages
+wb_data(my_indicators, country = "world", start_date = 2010, end_date = 2014, return_wide = FALSE, lang = "bg")
+
+
+# if you do not know when the latest time an indicator is avaiable mrv can help
+# unenployment rate
+wb_data("SL.UEM.TOTL.ZS", mrv = 1)
+
+# note the difference in mrv and mrnev
+wb_data("SL.UEM.TOTL.ZS", mrnev = 1)
+
+
+# without the freq parameter the deafult temporal granularity search is yearly
+# should return the 12 most recent years of data
+wb_data(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12)
+
+
+# if another frequency is available for that indicator it can be accessed using the freq parameter
+# should return the 12 most recent months of data
+wb_data(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12, freq = "M")
+
+
+## using the scale parameter
+
+# not scaled
+pop_df <- wb_data("SP.POP.TOTL", country = "regions_only", start_date = 2010, end_date = 2014)
+
+# same data as above, but scale = TRUE. Note the billions and millions labels in the scale column
+pop_df_scaled <- wb_data("SP.POP.TOTL", country = "regions_only", start_date = 2010, end_date = 2014, scale = TRUE)
 }

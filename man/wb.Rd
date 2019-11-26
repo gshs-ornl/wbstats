@@ -4,11 +4,24 @@
 \alias{wb}
 \title{Download Data from the World Bank API}
 \usage{
-wb(country = "all", indicator, startdate, enddate, mrv,
-  return_wide = FALSE, gapfill, freq, cache, lang = c("en", "es", "fr",
-  "ar", "zh"), removeNA = TRUE, POSIXct = FALSE, include_dec = FALSE,
-  include_unit = FALSE, include_obsStatus = FALSE,
-  include_lastUpdated = FALSE)
+wb(
+  country = "all",
+  indicator,
+  startdate,
+  enddate,
+  mrv,
+  return_wide = FALSE,
+  gapfill,
+  freq,
+  cache,
+  lang = c("en", "es", "fr", "ar", "zh"),
+  removeNA = TRUE,
+  POSIXct = FALSE,
+  include_dec = FALSE,
+  include_unit = FALSE,
+  include_obsStatus = FALSE,
+  include_lastUpdated = FALSE
+)
 }
 \arguments{
 \item{country}{Character vector of country or region codes. Default value is special code of \code{all}.

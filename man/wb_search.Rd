@@ -4,8 +4,13 @@
 \alias{wb_search}
 \title{Search indicator information available through the World Bank API}
 \usage{
-wb_search(pattern = "poverty", fields = c("indicator",
-  "indicator_desc"), extra = FALSE, cache, ...)
+wb_search(
+  pattern = "poverty",
+  fields = c("indicator", "indicator_desc"),
+  extra = FALSE,
+  cache,
+  ...
+)
 }
 \arguments{
 \item{pattern}{Character string or regular expression to be matched}

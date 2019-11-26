@@ -168,19 +168,19 @@ format_wb_country <- function(x, cache) {
   if (any(x_lower %in% c("countries", "countries_only", "countries only")))
     cn_params <- unique_na(cache_cn$iso3c[cache_cn$region != "Aggregates"])
 
-  else if (any(x_lower %in% "region"))
+  else if (any(x_lower %in% c("regions", "regions_only", "regions only")))
     cn_params <- unique_na(cache_cn$region_iso3c)
 
-  else if (any(x_lower %in% c("admin_region", "admin region")))
+  else if (any(x_lower %in% c("admin_regions", "admin_regions_only", "admin regions only")))
     cn_params <- unique_na(cache_cn$admin_region_iso3c)
 
-  else if (any(x_lower %in% c("income_level", "income level")))
+  else if (any(x_lower %in% c("income_levels", "income_levels_only", "income levels only")))
     cn_params <- unique_na(cache_cn$income_level_iso3c)
 
-  else if (any(x_lower %in% c("lending_type", "lending type")))
+  else if (any(x_lower %in% c("lending_types", "lending_types_only", "lending types only")))
     cn_params <- unique_na(cache_cn$lending_type_iso3c)
 
-  else if (any(x_lower %in% c("aggregates", "aggregates_only", "aggregates only" )))
+  else if (any(x_lower %in% c("aggregates", "aggregates_only", "aggregates only")))
     cn_params <- unique_na(cache_cn$iso3c[cache_cn$region == "Aggregates"])
 
   else if (any(x_lower %in% "all"))
@@ -204,7 +204,8 @@ format_wb_country <- function(x, cache) {
     good_cn <- x_lower[good_cn_index]
 
     if (length(good_cn) == 0)
-      stop("No valid values for the country parameter were found. Please check documentation for valid inputs")
+      stop("No valid values for the country parameter were found.
+           Please check the country argument description in wbstats::wb_data() for valid input values.")
 
     # use x instead of x_lower to KeEp UsEr DeFiNeD cAsInG
     bad_cn <- x[!good_cn_index]

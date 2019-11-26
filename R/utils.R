@@ -31,3 +31,4 @@ unique_na <- function(x, na.rm = TRUE) {
 
   x_unique
 }
+

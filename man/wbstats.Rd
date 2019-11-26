@@ -3,7 +3,6 @@
 \docType{package}
 \name{wbstats}
 \alias{wbstats}
-\alias{wbstats-package}
 \title{wbstats: An R package for searching and downloading data from the World Bank API.}
 \description{
 The wbstats package provides structured access to all of the information

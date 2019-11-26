@@ -2,13 +2,54 @@
 % Please edit documentation in R/end_points.R
 \name{wb_cache}
 \alias{wb_cache}
-\title{Title}
+\title{Download an updated list of country, indicator, and source information}
 \usage{
-wb_cache(...)
+wb_cache(lang)
 }
 \arguments{
-\item{...}{}
+\item{lang}{Language in which to return the results. If \code{lang} is unspecified,
+english is the default. For supported languages see \code{\link[=wb_languages]{wb_languages()}}.
+Possible values of \code{lang} are in the \code{iso2} column. A note of warning, not
+all data returns have support for langauges other than english. If the specific
+return does not support your requested language by default it will return \code{NA}.}
+}
+\value{
+A list containing the following items:
+\itemize{
+\item \code{countries}: The result of calling \code{\link[=wb_countries]{wb_countries()}}
+\item \code{indicators}: The result of calling \code{\link[=wb_indicators]{wb_indicators()}}
+\item \code{sources}: The result of calling \code{\link[=wb_sources]{wb_sources()}}
+\item \code{topics}: The result of calling \code{\link[=wb_topics]{wb_topics()}}
+\item \code{regions}: The result of calling \code{\link[=wb_regions]{wb_regions()}}
+\item \code{income_levels}: The result of calling \code{\link[=wb_income_levels]{wb_income_levels()}}
+\item \code{lending_types}: The result of calling \code{\link[=wb_lending_types]{wb_lending_types()}}
+\item \code{languages}: The result of calling \code{\link[=wb_languages]{wb_languages()}}
+}
 }
 \description{
-Title
+Download an updated list of information regarding countries, indicators,
+sources, regions, indicator topics, lending types, income levels, and
+supported languages from the World Bank API
+}
+\note{
+Not all data returns have support for langauges other than english. If the specific return
+does not support your requested language by default it will return \code{NA}. For an enumeration of
+supported languages by data source please see \code{\link[=wb_languages]{wb_languages()}}
+
+Saving this return and using it has the \code{cache} parameter in \code{\link[=wb_data]{wb_data()}} and \code{\link[=wb_search]{wb_search()}}
+replaces the default cached version \link{wb_cachelist} that comes with the package itself
+}
+\examples{
+# the default is english. To specify another language use argument lang
+
+# spanish
+\donttest{wb_cache(lang = "es")}
+
+# korean
+\donttest{wb_cache(lang = "ko")}
+
+possible values of lang are in the iso2 column in the languages data frame
+\donttest{example_iso2 <- wb_languages()$iso2[1]}
+\donttest{wb_cache(lang = example_iso2)}
+
 }
