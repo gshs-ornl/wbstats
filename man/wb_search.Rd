@@ -20,13 +20,15 @@ wb_search(
 
 \item{extra}{if FALSE, only the indicator ID and short name are returned,
 if \code{TRUE}, all columns of the \code{cache} parameter's indicators data frame
-are returned}
+are returned. Default is \code{FALSE}}
 
 \item{cache}{List of data frames returned from \code{\link[=wb_cache]{wb_cache()}}. If omitted,
 \link{wb_cachelist} is used}
 
 \item{ignore.case}{if \code{FALSE}, the pattern matching is case sensitive and
-if \code{TRUE}, case is ignored during matching.}
+if \code{TRUE}, case is ignored during matching. Default is \code{TRUE}}
+
+\item{...}{Any additional \code{\link[=grep]{grep()}} agruments you which to pass}
 }
 \value{
 A \link[tibble:tbl_df]{tibble} with indicators that match the search pattern.
@@ -44,14 +46,13 @@ wb_search(pattern = "Food and Agriculture Organization", fields = "source_org")
 # 'poverty' OR 'unemployment' OR 'employment'
 wb_search(pattern = "poverty|unemployment|employment")
 
- # pass any other grep argument along as well
- # everything without 'education'
- wb_search(pattern = "education", invert = TRUE)
+# pass any other grep argument along as well
+# everything without 'education'
+wb_search(pattern = "education", invert = TRUE)
 
- contains "gdp" AND "trade"
- wb_search("^(?=.*gdp)(?=.*trade).*", perl = TRUE)
+# contains "gdp" AND "trade"
+wb_search("^(?=.*gdp)(?=.*trade).*", perl = TRUE)
 
- contains "gdp" and NOT "trade"
- wb_search("^(?=.*gdp)(?!.*trade).*", perl = TRUE)
-
+# contains "gdp" and NOT "trade"
+wb_search("^(?=.*gdp)(?!.*trade).*", perl = TRUE)
 }

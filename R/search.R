@@ -7,11 +7,12 @@
 #' @param fields Character vector of column names through which to search
 #' @param extra if FALSE, only the indicator ID and short name are returned,
 #' if `TRUE`, all columns of the `cache` parameter's indicators data frame
-#' are returned
+#' are returned. Default is `FALSE`
 #' @param ignore.case if `FALSE`, the pattern matching is case sensitive and
-#' if `TRUE`, case is ignored during matching.
+#' if `TRUE`, case is ignored during matching. Default is `TRUE`
 #' @param cache List of data frames returned from [wb_cache()]. If omitted,
 #' [wb_cachelist] is used
+#' @param ... Any additional [grep()] agruments you which to pass
 #' @return A [tibble][tibble::tbl_df] with indicators that match the search pattern.
 #' @md
 #' @examples
@@ -23,16 +24,15 @@
 #' # 'poverty' OR 'unemployment' OR 'employment'
 #' wb_search(pattern = "poverty|unemployment|employment")
 #'
-#'  # pass any other grep argument along as well
-#'  # everything without 'education'
-#'  wb_search(pattern = "education", invert = TRUE)
+#' # pass any other grep argument along as well
+#' # everything without 'education'
+#' wb_search(pattern = "education", invert = TRUE)
 #'
-#'  # contains "gdp" AND "trade"
-#'  wb_search("^(?=.*gdp)(?=.*trade).*", perl = TRUE)
+#' # contains "gdp" AND "trade"
+#' wb_search("^(?=.*gdp)(?=.*trade).*", perl = TRUE)
 #'
-#'  # contains "gdp" and NOT "trade"
-#'  wb_search("^(?=.*gdp)(?!.*trade).*", perl = TRUE)
-#'
+#' # contains "gdp" and NOT "trade"
+#' wb_search("^(?=.*gdp)(?!.*trade).*", perl = TRUE)
 #' @export
 wb_search <- function(pattern, fields = c("indicator", "indicator_desc"),
                       extra = FALSE, cache, ignore.case = TRUE, ...){
