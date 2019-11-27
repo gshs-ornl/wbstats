@@ -110,7 +110,7 @@ my_indicators <- c("SP.POP.TOTL", "NY.GDP.MKTP.CD", "SL.UEM.TOTL.ZS", "SP.DYN.CB
 
 # you pass multiple country ids of different types
 # Albania (iso2c), Georgia (iso3c), and Mongolia
-my_countries <- c("al", "geo", "mongolia")
+my_countries <- c("AL", "Geo", "mongolia")
 df <- wb_data(my_indicators, country = my_countries, start_date = 2005, end_date = 2007)
 
 # same data as above, but in long format

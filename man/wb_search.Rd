@@ -5,10 +5,11 @@
 \title{Search indicator information available through the World Bank API}
 \usage{
 wb_search(
-  pattern = "poverty",
+  pattern,
   fields = c("indicator", "indicator_desc"),
   extra = FALSE,
   cache,
+  ignore.case = TRUE,
   ...
 )
 }
@@ -17,15 +18,18 @@ wb_search(
 
 \item{fields}{Character vector of column names through which to search}
 
-\item{extra}{if \code{FALSE}, only the indicator ID and short name are returned,
-if \code{TRUE}, all columns of the \code{cache} parameter's indicator data frame
+\item{extra}{if FALSE, only the indicator ID and short name are returned,
+if \code{TRUE}, all columns of the \code{cache} parameter's indicators data frame
 are returned}
 
-\item{cache}{List of data frames returned from \code{\link{wb_cache}}. If omitted,
-\code{\link{wb_cachelist}} is used}
+\item{cache}{List of data frames returned from \code{\link[=wb_cache]{wb_cache()}}. If omitted,
+\link{wb_cachelist} is used}
+
+\item{ignore.case}{if \code{FALSE}, the pattern matching is case sensitive and
+if \code{TRUE}, case is ignored during matching.}
 }
 \value{
-Data frame with indicators that match the search pattern.
+A \link[tibble:tbl_df]{tibble} with indicators that match the search pattern.
 }
 \description{
 This function allows finds indicators that match a search term and returns
@@ -43,4 +47,11 @@ wb_search(pattern = "poverty|unemployment|employment")
  # pass any other grep argument along as well
  # everything without 'education'
  wb_search(pattern = "education", invert = TRUE)
+
+ contains "gdp" AND "trade"
+ wb_search("^(?=.*gdp)(?=.*trade).*", perl = TRUE)
+
+ contains "gdp" and NOT "trade"
+ wb_search("^(?=.*gdp)(?!.*trade).*", perl = TRUE)
+
 }

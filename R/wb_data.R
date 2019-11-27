@@ -75,7 +75,7 @@
 #'
 #' # you pass multiple country ids of different types
 #' # Albania (iso2c), Georgia (iso3c), and Mongolia
-#' my_countries <- c("al", "geo", "mongolia")
+#' my_countries <- c("AL", "Geo", "mongolia")
 #' df <- wb_data(my_indicators, country = my_countries, start_date = 2005, end_date = 2007)
 #'
 #' # same data as above, but in long format
@@ -129,9 +129,11 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
 
   # TODO: 1. add deperated warning to old functions
   #       2. what about the search function?
+  #       2. BUG: date column always getting treated as numeric so monthly dates get dropped
+  #       3. for none wdi indicators, iso3c is NA and iso3 codes are in iso2 field. Maybe check for NA iso3 and pull from countries df
+  #       3. the "lending_types_only" doesn't work
   #       2. function for formatting time
-  #       3. check wb_cache doci
-  #       3. check query options
+  #       3. check query options?
   #       4. Do the cache
   #
   base_url <- wbstats:::wb_api_parameters$base_url

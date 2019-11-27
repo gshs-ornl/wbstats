@@ -5,12 +5,15 @@
 #'
 #' @param pattern Character string or regular expression to be matched
 #' @param fields Character vector of column names through which to search
-#' @param extra if \code{FALSE}, only the indicator ID and short name are returned,
-#' if \code{TRUE}, all columns of the \code{cache} parameter's indicator data frame
+#' @param extra if FALSE, only the indicator ID and short name are returned,
+#' if `TRUE`, all columns of the `cache` parameter's indicators data frame
 #' are returned
-#' @param cache List of data frames returned from \code{\link{wb_cache}}. If omitted,
-#' \code{\link{wb_cachelist}} is used
-#' @return Data frame with indicators that match the search pattern.
+#' @param ignore.case if `FALSE`, the pattern matching is case sensitive and
+#' if `TRUE`, case is ignored during matching.
+#' @param cache List of data frames returned from [wb_cache()]. If omitted,
+#' [wb_cachelist] is used
+#' @return A [tibble][tibble::tbl_df] with indicators that match the search pattern.
+#' @md
 #' @examples
 #' wb_search(pattern = "education")
 #'
@@ -23,16 +26,22 @@
 #'  # pass any other grep argument along as well
 #'  # everything without 'education'
 #'  wb_search(pattern = "education", invert = TRUE)
+#'
+#'  # contains "gdp" AND "trade"
+#'  wb_search("^(?=.*gdp)(?=.*trade).*", perl = TRUE)
+#'
+#'  # contains "gdp" and NOT "trade"
+#'  wb_search("^(?=.*gdp)(?!.*trade).*", perl = TRUE)
+#'
 #' @export
-wb_search <- function(pattern = "poverty", fields = c("indicator", "indicator_desc"),
-                      extra = FALSE, cache, ...){
+wb_search <- function(pattern, fields = c("indicator", "indicator_desc"),
+                      extra = FALSE, cache, ignore.case = TRUE, ...){
 
   if (missing(cache)) cache <- wbstats::wb_cachelist
-
   ind_cache <- as.data.frame(cache$indicators)
 
   match_index <- sort(unique(unlist(sapply(fields, FUN = function(i)
-    grep(pattern, ind_cache[, i], ignore.case = TRUE, ...), USE.NAMES = FALSE)
+    grep(pattern, ind_cache[, i], ignore.case = ignore.case, ...), USE.NAMES = FALSE)
   )))
 
   if (length(match_index) == 0) warning(paste0("no matches were found for the search term ", pattern,
@@ -41,7 +50,7 @@ wb_search <- function(pattern = "poverty", fields = c("indicator", "indicator_de
   if (extra) {
     match_df <-  cache$indicators[match_index, ]
   } else {
-    match_df <- cache$indicators[match_index, c("indicator_id", "indicator")]
+    match_df <- cache$indicators[match_index, c("indicator_id", "indicator", "indicator_desc")]
   }
 
   tibble::as_tibble(match_df)
