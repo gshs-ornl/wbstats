@@ -120,6 +120,10 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, return_wide 
                freq, cache, lang = c("en", "es", "fr", "ar", "zh"), removeNA = TRUE, POSIXct = FALSE,
                include_dec = FALSE, include_unit = FALSE, include_obsStatus = FALSE, include_lastUpdated = FALSE) {
 
+
+  # see here for best practices
+
+
   lang <- match.arg(lang)
 
   url_list <- wburls()

@@ -1,10 +1,4 @@
-#' Title
-#'
-#' @param x
-#' @param end_point
-#'
-#' @return
-#'
+
 #' @noRd
 format_wb_tidy_names <- function(x, end_point) {
 
@@ -23,18 +17,15 @@ format_wb_tidy_names <- function(x, end_point) {
 }
 
 
-#' Title
-#'
-#' @param x
-#' @param end_point
-#'
-#' @return
-#'
+
 #' @noRd
 format_wb_data <- function(x, end_point) {
 
   x_field_types <- format_wb_get_col_type(x)
   col_index <- which(x_field_types %in% "character")
+
+  # skip date column b/c it has its own parsing function
+  col_index <- setdiff(col_index, which(names(x) == "date"))
 
   x <- format_wb_func(x, readr::parse_guess,
                       col_index = col_index)
@@ -70,14 +61,6 @@ format_wb_data <- function(x, end_point) {
 }
 
 
-
-#' Title
-#'
-#' @param x
-#' @param ...
-#'
-#' @return
-#'
 #' @noRd
 format_wb_get_col_type <- function(x, ...) {
   x_type <- sapply(seq(ncol(x)), FUN = function(i) typeof(x[ ,i]))
@@ -85,31 +68,13 @@ format_wb_get_col_type <- function(x, ...) {
   x_type
 }
 
-
-#' Title
-#'
-#' @param x
-#' @param current_value
-#' @param replacement
-#' @param ...
-#'
-#' @return
-#'
 #' @noRd
 format_wb_func_replace_value <- function(x, current_value, replacement, ...) {
   x[x == current_value] <- replacement
   x
 }
 
-#' Title
-#'
-#' @param x
-#' @param true_pattern
-#' @param false_pattern
-#' @param ...
-#'
-#' @return
-#'
+
 #' @noRd
 format_wb_func_as_logical <- function(x, true_pattern, false_pattern, ...) {
   true_index <- grep(true_pattern, x = x, ...)
@@ -127,15 +92,7 @@ format_wb_func_as_logical <- function(x, true_pattern, false_pattern, ...) {
 }
 
 
-#' Title
-#'
-#' @param df
-#' @param func
-#' @param col_index
-#' @param ...
-#'
-#' @return
-#'
+
 #' @noRd
 format_wb_func <- function(df, func, col_index,  ...) {
 
@@ -149,13 +106,7 @@ format_wb_func <- function(df, func, col_index,  ...) {
   df
 }
 
-#' Format country names for API query
-#'
-#' @param x
-#' @param cache
-#'
-#' @return
-#'
+
 #' @noRd
 format_wb_country <- function(x, cache) {
 

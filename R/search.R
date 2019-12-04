@@ -34,7 +34,7 @@
 #' # contains "gdp" and NOT "trade"
 #' wb_search("^(?=.*gdp)(?!.*trade).*", perl = TRUE)
 #' @export
-wb_search <- function(pattern, fields = c("indicator", "indicator_desc"),
+wb_search <- function(pattern, fields = c("indicator_id", "indicator", "indicator_desc"),
                       extra = FALSE, cache, ignore.case = TRUE, ...){
 
   if (missing(cache)) cache <- wbstats::wb_cachelist

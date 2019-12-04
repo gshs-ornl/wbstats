@@ -115,24 +115,23 @@
 #'
 #' # without the freq parameter the deafult temporal granularity search is yearly
 #' # should return the 12 most recent years of data
-#' df_annual <- wb_data(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12)
+#' df_annual <- wb_data("DPANUSSPF", country = c("CHN", "IND"), mrv = 12)
 #'
 #'
 #' # if another frequency is available for that indicator it can be accessed using the freq parameter
 #' # should return the 12 most recent months of data
-#' df_monthly <- wb_data(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12, freq = "M")
+#' df_monthly <- wb_data("DPANUSSPF", country = c("CHN", "IND"), mrv = 12, freq = "M")
 wb_data <- function(indicator, country = "countries_only", start_date, end_date,
                     return_wide = TRUE, mrv, mrnev, cache, freq, gapfill = FALSE,
                     lang) {
 
   if (missing(cache)) cache <- wbstats::wb_cachelist
 
-  # TODO: 1. add deperated warning to old functions
-  #       2. what about the search function?
-  #       2. BUG: date column always getting treated as numeric so monthly dates get dropped
+  # TODO: 1. add deperated warning to old functions http://r-pkgs.had.co.nz/release.html
+              # mixing annual and monthly data in one call
+  #       2. BUG: wb_data(country = c("CHN", "IND"), indicator = c("DPANUSSPB", "DPANUSSPF", "SP.POP.TOTL"), start_date = "2010M02", end_date = "2018M01")
   #       3. for none wdi indicators, iso3c is NA and iso3 codes are in iso2 field. Maybe check for NA iso3 and pull from countries df
   #       3. the "lending_types_only" doesn't work
-  #       2. function for formatting time
   #       3. check query options?
   #       4. Do the cache
   #
@@ -201,16 +200,16 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
 
   # what is NULL just gets dropped in the build url step
   query_list <- list(
-    date     = date_query,
-    scale    = scale_query,
-    freq     = freq_query,
-    mrv      = mrv_query,
-    mrnev    = mrnev_query,
-    gapfill  = gapfill_query,
-    footnote = "y",
+    date      = date_query,
+    scale     = scale_query,
+    frequency = freq_query,
+    mrv       = mrv_query,
+    mrnev     = mrnev_query,
+    gapfill   = gapfill_query,
+    footnote  = "y",
     cntrycode = "y",
-    per_page = wbstats:::wb_api_parameters$per_page,
-    format   = wbstats:::wb_api_parameters$format
+    per_page  = wbstats:::wb_api_parameters$per_page,
+    format    = wbstats:::wb_api_parameters$format
   )
 
   # be able to return this for debugging
@@ -281,5 +280,20 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
     d <- d[ , col_order]
   }
 
- d
+
+  d <- format_wb_dates(d)
+
+  d
+}
+
+
+# taken from https://github.com/ropensci/rdhs/blob/master/R/API.R
+# need to properly cite if i am going to keep it in
+## This is something of an ugly hack to convert function arguments
+## into a list appropriate for the api queries.  There are common
+## arguments (in "drop") to api functions that are not actually query
+## parameters
+args_to_query <- function(env, drop = c("client", "force", "all_results")) {
+  ret <- as.list(env)
+  ret[setdiff(names(ret), drop)]
 }

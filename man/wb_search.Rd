@@ -6,7 +6,7 @@
 \usage{
 wb_search(
   pattern,
-  fields = c("indicator", "indicator_desc"),
+  fields = c("indicator_id", "indicator", "indicator_desc"),
   extra = FALSE,
   cache,
   ignore.case = TRUE,

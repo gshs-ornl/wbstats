@@ -150,10 +150,10 @@ df_mrnev <- wb_data("SL.UEM.TOTL.ZS", mrnev = 1)
 
 # without the freq parameter the deafult temporal granularity search is yearly
 # should return the 12 most recent years of data
-df_annual <- wb_data(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12)
+df_annual <- wb_data("DPANUSSPF", country = c("CHN", "IND"), mrv = 12)
 
 
 # if another frequency is available for that indicator it can be accessed using the freq parameter
 # should return the 12 most recent months of data
-df_monthly <- wb_data(country = c("CHN", "IND"), indicator = "DPANUSSPF", mrv = 12, freq = "M")
+df_monthly <- wb_data("DPANUSSPF", country = c("CHN", "IND"), mrv = 12, freq = "M")
 }
