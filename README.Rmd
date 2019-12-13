@@ -30,6 +30,10 @@ The latest development version from github with
 devtools::install_github("GIST-ORNL/wbstats")
 ```
 
+Please note there there are a lot a changes between the latest release on CRAN and this version. We are currently working towards a major update coming around the new year.
+
+All of the below describes the version `0.2.0` and will be updated to reflect recent changes soon.
+
 # Introduction
 
 The World Bank^[<http://www.worldbank.org/>] is a tremendous source of global socio-economic data; spanning several decades and dozens of topics, it has the potential to shed light on numerous global issues. To help provide access to this rich source of information, The World Bank themselves, provide a well structured RESTful API^[<http://data.worldbank.org/developers>]. While this API is very useful for integration into web services and other high-level applications, it becomes quickly overwhelming for researchers who have neither the time nor the expertise to develop software to interface with the API. This leaves the researcher to rely on manual bulk downloads of spreadsheets of the data they are interested in. This too is can quickly become overwhelming, as the work is manual, time consuming, and not easily reproducible. The goal of the `wbstats` R-package is to provide a bridge between these alternatives and allow researchers to focus on their research questions and not the question of accessing the data. The `wbstats` R-package allows researchers to quickly search and download the data of their particular interest in a programmatic and reproducible fashion; this facilitates a seamless integration into their workflow and allows analysis to be quickly rerun on different areas of interest and with realtime access to the latest available data.
@@ -202,49 +206,6 @@ Because `gapfill` returns data that does reflect actual observed values, use thi
 
 ### Using `POSIXct = TRUE`
 The default format for the `date` column is not conducive to sorting or plotting, especially when downloading sub annual data, such as monthly or quarterly data. To address this, if `TRUE`, the `POSIXct` parameter adds the additional columns `date_ct` and `granularity`. `date_ct` converts the default date into a `POSIXct`. `granularity` denotes the time resolution that the date represents. This option requires the use of the package `lubridate (>= 1.5.0)`. If `POSIXct = TRUE` and `lubridate (>= 1.5.0)` is not available, a `warning` is produced and the option is ignored
-
-
-#### NOTE: As of October 20, 2018 the GEM Commodities Database was temporarily unavailable on the World Bank API per the World Bank. Please see the GEM Commodities webpage^[<http://data.worldbank.org/developers>]
-
-This results in any indicators from that database returning a `(400) Bad Request` error. `wbstats` should report an error message but return an empty data frame.
-
-```{r error=TRUE, message=TRUE, warning=TRUE, verbose=TRUE}
-library(wbstats)
-
-oil_data <- wb(indicator = "CRUDE_BRENT", mrv = 10, freq = "M", POSIXct = TRUE)
-
-```
-
-
-The two examples below will also produce the following errors
-
-
-The `POSIXct = TRUE` option makes plotting and sorting dates much easier.
-```{r read-me-ex-posixct-1, fig.height = 4, fig.width = 7.5, fig.path = "tools/figures/"}
-library(wbstats)
-library(ggplot2)
-
-oil_data <- wb(indicator = c("CRUDE_DUBAI", "CRUDE_BRENT", "CRUDE_WTI", "CRUDE_PETRO"),
-               startdate = "2012M01", enddate = "2014M12", freq = "M", POSIXct = TRUE)
-
-ggplot(oil_data, aes(x = date_ct, y = value, colour = indicator)) + geom_line(size = 1) +
-  labs(title = "Crude Oil Price Comparisons", x = "Date", y = "US Dollars")
-```
-
-The `POSIXct = TRUE` option also makes plotting time series with different time coverage seamless
-```{r read-me-ex-posixct-2, fig.height = 4, fig.width = 7.5, fig.path = "tools/figures/"}
-library(wbstats)
-library(ggplot2)
-
-# querying seperate for differing time coverage example
-gold_data <- wb(indicator = "GOLD", mrv = 120, freq = "M", POSIXct = TRUE)
-plat_data <- wb(indicator = "PLATINUM", mrv = 60, freq = "M", POSIXct = TRUE)
-
-metal_data <- rbind(gold_data, plat_data)
-
-ggplot(metal_data, aes(x = date_ct, y = value, colour = indicator)) + geom_line(size = 1) +
-  labs(title = "Precious Metal Prices", x = "Date", y = "US Dollars")
-```
 
 
 # Some Sharp Corners
