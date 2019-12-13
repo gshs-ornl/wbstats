@@ -9,7 +9,7 @@
 #' if \code{TRUE}, all columns of the \code{cache} parameter's indicator data frame
 #' are returned
 #' @param cache List of data frames returned from \code{\link{wbcache}}. If omitted,
-#' \code{\link{wb_cachelist}} is used
+#' \code{\link{wb_cachelist_dep}} is used
 #' @return Data frame with indicators that match the search pattern.
 #' @examples
 #' wbsearch(pattern = "education")
@@ -22,7 +22,7 @@
 #' @export
 wbsearch <- function(pattern = "poverty", fields = c("indicator", "indicatorDesc"), extra = FALSE, cache){
 
-  if (missing(cache)) cache <- wbstats::wb_cachelist
+  if (missing(cache)) cache <- wbstats::wb_cachelist_dep
 
   ind_cache <- cache$indicators
 
