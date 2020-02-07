@@ -121,7 +121,7 @@ wb <- function(country = "all", indicator, startdate, enddate, mrv, return_wide 
                include_dec = FALSE, include_unit = FALSE, include_obsStatus = FALSE, include_lastUpdated = FALSE) {
 
 
-  # see here for best practices
+  lifecycle::deprecate_warn("1.0.0", "wbstats::wb()", "wbstats::wb_data()")
 
 
   lang <- match.arg(lang)

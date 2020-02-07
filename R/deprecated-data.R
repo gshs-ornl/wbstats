@@ -4,7 +4,6 @@
 #' By default functions \code{\link{wb}} and \code{\link{wbsearch}} use this
 #' data for the \code{cache} parameter.
 #'
-#' This data was updated using \code{\link{wbcache}} on January 1, 2018
 #'
 #' @format A list containing 7 data frames:
 #' \itemize{
@@ -16,4 +15,4 @@
 #' \item \code{income}: A data frame.The result of calling \code{\link{wbincome}}
 #' \item \code{lending}: A data frame.The result of calling \code{\link{wblending}}
 #' }
-"wb_cachelist"
+"wb_cachelist_dep"

@@ -26,6 +26,9 @@
 #' @export
 wbcountries <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 
+
+  lifecycle::deprecate_warn("1.0.0", "wbstats::wbcountries()", "wbstats::wb_countries()")
+
   # if none supplied english is default
   lang <- match.arg(lang)
 
@@ -96,6 +99,7 @@ wbcountries <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 #' @export
 wbindicators <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 
+  lifecycle::deprecate_warn("1.0.0", "wbstats::wbindicators()", "wbstats::wb_indicators()")
 
   # if none supplied english is default
   lang <- match.arg(lang)
@@ -155,6 +159,7 @@ wbindicators <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 #' @export
 wbtopics <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 
+  lifecycle::deprecate_warn("1.0.0", "wbstats::wbtopics()", "wbstats::wb_topics()")
   # if none supplied english is default
   lang <- match.arg(lang)
 
@@ -204,6 +209,7 @@ wbtopics <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 #' @export
 wblending <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 
+  lifecycle::deprecate_warn("1.0.0", "wbstats::wblending()", "wbstats::wb_lending_types()")
   # if none supplied english is default
   lang <- match.arg(lang)
 
@@ -253,6 +259,8 @@ wblending <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 #' wbincome(lang = "es")
 #' @export
 wbincome <- function(lang = c("en", "es", "fr", "ar", "zh")) {
+
+  lifecycle::deprecate_warn("1.0.0", "wbstats::wbincome()", "wbstats::wb_income_levels()")
 
   # if none supplied english is default
   lang <- match.arg(lang)
@@ -304,6 +312,8 @@ wbincome <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 #' @export
 wbsources <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 
+  lifecycle::deprecate_warn("1.0.0", "wbstats::wbsources()", "wbstats::wb_sources()")
+
   # if none supplied english is default
   lang <- match.arg(lang)
 
@@ -344,6 +354,12 @@ wbsources <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 #' wbdatacatalog()
 #' @export
 wbdatacatalog <- function() {
+
+  lifecycle::deprecate_warn("1.0.0", "wbstats::wbdatacatalog()",
+                            details = paste("This function uses an out of date version of the Data Catalog API.",
+                                            "wbstats does not currently have support for the latest API version.\n",
+                                            "Please see https://datacatalog.worldbank.org/ for up to date information.")
+                            )
 
   url_list <- wburls()
   base_url <- url_list$base_url
@@ -449,6 +465,7 @@ wbdatacatalog <- function() {
 #' @export
 wbcache <- function(lang = c("en", "es", "fr", "ar", "zh")) {
 
+  lifecycle::deprecate_warn("1.0.0", "wbstats::wbcache()", "wbstats::wb_cache()")
   # if none supplied english is default
   lang <- match.arg(lang)
 

@@ -22,6 +22,8 @@
 #' @export
 wbsearch <- function(pattern = "poverty", fields = c("indicator", "indicatorDesc"), extra = FALSE, cache){
 
+  lifecycle::deprecate_warn("1.0.0", "wbstats::wbsearch()", "wbstats::wb_search()")
+
   if (missing(cache)) cache <- wbstats::wb_cachelist_dep
 
   ind_cache <- cache$indicators
