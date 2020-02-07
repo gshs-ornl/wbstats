@@ -15,6 +15,7 @@ wb_data(
   cache,
   freq,
   gapfill = FALSE,
+  date_as_class_date = FALSE,
   lang
 )
 }
@@ -67,6 +68,11 @@ Useful in conjuction with \code{freq}}
 Useful for querying high frequency data.}
 
 \item{gapfill}{Logical. If \code{TRUE} fills in missing values by carrying forward the last
+available value until the next available period (max number of periods back tracked will be limited by \code{mrv} number).
+Default is \code{FALSE}}
+
+\item{date_as_class_date}{Logical. If \code{TRUE} the date field is returned as class \link{Date}, useful when working with
+non-annual data or data at mixed resolutions. Default is \code{FALSE}
 available value until the next available period (max number of periods back tracked will be limited by \code{mrv} number).
 Default is \code{FALSE}}
 
@@ -146,14 +152,4 @@ df_mrv <- wb_data("SL.UEM.TOTL.ZS", mrv = 1)
 
 # note the difference in mrv and mrnev
 df_mrnev <- wb_data("SL.UEM.TOTL.ZS", mrnev = 1)
-
-
-# without the freq parameter the deafult temporal granularity search is yearly
-# should return the 12 most recent years of data
-df_annual <- wb_data("DPANUSSPF", country = c("CHN", "IND"), mrv = 12)
-
-
-# if another frequency is available for that indicator it can be accessed using the freq parameter
-# should return the 12 most recent months of data
-df_monthly <- wb_data("DPANUSSPF", country = c("CHN", "IND"), mrv = 12, freq = "M")
 }

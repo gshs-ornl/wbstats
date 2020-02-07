@@ -161,7 +161,7 @@ pop_data
 
 As of `wbstats 1.0` queries are now returned in wide format. This was a request made by multiple users and is in line with the principles of [tidy data](https://www.jstatsoft.org/article/view/v059i10). If you would like to return the data in a long format, you can set `return_wide = FALSE`   
 
-Now that each indicator is it's own column, we can implement a great suggestion by [vincentarelbundock](https://github.com/vincentarelbundock) to allow custom names for the indicators 
+Now that each indicator is it's own column, we can implement a great suggestion by [vincentarelbundock](https://github.com/nset-ornl/wbstats/issues/12) to allow custom names for the indicators 
 ```{r}
 library(wbstats)
 
@@ -207,36 +207,25 @@ head(gdp_capita)
 ```
 
 ### Dates
-Currently all dates are returned as
+Because the majority of data available from the World Bank is at the annual resolution, by default dates in `wbstats` are returned as `numeric`s. This default makes common tasks like filtering easier. If you would like the date field to be of class `Date` you can set `date_as_class_date = TRUE`
 
 # Some Sharp Corners
 There are a few behaviors of the World Bank API that being aware of could help explain some potentially unexpected results. These results are known but no special actions are taken to mitigate them as they are the result of the API itself and artifically limiting the inputs or results could potentially causes problems or create unnecessary rescrictions in the future. 
 
-## Most Recent Values
-If you use the `mrv` parameter in `wb()` with mutliple countries or regions, it searches for the most recent dates for which any country or region in your selection has data and then returns the data for those dates. In other words the `mrv` value is not determined on a country by country basis, rather it is determined across the entire selection.
-```{r}
-library(wbstats)
-
-per_data_1 <- wb(country = "all", indicator = 'per_lm_ac.cov_pop_tot', mrv = 1)
-per_data_1
-
-per_data_2 <- wb(country = "all", indicator = 'per_lm_ac.cov_pop_tot', mrv = 2)
-per_data_2
-
-```
+## This case of the missing indicators
 
 ## Searching in other languages
-Not all data sources support all languages. If an indicator does not have a translation for a particular language, the non-supported fields will return as `NA`. This could potentially result in a differing number of matching indicators from `wbsearch()`
+Not all data sources support all languages. If an indicator does not have a translation for a particular language, the non-supported fields will return as `NA`. This could potentially result in a differing number of matching indicators from `wb_search()`
 ```{r}
 
 library(wbstats)
 
 # english
-cache_en <- wbcache()
+cache_en <- wb_cache()
 sum(is.na(cache_en$indicators$indicator))
 
 # spanish
-cache_es <- wbcache(lang = "es")
+cache_es <- wb_cache(lang = "es")
 sum(is.na(cache_es$indicators$indicator))
 ```
 

@@ -42,6 +42,10 @@
 #' @param gapfill Logical. If `TRUE` fills in missing values by carrying forward the last
 #' available value until the next available period (max number of periods back tracked will be limited by `mrv` number).
 #' Default is `FALSE`
+#' @param date_as_class_date Logical. If `TRUE` the date field is returned as class [Date], useful when working with
+#' non-annual data or data at mixed resolutions. Default is `FALSE`
+#' available value until the next available period (max number of periods back tracked will be limited by `mrv` number).
+#' Default is `FALSE`
 #' @inheritParams wb_cache
 #'
 #' @return A [tibble][tibble::tbl_df] of all available requested data.
@@ -113,7 +117,7 @@
 #' df_mrnev <- wb_data("SL.UEM.TOTL.ZS", mrnev = 1)
 wb_data <- function(indicator, country = "countries_only", start_date, end_date,
                     return_wide = TRUE, mrv, mrnev, cache, freq, gapfill = FALSE,
-                    lang) {
+                    date_as_class_date = FALSE, lang) {
 
   if (missing(cache)) cache <- wbstats::wb_cachelist
 
@@ -270,20 +274,22 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
     d <- d[ , col_order]
   }
 
+  if (date_as_class_date)  d <- format_wb_dates(d)
+  else d$date <- as.numeric(d$date)
 
-  d <- format_wb_dates(d)
+  # for indicators that are not apart of the World Development Indicators dataset
+  # iso3c values are passed in the iso2c column while the iso3c column is NA
+  # check for those and standardize the returns
+  if (any(is.na(d$iso3c))) {
+
+    d_country_index <- sapply(d$country, function(i) which(cache$countries$country == i))
+    new_iso_values <- cache$countries[d_country_index, c("iso2c", "iso3c")]
+
+    d$iso2c <- new_iso_values$iso2c
+    d$iso3c <- new_iso_values$iso3c
+  }
+
 
   d
 }
 
-
-# taken from https://github.com/ropensci/rdhs/blob/master/R/API.R
-# need to properly cite if i am going to keep it in
-## This is something of an ugly hack to convert function arguments
-## into a list appropriate for the api queries.  There are common
-## arguments (in "drop") to api functions that are not actually query
-## parameters
-args_to_query <- function(env, drop = c("client", "force", "all_results")) {
-  ret <- as.list(env)
-  ret[setdiff(names(ret), drop)]
-}

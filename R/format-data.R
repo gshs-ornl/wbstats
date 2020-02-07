@@ -42,8 +42,6 @@ format_wb_data <- function(x, end_point) {
     if("obs_status" %in% x_names) x$footnote <- as.character(x$footnote)
   }
 
-  if (end_point == "query")
-
   if (end_point == "country") x[x$iso3c == "NAM", "iso2c"] <- "NA"
 
   if (end_point == "source") {

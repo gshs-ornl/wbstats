@@ -258,16 +258,16 @@ library(wbstats)
 pop_data <- wb_data("SP.POP.TOTL", start_date = 2000, end_date = 2002)
 
 head(pop_data)
-#> # A tibble: 6 x 10
-#>   iso2c iso3c country date       SP.POP.TOTL unit  obs_status footnote
-#>   <chr> <chr> <chr>   <date>           <dbl> <chr> <chr>      <chr>   
-#> 1 AW    ABW   Aruba   2000-01-01       90853 <NA>  <NA>       <NA>    
-#> 2 AW    ABW   Aruba   2001-01-01       92898 <NA>  <NA>       <NA>    
-#> 3 AW    ABW   Aruba   2002-01-01       94992 <NA>  <NA>       <NA>    
-#> 4 AF    AFG   Afghan~ 2000-01-01    20779953 <NA>  <NA>       <NA>    
-#> 5 AF    AFG   Afghan~ 2001-01-01    21606988 <NA>  <NA>       <NA>    
-#> 6 AF    AFG   Afghan~ 2002-01-01    22600770 <NA>  <NA>       <NA>    
-#> # ... with 2 more variables: last_updated <date>, obs_resolution <chr>
+#> # A tibble: 6 x 9
+#>   iso2c iso3c country  date SP.POP.TOTL unit  obs_status footnote
+#>   <chr> <chr> <chr>   <dbl>       <dbl> <chr> <chr>      <chr>   
+#> 1 AW    ABW   Aruba    2000       90853 <NA>  <NA>       <NA>    
+#> 2 AW    ABW   Aruba    2001       92898 <NA>  <NA>       <NA>    
+#> 3 AW    ABW   Aruba    2002       94992 <NA>  <NA>       <NA>    
+#> 4 AF    AFG   Afghan~  2000    20779953 <NA>  <NA>       <NA>    
+#> 5 AF    AFG   Afghan~  2001    21606988 <NA>  <NA>       <NA>    
+#> 6 AF    AFG   Afghan~  2002    22600770 <NA>  <NA>       <NA>    
+#> # ... with 1 more variable: last_updated <date>
 ```
 
 If you are interested in only some subset of countries or regions you
@@ -289,17 +289,17 @@ pop_data <- wb_data("SP.POP.TOTL", country = example_geos,
                     start_date = 2012, end_date = 2012)
 
 pop_data
-#> # A tibble: 7 x 10
-#>   iso2c iso3c country date       SP.POP.TOTL unit  obs_status footnote
-#>   <chr> <chr> <chr>   <date>           <dbl> <chr> <chr>      <chr>   
-#> 1 AW    ABW   Aruba   2012-01-01      102560 <NA>  <NA>       <NA>    
-#> 2 AF    AFG   Afghan~ 2012-01-01    31161376 <NA>  <NA>       <NA>    
-#> 3 AL    ALB   Albania 2012-01-01     2900401 <NA>  <NA>       <NA>    
-#> 4 7E    ECA   Europe~ 2012-01-01   403265869 <NA>  <NA>       <NA>    
-#> 5 8S    SAS   South ~ 2012-01-01  1683747130 <NA>  <NA>       <NA>    
-#> 6 ZG    SSF   Sub-Sa~ 2012-01-01   917726973 <NA>  <NA>       <NA>    
-#> 7 XD    <NA>  High i~ 2012-01-01  1170223344 <NA>  <NA>       <NA>    
-#> # ... with 2 more variables: last_updated <date>, obs_resolution <chr>
+#> # A tibble: 7 x 9
+#>   iso2c iso3c country  date SP.POP.TOTL unit  obs_status footnote
+#>   <chr> <chr> <chr>   <dbl>       <dbl> <chr> <chr>      <chr>   
+#> 1 AW    ABW   Aruba    2012      102560 <NA>  <NA>       <NA>    
+#> 2 AF    AFG   Afghan~  2012    31161376 <NA>  <NA>       <NA>    
+#> 3 AL    ALB   Albania  2012     2900401 <NA>  <NA>       <NA>    
+#> 4 7E    ECA   Europe~  2012   403265869 <NA>  <NA>       <NA>    
+#> 5 8S    SAS   South ~  2012  1683747130 <NA>  <NA>       <NA>    
+#> 6 ZG    SSF   Sub-Sa~  2012   917726973 <NA>  <NA>       <NA>    
+#> 7 XD    <NA>  High i~  2012  1170223344 <NA>  <NA>       <NA>    
+#> # ... with 1 more variable: last_updated <date>
 ```
 
 As of `wbstats 1.0` queries are now returned in wide format. This was a
@@ -322,15 +322,15 @@ my_indicators = c("pop" = "SP.POP.TOTL",
 pop_gdp <- wb_data(my_indicators, start_date = 2010, end_date = 2012)
 
 head(pop_gdp)
-#> # A tibble: 6 x 7
-#>   iso2c iso3c country     date                gdp      pop obs_resolution
-#>   <chr> <chr> <chr>       <date>            <dbl>    <dbl> <chr>         
-#> 1 AW    ABW   Aruba       2010-01-01  2390502793.   101669 annual        
-#> 2 AW    ABW   Aruba       2011-01-01  2549720670.   102046 annual        
-#> 3 AW    ABW   Aruba       2012-01-01  2534636872.   102560 annual        
-#> 4 AF    AFG   Afghanistan 2010-01-01 15856574731. 29185507 annual        
-#> 5 AF    AFG   Afghanistan 2011-01-01 17804280538. 30117413 annual        
-#> 6 AF    AFG   Afghanistan 2012-01-01 20001615789. 31161376 annual
+#> # A tibble: 6 x 6
+#>   iso2c iso3c country      date          gdp      pop
+#>   <chr> <chr> <chr>       <dbl>        <dbl>    <dbl>
+#> 1 AW    ABW   Aruba        2010  2390502793.   101669
+#> 2 AW    ABW   Aruba        2011  2549720670.   102046
+#> 3 AW    ABW   Aruba        2012  2534636872.   102560
+#> 4 AF    AFG   Afghanistan  2010 15856574731. 29185507
+#> 5 AF    AFG   Afghanistan  2011 17804280538. 30117413
+#> 6 AF    AFG   Afghanistan  2012 20001615789. 31161376
 ```
 
 You’ll notice that when you query only one indicator, as in the first
@@ -351,17 +351,16 @@ my_indicators = c("pop" = "SP.POP.TOTL",
 pop_gdp_long <- wb_data(my_indicators, start_date = 2010, end_date = 2012, return_wide = FALSE)
 
 head(pop_gdp_long)
-#> # A tibble: 6 x 12
-#>   indicator_id indicator iso2c iso3c country date        value unit 
-#>   <chr>        <chr>     <chr> <chr> <chr>   <date>      <dbl> <chr>
-#> 1 SP.POP.TOTL  Populati~ AW    ABW   Aruba   2012-01-01 1.03e5 <NA> 
-#> 2 SP.POP.TOTL  Populati~ AW    ABW   Aruba   2011-01-01 1.02e5 <NA> 
-#> 3 SP.POP.TOTL  Populati~ AW    ABW   Aruba   2010-01-01 1.02e5 <NA> 
-#> 4 SP.POP.TOTL  Populati~ AF    AFG   Afghan~ 2012-01-01 3.12e7 <NA> 
-#> 5 SP.POP.TOTL  Populati~ AF    AFG   Afghan~ 2011-01-01 3.01e7 <NA> 
-#> 6 SP.POP.TOTL  Populati~ AF    AFG   Afghan~ 2010-01-01 2.92e7 <NA> 
-#> # ... with 4 more variables: obs_status <chr>, footnote <chr>,
-#> #   last_updated <date>, obs_resolution <chr>
+#> # A tibble: 6 x 11
+#>   indicator_id indicator iso2c iso3c country  date  value unit  obs_status
+#>   <chr>        <chr>     <chr> <chr> <chr>   <dbl>  <dbl> <chr> <chr>     
+#> 1 SP.POP.TOTL  Populati~ AW    ABW   Aruba    2012 1.03e5 <NA>  <NA>      
+#> 2 SP.POP.TOTL  Populati~ AW    ABW   Aruba    2011 1.02e5 <NA>  <NA>      
+#> 3 SP.POP.TOTL  Populati~ AW    ABW   Aruba    2010 1.02e5 <NA>  <NA>      
+#> 4 SP.POP.TOTL  Populati~ AF    AFG   Afghan~  2012 3.12e7 <NA>  <NA>      
+#> 5 SP.POP.TOTL  Populati~ AF    AFG   Afghan~  2011 3.01e7 <NA>  <NA>      
+#> 6 SP.POP.TOTL  Populati~ AF    AFG   Afghan~  2010 2.92e7 <NA>  <NA>      
+#> # ... with 2 more variables: footnote <chr>, last_updated <date>
 ```
 
 ### Using `mrv` and `mrnev`
@@ -378,16 +377,16 @@ library(wbstats)
 gdp_capita <- wb_data("NY.GDP.PCAP.CD", mrv = 1)
 
 head(gdp_capita)
-#> # A tibble: 6 x 10
-#>   iso2c iso3c country date       NY.GDP.PCAP.CD unit  obs_status footnote
-#>   <chr> <chr> <chr>   <date>              <dbl> <chr> <chr>      <chr>   
-#> 1 AW    ABW   Aruba   2018-01-01            NA  <NA>  <NA>       <NA>    
-#> 2 AF    AFG   Afghan~ 2018-01-01           521. <NA>  <NA>       <NA>    
-#> 3 AO    AGO   Angola  2018-01-01          3432. <NA>  <NA>       <NA>    
-#> 4 AL    ALB   Albania 2018-01-01          5269. <NA>  <NA>       <NA>    
-#> 5 AD    AND   Andorra 2018-01-01         42030. <NA>  <NA>       <NA>    
-#> 6 AE    ARE   United~ 2018-01-01         43005. <NA>  <NA>       <NA>    
-#> # ... with 2 more variables: last_updated <date>, obs_resolution <chr>
+#> # A tibble: 6 x 9
+#>   iso2c iso3c country  date NY.GDP.PCAP.CD unit  obs_status footnote
+#>   <chr> <chr> <chr>   <dbl>          <dbl> <chr> <chr>      <chr>   
+#> 1 AW    ABW   Aruba    2018            NA  <NA>  <NA>       <NA>    
+#> 2 AF    AFG   Afghan~  2018           521. <NA>  <NA>       <NA>    
+#> 3 AO    AGO   Angola   2018          3432. <NA>  <NA>       <NA>    
+#> 4 AL    ALB   Albania  2018          5269. <NA>  <NA>       <NA>    
+#> 5 AD    AND   Andorra  2018         42030. <NA>  <NA>       <NA>    
+#> 6 AE    ARE   United~  2018         43005. <NA>  <NA>       <NA>    
+#> # ... with 1 more variable: last_updated <date>
 ```
 
 Often it is the case that the latest available data is different from
@@ -404,21 +403,24 @@ library(wbstats)
 gdp_capita <- wb_data("NY.GDP.PCAP.CD", mrnev = 1)
 
 head(gdp_capita)
-#> # A tibble: 6 x 9
-#>   iso2c iso3c country date       NY.GDP.PCAP.CD obs_status footnote
-#>   <chr> <chr> <chr>   <date>              <dbl> <chr>      <chr>   
-#> 1 AW    ABW   Aruba   2017-01-01         25630. <NA>       <NA>    
-#> 2 AF    AFG   Afghan~ 2018-01-01           521. <NA>       <NA>    
-#> 3 AO    AGO   Angola  2018-01-01          3432. <NA>       <NA>    
-#> 4 AL    ALB   Albania 2018-01-01          5269. <NA>       <NA>    
-#> 5 AD    AND   Andorra 2018-01-01         42030. <NA>       <NA>    
-#> 6 AE    ARE   United~ 2018-01-01         43005. <NA>       <NA>    
-#> # ... with 2 more variables: last_updated <date>, obs_resolution <chr>
+#> # A tibble: 6 x 8
+#>   iso2c iso3c country  date NY.GDP.PCAP.CD obs_status footnote last_updated
+#>   <chr> <chr> <chr>   <dbl>          <dbl> <chr>      <chr>    <date>      
+#> 1 AW    ABW   Aruba    2017         25630. <NA>       <NA>     2019-12-20  
+#> 2 AF    AFG   Afghan~  2018           521. <NA>       <NA>     2019-12-20  
+#> 3 AO    AGO   Angola   2018          3432. <NA>       <NA>     2019-12-20  
+#> 4 AL    ALB   Albania  2018          5269. <NA>       <NA>     2019-12-20  
+#> 5 AD    AND   Andorra  2018         42030. <NA>       <NA>     2019-12-20  
+#> 6 AE    ARE   United~  2018         43005. <NA>       <NA>     2019-12-20
 ```
 
 ### Dates
 
-Currently all dates are returned as
+Because the majority of data available from the World Bank is at the
+annual resolution, by default dates in `wbstats` are returned as
+`numeric`s. This default makes common tasks like filtering easier. If
+you would like the date field to be of class `Date` you can set
+`date_as_class_date = TRUE`
 
 Some Sharp Corners
 ==================
@@ -430,44 +432,8 @@ the result of the API itself and artifically limiting the inputs or
 results could potentially causes problems or create unnecessary
 rescrictions in the future.
 
-Most Recent Values
-------------------
-
-If you use the `mrv` parameter in `wb()` with mutliple countries or
-regions, it searches for the most recent dates for which any country or
-region in your selection has data and then returns the data for those
-dates. In other words the `mrv` value is not determined on a country by
-country basis, rather it is determined across the entire selection.
-
-``` r
-library(wbstats)
-
-per_data_1 <- wb(country = "all", indicator = 'per_lm_ac.cov_pop_tot', mrv = 1)
-per_data_1
-#>    iso3c date value           indicatorID
-#> 48   ECU 2016     0 per_lm_ac.cov_pop_tot
-#> 80   LBR 2016     0 per_lm_ac.cov_pop_tot
-#>                             indicator iso2c country
-#> 48 Coverage (%) - Active Labor Market    EC Ecuador
-#> 80 Coverage (%) - Active Labor Market    LR Liberia
-
-per_data_2 <- wb(country = "all", indicator = 'per_lm_ac.cov_pop_tot', mrv = 2)
-per_data_2
-#>     iso3c date     value           indicatorID
-#> 36    AZE 2015  3.613943 per_lm_ac.cov_pop_tot
-#> 72    CHL 2015 24.275833 per_lm_ac.cov_pop_tot
-#> 86    CIV 2015  0.000000 per_lm_ac.cov_pop_tot
-#> 95    ECU 2016  0.000000 per_lm_ac.cov_pop_tot
-#> 132   IDN 2015  5.443194 per_lm_ac.cov_pop_tot
-#> 159   LBR 2016  0.000000 per_lm_ac.cov_pop_tot
-#>                              indicator iso2c       country
-#> 36  Coverage (%) - Active Labor Market    AZ    Azerbaijan
-#> 72  Coverage (%) - Active Labor Market    CL         Chile
-#> 86  Coverage (%) - Active Labor Market    CI Cote D'Ivoire
-#> 95  Coverage (%) - Active Labor Market    EC       Ecuador
-#> 132 Coverage (%) - Active Labor Market    ID     Indonesia
-#> 159 Coverage (%) - Active Labor Market    LR       Liberia
-```
+This case of the missing indicators
+-----------------------------------
 
 Searching in other languages
 ----------------------------
@@ -475,21 +441,21 @@ Searching in other languages
 Not all data sources support all languages. If an indicator does not
 have a translation for a particular language, the non-supported fields
 will return as `NA`. This could potentially result in a differing number
-of matching indicators from `wbsearch()`
+of matching indicators from `wb_search()`
 
 ``` r
 
 library(wbstats)
 
 # english
-cache_en <- wbcache()
+cache_en <- wb_cache()
 sum(is.na(cache_en$indicators$indicator))
 #> [1] 0
 
 # spanish
-cache_es <- wbcache(lang = "es")
+cache_es <- wb_cache(lang = "es")
 sum(is.na(cache_es$indicators$indicator))
-#> [1] 15365
+#> [1] 14626
 ```
 
 Legal
