@@ -17,6 +17,3 @@ from the World Bank API
 This function does not support any languages other than english due to
 the lack of support from the World Bank API
 }
-\examples{
-wbdatacatalog()
-}

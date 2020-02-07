@@ -30,7 +30,3 @@ The options for \code{lang} are:
 \item \code{zh}: Mandarin
 }
 }
-\examples{
-# default is english. To specific another language use argument lang
-\donttest{wbindicators(lang = "es")}
-}

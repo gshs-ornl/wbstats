@@ -30,8 +30,3 @@ The options for \code{lang} are:
 \item \code{zh}: Mandarin
 }
 }
-\examples{
-wbincome()
-
-wbincome(lang = "es")
-}

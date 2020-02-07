@@ -45,7 +45,3 @@ other langauges for that information.
 Saving this return and using it has the \code{cache} parameter in \code{\link{wb}} and \code{\link{wbsearch}}
 replaces the default cached version \code{\link{wb_cachelist}} that comes with the package itself
 }
-\examples{
-# default is english. To specific another language use argument lang
-\donttest{wbcache(lang = "es")}
-}
