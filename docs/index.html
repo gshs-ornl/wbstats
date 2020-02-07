@@ -8,8 +8,9 @@
 <title>Programmatic Access to Data and Statistics from the World
     Bank API • wbstats</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Programmatic Access to Data and Statistics from the World
     Bank API">
 <meta property="og:description" content="Tools for searching and downloading data and
@@ -24,7 +25,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-article">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -44,24 +45,15 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
+</li>
+<li>
+  <a href="articles/wbstats.html">Get started</a>
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="articles/Using_the_wbstats_package.html">Introduction to the wbstats R-package</a>
-    </li>
-  </ul>
 </li>
 <li>
   <a href="news/index.html">Changelog</a>
@@ -70,7 +62,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/nset-ornl/wbstats">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -83,27 +75,24 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    
 
-    
-    
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-<div id="wbstats-an-r-package-for-searching-and-downloading-data-from-the-world-bank-api-" class="section level1">
+      </header><div class="row">
+  <div class="contents col-md-9">
+
+<div id="wbstats-an-r-package-for-searching-and-downloading-data-from-the-world-bank-api" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#wbstats-an-r-package-for-searching-and-downloading-data-from-the-world-bank-api-" class="anchor"></a>wbstats: An R package for searching and downloading data from the World Bank API.</h1></div>
+<a href="#wbstats-an-r-package-for-searching-and-downloading-data-from-the-world-bank-api" class="anchor"></a>wbstats: An R package for searching and downloading data from the World Bank API.</h1></div>
 <p>You can install:</p>
 <p>The latest release version from CRAN with</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"wbstats"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"wbstats"</span>)</a></code></pre></div>
 <p>or</p>
 <p>The latest development version from github with</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"nset-ornl/wbstats"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"nset-ornl/wbstats"</span>)</a></code></pre></div>
 </div>
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>The World Bank<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> is a tremendous source of global socio-economic data; spanning several decades and dozens of topics, it has the potential to shed light on numerous global issues. To help provide access to this rich source of information, The World Bank themselves, provide a well structured RESTful API<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. While this API is very useful for integration into web services and other high-level applications, it becomes quickly overwhelming for researchers who have neither the time nor the expertise to develop software to interface with the API. This leaves the researcher to rely on manual bulk downloads of spreadsheets of the data they are interested in. This too is can quickly become overwhelming, as the work is manual, time consuming, and not easily reproducible. The goal of the <code>wbstats</code> R-package is to provide a bridge between these alternatives and allow researchers to focus on their research questions and not the question of accessing the data. The <code>wbstats</code> R-package allows researchers to quickly search and download the data of their particular interest in a programmatic and reproducible fashion; this facilitates a seamless integration into their workflow and allows analysis to be quickly rerun on different areas of interest and with realtime access to the latest available data.</p>
+<p>The World Bank[1] is a tremendous source of global socio-economic data; spanning several decades and dozens of topics, it has the potential to shed light on numerous global issues. To help provide access to this rich source of information, The World Bank themselves, provide a well structured RESTful API[2]. While this API is very useful for integration into web services and other high-level applications, it becomes quickly overwhelming for researchers who have neither the time nor the expertise to develop software to interface with the API. This leaves the researcher to rely on manual bulk downloads of spreadsheets of the data they are interested in. This too is can quickly become overwhelming, as the work is manual, time consuming, and not easily reproducible. The goal of the <code>wbstats</code> R-package is to provide a bridge between these alternatives and allow researchers to focus on their research questions and not the question of accessing the data. The <code>wbstats</code> R-package allows researchers to quickly search and download the data of their particular interest in a programmatic and reproducible fashion; this facilitates a seamless integration into their workflow and allows analysis to be quickly rerun on different areas of interest and with realtime access to the latest available data.</p>
 <div id="highlighted-features-of-the-wbstats-r-package" class="section level3">
 <h3 class="hasAnchor">
 <a href="#highlighted-features-of-the-wbstats-r-package" class="anchor"></a>Highlighted features of the <code>wbstats</code> R-package:</h3>
@@ -129,12 +118,12 @@
 <a href="#finding-available-data-with-wb_cachelist" class="anchor"></a>Finding available data with <code>wb_cachelist</code>
 </h2>
 <p>For performance and ease of use, a cached version of useful information is provided with the <code>wbstats</code> R-package. This data is called <code>wb_cachelist</code> and provides a snapshot of available countries, indicators, and other relevant information. <code>wb_cachelist</code> is by default the the source from which <code><a href="reference/wb_search.html">wb_search()</a></code> and <code><a href="reference/wb_data.html">wb_data()</a></code> uses to find matching information. The structure of <code>wb_cachelist</code> is as follows</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(wbstats)</a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb3-2" title="2"></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(wb_cachelist, <span class="dt">max.level =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(wb_cachelist, <span class="dt">max.level =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb3-4" title="4"><span class="co">#&gt; List of 8</span></a>
 <a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt;  $ countries    :Classes 'tbl_df', 'tbl' and 'data.frame':   304 obs. of  18 variables:</span></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="co">#&gt;  $ indicators   :Classes 'tbl_df', 'tbl' and 'data.frame':   16496 obs. of  8 variables:</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co">#&gt;  $ indicators   :Classes 'tbl_df', 'tbl' and 'data.frame':   16466 obs. of  8 variables:</span></a>
 <a class="sourceLine" id="cb3-7" title="7"><span class="co">#&gt;  $ sources      :Classes 'tbl_df', 'tbl' and 'data.frame':   57 obs. of  9 variables:</span></a>
 <a class="sourceLine" id="cb3-8" title="8"><span class="co">#&gt;  $ topics       :Classes 'tbl_df', 'tbl' and 'data.frame':   21 obs. of  3 variables:</span></a>
 <a class="sourceLine" id="cb3-9" title="9"><span class="co">#&gt;  $ regions      :Classes 'tbl_df', 'tbl' and 'data.frame':   48 obs. of  4 variables:</span></a>
@@ -144,20 +133,30 @@
 </div>
 <div id="accessing-updated-available-data-with-wb_cache" class="section level2">
 <h2 class="hasAnchor">
-<a href="#accessing-updated-available-data-with-wb_cache" class="anchor"></a>Accessing updated available data with <code><a href="reference/wb_cache.html">wb_cache()</a></code>
+<a href="#accessing-updated-available-data-with-wb_cache" class="anchor"></a>Accessing updated available data with <code>wb_cache()</code>
 </h2>
 <p>For the most recent information on available data from the World Bank API <code><a href="reference/wb_cache.html">wb_cache()</a></code> downloads an updated version of the information stored in <code>wb_cachelist</code>. <code>wb_cachelist</code> is simply a saved return of <code><a href="reference/wb_cache.html">wb_cache(lang = "en")</a></code>. To use this updated information in <code><a href="reference/wb_search.html">wb_search()</a></code> or <code><a href="reference/wb_data.html">wb_data()</a></code>, set the <code>cache</code> parameter to the saved <code>list</code> returned from <code><a href="reference/wb_cache.html">wb_cache()</a></code>. It is always a good idea to use this updated information to insure that you have access to the latest available information, such as newly added indicators or data sources. There are also cases in which indicators that were previously available from the API have been removed or deprecated.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(wbstats)</a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb4-2" title="2"></a>
 <a class="sourceLine" id="cb4-3" title="3"><span class="co"># default language is english</span></a>
 <a class="sourceLine" id="cb4-4" title="4">new_cache &lt;-<span class="st"> </span><span class="kw"><a href="reference/wb_cache.html">wb_cache</a></span>()</a></code></pre></div>
 </div>
 <div id="search-available-data-with-wb_search" class="section level2">
 <h2 class="hasAnchor">
-<a href="#search-available-data-with-wb_search" class="anchor"></a>Search available data with <code><a href="reference/wb_search.html">wb_search()</a></code>
+<a href="#search-available-data-with-wb_search" class="anchor"></a>Search available data with <code>wb_search()</code>
 </h2>
 <p><code><a href="reference/wb_search.html">wb_search()</a></code> searches through the <code>indicators</code> data frame to find indicators that match a search pattern. An example of the structure of this data frame is below</p>
-<table class="table table">
+<table class="table">
+<colgroup>
+<col width="1%">
+<col width="1%">
+<col width="0%">
+<col width="52%">
+<col width="35%">
+<col width="5%">
+<col width="0%">
+<col width="2%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">indicator_id</th>
 <th align="left">indicator</th>
@@ -192,10 +191,10 @@
 </tbody>
 </table>
 <p>By default the search is done over the <code>indicator_id</code>, <code>indicator</code>, and <code>indicator_desc</code> fields and returns the those 3 columns of the matching rows. The <code>indicator_id</code> values are inputs into <code><a href="reference/wb_data.html">wb_data()</a></code>, the function for downloading the data. To return all columns for the <code>indicators</code> data frame, you can set <code>extra = TRUE</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(wbstats)</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb5-2" title="2"></a>
 <a class="sourceLine" id="cb5-3" title="3">unemploy_inds&lt;-<span class="st"> </span><span class="kw"><a href="reference/wb_search.html">wb_search</a></span>(<span class="st">"unemployment"</span>)</a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(unemploy_inds)</a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(unemploy_inds)</a>
 <a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt; # A tibble: 6 x 3</span></a>
 <a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt;   indicator_id indicator                    indicator_desc                 </span></a>
 <a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;                        &lt;chr&gt;                          </span></a>
@@ -206,21 +205,21 @@
 <a class="sourceLine" id="cb5-12" title="12"><span class="co">#&gt; 5 fin37.t.a.2  Received government transfe~ The percentage of respondents ~</span></a>
 <a class="sourceLine" id="cb5-13" title="13"><span class="co">#&gt; 6 fin37.t.a.3  Received government transfe~ The percentage of respondents ~</span></a></code></pre></div>
 <p>Other fields can be searched by simply changing the <code>fields</code> parameter. For example</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(wbstats)</a>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb6-2" title="2"></a>
 <a class="sourceLine" id="cb6-3" title="3">blmbrg_vars &lt;-<span class="st"> </span><span class="kw"><a href="reference/wb_search.html">wb_search</a></span>(<span class="st">"Bloomberg"</span>, <span class="dt">fields =</span> <span class="st">"source_org"</span>)</a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(blmbrg_vars)</a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(blmbrg_vars)</a>
 <a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
 <a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt;   indicator_id indicator             indicator_desc                        </span></a>
 <a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;                 &lt;chr&gt;                                 </span></a>
 <a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; 1 GFDD.OM.02   Stock market return ~ Stock market return is the growth rat~</span></a>
 <a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt; 2 GFDD.SM.01   Stock price volatili~ Stock price volatility is the average~</span></a></code></pre></div>
 <p>Regular expressions are also supported</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(wbstats)</a>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb7-2" title="2"></a>
 <a class="sourceLine" id="cb7-3" title="3"><span class="co"># 'poverty' OR 'unemployment' OR 'employment'</span></a>
 <a class="sourceLine" id="cb7-4" title="4">povemply_inds &lt;-<span class="st"> </span><span class="kw"><a href="reference/wb_search.html">wb_search</a></span>(<span class="dt">pattern =</span> <span class="st">"poverty|unemployment|employment"</span>)</a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(povemply_inds)</a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(povemply_inds)</a>
 <a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt; # A tibble: 6 x 3</span></a>
 <a class="sourceLine" id="cb7-7" title="7"><span class="co">#&gt;   indicator_id    indicator             indicator_desc                     </span></a>
 <a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;                 &lt;chr&gt;                              </span></a>
@@ -231,11 +230,11 @@
 <a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt; 5 1.0.HCount.Poo~ Poverty Headcount ($~ The poverty headcount index measur~</span></a>
 <a class="sourceLine" id="cb7-14" title="14"><span class="co">#&gt; 6 1.0.HCount.Vul~ Vulnerable ($4-10 a ~ The poverty headcount index measur~</span></a></code></pre></div>
 <p>As well as any <code>grep</code> function argument</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(wbstats)</a>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb8-2" title="2"></a>
 <a class="sourceLine" id="cb8-3" title="3"><span class="co"># contains "gdp" and NOT "trade"</span></a>
 <a class="sourceLine" id="cb8-4" title="4">gdp_no_trade_inds &lt;-<span class="st"> </span><span class="kw"><a href="reference/wb_search.html">wb_search</a></span>(<span class="st">"^(?=.*gdp)(?!.*trade).*"</span>, <span class="dt">perl =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(gdp_no_trade_inds)</a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(gdp_no_trade_inds)</a>
 <a class="sourceLine" id="cb8-6" title="6"><span class="co">#&gt; # A tibble: 6 x 3</span></a>
 <a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt;   indicator_id    indicator               indicator_desc                   </span></a>
 <a class="sourceLine" id="cb8-8" title="8"><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;                   &lt;chr&gt;                            </span></a>
@@ -246,14 +245,14 @@
 <a class="sourceLine" id="cb8-13" title="13"><span class="co">#&gt; 5 6.0.GDPpc_cons~ GDP per capita, PPP (c~ GDP per capita based on purchasi~</span></a>
 <a class="sourceLine" id="cb8-14" title="14"><span class="co">#&gt; 6 BI.WAG.TOTL.GD~ Wage bill as a percent~ &lt;NA&gt;</span></a></code></pre></div>
 <p>The default cached data in <code>wb_cachelist</code> is in English. To search indicators in a different language, you can download an updated copy of <code>wb_cachelist</code> using <code><a href="reference/wb_cache.html">wb_cache()</a></code>, with the <code>lang</code> parameter set to the language of interest and then set this as the <code>cache</code> parameter in <code><a href="reference/wb_search.html">wb_search()</a></code>. Other languages are supported in so far as they are supported by the original data sources. Some sources provide full support for other languages, while some have very limited support. If the data source does not have a translation for a certain field or indicator then the result is <code>NA</code>, this may result in a varying number matches depending upon the language you select.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(wbstats)</a>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb9-2" title="2"></a>
 <a class="sourceLine" id="cb9-3" title="3"><span class="co"># download wb_cache in spanish</span></a>
 <a class="sourceLine" id="cb9-4" title="4">wb_cachelist_es &lt;-<span class="st"> </span><span class="kw"><a href="reference/wb_cache.html">wb_cache</a></span>(<span class="dt">lang =</span> <span class="st">"es"</span>)</a>
 <a class="sourceLine" id="cb9-5" title="5"></a>
 <a class="sourceLine" id="cb9-6" title="6">gini_inds &lt;-<span class="st"> </span><span class="kw"><a href="reference/wb_search.html">wb_search</a></span>(<span class="dt">pattern =</span> <span class="st">"Coeficiente de Gini"</span>, <span class="dt">cache =</span> wb_cachelist_es)</a>
 <a class="sourceLine" id="cb9-7" title="7"></a>
-<a class="sourceLine" id="cb9-8" title="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(gini_inds)</a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(gini_inds)</a>
 <a class="sourceLine" id="cb9-9" title="9"><span class="co">#&gt; # A tibble: 6 x 3</span></a>
 <a class="sourceLine" id="cb9-10" title="10"><span class="co">#&gt;   indicator_id   indicator              indicator_desc                     </span></a>
 <a class="sourceLine" id="cb9-11" title="11"><span class="co">#&gt;   &lt;chr&gt;          &lt;chr&gt;                  &lt;chr&gt;                              </span></a>
@@ -266,16 +265,16 @@
 </div>
 <div id="downloading-data-with-wb_data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#downloading-data-with-wb_data" class="anchor"></a>Downloading data with <code><a href="reference/wb_data.html">wb_data()</a></code>
+<a href="#downloading-data-with-wb_data" class="anchor"></a>Downloading data with <code>wb_data()</code>
 </h2>
 <p>Once you have found the set of indicators that you would like to explore further, the next step is downloading the data with <code><a href="reference/wb_data.html">wb_data()</a></code>. The following examples are meant to highlight the different ways in which <code><a href="reference/wb_data.html">wb_data()</a></code> can be used and demonstrate the major optional parameters.</p>
 <p>The default value for the <code>country</code> parameter is a special value of <code>"countries_only"</code>, which as you might expect, returns data on the selected <code>indicator</code> for only countries. This is in contrast to <code>country = "all"</code> or <code>country = "regions_only"</code> which would return data for countries and regional aggregates together, or only regional aggregates, respectively</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(wbstats)</a>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb10-2" title="2"></a>
 <a class="sourceLine" id="cb10-3" title="3"><span class="co"># Population, total</span></a>
 <a class="sourceLine" id="cb10-4" title="4">pop_data &lt;-<span class="st"> </span><span class="kw"><a href="reference/wb_data.html">wb_data</a></span>(<span class="st">"SP.POP.TOTL"</span>, <span class="dt">start_date =</span> <span class="dv">2000</span>, <span class="dt">end_date =</span> <span class="dv">2002</span>)</a>
 <a class="sourceLine" id="cb10-5" title="5"></a>
-<a class="sourceLine" id="cb10-6" title="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(pop_data)</a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(pop_data)</a>
 <a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
 <a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt;   iso2c iso3c country  date SP.POP.TOTL unit  obs_status footnote</span></a>
 <a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;   </span></a>
@@ -287,12 +286,12 @@
 <a class="sourceLine" id="cb10-15" title="15"><span class="co">#&gt; 6 AF    AFG   Afghan~  2002    22600770 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
 <a class="sourceLine" id="cb10-16" title="16"><span class="co">#&gt; # ... with 1 more variable: last_updated &lt;date&gt;</span></a></code></pre></div>
 <p>If you are interested in only some subset of countries or regions you can pass along the specific codes to the <code>country</code> parameter. The country and region codes and names that can be passed to the <code>country</code> parameter as well, most prominently the coded values from the <code>iso2c</code> and <code>iso3c</code> from the <code>countries</code> data frame in <code>wb_cachelist</code> or the return of <code><a href="reference/wb_cache.html">wb_cache()</a></code>. Any values from the above columns can mixed together and passed to the same call</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(wbstats)</a>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb11-2" title="2"></a>
 <a class="sourceLine" id="cb11-3" title="3"><span class="co"># you can mix different ids and they are case insensitive</span></a>
 <a class="sourceLine" id="cb11-4" title="4"><span class="co"># you can even use SpOnGeBoB CaSe if that's the kind of thing you're into</span></a>
 <a class="sourceLine" id="cb11-5" title="5"><span class="co"># iso3c, iso2c, country, region_iso3c, admin_region_iso3c, admin_region, income_level</span></a>
-<a class="sourceLine" id="cb11-6" title="6">example_geos &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"ABW"</span>,<span class="st">"AF"</span>, <span class="st">"albania"</span>, <span class="st">"SSF"</span>, <span class="st">"eca"</span>, <span class="st">"South Asia"</span>, <span class="st">"HiGh InComE"</span>)</a>
+<a class="sourceLine" id="cb11-6" title="6">example_geos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ABW"</span>,<span class="st">"AF"</span>, <span class="st">"albania"</span>, <span class="st">"SSF"</span>, <span class="st">"eca"</span>, <span class="st">"South Asia"</span>, <span class="st">"HiGh InComE"</span>)</a>
 <a class="sourceLine" id="cb11-7" title="7">pop_data &lt;-<span class="st"> </span><span class="kw"><a href="reference/wb_data.html">wb_data</a></span>(<span class="st">"SP.POP.TOTL"</span>, <span class="dt">country =</span> example_geos,</a>
 <a class="sourceLine" id="cb11-8" title="8">                    <span class="dt">start_date =</span> <span class="dv">2012</span>, <span class="dt">end_date =</span> <span class="dv">2012</span>)</a>
 <a class="sourceLine" id="cb11-9" title="9"></a>
@@ -306,18 +305,18 @@
 <a class="sourceLine" id="cb11-17" title="17"><span class="co">#&gt; 4 7E    ECA   Europe~  2012   403265869 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
 <a class="sourceLine" id="cb11-18" title="18"><span class="co">#&gt; 5 8S    SAS   South ~  2012  1683747130 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
 <a class="sourceLine" id="cb11-19" title="19"><span class="co">#&gt; 6 ZG    SSF   Sub-Sa~  2012   917726973 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
-<a class="sourceLine" id="cb11-20" title="20"><span class="co">#&gt; 7 XD    HIC   High i~  2012  1170223344 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
+<a class="sourceLine" id="cb11-20" title="20"><span class="co">#&gt; 7 XD    &lt;NA&gt;  High i~  2012  1170223344 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
 <a class="sourceLine" id="cb11-21" title="21"><span class="co">#&gt; # ... with 1 more variable: last_updated &lt;date&gt;</span></a></code></pre></div>
 <p>As of <code>wbstats 1.0</code> queries are now returned in wide format. This was a request made by multiple users and is in line with the principles of <a href="https://www.jstatsoft.org/article/view/v059i10">tidy data</a>. If you would like to return the data in a long format, you can set <code>return_wide = FALSE</code></p>
-<p>Now that each indicator is it’s own column, we can implement a great suggestion by <a href="https://github.com/nset-ornl/wbstats/issues/12">vincentarelbundock</a> to allow custom names for the indicators</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(wbstats)</a>
+<p>Now that each indicator is it’s own column, we can implement a great suggestion by <a href="https://github.com/vincentarelbundock">vincentarelbundock</a> to allow custom names for the indicators</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb12-2" title="2"></a>
-<a class="sourceLine" id="cb12-3" title="3">my_indicators =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"pop"</span> =<span class="st"> "SP.POP.TOTL"</span>, </a>
+<a class="sourceLine" id="cb12-3" title="3">my_indicators =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"pop"</span> =<span class="st"> "SP.POP.TOTL"</span>, </a>
 <a class="sourceLine" id="cb12-4" title="4">                  <span class="st">"gdp"</span> =<span class="st"> "NY.GDP.MKTP.CD"</span>)</a>
 <a class="sourceLine" id="cb12-5" title="5"></a>
 <a class="sourceLine" id="cb12-6" title="6">pop_gdp &lt;-<span class="st"> </span><span class="kw"><a href="reference/wb_data.html">wb_data</a></span>(my_indicators, <span class="dt">start_date =</span> <span class="dv">2010</span>, <span class="dt">end_date =</span> <span class="dv">2012</span>)</a>
 <a class="sourceLine" id="cb12-7" title="7"></a>
-<a class="sourceLine" id="cb12-8" title="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(pop_gdp)</a>
+<a class="sourceLine" id="cb12-8" title="8"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(pop_gdp)</a>
 <a class="sourceLine" id="cb12-9" title="9"><span class="co">#&gt; # A tibble: 6 x 6</span></a>
 <a class="sourceLine" id="cb12-10" title="10"><span class="co">#&gt;   iso2c iso3c country      date          gdp      pop</span></a>
 <a class="sourceLine" id="cb12-11" title="11"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;</span></a>
@@ -328,14 +327,14 @@
 <a class="sourceLine" id="cb12-16" title="16"><span class="co">#&gt; 5 AF    AFG   Afghanistan  2011 17804280538. 30117413</span></a>
 <a class="sourceLine" id="cb12-17" title="17"><span class="co">#&gt; 6 AF    AFG   Afghanistan  2012 20001615789. 31161376</span></a></code></pre></div>
 <p>You’ll notice that when you query only one indicator, as in the first two examples above, it returns the extra fields <code>unit</code>, <code>obs_status</code>, <code>footnote</code>, and <code>last_updated</code>, but when we queried multiple indicators at once, as in our last example, they are dropped. This is because those extra fields are tied to a specific observation of a single indicator and when we have multiple indciator values in a single row, they are no longer consistent with the tidy data format. If you would like that information for multiple indicators, you can use <code>return_wide = FALSE</code></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(wbstats)</a>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb13-2" title="2"></a>
-<a class="sourceLine" id="cb13-3" title="3">my_indicators =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"pop"</span> =<span class="st"> "SP.POP.TOTL"</span>, </a>
+<a class="sourceLine" id="cb13-3" title="3">my_indicators =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"pop"</span> =<span class="st"> "SP.POP.TOTL"</span>, </a>
 <a class="sourceLine" id="cb13-4" title="4">                  <span class="st">"gdp"</span> =<span class="st"> "NY.GDP.MKTP.CD"</span>)</a>
 <a class="sourceLine" id="cb13-5" title="5"></a>
 <a class="sourceLine" id="cb13-6" title="6">pop_gdp_long &lt;-<span class="st"> </span><span class="kw"><a href="reference/wb_data.html">wb_data</a></span>(my_indicators, <span class="dt">start_date =</span> <span class="dv">2010</span>, <span class="dt">end_date =</span> <span class="dv">2012</span>, <span class="dt">return_wide =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb13-7" title="7"></a>
-<a class="sourceLine" id="cb13-8" title="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(pop_gdp_long)</a>
+<a class="sourceLine" id="cb13-8" title="8"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(pop_gdp_long)</a>
 <a class="sourceLine" id="cb13-9" title="9"><span class="co">#&gt; # A tibble: 6 x 11</span></a>
 <a class="sourceLine" id="cb13-10" title="10"><span class="co">#&gt;   indicator_id indicator iso2c iso3c country  date  value unit  obs_status</span></a>
 <a class="sourceLine" id="cb13-11" title="11"><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     </span></a>
@@ -351,12 +350,12 @@
 <a href="#using-mrv-and-mrnev" class="anchor"></a>Using <code>mrv</code> and <code>mrnev</code>
 </h3>
 <p>If you do not know the latest date an indicator you are interested in is available for you country you can use the <code>mrv</code> instead of <code>start_date</code> and <code>end_date</code>. <code>mrv</code> stands for most recent value and takes a <code>integer</code> corresponding to the number of most recent values you wish to return</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(wbstats)</a>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb14-2" title="2"></a>
 <a class="sourceLine" id="cb14-3" title="3"><span class="co"># most recent gdp per captia estimates</span></a>
 <a class="sourceLine" id="cb14-4" title="4">gdp_capita &lt;-<span class="st"> </span><span class="kw"><a href="reference/wb_data.html">wb_data</a></span>(<span class="st">"NY.GDP.PCAP.CD"</span>, <span class="dt">mrv =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb14-5" title="5"></a>
-<a class="sourceLine" id="cb14-6" title="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(gdp_capita)</a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(gdp_capita)</a>
 <a class="sourceLine" id="cb14-7" title="7"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
 <a class="sourceLine" id="cb14-8" title="8"><span class="co">#&gt;   iso2c iso3c country  date NY.GDP.PCAP.CD unit  obs_status footnote</span></a>
 <a class="sourceLine" id="cb14-9" title="9"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;   </span></a>
@@ -368,11 +367,11 @@
 <a class="sourceLine" id="cb14-15" title="15"><span class="co">#&gt; 6 AE    ARE   United~  2018         43005. &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
 <a class="sourceLine" id="cb14-16" title="16"><span class="co">#&gt; # ... with 1 more variable: last_updated &lt;date&gt;</span></a></code></pre></div>
 <p>Often it is the case that the latest available data is different from country to country. There may be 2020 estimates for one location, while another only has estimates up to 2019. This is especially true for survey data. When you would like to return the latest avialble data for each country regardless of its temporal misalignment, you can use the <code>mrnev</code> instead of <code>mrnev</code>. <code>mrnev</code> stands for most recent non empty value.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(wbstats)</a>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb15-2" title="2"></a>
 <a class="sourceLine" id="cb15-3" title="3">gdp_capita &lt;-<span class="st"> </span><span class="kw"><a href="reference/wb_data.html">wb_data</a></span>(<span class="st">"NY.GDP.PCAP.CD"</span>, <span class="dt">mrnev =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb15-4" title="4"></a>
-<a class="sourceLine" id="cb15-5" title="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(gdp_capita)</a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(gdp_capita)</a>
 <a class="sourceLine" id="cb15-6" title="6"><span class="co">#&gt; # A tibble: 6 x 8</span></a>
 <a class="sourceLine" id="cb15-7" title="7"><span class="co">#&gt;   iso2c iso3c country  date NY.GDP.PCAP.CD obs_status footnote last_updated</span></a>
 <a class="sourceLine" id="cb15-8" title="8"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;          &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;date&gt;      </span></a>
@@ -403,16 +402,16 @@
 <a href="#searching-in-other-languages" class="anchor"></a>Searching in other languages</h2>
 <p>Not all data sources support all languages. If an indicator does not have a translation for a particular language, the non-supported fields will return as <code>NA</code>. This could potentially result in a differing number of matching indicators from <code><a href="reference/wb_search.html">wb_search()</a></code></p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"></a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(wbstats)</a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb16-3" title="3"></a>
 <a class="sourceLine" id="cb16-4" title="4"><span class="co"># english</span></a>
 <a class="sourceLine" id="cb16-5" title="5">cache_en &lt;-<span class="st"> </span><span class="kw"><a href="reference/wb_cache.html">wb_cache</a></span>()</a>
-<a class="sourceLine" id="cb16-6" title="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/NA">is.na</a></span>(cache_en<span class="op">$</span>indicators<span class="op">$</span>indicator))</a>
+<a class="sourceLine" id="cb16-6" title="6"><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(cache_en<span class="op">$</span>indicators<span class="op">$</span>indicator))</a>
 <a class="sourceLine" id="cb16-7" title="7"><span class="co">#&gt; [1] 0</span></a>
 <a class="sourceLine" id="cb16-8" title="8"></a>
 <a class="sourceLine" id="cb16-9" title="9"><span class="co"># spanish</span></a>
 <a class="sourceLine" id="cb16-10" title="10">cache_es &lt;-<span class="st"> </span><span class="kw"><a href="reference/wb_cache.html">wb_cache</a></span>(<span class="dt">lang =</span> <span class="st">"es"</span>)</a>
-<a class="sourceLine" id="cb16-11" title="11"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/NA">is.na</a></span>(cache_es<span class="op">$</span>indicators<span class="op">$</span>indicator))</a>
+<a class="sourceLine" id="cb16-11" title="11"><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(cache_es<span class="op">$</span>indicators<span class="op">$</span>indicator))</a>
 <a class="sourceLine" id="cb16-12" title="12"><span class="co">#&gt; [1] 14626</span></a></code></pre></div>
 </div>
 </div>
@@ -420,14 +419,10 @@
 <h1 class="hasAnchor">
 <a href="#legal" class="anchor"></a>Legal</h1>
 <p>The World Bank Group, or any of its member instutions, do not support or endorse this software and are not libable for any findings or conclusions that come from the use of this software.</p>
+<p>[1] <a href="http://www.worldbank.org/" class="uri">http://www.worldbank.org/</a></p>
+<p>[2] <a href="http://data.worldbank.org/developers" class="uri">http://data.worldbank.org/developers</a></p>
 </div>
-<div class="footnotes">
-<hr>
-<ol>
-<li id="fn1"><p><a href="http://www.worldbank.org/" class="uri">http://www.worldbank.org/</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p><a href="http://data.worldbank.org/developers" class="uri">http://data.worldbank.org/developers</a><a href="#fnref2" class="footnote-back">↩</a></p></li>
-</ol>
-</div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -459,13 +454,12 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Jesse Piburn <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-4967-7912" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
+<li>Jesse Piburn <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-4967-7912" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
-      </div>
-
+  </div>
 </div>
 
 
@@ -474,12 +468,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

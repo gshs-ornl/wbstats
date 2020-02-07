@@ -7,10 +7,21 @@ reference:
     desc: >
       Functions for finding and searching what data is available
     contents:
-      - starts_with("wb_")
-    exclude:
-      - wb_data
+      - wb_search
+      - wb_indicators
+      - wb_cache
+      - wb_countries
+      - wb_topics
+      - wb_sources
+      - wb_regions
+      - wb_income_levels
+      - wb_lending_types
+      - wb_languages
   - title: "Downloading Data"
     desc: "Functions for downloading data from the World Bank API"
     contents:
-      - matches("wb_data")
+      - wb_data
+  - title: "Cached Data"
+    desc: ""
+    contents:
+      - wb_cachelist
