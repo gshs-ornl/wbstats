@@ -1,8 +1,4 @@
-#' url chucks to be used in API calls
-#'
-#' This function is used inside other functions in this package
-#'
-#' @return  a list with a base url and a url section for formatting the json return
+#' @noRd
 wburls <- function() {
 
   base_url <- "http://api.worldbank.org/v2/"
@@ -14,18 +10,7 @@ wburls <- function() {
 }
 
 
-#' Format column names of World Bank API returns
-#'
-#' change the name of columns that we know of to our
-#' standardized names. If there are new columns added that we
-#' don't know about, leave their name the same
-#'
-#' @param df data frame returned from API call
-#' @param col_names a named vector of column names and what they will
-#' be changed to
-#' @param blank2NA logical. If \code{TRUE} blank values are converted to NA
-#'
-#' @return a data frame with the column names changed accordingly
+#' @noRd
 wbformatcols <- function(df, col_names, blank2NA = TRUE) {
 
   col_align <- match(names(col_names), names(df))
@@ -39,17 +24,7 @@ wbformatcols <- function(df, col_names, blank2NA = TRUE) {
 }
 
 
-#' Add a POSIXct dates to a World Bank API return
-#'
-#' Add a POSIXct date column as well as a column with the
-#' appropreiate granularity to a World Bank API return
-#'
-#' @param df data frame returned from API call
-#' @param date_col name of the current date field
-
-#' @return If the package lubridate (>= 1.5.0) is available the original data frame with two new columns,
-#' \code{data_ct} and \code{granularity} is returned. If the above package is not available,
-#' the orignal data frame is returned unaltered with an additional warning message.
+#' @noRd
 wbdate2POSIXct <- function(df, date_col) {
 
   if (requireNamespace("lubridate", versionCheck = list(op = ">=", version = "1.5.0"),
@@ -133,13 +108,7 @@ wbdate2POSIXct <- function(df, date_col) {
 }
 
 
-#' Call the World Bank API and return list
-#'
-#' To be used inside of wbget()
-#'
-#' @param url_string A character string. A formatted url string
-#' @param indicator A character string. indicatorID for request. Used for error returns
-#' @return json contents of page information
+#' @noRd
 call_api <- function(url_string, indicator) {
 
   # move this to data-raw eventually
@@ -173,16 +142,7 @@ call_api <- function(url_string, indicator) {
 
 
 
-#' Call the World Bank API and return a formatted data frame
-#'
-#' This function calls wbget.raw and determines if there are
-#' multiple pages from the request. If there are multiple pages
-#' then if generates a list of data frames from each page and
-#' then combines the results with do.call("rbind", mylist)
-#'
-#' @param url_string A character string. A formatted url string
-#' @param indicator A character string. indicatorID for request. Used for error returns
-#' @return A data frame
+#' @noRd
 wbget <- function(url_string, indicator) {
 
   return_json <- call_api(url_string = url_string, indicator = indicator)
@@ -245,14 +205,7 @@ wbget <- function(url_string, indicator) {
 }
 
 
-#' Call the Data Catalog API
-#'
-#' Helper function for the data catalog call
-#'
-#' @param url_string A charcter string. A formatted url string
-#' @note This call is seperate because the data catalog is actaully a different
-#'  API and therefore has a different return structure.
-#' @return A list of data frames
+#' @noRd
 wbget_dc <- function(url_string) {
 
   return_json <- call_api(url_string = url_string, indicator = "Data Catalog")
