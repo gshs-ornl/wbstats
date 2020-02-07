@@ -1,13 +1,3 @@
-
-#' Title
-#'
-#' @param base_url
-#' @param indicator
-#' @param path_list
-#' @param query_list
-#'
-#' @return
-#'
 #' @noRd
 build_wb_url <- function(base_url, indicator, path_list, query_list) {
 
@@ -36,14 +26,6 @@ build_wb_url <- function(base_url, indicator, path_list, query_list) {
   out_url
 }
 
-
-#' Title
-#'
-#' @param end_point
-#' @param lang
-#'
-#' @return
-#'
 #' @noRd
 build_get_url <- function(end_point, lang) {
 
@@ -70,14 +52,6 @@ build_get_url <- function(end_point, lang) {
   wb_url
 }
 
-
-#' Title
-#'
-#' @param url_string
-#' @param indicator
-#'
-#' @return
-#'
 #' @noRd
 fetch_wb_url <- function(url_string, indicator) {
 
@@ -139,23 +113,13 @@ fetch_wb_url <- function(url_string, indicator) {
 
 }
 
-
-
-
-#' Title
-#'
-#' @param url_string
-#' @param indicator
-#'
-#' @return
-#'
 #' @noRd
 fetch_wb_url_content <- function(url_string, indicator) {
 
   indicator <- if_missing(indicator)
 
   # move this to data-raw eventually
-  ua <- httr::user_agent("https://github.com/jpiburn/wbstats")
+  ua <- httr::user_agent("https://github.com/nset-ornl/wbstats")
 
   # add api_token here if/when that is supported
 

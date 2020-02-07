@@ -1,10 +1,3 @@
-#' Under the hood helper function
-#'
-#' @param end_point
-#' @param lang
-#'
-#' @return
-#'
 #' @noRd
 wb_end_point <- function(end_point, lang) {
 
@@ -167,7 +160,7 @@ wb_indicators <- function(lang, include_archive = FALSE) {
 #' # korean
 #' \donttest{wb_cache(lang = "ko")}
 #'
-#' possible values of lang are in the iso2 column in the languages data frame
+#' # possible values of lang are in the iso2 column in the languages data frame
 #' \donttest{example_iso2 <- wb_languages()$iso2[1]}
 #' \donttest{wb_cache(lang = example_iso2)}
 #'

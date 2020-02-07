@@ -1,28 +1,42 @@
-Package: wbstats
 Type: Package
-Title: Programmatic Access to Data and Statistics from the World Bank API
-Description: Tools for searching and downloading data and statistics from
-  the World Bank Data API (<http://data.worldbank.org/developers/api-overview>)
-  and the World Bank Data Catalog API (<http://data.worldbank.org/developers/data-catalog-api>).
-Version: 0.2.1.9000
-Authors@R: c(
-  person("Jesse", "Piburn", email = "piburnjo@ornl.gov", role = c("aut", "cre")),
-  person("UT-Battelle, LLC", role = "cph")
-  )
+Package: wbstats
+Title: Programmatic Access to Data and Statistics from the World
+    Bank API
+Version: 1.0.0
+Authors@R: 
+    c(person(given = "Jesse",
+             family = "Piburn",
+             role = c("aut", "cre"),
+             email = "piburnjo@ornl.gov",
+             comment = c(ORCID = "0000-0003-4967-7912")),
+      person(given = "UT-Battelle, LLC",
+             role = "cph"))
 Maintainer: Jesse Piburn <piburnjo@ornl.gov>
-URL: https://github.com/nset-ornl/wbstats
+Description: Tools for searching and downloading data and
+    statistics from the World Bank Data API
+    <http://data.worldbank.org/developers/api-overview> and the World
+    Bank Data Catalog API
+    <http://data.worldbank.org/developers/data-catalog-api>.
 License: MIT + file LICENSE
-LazyData: TRUE
+URL: https://github.com/nset-ornl/wbstats
+BugReports: https://github.com/nset-ornl/wbstats/issues
 Depends:
-    R (>= 3.1)
+    R (>= 3.2)
 Imports:
+    dplyr,
     httr,
     jsonlite,
     lifecycle,
+    lubridate,
+    readr,
+    stringr,
+    tibble,
     tidyr
 Suggests:
     ggplot2,
-    knitr,
-    lubridate (>= 1.5.0)
-VignetteBuilder: knitr
+    knitr
+VignetteBuilder: 
+    knitr
+Encoding: UTF-8
+LazyData: TRUE
 RoxygenNote: 7.0.1

@@ -4,3 +4,6 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^cran-comments\.md$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

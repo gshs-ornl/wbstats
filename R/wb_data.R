@@ -7,21 +7,22 @@
 #' to the `indicator_id` column from the `indicators` tibble of [wb_cache()], [wb_cachelist], or
 #'  the result of running [wb_indicators()] directly
 #' @param country Character vector of country, region, or special value codes for the
-#' locations you want to return data for. Permissible values can be found in the countries tibble in [wb_cachelist]
-#' or by running [wb_countries()] directly. Specifically, values listed in the following fields
-#' `iso3c`, `iso2c`, `country`, `region`, `admin_region`, `income_level` and all of the `region_*`, `admin_region_*`, `income_level_*`,
-#' columns. As well as the following special values
+#' locations you want to return data for. Permissible values can be found in the
+#' countries tibble in [wb_cachelist] or by running [wb_countries()] directly.
+#' Specifically, values listed in the following fields `iso3c`, `iso2c`, `country`,
+#' `region`, `admin_region`, `income_level` and all of the `region_*`,
+#' `admin_region_*`, `income_level_*`, columns. As well as the following special values
 #' * `"countries_only"` (Default)
 #' * `"regions_only"`
 #' * `"admin_regions_only"`
 #' * `"income_levels_only"`
 #' * `"aggregates_only"`
 #' * `"all"`
-#' @param start_date Numeric or character. If numeric it must be in `%Y`` form (i.e. four digit year).
+#' @param start_date Numeric or character. If numeric it must be in `%Y` form (i.e. four digit year).
 #'  For data at the subannual granularity the API supports a format as follows: for monthly data, "2016M01"
 #'  and for quarterly data, "2016Q1". This also accepts a special value of "YTD", useful for more frequently
 #'  updated subannual indicators.
-#' @param end_date Numeric or character. If numeric it must be in `%Y`` form (i.e. four digit year).
+#' @param end_date Numeric or character. If numeric it must be in `%Y` form (i.e. four digit year).
 #'  For data at the subannual granularity the API supports a format as follows: for monthly data, "2016M01"
 #'  and for quarterly data, "2016Q1".
 #' @param return_wide Logical. If `TRUE` data is returned in a wide format instead of long,
@@ -53,12 +54,15 @@
 #' @details
 #' ## `obs_status` column
 #' Indicates the observation status for location, indicator and date combination.
-#' For example `"F"` in the response indicates that the observation status for that data point is "forecast".
+#' For example `"F"` in the response indicates that the observation status for
+#' that data point is "forecast".
 #'
 #' @export
 #' @md
 #'
 #' @examples
+#'
+#'
 #' # gdp for all countries for all available dates
 #' \donttest{df_gdp <- wb_data("NY.GDP.MKTP.CD")}
 #'
@@ -66,55 +70,66 @@
 #' df_brazil <- wb_data("NY.GDP.MKTP.CD", country = "br")
 #'
 #' # Brazilian gdp for 2006
-#' df_brazil_1 <- wb_data("NY.GDP.MKTP.CD", country = "brazil", start_date = 2006)
+#' df_brazil_1 <- wb_data("NY.GDP.MKTP.CD", country = "brazil",
+#'                        start_date = 2006)
 #'
 #' # Brazilian gdp for 2006-2010
-#' df_brazil_2 <- wb_data("NY.GDP.MKTP.CD", country = "BRA", start_date = 2006, end_date = 2010)
-#'
+#' df_brazil_2 <- wb_data("NY.GDP.MKTP.CD", country = "BRA",
+#'                        start_date = 2006, end_date = 2010)
 #'
 #' # Population, GDP, Unemployment Rate, Birth Rate (per 1000 people)
-#' my_indicators <- c("SP.POP.TOTL", "NY.GDP.MKTP.CD", "SL.UEM.TOTL.ZS", "SP.DYN.CBRT.IN")
-#' \donttest{df <- wb_data(my_indicators)}
+#' my_indicators <- c("SP.POP.TOTL",
+#'                    "NY.GDP.MKTP.CD",
+#'                    "SL.UEM.TOTL.ZS",
+#'                    "SP.DYN.CBRT.IN")
 #'
+#' \donttest{df <- wb_data(my_indicators)}
 #'
 #' # you pass multiple country ids of different types
 #' # Albania (iso2c), Georgia (iso3c), and Mongolia
 #' my_countries <- c("AL", "Geo", "mongolia")
-#' df <- wb_data(my_indicators, country = my_countries, start_date = 2005, end_date = 2007)
+#' df <- wb_data(my_indicators, country = my_countries,
+#'               start_date = 2005, end_date = 2007)
 #'
 #' # same data as above, but in long format
-#' df_long <- wb_data(my_indicators, country = my_countries, start_date = 2005, end_date = 2007, return_wide = FALSE)
+#' df_long <- wb_data(my_indicators, country = my_countries,
+#'                    start_date = 2005, end_date = 2007,
+#'                    return_wide = FALSE)
 #'
 #'
 #' # regional population totals
 #' # regions correspond to the region column in wb_cachelist$countries
-#' df_region <- wb_data("SP.POP.TOTL", country = "regions_only", start_date = 2010, end_date = 2014)
+#' df_region <- wb_data("SP.POP.TOTL", country = "regions_only",
+#'                      start_date = 2010, end_date = 2014)
 #'
 #'
 #' # a specific region
-#' df_world <- wb_data("SP.POP.TOTL", country = "world", start_date = 2010, end_date = 2014)
+#' df_world <- wb_data("SP.POP.TOTL", country = "world",
+#'                     start_date = 2010, end_date = 2014)
 #'
 #'
 #' # if the indicator is part of a named vector the name will be the column name
-#' names(my_indicators) <- c("population", "gdp", "unemployment_rate", "birth_rate")
-#' df_names <- wb_data(my_indicators, country = "world", start_date = 2010, end_date = 2014)
+#' my_indicators <- c("pop" = "SP.POP.TOTL",
+#'                    "gdp" = "NY.GDP.MKTP.CD",
+#'                    "unemployment_rate" = "SL.UEM.TOTL.ZS",
+#'                    "birth_rate" = "SP.DYN.CBRT.IN")
+#'
+#' df_names <- wb_data(my_indicators, country = "world",
+#'                     start_date = 2010, end_date = 2014)
 #'
 #'
 #' # custom names are ignored if returning in long format
-#' df_names_long <- wb_data(my_indicators, country = "world", start_date = 2010, end_date = 2014, return_wide = FALSE)
+#' df_names_long <- wb_data(my_indicators, country = "world",
+#'                          start_date = 2010, end_date = 2014,
+#'                          return_wide = FALSE)
 #'
 #' # same as above but in Bulgarian
 #' # note that not all indicators have translations for all languages
-#' df_names_long_bg <- wb_data(my_indicators, country = "world", start_date = 2010,
-#' end_date = 2014, return_wide = FALSE, lang = "bg")
+#' df_names_long_bg <- wb_data(my_indicators, country = "world",
+#'                             start_date = 2010, end_date = 2014,
+#'                             return_wide = FALSE, lang = "bg")
 #'
 #'
-#' # if you do not know when the latest time an indicator is avaiable mrv can help
-#' # unenployment rate
-#' df_mrv <- wb_data("SL.UEM.TOTL.ZS", mrv = 1)
-#'
-#' # note the difference in mrv and mrnev
-#' df_mrnev <- wb_data("SL.UEM.TOTL.ZS", mrnev = 1)
 wb_data <- function(indicator, country = "countries_only", start_date, end_date,
                     return_wide = TRUE, mrv, mrnev, cache, freq, gapfill = FALSE,
                     date_as_class_date = FALSE, lang) {
@@ -129,11 +144,11 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
   #       3. check query options?
   #       4. Do the cache
   #
-  base_url <- wbstats:::wb_api_parameters$base_url
+  base_url <- wb_api_parameters$base_url
 
   # format country ----------------------------------------------------------
   country_param <- format_wb_country(country, cache = cache)
-  country_path <- paste0(wbstats:::wb_api_parameters$country, "/", country_param)
+  country_path <- paste0(wb_api_parameters$country, "/", country_param)
 
 
   # check dates ----------
@@ -187,7 +202,7 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
 
   # country should be part of the path list b/c other endpoint don't require it or need more things
   path_list <- list(
-    version = wbstats:::wb_api_parameters$version,
+    version = wb_api_parameters$version,
     lang    = if_missing(lang, wb_default_lang(), lang),
     country = country_path
   )
@@ -202,12 +217,12 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
     gapfill   = gapfill_query,
     footnote  = "y",
     cntrycode = "y",
-    per_page  = wbstats:::wb_api_parameters$per_page,
-    format    = wbstats:::wb_api_parameters$format
+    per_page  = wb_api_parameters$per_page,
+    format    = wb_api_parameters$format
   )
 
   # be able to return this for debugging
-  ind_url <- wbstats:::build_wb_url(
+  ind_url <- build_wb_url(
       base_url  = base_url,  indicator  = indicator,
       path_list = path_list, query_list = query_list
     )
