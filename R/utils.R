@@ -11,16 +11,6 @@ if_missing <- function(x, true = NA, false = x) {
   ifelse(missing(x), true, false)
 }
 
-
-#' @noRd
-check_mark_text <- function() {
-  if (
-    requireNamespace("crayon", quietly = TRUE) &
-    requireNamespace("clisymbols", quietly = TRUE)
-  ) check_mark <- crayon::green(clisymbols::symbol$tick)
-  else check_mark <- ""
-}
-
 #' @noRd
 unique_na <- function(x, na.rm = TRUE) {
   x_unique <- unique(x)
