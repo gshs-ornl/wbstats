@@ -8,7 +8,8 @@ reference:
       Functions for finding and searching what data is available
     contents:
       - starts_with("wb_")
-      - exclude("wb_data")
+    exclude:
+      - wb_data
   - title: "Downloading Data"
     desc: "Functions for downloading data from the World Bank API"
     contents:
