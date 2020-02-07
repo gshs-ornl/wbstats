@@ -1,10 +1,4 @@
-
-
-#' Check the Default Langauge for World Bank API calls
-#'
-#' @inheritParams wb_cache
-#'
-#' @return character
+#' @noRd
 wb_default_lang <- function(lang) {
   if (missing(lang)) {
     env_lang <- options()$wbstats.lang

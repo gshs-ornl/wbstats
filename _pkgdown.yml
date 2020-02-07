@@ -2,3 +2,14 @@ destination: docs
 template:
   params:
     bootswatch: flatly
+reference:
+  - title: "Searching for Data"
+    desc: >
+      Functions for finding and searching what data is available
+    contents:
+      - starts_with("wb_")
+      - exclude("wb_data")
+  - title: "Downloading Data"
+    desc: "Functions for downloading data from the World Bank API"
+    contents:
+      - matches("wb_data")
