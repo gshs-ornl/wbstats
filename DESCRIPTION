@@ -11,7 +11,7 @@ Authors@R: c(
   person("UT-Battelle, LLC", role = "cph")
   )
 Maintainer: Jesse Piburn <piburnjo@ornl.gov>
-URL: https://github.com/GIST-ORNL/wbstats
+URL: https://github.com/nset-ornl/wbstats
 License: MIT + file LICENSE
 LazyData: TRUE
 Depends:
