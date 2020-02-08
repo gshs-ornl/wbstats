@@ -22,6 +22,5 @@ reference:
     contents:
       - wb_data
   - title: "Cached Data"
-    desc: ""
     contents:
       - wb_cachelist
