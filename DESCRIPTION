@@ -34,7 +34,8 @@ Imports:
     tidyr
 Suggests:
     ggplot2,
-    knitr
+    knitr,
+    rmarkdown
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
