@@ -1,0 +1,44 @@
+---
+title: "Mapping wbstats data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Mapping wbstats data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(rnaturalearth)
+library(tidyverse)
+library(wbstats)
+
+
+indicator_info <- filter(wb_cachelist$indicators, indicator_id == "SL.EMP.SELF.ZS")
+
+ne_countries(returnclass = "sf") %>%
+  left_join(
+    wb_data(
+      c(self_employed = "SL.EMP.SELF.ZS"), 
+         mrnev = 1
+          ),
+    c("iso_a3" = "iso3c")
+  ) %>%
+  filter(iso_a3 != "ATA") %>% # remove Anarctica
+  ggplot(aes(fill = self_employed)) +
+  geom_sf() +
+  scale_fill_viridis_c(labels = scales::percent_format(scale = 1)) +
+  theme(legend.position="bottom") +
+  labs(
+    title = indicator_info$indicator,
+    fill = NULL,
+    caption = paste("Source:", indicator_info$source_org) 
+  )
+  
+```
