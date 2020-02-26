@@ -2,5 +2,6 @@ pandoc: '2.6'
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
+  mapping-wbstats-data: mapping-wbstats-data.html
   wbstats: wbstats.html
 
