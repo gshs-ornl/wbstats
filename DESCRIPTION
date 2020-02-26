@@ -12,9 +12,7 @@ Authors@R:
       person(given = "UT-Battelle, LLC",
              role = "cph"))
 Maintainer: Jesse Piburn <piburnjo@ornl.gov>
-Description: Tools for searching and downloading data and
-    statistics from the World Bank Data API
-    <http://data.worldbank.org/developers/api-overview>
+Description: Search and download data from the World Bank Data API.
 License: MIT + file LICENSE
 URL: https://github.com/nset-ornl/wbstats
 BugReports: https://github.com/nset-ornl/wbstats/issues
