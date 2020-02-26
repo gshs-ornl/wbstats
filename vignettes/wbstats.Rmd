@@ -75,6 +75,7 @@ new_cache <- wb_cache()
 `wb_search()` searches through the `indicators` data frame to find indicators that match a search pattern. An example of the structure of this data frame is below
 ```{r, echo=FALSE}
 example_inds <- c("SP.POP.TOTL", "NY.GDP.MKTP.CD")
+
 df <- wbstats::wb_cachelist$indicators[wbstats::wb_cachelist$indicators$indicator_id %in% example_inds, ]
 
 head(df)
@@ -85,6 +86,7 @@ By default the search is done over the `indicator_id`, `indicator`, and `indicat
 library(wbstats)
 
 unemploy_inds<- wb_search("unemployment")
+
 head(unemploy_inds)
 
 ```
@@ -94,6 +96,7 @@ Other fields can be searched by simply changing the `fields` parameter. For exam
 library(wbstats)
 
 blmbrg_vars <- wb_search("Bloomberg", fields = "source_org")
+
 head(blmbrg_vars)
 
 ```
@@ -104,6 +107,7 @@ library(wbstats)
 
 # 'poverty' OR 'unemployment' OR 'employment'
 povemply_inds <- wb_search(pattern = "poverty|unemployment|employment")
+
 head(povemply_inds)
 
 ```
@@ -114,6 +118,7 @@ library(wbstats)
 
 # contains "gdp" and NOT "trade"
 gdp_no_trade_inds <- wb_search("^(?=.*gdp)(?!.*trade).*", perl = TRUE)
+
 head(gdp_no_trade_inds)
 ```
 
@@ -211,8 +216,6 @@ Because the majority of data available from the World Bank is at the annual reso
 
 # Some Sharp Corners
 There are a few behaviors of the World Bank API that being aware of could help explain some potentially unexpected results. These results are known but no special actions are taken to mitigate them as they are the result of the API itself and artifically limiting the inputs or results could potentially causes problems or create unnecessary rescrictions in the future. 
-
-## This case of the missing indicators
 
 ## Searching in other languages
 Not all data sources support all languages. If an indicator does not have a translation for a particular language, the non-supported fields will return as `NA`. This could potentially result in a differing number of matching indicators from `wb_search()`
