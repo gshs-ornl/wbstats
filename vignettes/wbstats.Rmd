@@ -1,7 +1,13 @@
 ---
+title: "wbstats"
 output:
   md_document:
-    variant: markdown_github
+    variant: gfm
+vignette: >
+  %\VignetteIndexEntry{wbstats}
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteEncoding{UTF-8}
+
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
