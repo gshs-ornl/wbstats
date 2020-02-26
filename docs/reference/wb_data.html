@@ -277,11 +277,8 @@ that data point is "forecast".</p>
                    <span class='st'>"SL.UEM.TOTL.ZS"</span>,
                    <span class='st'>"SP.DYN.CBRT.IN"</span>)
 
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>wb_data</span>(<span class='no'>my_indicators</span>)</div><div class='output co'>#&gt; <span class='error'>Error: World Bank API request failed for indicator NA</span>
-#&gt; <span class='error'>message: Client error: (400) Bad Request</span>
-#&gt; <span class='error'>category: Client error</span>
-#&gt; <span class='error'>reason: Bad Request </span>
-#&gt; <span class='error'>url: https://api.worldbank.org/v2/en/country/ABW;AFG;AGO;ALB;AND;ARE;ARG;ARM;ASM;ATG;AUS;AUT;AZE;BDI;BEL;BEN;BFA;BGD;BGR;BHR;BHS;BIH;BLR;BLZ;BMU;BOL;BRA;BRB;BRN;BTN;BWA;CAF;CAN;CHE;CHI;CHL;CHN;CIV;CMR;COD;COG;COL;COM;CPV;CRI;CUB;CUW;CYM;CYP;CZE;DEU;DJI;DMA;DNK;DOM;DZA;ECU;EGY;ERI;ESP;EST;ETH;FIN;FJI;FRA;FRO;FSM;GAB;GBR;GEO;GHA;GIB;GIN;GMB;GNB;GNQ;GRC;GRD;GRL;GTM;GUM;GUY;HKG;HND;HRV;HTI;HUN;IDN;IMN;IND;IRL;IRN;IRQ;ISL;ISR;ITA;JAM;JOR;JPN;KAZ;KEN;KGZ;KHM;KIR;KNA;KOR;KWT;LAO;LBN;LBR;LBY;LCA;LIE;LKA;LSO;LTU;LUX;LVA;MAC;MAF;MAR;MCO;MDA;MDG;MDV;MEX;MHL;MKD;MLI;MLT;MMR;MNE;MNG;MNP;MOZ;MRT;MUS;MWI;MYS;NAM;NCL;NER;NGA;NIC;NLD;NOR;NPL;NRU;NZL;OMN;PAK;PAN;PER;PHL;PLW;PNG;POL;PRI;PRK;PRT;PRY;PSE;PYF;QAT;ROU;RUS;RWA;SAU;SDN;SEN;SGP;SLB;SLE;SLV;SMR;SOM;SRB;SSD;STP;SUR;SVK;SVN;SWE;SWZ;SXM;SYC;SYR;TCA;TCD;TGO;THA;TJK;TKM;TLS;TON;TTO;TUN;TUR;TUV;TWN;TZA;UGA;UKR;URY;USA;UZB;VCT;VEN;VGB;VIR;VNM;VUT;WSM;XKX;YEM;ZAF;ZMB;ZWE/indicator/SP.DYN.CBRT.IN?footnote=y&amp;cntrycode=y&amp;per_page=20000&amp;format=json</span></div><div class='input'>
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>wb_data</span>(<span class='no'>my_indicators</span>)
+
 <span class='co'># you pass multiple country ids of different types</span>
 <span class='co'># Albania (iso2c), Georgia (iso3c), and Mongolia</span>
 <span class='no'>my_countries</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"AL"</span>, <span class='st'>"Geo"</span>, <span class='st'>"mongolia"</span>)

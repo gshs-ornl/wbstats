@@ -81,6 +81,18 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/mapping-wbstats-data.html">Mapping wbstats data</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -110,13 +122,35 @@
       <small>Source: <a href='https://github.com/nset-ornl/wbstats/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="wbstats-100" class="section level1">
+<h1 class="page-header">
+<a href="#wbstats-100" class="anchor"></a>wbstats 1.0.0<small> Unreleased </small>
+</h1>
+<p>The <code>1.0.0</code> release represents a complete overhaul of the <code>wbstats</code> package to hopefully be more consistent and easy to use.</p>
+<div id="changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes" class="anchor"></a>Changes:</h2>
+<ul>
+<li>Data now returns in a wide format by default with each indicator being its own column</li>
+<li>Adoption of the “tidyverse” ecosystem.</li>
+<li>New naming convention, <code>wb_*()</code> for all <code>wbstats</code> functions. Relatedly,</li>
+<li>Older functions from previous versions are now deprecated and should produce a warning</li>
+<li>Support for custom indicator names by passing a named vector to <code><a href="../reference/wb_data.html">wb_data()</a></code>
+</li>
+<li>Includes support for most recent non-empty value queries. Basically quering the most recent <code>n</code> values from each location, regardless of the date.</li>
+<li>
+<code><a href="../reference/wb_search.html">wb_search()</a></code> now accepts any <code><a href="https://rdrr.io/r/base/grep.html">grep()</a></code> argument passed through <code>...</code>
+</li>
+</ul>
+</div>
+</div>
     <div id="wbstats-0219000" class="section level1">
 <h1 class="page-header">
 <a href="#wbstats-0219000" class="anchor"></a>wbstats 0.2.1.9000<small> Unreleased </small>
 </h1>
-<div id="changes" class="section level2">
+<div id="changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes" class="anchor"></a>Changes:</h2>
+<a href="#changes-1" class="anchor"></a>Changes:</h2>
 <ul>
 <li>add non-exported .wb_url function for debugging purposes</li>
 </ul>
@@ -138,9 +172,9 @@
 <li>Indicators from source <code>WDI Database Archives</code> are now accessible</li>
 </ul>
 </div>
-<div id="changes-1" class="section level2">
+<div id="changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-1" class="anchor"></a>Changes:</h2>
+<a href="#changes-2" class="anchor"></a>Changes:</h2>
 <ul>
 <li>
 <p>Now uses Version 2 of the World Bank API.</p>
@@ -159,9 +193,9 @@
 <h1 class="page-header">
 <a href="#wbstats-011" class="anchor"></a>wbstats 0.1.1<small> 2016-12-08 </small>
 </h1>
-<div id="changes-2" class="section level2">
+<div id="changes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-2" class="anchor"></a>Changes:</h2>
+<a href="#changes-3" class="anchor"></a>Changes:</h2>
 <ul>
 <li>Add ‘aggregates’ and ‘countries_only’ options to <code><a href="../reference/wb.html">wb()</a></code> per bapfeld pr</li>
 <li>update cached data in <code>wb_cachelist</code>
@@ -175,6 +209,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#wbstats-100">1.0.0</a></li>
         <li><a href="#wbstats-0219000">0.2.1.9000</a></li>
         <li><a href="#wbstats-020">0.2.0</a></li>
         <li><a href="#wbstats-011">0.1.1</a></li>

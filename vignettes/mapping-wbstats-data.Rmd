@@ -23,7 +23,6 @@ library(tidyverse)
 library(wbstats)
 
 ind <- "SL.EMP.SELF.ZS"
-
 indicator_info <- filter(wb_cachelist$indicators, indicator_id == ind)
 
 ne_countries(returnclass = "sf") %>%

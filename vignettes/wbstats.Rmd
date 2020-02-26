@@ -39,7 +39,6 @@ The World Bank^[<http://www.worldbank.org/>] is a tremendous source of global so
 - Uses version 2 of the World Bank API that provides access to more indicators and metadata than the previous API version
 - Access to all annual, quarterly, and monthly data available in the API
 - Support for searching and downloading data in multiple languages
-- Access to the World Bank Data Catalog Metadata, providing among other information; update schedules and supported languages
 - Returns data in either wide (default) or long format
 - Support for Most Recent Value queries
 - Support for `grep` style searching for data descriptions and names
@@ -77,7 +76,8 @@ new_cache <- wb_cache()
 ```{r, echo=FALSE}
 example_inds <- c("SP.POP.TOTL", "NY.GDP.MKTP.CD")
 df <- wbstats::wb_cachelist$indicators[wbstats::wb_cachelist$indicators$indicator_id %in% example_inds, ]
-knitr::kable(head(df))
+
+head(df)
 ```
 
 By default the search is done over the `indicator_id`, `indicator`, and `indicator_desc` fields and returns the those 3 columns of the matching rows. The `indicator_id` values are inputs into `wb_data()`, the function for downloading the data. To return all columns for the `indicators` data frame, you can set `extra = TRUE`.
