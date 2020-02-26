@@ -88,7 +88,7 @@ d %>%
   ) 
 ```
 
-![](README-readme-chart-1.png)
+![](tools/figures/readme-chart.pngreadme-chart-1.png)
 
 Using `ggplot2` to map `wbstats` data
 =====================================
@@ -121,4 +121,4 @@ ne_countries(returnclass = "sf") %>%
   )
 ```
 
-<img src="README-ggplot2-1.png" style="display: block; margin: auto;" />
+<img src="tools/figures/readme-map.pngggplot2-1.png" style="display: block; margin: auto;" />

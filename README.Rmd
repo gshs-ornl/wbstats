@@ -44,7 +44,7 @@ head(d)
 
 ## Hans Rosling's Gapminder using wbstats
 
-```{r readme-chart, warning=FALSE, message=FALSE, fig.width=12, fig.height=6}
+```{r readme-chart, warning=FALSE, message=FALSE, fig.width=12, fig.height=6, fig.path="tools/figures/readme-chart.png"}
 library(tidyverse)
 library(wbstats)
 
@@ -93,7 +93,7 @@ d %>%
 
 # Using `ggplot2` to map `wbstats` data
 
-```{r ggplot2, fig.height=6, fig.width=8, fig.align="center", message=FALSE, warning=FALSE}
+```{r ggplot2, fig.height=6, fig.width=8, fig.align="center", message=FALSE, warning=FALSE, fig.path="tools/figures/readme-map.png"}
 library(rnaturalearth)
 library(tidyverse)
 library(wbstats)
