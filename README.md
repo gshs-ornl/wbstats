@@ -41,8 +41,8 @@ head(d)
 #> # ... with 1 more variable: last_updated <date>
 ```
 
-Hans Rosling’s Gapminder using wbstats
---------------------------------------
+Hans Rosling’s Gapminder using `wbstats`
+----------------------------------------
 
 ``` r
 library(tidyverse)
@@ -88,10 +88,10 @@ d %>%
   ) 
 ```
 
-![](tools/figures/readme-chart.pngreadme-chart-1.png)
+![](man/figures/readme-chart-1.png)
 
 Using `ggplot2` to map `wbstats` data
-=====================================
+-------------------------------------
 
 ``` r
 library(rnaturalearth)
@@ -121,4 +121,4 @@ ne_countries(returnclass = "sf") %>%
   )
 ```
 
-<img src="tools/figures/readme-map.pngggplot2-1.png" style="display: block; margin: auto;" />
+<img src="man/figures/ggplot2-1.png" style="display: block; margin: auto;" />

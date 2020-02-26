@@ -10,7 +10,7 @@ output:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "man/figures/"
 )
 ```
 
@@ -42,9 +42,9 @@ head(d)
 ```
 
 
-## Hans Rosling's Gapminder using wbstats
+## Hans Rosling's Gapminder using `wbstats`
 
-```{r readme-chart, warning=FALSE, message=FALSE, fig.width=12, fig.height=6, fig.path="tools/figures/readme-chart.png"}
+```{r readme-chart, warning=FALSE, message=FALSE, fig.width=12, fig.height=6}
 library(tidyverse)
 library(wbstats)
 
@@ -91,9 +91,9 @@ d %>%
 
 
 
-# Using `ggplot2` to map `wbstats` data
+## Using `ggplot2` to map `wbstats` data
 
-```{r ggplot2, fig.height=6, fig.width=8, fig.align="center", message=FALSE, warning=FALSE, fig.path="tools/figures/readme-map.png"}
+```{r ggplot2, fig.height=6, fig.width=8, fig.align="center", message=FALSE, warning=FALSE}
 library(rnaturalearth)
 library(tidyverse)
 library(wbstats)
@@ -121,3 +121,4 @@ ne_countries(returnclass = "sf") %>%
   )
   
 ```
+
