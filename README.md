@@ -19,39 +19,44 @@ The latest development version from github with
 remotes::install_github("nset-ornl/wbstats")
 ```
 
-Introduction
-============
+Downloading data from the World Bank
+====================================
 
-The World Bank[1] is a tremendous source of global socio-economic data;
-spanning several decades and dozens of topics, it has the potential to
-shed light on numerous global issues. To help provide access to this
-rich source of information, The World Bank themselves, provide a well
-structured RESTful API[2]. While this API is very useful for integration
-into web services and other high-level applications, it becomes quickly
-overwhelming for researchers who have neither the time nor the expertise
-to develop software to interface with the API. This leaves the
-researcher to rely on manual bulk downloads of spreadsheets of the data
-they are interested in. This too is can quickly become overwhelming, as
-the work is manual, time consuming, and not easily reproducible. The
-goal of the `wbstats` R-package is to provide a bridge between these
-alternatives and allow researchers to focus on their research questions
-and not the question of accessing the data. The `wbstats` R-package
-allows researchers to quickly search and download the data of their
-particular interest in a programmatic and reproducible fashion; this
-facilitates a seamless integration into their workflow and allows
-analysis to be quickly rerun on different areas of interest and with
-realtime access to the latest available data.
+``` r
+library(wbstats)
+
+# Population for every country from 1960 until present
+d <- wb_data("SP.POP.TOTL")
+    
+head(d)
+#> # A tibble: 6 x 9
+#>   iso2c iso3c country  date SP.POP.TOTL unit  obs_status footnote
+#>   <chr> <chr> <chr>   <dbl>       <dbl> <chr> <chr>      <chr>   
+#> 1 AW    ABW   Aruba    2019          NA <NA>  <NA>       <NA>    
+#> 2 AW    ABW   Aruba    2018      105845 <NA>  <NA>       <NA>    
+#> 3 AW    ABW   Aruba    2017      105366 <NA>  <NA>       <NA>    
+#> 4 AW    ABW   Aruba    2016      104872 <NA>  <NA>       <NA>    
+#> 5 AW    ABW   Aruba    2015      104341 <NA>  <NA>       <NA>    
+#> 6 AW    ABW   Aruba    2014      103774 <NA>  <NA>       <NA>    
+#> # ... with 1 more variable: last_updated <date>
+```
+
+Hans Rosling’s Gapminder using wbstats
+--------------------------------------
 
 ``` r
 library(tidyverse)
 library(wbstats)
 
-wb_data(
-  c(life_exp = "SP.DYN.LE00.IN", 
-    gdp_capita ="NY.GDP.PCAP.CD", 
-    pop = "SP.POP.TOTL"), 
-  start_date = 2016
-  ) %>%
+my_indicators <- c(
+  life_exp = "SP.DYN.LE00.IN", 
+  gdp_capita ="NY.GDP.PCAP.CD", 
+  pop = "SP.POP.TOTL"
+  )
+
+d <- wb_data(my_indicators, start_date = 2016)
+
+d %>%
   left_join(wb_countries(), "iso3c") %>%
   ggplot() +
   geom_point(
@@ -85,6 +90,35 @@ wb_data(
 
 ![](README-readme-chart-1.png)
 
-[1] <a href="http://www.worldbank.org/" class="uri">http://www.worldbank.org/</a>
+Using `ggplot2` to map `wbstats` data
+=====================================
 
-[2] <a href="http://data.worldbank.org/developers" class="uri">http://data.worldbank.org/developers</a>
+``` r
+library(rnaturalearth)
+library(tidyverse)
+library(wbstats)
+
+ind <- "SL.EMP.SELF.ZS"
+indicator_info <- filter(wb_cachelist$indicators, indicator_id == ind)
+
+ne_countries(returnclass = "sf") %>%
+  left_join(
+    wb_data(
+      c(self_employed = ind), 
+         mrnev = 1
+          ),
+    c("iso_a3" = "iso3c")
+  ) %>%
+  filter(iso_a3 != "ATA") %>% # remove Antarctica
+  ggplot(aes(fill = self_employed)) +
+  geom_sf() +
+  scale_fill_viridis_c(labels = scales::percent_format(scale = 1)) +
+  theme(legend.position="bottom") +
+  labs(
+    title = indicator_info$indicator,
+    fill = NULL,
+    caption = paste("Source:", indicator_info$source_org) 
+  )
+```
+
+<img src="README-ggplot2-1.png" style="display: block; margin: auto;" />

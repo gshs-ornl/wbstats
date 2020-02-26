@@ -1,3 +1,21 @@
+
+# wbstats 1.0.0
+
+The `1.0.0` release represents a complete overhaul of the `wbstats` package to
+hopefully be more consistent and easy to use.
+
+## Changes:
+* Data now returns in a wide format by default with each indicator being its own column
+* Adoption of the "tidyverse" ecosystem.
+* New naming convention, `wb_*()` for all `wbstats` functions. Relatedly,
+* Older functions from previous versions are now deprecated and should produce a warning
+* Support for custom indicator names by passing a named vector to `wb_data()`
+* Includes support for most recent non-empty value queries. Basically quering the most recent
+  `n` values from each location, regardless of the date.
+* `wb_search()` now accepts any `grep()` argument passed through `...` 
+
+
+
 # wbstats 0.2.1.9000
 
 ## Changes:

@@ -14,9 +14,7 @@ Authors@R:
 Maintainer: Jesse Piburn <piburnjo@ornl.gov>
 Description: Tools for searching and downloading data and
     statistics from the World Bank Data API
-    <http://data.worldbank.org/developers/api-overview> and the World
-    Bank Data Catalog API
-    <http://data.worldbank.org/developers/data-catalog-api>.
+    <http://data.worldbank.org/developers/api-overview>
 License: MIT + file LICENSE
 URL: https://github.com/nset-ornl/wbstats
 BugReports: https://github.com/nset-ornl/wbstats/issues
