@@ -84,18 +84,6 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/mapping-wbstats-data.html">Mapping wbstats data</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -48476,81 +48464,13 @@ this column is removed. If <code>TRUE</code> and <code>POSIXct = TRUE</code> the
 #&gt; 24   India</div><div class='input'>
  <span class='co'># if another frequency is available for that indicator it can be accessed using the freq parameter</span>
  <span class='co'># should return the 12 most recent months of data</span>
- <span class='fu'>wb</span>(<span class='kw'>country</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"CHN"</span>, <span class='st'>"IND"</span>), <span class='kw'>indicator</span> <span class='kw'>=</span> <span class='st'>"DPANUSSPF"</span>, <span class='kw'>mrv</span> <span class='kw'>=</span> <span class='fl'>12</span>, <span class='kw'>freq</span> <span class='kw'>=</span> <span class='st'>"M"</span>)</div><div class='output co'>#&gt;    iso3c    date     value indicatorID
-#&gt; 1    CHN 2019M09  7.134250   DPANUSSPF
-#&gt; 2    CHN 2019M08  7.065364   DPANUSSPF
-#&gt; 3    CHN 2019M07  6.879565   DPANUSSPF
-#&gt; 4    CHN 2019M06  6.898325   DPANUSSPF
-#&gt; 5    CHN 2019M05  6.859065   DPANUSSPF
-#&gt; 6    CHN 2019M04  6.716523   DPANUSSPF
-#&gt; 7    CHN 2019M03  6.713571   DPANUSSPF
-#&gt; 8    CHN 2019M02  6.743775   DPANUSSPF
-#&gt; 9    CHN 2019M01  6.791790   DPANUSSPF
-#&gt; 10   CHN 2018M12  6.884183   DPANUSSPF
-#&gt; 11   CHN 2018M11  6.940364   DPANUSSPF
-#&gt; 12   CHN 2018M10  6.926804   DPANUSSPF
-#&gt; 13   IND 2019M09 71.777812   DPANUSSPF
-#&gt; 14   IND 2019M08 71.175250   DPANUSSPF
-#&gt; 15   IND 2019M07 68.764674   DPANUSSPF
-#&gt; 16   IND 2019M06 69.422300   DPANUSSPF
-#&gt; 17   IND 2019M05 69.820891   DPANUSSPF
-#&gt; 18   IND 2019M04 69.370386   DPANUSSPF
-#&gt; 19   IND 2019M03 69.544976   DPANUSSPF
-#&gt; 20   IND 2019M02 71.243400   DPANUSSPF
-#&gt; 21   IND 2019M01 70.777304   DPANUSSPF
-#&gt; 22   IND 2018M12 70.713048   DPANUSSPF
-#&gt; 23   IND 2018M11 71.825318   DPANUSSPF
-#&gt; 24   IND 2018M10 73.587435   DPANUSSPF
-#&gt;                                                            indicator iso2c
-#&gt; 1  Exchange rate, old LCU per USD extended forward, period average,,    CN
-#&gt; 2  Exchange rate, old LCU per USD extended forward, period average,,    CN
-#&gt; 3  Exchange rate, old LCU per USD extended forward, period average,,    CN
-#&gt; 4  Exchange rate, old LCU per USD extended forward, period average,,    CN
-#&gt; 5  Exchange rate, old LCU per USD extended forward, period average,,    CN
-#&gt; 6  Exchange rate, old LCU per USD extended forward, period average,,    CN
-#&gt; 7  Exchange rate, old LCU per USD extended forward, period average,,    CN
-#&gt; 8  Exchange rate, old LCU per USD extended forward, period average,,    CN
-#&gt; 9  Exchange rate, old LCU per USD extended forward, period average,,    CN
-#&gt; 10 Exchange rate, old LCU per USD extended forward, period average,,    CN
-#&gt; 11 Exchange rate, old LCU per USD extended forward, period average,,    CN
-#&gt; 12 Exchange rate, old LCU per USD extended forward, period average,,    CN
-#&gt; 13 Exchange rate, old LCU per USD extended forward, period average,,    IN
-#&gt; 14 Exchange rate, old LCU per USD extended forward, period average,,    IN
-#&gt; 15 Exchange rate, old LCU per USD extended forward, period average,,    IN
-#&gt; 16 Exchange rate, old LCU per USD extended forward, period average,,    IN
-#&gt; 17 Exchange rate, old LCU per USD extended forward, period average,,    IN
-#&gt; 18 Exchange rate, old LCU per USD extended forward, period average,,    IN
-#&gt; 19 Exchange rate, old LCU per USD extended forward, period average,,    IN
-#&gt; 20 Exchange rate, old LCU per USD extended forward, period average,,    IN
-#&gt; 21 Exchange rate, old LCU per USD extended forward, period average,,    IN
-#&gt; 22 Exchange rate, old LCU per USD extended forward, period average,,    IN
-#&gt; 23 Exchange rate, old LCU per USD extended forward, period average,,    IN
-#&gt; 24 Exchange rate, old LCU per USD extended forward, period average,,    IN
-#&gt;    country
-#&gt; 1    China
-#&gt; 2    China
-#&gt; 3    China
-#&gt; 4    China
-#&gt; 5    China
-#&gt; 6    China
-#&gt; 7    China
-#&gt; 8    China
-#&gt; 9    China
-#&gt; 10   China
-#&gt; 11   China
-#&gt; 12   China
-#&gt; 13   India
-#&gt; 14   India
-#&gt; 15   India
-#&gt; 16   India
-#&gt; 17   India
-#&gt; 18   India
-#&gt; 19   India
-#&gt; 20   India
-#&gt; 21   India
-#&gt; 22   India
-#&gt; 23   India
-#&gt; 24   India</div></span></pre>
+ <span class='fu'>wb</span>(<span class='kw'>country</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"CHN"</span>, <span class='st'>"IND"</span>), <span class='kw'>indicator</span> <span class='kw'>=</span> <span class='st'>"DPANUSSPF"</span>, <span class='kw'>mrv</span> <span class='kw'>=</span> <span class='fl'>12</span>, <span class='kw'>freq</span> <span class='kw'>=</span> <span class='st'>"M"</span>)</div><div class='output co'>#&gt; Error : World Bank API request failed for indicator DPANUSSPF
+#&gt; message: Client error: (400) Bad Request
+#&gt; category: Client error
+#&gt; reason: Bad Request 
+#&gt; url: http://api.worldbank.org/v2/en/countries/CHN;IND/indicators/DPANUSSPF?MRV=12&amp;frequency=M&amp;per_page=20000&amp;format=json</div><div class='output co'>#&gt; <span class='warning'>Warning: No data was returned for any requested country and indicator. Returning empty data frame</span></div><div class='output co'>#&gt; [1] value       date        indicatorID indicator   iso2c       country    
+#&gt; [7] iso3c      
+#&gt; &lt;0 rows&gt; (or 0-length row.names)</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
