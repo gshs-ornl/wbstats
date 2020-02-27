@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> • wbstats</title>
+<title>wbstats • wbstats</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="">
+<script src="../pkgdown.js"></script><meta property="og:title" content="wbstats">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -73,7 +73,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1></h1>
+      <h1>wbstats</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/nset-ornl/wbstats/blob/master/vignettes/wbstats.Rmd"><code>vignettes/wbstats.Rmd</code></a></small>
@@ -151,65 +151,68 @@
 </h2>
 <p><code><a href="../reference/wb_search.html">wb_search()</a></code> searches through the <code>indicators</code> data frame to find indicators that match a search pattern. An example of the structure of this data frame is below</p>
 <pre><code>#&gt; # A tibble: 2 x 8
-#&gt;   indicator_id indicator unit  indicator_desc source_org topics source_id
-#&gt;   &lt;chr&gt;        &lt;chr&gt;     &lt;lgl&gt; &lt;chr&gt;          &lt;chr&gt;      &lt;list&gt;     &lt;dbl&gt;
-#&gt; 1 NY.GDP.MKTP~ GDP (cur~ NA    GDP at purcha~ World Ban~ &lt;df[,~         2
-#&gt; 2 SP.POP.TOTL  Populati~ NA    Total populat~ (1) Unite~ &lt;df[,~         2
-#&gt; # ... with 1 more variable: source &lt;chr&gt;</code></pre>
+#&gt;   indicator_id indicator unit  indicator_desc source_org topics source_id source
+#&gt;   &lt;chr&gt;        &lt;chr&gt;     &lt;lgl&gt; &lt;chr&gt;          &lt;chr&gt;      &lt;list&gt;     &lt;dbl&gt; &lt;chr&gt; 
+#&gt; 1 NY.GDP.MKTP~ GDP (cur~ NA    GDP at purcha~ World Ban~ &lt;df[,~         2 World~
+#&gt; 2 SP.POP.TOTL  Populati~ NA    Total populat~ (1) Unite~ &lt;df[,~         2 World~</code></pre>
 <p>By default the search is done over the <code>indicator_id</code>, <code>indicator</code>, and <code>indicator_desc</code> fields and returns the those 3 columns of the matching rows. The <code>indicator_id</code> values are inputs into <code><a href="../reference/wb_data.html">wb_data()</a></code>, the function for downloading the data. To return all columns for the <code>indicators</code> data frame, you can set <code>extra = TRUE</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb6-2" title="2"></a>
 <a class="sourceLine" id="cb6-3" title="3">unemploy_inds&lt;-<span class="st"> </span><span class="kw"><a href="../reference/wb_search.html">wb_search</a></span>(<span class="st">"unemployment"</span>)</a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(unemploy_inds)</a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; # A tibble: 6 x 3</span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt;   indicator_id indicator                    indicator_desc                 </span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;                        &lt;chr&gt;                          </span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; 1 fin37.t.a    Received government transfe~ The percentage of respondents ~</span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt; 2 fin37.t.a.1  Received government transfe~ The percentage of respondents ~</span></a>
-<a class="sourceLine" id="cb6-10" title="10"><span class="co">#&gt; 3 fin37.t.a.10 Received government transfe~ The percentage of respondents ~</span></a>
-<a class="sourceLine" id="cb6-11" title="11"><span class="co">#&gt; 4 fin37.t.a.11 Received government transfe~ The percentage of respondents ~</span></a>
-<a class="sourceLine" id="cb6-12" title="12"><span class="co">#&gt; 5 fin37.t.a.2  Received government transfe~ The percentage of respondents ~</span></a>
-<a class="sourceLine" id="cb6-13" title="13"><span class="co">#&gt; 6 fin37.t.a.3  Received government transfe~ The percentage of respondents ~</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-4" title="4"></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(unemploy_inds)</a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt; # A tibble: 6 x 3</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt;   indicator_id indicator                       indicator_desc                   </span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;                           &lt;chr&gt;                            </span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt; 1 fin37.t.a    Received government transfers ~ The percentage of respondents wh~</span></a>
+<a class="sourceLine" id="cb6-10" title="10"><span class="co">#&gt; 2 fin37.t.a.1  Received government transfers ~ The percentage of respondents wh~</span></a>
+<a class="sourceLine" id="cb6-11" title="11"><span class="co">#&gt; 3 fin37.t.a.10 Received government transfers ~ The percentage of respondents wh~</span></a>
+<a class="sourceLine" id="cb6-12" title="12"><span class="co">#&gt; 4 fin37.t.a.11 Received government transfers ~ The percentage of respondents wh~</span></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="co">#&gt; 5 fin37.t.a.2  Received government transfers ~ The percentage of respondents wh~</span></a>
+<a class="sourceLine" id="cb6-14" title="14"><span class="co">#&gt; 6 fin37.t.a.3  Received government transfers ~ The percentage of respondents wh~</span></a></code></pre></div>
 <p>Other fields can be searched by simply changing the <code>fields</code> parameter. For example</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb7-2" title="2"></a>
 <a class="sourceLine" id="cb7-3" title="3">blmbrg_vars &lt;-<span class="st"> </span><span class="kw"><a href="../reference/wb_search.html">wb_search</a></span>(<span class="st">"Bloomberg"</span>, <span class="dt">fields =</span> <span class="st">"source_org"</span>)</a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(blmbrg_vars)</a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt;   indicator_id indicator             indicator_desc                        </span></a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;                 &lt;chr&gt;                                 </span></a>
-<a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt; 1 GFDD.OM.02   Stock market return ~ Stock market return is the growth rat~</span></a>
-<a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt; 2 GFDD.SM.01   Stock price volatili~ Stock price volatility is the average~</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-4" title="4"></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(blmbrg_vars)</a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="co">#&gt;   indicator_id indicator              indicator_desc                            </span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;                  &lt;chr&gt;                                     </span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt; 1 GFDD.OM.02   Stock market return (~ Stock market return is the growth rate of~</span></a>
+<a class="sourceLine" id="cb7-10" title="10"><span class="co">#&gt; 2 GFDD.SM.01   Stock price volatility Stock price volatility is the average of ~</span></a></code></pre></div>
 <p>Regular expressions are also supported</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb8-2" title="2"></a>
 <a class="sourceLine" id="cb8-3" title="3"><span class="co"># 'poverty' OR 'unemployment' OR 'employment'</span></a>
 <a class="sourceLine" id="cb8-4" title="4">povemply_inds &lt;-<span class="st"> </span><span class="kw"><a href="../reference/wb_search.html">wb_search</a></span>(<span class="dt">pattern =</span> <span class="st">"poverty|unemployment|employment"</span>)</a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(povemply_inds)</a>
-<a class="sourceLine" id="cb8-6" title="6"><span class="co">#&gt; # A tibble: 6 x 3</span></a>
-<a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt;   indicator_id    indicator             indicator_desc                     </span></a>
-<a class="sourceLine" id="cb8-8" title="8"><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;                 &lt;chr&gt;                              </span></a>
-<a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt; 1 1.0.HCount.1.9~ Poverty Headcount ($~ The poverty headcount index measur~</span></a>
-<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt; 2 1.0.HCount.2.5~ Poverty Headcount ($~ The poverty headcount index measur~</span></a>
-<a class="sourceLine" id="cb8-11" title="11"><span class="co">#&gt; 3 1.0.HCount.Mid~ Middle Class ($10-50~ The poverty headcount index measur~</span></a>
-<a class="sourceLine" id="cb8-12" title="12"><span class="co">#&gt; 4 1.0.HCount.Ofcl Official Moderate Po~ The poverty headcount index measur~</span></a>
-<a class="sourceLine" id="cb8-13" title="13"><span class="co">#&gt; 5 1.0.HCount.Poo~ Poverty Headcount ($~ The poverty headcount index measur~</span></a>
-<a class="sourceLine" id="cb8-14" title="14"><span class="co">#&gt; 6 1.0.HCount.Vul~ Vulnerable ($4-10 a ~ The poverty headcount index measur~</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-5" title="5"></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(povemply_inds)</a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt; # A tibble: 6 x 3</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="co">#&gt;   indicator_id     indicator             indicator_desc                         </span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt;   &lt;chr&gt;            &lt;chr&gt;                 &lt;chr&gt;                                  </span></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt; 1 1.0.HCount.1.90~ Poverty Headcount ($~ The poverty headcount index measures t~</span></a>
+<a class="sourceLine" id="cb8-11" title="11"><span class="co">#&gt; 2 1.0.HCount.2.5u~ Poverty Headcount ($~ The poverty headcount index measures t~</span></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="co">#&gt; 3 1.0.HCount.Mid1~ Middle Class ($10-50~ The poverty headcount index measures t~</span></a>
+<a class="sourceLine" id="cb8-13" title="13"><span class="co">#&gt; 4 1.0.HCount.Ofcl  Official Moderate Po~ The poverty headcount index measures t~</span></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="co">#&gt; 5 1.0.HCount.Poor~ Poverty Headcount ($~ The poverty headcount index measures t~</span></a>
+<a class="sourceLine" id="cb8-15" title="15"><span class="co">#&gt; 6 1.0.HCount.Vul4~ Vulnerable ($4-10 a ~ The poverty headcount index measures t~</span></a></code></pre></div>
 <p>As well as any <code>grep</code> function argument</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb9-2" title="2"></a>
 <a class="sourceLine" id="cb9-3" title="3"><span class="co"># contains "gdp" and NOT "trade"</span></a>
 <a class="sourceLine" id="cb9-4" title="4">gdp_no_trade_inds &lt;-<span class="st"> </span><span class="kw"><a href="../reference/wb_search.html">wb_search</a></span>(<span class="st">"^(?=.*gdp)(?!.*trade).*"</span>, <span class="dt">perl =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(gdp_no_trade_inds)</a>
-<a class="sourceLine" id="cb9-6" title="6"><span class="co">#&gt; # A tibble: 6 x 3</span></a>
-<a class="sourceLine" id="cb9-7" title="7"><span class="co">#&gt;   indicator_id    indicator               indicator_desc                   </span></a>
-<a class="sourceLine" id="cb9-8" title="8"><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;                   &lt;chr&gt;                            </span></a>
-<a class="sourceLine" id="cb9-9" title="9"><span class="co">#&gt; 1 5.51.01.10.gdp  Per capita GDP growth   GDP per capita is the sum of gro~</span></a>
-<a class="sourceLine" id="cb9-10" title="10"><span class="co">#&gt; 2 6.0.GDP_current GDP (current $)         GDP is the sum of gross value ad~</span></a>
-<a class="sourceLine" id="cb9-11" title="11"><span class="co">#&gt; 3 6.0.GDP_growth  GDP growth (annual %)   Annual percentage growth rate of~</span></a>
-<a class="sourceLine" id="cb9-12" title="12"><span class="co">#&gt; 4 6.0.GDP_usd     GDP (constant 2005 $)   GDP is the sum of gross value ad~</span></a>
-<a class="sourceLine" id="cb9-13" title="13"><span class="co">#&gt; 5 6.0.GDPpc_cons~ GDP per capita, PPP (c~ GDP per capita based on purchasi~</span></a>
-<a class="sourceLine" id="cb9-14" title="14"><span class="co">#&gt; 6 BI.WAG.TOTL.GD~ Wage bill as a percent~ &lt;NA&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-5" title="5"></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(gdp_no_trade_inds)</a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="co">#&gt; # A tibble: 6 x 3</span></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="co">#&gt;   indicator_id    indicator                indicator_desc                       </span></a>
+<a class="sourceLine" id="cb9-9" title="9"><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;                    &lt;chr&gt;                                </span></a>
+<a class="sourceLine" id="cb9-10" title="10"><span class="co">#&gt; 1 5.51.01.10.gdp  Per capita GDP growth    GDP per capita is the sum of gross v~</span></a>
+<a class="sourceLine" id="cb9-11" title="11"><span class="co">#&gt; 2 6.0.GDP_current GDP (current $)          GDP is the sum of gross value added ~</span></a>
+<a class="sourceLine" id="cb9-12" title="12"><span class="co">#&gt; 3 6.0.GDP_growth  GDP growth (annual %)    Annual percentage growth rate of GDP~</span></a>
+<a class="sourceLine" id="cb9-13" title="13"><span class="co">#&gt; 4 6.0.GDP_usd     GDP (constant 2005 $)    GDP is the sum of gross value added ~</span></a>
+<a class="sourceLine" id="cb9-14" title="14"><span class="co">#&gt; 5 6.0.GDPpc_cons~ GDP per capita, PPP (co~ GDP per capita based on purchasing p~</span></a>
+<a class="sourceLine" id="cb9-15" title="15"><span class="co">#&gt; 6 BI.WAG.TOTL.GD~ Wage bill as a percenta~ &lt;NA&gt;</span></a></code></pre></div>
 <p>The default cached data in <code>wb_cachelist</code> is in English. To search indicators in a different language, you can download an updated copy of <code>wb_cachelist</code> using <code><a href="../reference/wb_cache.html">wb_cache()</a></code>, with the <code>lang</code> parameter set to the language of interest and then set this as the <code>cache</code> parameter in <code><a href="../reference/wb_search.html">wb_search()</a></code>. Other languages are supported in so far as they are supported by the original data sources. Some sources provide full support for other languages, while some have very limited support. If the data source does not have a translation for a certain field or indicator then the result is <code>NA</code>, this may result in a varying number matches depending upon the language you select.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb10-2" title="2"></a>
@@ -220,14 +223,14 @@
 <a class="sourceLine" id="cb10-7" title="7"></a>
 <a class="sourceLine" id="cb10-8" title="8"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(gini_inds)</a>
 <a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt; # A tibble: 6 x 3</span></a>
-<a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt;   indicator_id   indicator              indicator_desc                     </span></a>
-<a class="sourceLine" id="cb10-11" title="11"><span class="co">#&gt;   &lt;chr&gt;          &lt;chr&gt;                  &lt;chr&gt;                              </span></a>
-<a class="sourceLine" id="cb10-12" title="12"><span class="co">#&gt; 1 3.0.Gini       Coeficiente de Gini    El coeficiente de Gini es la medid~</span></a>
-<a class="sourceLine" id="cb10-13" title="13"><span class="co">#&gt; 2 3.0.Gini_noze~ Coeficiente de Gini (~ El coeficiente de Gini es la medid~</span></a>
-<a class="sourceLine" id="cb10-14" title="14"><span class="co">#&gt; 3 3.0.TheilInd1  Índice de Theil, GE(1) El Índice de Theil es parte de una~</span></a>
-<a class="sourceLine" id="cb10-15" title="15"><span class="co">#&gt; 4 3.1.Gini       Gini, Rural            El coeficiente de Gini es la medid~</span></a>
-<a class="sourceLine" id="cb10-16" title="16"><span class="co">#&gt; 5 3.1.TheilInd1  Índice de Theil, GE(1~ El Índice de Theil es parte de una~</span></a>
-<a class="sourceLine" id="cb10-17" title="17"><span class="co">#&gt; 6 3.2.Gini       Gini, Urbano           El coeficiente de Gini es la medid~</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt;   indicator_id   indicator                indicator_desc                        </span></a>
+<a class="sourceLine" id="cb10-11" title="11"><span class="co">#&gt;   &lt;chr&gt;          &lt;chr&gt;                    &lt;chr&gt;                                 </span></a>
+<a class="sourceLine" id="cb10-12" title="12"><span class="co">#&gt; 1 3.0.Gini       Coeficiente de Gini      El coeficiente de Gini es la medida d~</span></a>
+<a class="sourceLine" id="cb10-13" title="13"><span class="co">#&gt; 2 3.0.Gini_noze~ Coeficiente de Gini (In~ El coeficiente de Gini es la medida d~</span></a>
+<a class="sourceLine" id="cb10-14" title="14"><span class="co">#&gt; 3 3.0.TheilInd1  Índice de Theil, GE(1)   El Índice de Theil es parte de una gr~</span></a>
+<a class="sourceLine" id="cb10-15" title="15"><span class="co">#&gt; 4 3.1.Gini       Gini, Rural              El coeficiente de Gini es la medida d~</span></a>
+<a class="sourceLine" id="cb10-16" title="16"><span class="co">#&gt; 5 3.1.TheilInd1  Índice de Theil, GE(1),~ El Índice de Theil es parte de una gr~</span></a>
+<a class="sourceLine" id="cb10-17" title="17"><span class="co">#&gt; 6 3.2.Gini       Gini, Urbano             El coeficiente de Gini es la medida d~</span></a></code></pre></div>
 </div>
 <div id="downloading-data-with-wb_data" class="section level2">
 <h2 class="hasAnchor">
@@ -242,15 +245,14 @@
 <a class="sourceLine" id="cb11-5" title="5"></a>
 <a class="sourceLine" id="cb11-6" title="6"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(pop_data)</a>
 <a class="sourceLine" id="cb11-7" title="7"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
-<a class="sourceLine" id="cb11-8" title="8"><span class="co">#&gt;   iso2c iso3c country  date SP.POP.TOTL unit  obs_status footnote</span></a>
-<a class="sourceLine" id="cb11-9" title="9"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;   </span></a>
-<a class="sourceLine" id="cb11-10" title="10"><span class="co">#&gt; 1 AW    ABW   Aruba    2000       90853 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
-<a class="sourceLine" id="cb11-11" title="11"><span class="co">#&gt; 2 AW    ABW   Aruba    2001       92898 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
-<a class="sourceLine" id="cb11-12" title="12"><span class="co">#&gt; 3 AW    ABW   Aruba    2002       94992 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
-<a class="sourceLine" id="cb11-13" title="13"><span class="co">#&gt; 4 AF    AFG   Afghan~  2000    20779953 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
-<a class="sourceLine" id="cb11-14" title="14"><span class="co">#&gt; 5 AF    AFG   Afghan~  2001    21606988 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
-<a class="sourceLine" id="cb11-15" title="15"><span class="co">#&gt; 6 AF    AFG   Afghan~  2002    22600770 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
-<a class="sourceLine" id="cb11-16" title="16"><span class="co">#&gt; # ... with 1 more variable: last_updated &lt;date&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb11-8" title="8"><span class="co">#&gt;   iso2c iso3c country    date SP.POP.TOTL unit  obs_status footnote last_updated</span></a>
+<a class="sourceLine" id="cb11-9" title="9"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;date&gt;      </span></a>
+<a class="sourceLine" id="cb11-10" title="10"><span class="co">#&gt; 1 AW    ABW   Aruba      2000       90853 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;     2020-02-26  </span></a>
+<a class="sourceLine" id="cb11-11" title="11"><span class="co">#&gt; 2 AW    ABW   Aruba      2001       92898 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;     2020-02-26  </span></a>
+<a class="sourceLine" id="cb11-12" title="12"><span class="co">#&gt; 3 AW    ABW   Aruba      2002       94992 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;     2020-02-26  </span></a>
+<a class="sourceLine" id="cb11-13" title="13"><span class="co">#&gt; 4 AF    AFG   Afghanis~  2000    20779953 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;     2020-02-26  </span></a>
+<a class="sourceLine" id="cb11-14" title="14"><span class="co">#&gt; 5 AF    AFG   Afghanis~  2001    21606988 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;     2020-02-26  </span></a>
+<a class="sourceLine" id="cb11-15" title="15"><span class="co">#&gt; 6 AF    AFG   Afghanis~  2002    22600770 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;     2020-02-26</span></a></code></pre></div>
 <p>If you are interested in only some subset of countries or regions you can pass along the specific codes to the <code>country</code> parameter. The country and region codes and names that can be passed to the <code>country</code> parameter as well, most prominently the coded values from the <code>iso2c</code> and <code>iso3c</code> from the <code>countries</code> data frame in <code>wb_cachelist</code> or the return of <code><a href="../reference/wb_cache.html">wb_cache()</a></code>. Any values from the above columns can mixed together and passed to the same call</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
 <a class="sourceLine" id="cb12-2" title="2"></a>
@@ -263,16 +265,15 @@
 <a class="sourceLine" id="cb12-9" title="9"></a>
 <a class="sourceLine" id="cb12-10" title="10">pop_data</a>
 <a class="sourceLine" id="cb12-11" title="11"><span class="co">#&gt; # A tibble: 7 x 9</span></a>
-<a class="sourceLine" id="cb12-12" title="12"><span class="co">#&gt;   iso2c iso3c country  date SP.POP.TOTL unit  obs_status footnote</span></a>
-<a class="sourceLine" id="cb12-13" title="13"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;   </span></a>
-<a class="sourceLine" id="cb12-14" title="14"><span class="co">#&gt; 1 AW    ABW   Aruba    2012      102560 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
-<a class="sourceLine" id="cb12-15" title="15"><span class="co">#&gt; 2 AF    AFG   Afghan~  2012    31161376 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
-<a class="sourceLine" id="cb12-16" title="16"><span class="co">#&gt; 3 AL    ALB   Albania  2012     2900401 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
-<a class="sourceLine" id="cb12-17" title="17"><span class="co">#&gt; 4 7E    ECA   Europe~  2012   403265869 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
-<a class="sourceLine" id="cb12-18" title="18"><span class="co">#&gt; 5 8S    SAS   South ~  2012  1683747130 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
-<a class="sourceLine" id="cb12-19" title="19"><span class="co">#&gt; 6 ZG    SSF   Sub-Sa~  2012   917726973 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
-<a class="sourceLine" id="cb12-20" title="20"><span class="co">#&gt; 7 XD    HIC   High i~  2012  1170223344 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;    </span></a>
-<a class="sourceLine" id="cb12-21" title="21"><span class="co">#&gt; # ... with 1 more variable: last_updated &lt;date&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb12-12" title="12"><span class="co">#&gt;   iso2c iso3c country    date SP.POP.TOTL unit  obs_status footnote last_updated</span></a>
+<a class="sourceLine" id="cb12-13" title="13"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;date&gt;      </span></a>
+<a class="sourceLine" id="cb12-14" title="14"><span class="co">#&gt; 1 AW    ABW   Aruba      2012      102560 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;     2020-02-26  </span></a>
+<a class="sourceLine" id="cb12-15" title="15"><span class="co">#&gt; 2 AF    AFG   Afghanis~  2012    31161376 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;     2020-02-26  </span></a>
+<a class="sourceLine" id="cb12-16" title="16"><span class="co">#&gt; 3 AL    ALB   Albania    2012     2900401 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;     2020-02-26  </span></a>
+<a class="sourceLine" id="cb12-17" title="17"><span class="co">#&gt; 4 7E    ECA   Europe &amp;~  2012   403265869 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;     2020-02-26  </span></a>
+<a class="sourceLine" id="cb12-18" title="18"><span class="co">#&gt; 5 8S    SAS   South As~  2012  1683747130 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;     2020-02-26  </span></a>
+<a class="sourceLine" id="cb12-19" title="19"><span class="co">#&gt; 6 ZG    SSF   Sub-Saha~  2012   917726973 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;     2020-02-26  </span></a>
+<a class="sourceLine" id="cb12-20" title="20"><span class="co">#&gt; 7 XD    HIC   High inc~  2012  1170223344 &lt;NA&gt;  &lt;NA&gt;       &lt;NA&gt;     2020-02-26</span></a></code></pre></div>
 <p>As of <code>wbstats 1.0</code> queries are now returned in wide format. This was a request made by multiple users and is in line with the principles of <a href="https://www.jstatsoft.org/article/view/v059i10">tidy data</a>. If you would like to return the data in a long format, you can set <code>return_wide = FALSE</code></p>
 <p>Now that each indicator is it’s own column, we can implement a great suggestion by <a href="https://github.com/nset-ornl/wbstats/issues/12">vincentarelbundock</a> to allow custom names for the indicators</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</a>
@@ -339,14 +340,14 @@
 <a class="sourceLine" id="cb16-4" title="4"></a>
 <a class="sourceLine" id="cb16-5" title="5"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(gdp_capita)</a>
 <a class="sourceLine" id="cb16-6" title="6"><span class="co">#&gt; # A tibble: 6 x 8</span></a>
-<a class="sourceLine" id="cb16-7" title="7"><span class="co">#&gt;   iso2c iso3c country  date NY.GDP.PCAP.CD obs_status footnote last_updated</span></a>
-<a class="sourceLine" id="cb16-8" title="8"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;          &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;date&gt;      </span></a>
-<a class="sourceLine" id="cb16-9" title="9"><span class="co">#&gt; 1 AW    ABW   Aruba    2017         25630. &lt;NA&gt;       &lt;NA&gt;     2019-12-20  </span></a>
-<a class="sourceLine" id="cb16-10" title="10"><span class="co">#&gt; 2 AF    AFG   Afghan~  2018           521. &lt;NA&gt;       &lt;NA&gt;     2019-12-20  </span></a>
-<a class="sourceLine" id="cb16-11" title="11"><span class="co">#&gt; 3 AO    AGO   Angola   2018          3432. &lt;NA&gt;       &lt;NA&gt;     2019-12-20  </span></a>
-<a class="sourceLine" id="cb16-12" title="12"><span class="co">#&gt; 4 AL    ALB   Albania  2018          5269. &lt;NA&gt;       &lt;NA&gt;     2019-12-20  </span></a>
-<a class="sourceLine" id="cb16-13" title="13"><span class="co">#&gt; 5 AD    AND   Andorra  2018         42030. &lt;NA&gt;       &lt;NA&gt;     2019-12-20  </span></a>
-<a class="sourceLine" id="cb16-14" title="14"><span class="co">#&gt; 6 AE    ARE   United~  2018         43005. &lt;NA&gt;       &lt;NA&gt;     2019-12-20</span></a></code></pre></div>
+<a class="sourceLine" id="cb16-7" title="7"><span class="co">#&gt;   iso2c iso3c country       date NY.GDP.PCAP.CD obs_status footnote last_updated</span></a>
+<a class="sourceLine" id="cb16-8" title="8"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;          &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;date&gt;      </span></a>
+<a class="sourceLine" id="cb16-9" title="9"><span class="co">#&gt; 1 AW    ABW   Aruba         2017         25630. &lt;NA&gt;       &lt;NA&gt;     2020-02-26  </span></a>
+<a class="sourceLine" id="cb16-10" title="10"><span class="co">#&gt; 2 AF    AFG   Afghanistan   2018           521. &lt;NA&gt;       &lt;NA&gt;     2020-02-26  </span></a>
+<a class="sourceLine" id="cb16-11" title="11"><span class="co">#&gt; 3 AO    AGO   Angola        2018          3432. &lt;NA&gt;       &lt;NA&gt;     2020-02-26  </span></a>
+<a class="sourceLine" id="cb16-12" title="12"><span class="co">#&gt; 4 AL    ALB   Albania       2018          5269. &lt;NA&gt;       &lt;NA&gt;     2020-02-26  </span></a>
+<a class="sourceLine" id="cb16-13" title="13"><span class="co">#&gt; 5 AD    AND   Andorra       2018         42030. &lt;NA&gt;       &lt;NA&gt;     2020-02-26  </span></a>
+<a class="sourceLine" id="cb16-14" title="14"><span class="co">#&gt; 6 AE    ARE   United Arab~  2018         43005. &lt;NA&gt;       &lt;NA&gt;     2020-02-26</span></a></code></pre></div>
 </div>
 <div id="dates" class="section level3">
 <h3 class="hasAnchor">
@@ -359,10 +360,6 @@
 <h1 class="hasAnchor">
 <a href="#some-sharp-corners" class="anchor"></a>Some Sharp Corners</h1>
 <p>There are a few behaviors of the World Bank API that being aware of could help explain some potentially unexpected results. These results are known but no special actions are taken to mitigate them as they are the result of the API itself and artifically limiting the inputs or results could potentially causes problems or create unnecessary rescrictions in the future.</p>
-<div id="this-case-of-the-missing-indicators" class="section level2">
-<h2 class="hasAnchor">
-<a href="#this-case-of-the-missing-indicators" class="anchor"></a>This case of the missing indicators</h2>
-</div>
 <div id="searching-in-other-languages" class="section level2">
 <h2 class="hasAnchor">
 <a href="#searching-in-other-languages" class="anchor"></a>Searching in other languages</h2>
@@ -412,8 +409,7 @@
 </li>
       <li>
 <a href="#some-sharp-corners">Some Sharp Corners</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#this-case-of-the-missing-indicators">This case of the missing indicators</a></li>
-      <li><a href="#searching-in-other-languages">Searching in other languages</a></li>
+<li><a href="#searching-in-other-languages">Searching in other languages</a></li>
       </ul>
 </li>
       <li><a href="#legal">Legal</a></li>
