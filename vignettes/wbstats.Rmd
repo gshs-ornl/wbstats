@@ -7,7 +7,7 @@ vignette: >
   %\VignetteIndexEntry{wbstats}
   %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
-
+    
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -221,7 +221,8 @@ head(gdp_capita)
 Because the majority of data available from the World Bank is at the annual resolution, by default dates in `wbstats` are returned as `numeric`s. This default makes common tasks like filtering easier. If you would like the date field to be of class `Date` you can set `date_as_class_date = TRUE`
 
 # Some Sharp Corners
-There are a few behaviors of the World Bank API that being aware of could help explain some potentially unexpected results. These results are known but no special actions are taken to mitigate them as they are the result of the API itself and artifically limiting the inputs or results could potentially causes problems or create unnecessary rescrictions in the future. 
+There are a few behaviors of the World Bank API that being aware of could help explain some potentially unexpected results. These results are known but no special actions are taken to mitigate them as they are the result of the API itself and artifically limiting the inputs or results could potentially causes problems or create unnecessary rescrictions in the future.
+ 
 
 ## Searching in other languages
 Not all data sources support all languages. If an indicator does not have a translation for a particular language, the non-supported fields will return as `NA`. This could potentially result in a differing number of matching indicators from `wb_search()`

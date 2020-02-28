@@ -7,7 +7,7 @@ vignette: >
   %\VignetteIndexEntry{wbstats}
   %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
-
+    
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -208,12 +208,12 @@ head(pop_data)
 #> # A tibble: 6 x 9
 #>   iso2c iso3c country    date SP.POP.TOTL unit  obs_status footnote last_updated
 #>   <chr> <chr> <chr>     <dbl>       <dbl> <chr> <chr>      <chr>    <date>      
-#> 1 AW    ABW   Aruba      2000       90853 <NA>  <NA>       <NA>     2020-02-26  
-#> 2 AW    ABW   Aruba      2001       92898 <NA>  <NA>       <NA>     2020-02-26  
-#> 3 AW    ABW   Aruba      2002       94992 <NA>  <NA>       <NA>     2020-02-26  
-#> 4 AF    AFG   Afghanis~  2000    20779953 <NA>  <NA>       <NA>     2020-02-26  
-#> 5 AF    AFG   Afghanis~  2001    21606988 <NA>  <NA>       <NA>     2020-02-26  
-#> 6 AF    AFG   Afghanis~  2002    22600770 <NA>  <NA>       <NA>     2020-02-26
+#> 1 AW    ABW   Aruba      2000       90853 <NA>  <NA>       <NA>     2020-02-27  
+#> 2 AW    ABW   Aruba      2001       92898 <NA>  <NA>       <NA>     2020-02-27  
+#> 3 AW    ABW   Aruba      2002       94992 <NA>  <NA>       <NA>     2020-02-27  
+#> 4 AF    AFG   Afghanis~  2000    20779953 <NA>  <NA>       <NA>     2020-02-27  
+#> 5 AF    AFG   Afghanis~  2001    21606988 <NA>  <NA>       <NA>     2020-02-27  
+#> 6 AF    AFG   Afghanis~  2002    22600770 <NA>  <NA>       <NA>     2020-02-27
 ```
 
 If you are interested in only some subset of countries or regions you can pass along the specific codes to the `country` parameter. The country and region codes and names that can be passed to the `country` parameter as well, most prominently the coded values from the `iso2c` and `iso3c` from the `countries` data frame in `wb_cachelist` or the return of `wb_cache()`. Any values from the above columns can mixed together and passed to the same call
@@ -232,13 +232,13 @@ pop_data
 #> # A tibble: 7 x 9
 #>   iso2c iso3c country    date SP.POP.TOTL unit  obs_status footnote last_updated
 #>   <chr> <chr> <chr>     <dbl>       <dbl> <chr> <chr>      <chr>    <date>      
-#> 1 AW    ABW   Aruba      2012      102560 <NA>  <NA>       <NA>     2020-02-26  
-#> 2 AF    AFG   Afghanis~  2012    31161376 <NA>  <NA>       <NA>     2020-02-26  
-#> 3 AL    ALB   Albania    2012     2900401 <NA>  <NA>       <NA>     2020-02-26  
-#> 4 7E    ECA   Europe &~  2012   403265869 <NA>  <NA>       <NA>     2020-02-26  
-#> 5 8S    SAS   South As~  2012  1683747130 <NA>  <NA>       <NA>     2020-02-26  
-#> 6 ZG    SSF   Sub-Saha~  2012   917726973 <NA>  <NA>       <NA>     2020-02-26  
-#> 7 XD    HIC   High inc~  2012  1170223344 <NA>  <NA>       <NA>     2020-02-26
+#> 1 AW    ABW   Aruba      2012      102560 <NA>  <NA>       <NA>     2020-02-27  
+#> 2 AF    AFG   Afghanis~  2012    31161376 <NA>  <NA>       <NA>     2020-02-27  
+#> 3 AL    ALB   Albania    2012     2900401 <NA>  <NA>       <NA>     2020-02-27  
+#> 4 7E    ECA   Europe &~  2012   403265869 <NA>  <NA>       <NA>     2020-02-27  
+#> 5 8S    SAS   South As~  2012  1683747130 <NA>  <NA>       <NA>     2020-02-27  
+#> 6 ZG    SSF   Sub-Saha~  2012   917726973 <NA>  <NA>       <NA>     2020-02-27  
+#> 7 XD    HIC   High inc~  2012  1170223344 <NA>  <NA>       <NA>     2020-02-27
 ```
 
 As of `wbstats 1.0` queries are now returned in wide format. This was a request made by multiple users and is in line with the principles of [tidy data](https://www.jstatsoft.org/article/view/v059i10). If you would like to return the data in a long format, you can set `return_wide = FALSE`   
@@ -322,12 +322,12 @@ head(gdp_capita)
 #> # A tibble: 6 x 8
 #>   iso2c iso3c country       date NY.GDP.PCAP.CD obs_status footnote last_updated
 #>   <chr> <chr> <chr>        <dbl>          <dbl> <chr>      <chr>    <date>      
-#> 1 AW    ABW   Aruba         2017         25630. <NA>       <NA>     2020-02-26  
-#> 2 AF    AFG   Afghanistan   2018           521. <NA>       <NA>     2020-02-26  
-#> 3 AO    AGO   Angola        2018          3432. <NA>       <NA>     2020-02-26  
-#> 4 AL    ALB   Albania       2018          5269. <NA>       <NA>     2020-02-26  
-#> 5 AD    AND   Andorra       2018         42030. <NA>       <NA>     2020-02-26  
-#> 6 AE    ARE   United Arab~  2018         43005. <NA>       <NA>     2020-02-26
+#> 1 AW    ABW   Aruba         2017         25630. <NA>       <NA>     2020-02-27  
+#> 2 AF    AFG   Afghanistan   2018           521. <NA>       <NA>     2020-02-27  
+#> 3 AO    AGO   Angola        2018          3432. <NA>       <NA>     2020-02-27  
+#> 4 AL    ALB   Albania       2018          5269. <NA>       <NA>     2020-02-27  
+#> 5 AD    AND   Andorra       2018         42030. <NA>       <NA>     2020-02-27  
+#> 6 AE    ARE   United Arab~  2018         43005. <NA>       <NA>     2020-02-27
 ```
 
 ### Dates
@@ -351,7 +351,7 @@ sum(is.na(cache_en$indicators$indicator))
 # spanish
 cache_es <- wb_cache(lang = "es")
 sum(is.na(cache_es$indicators$indicator))
-#> [1] 14626
+#> [1] 14628
 ```
 
 
