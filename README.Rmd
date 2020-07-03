@@ -36,7 +36,7 @@ remotes::install_github("nset-ornl/wbstats")
 library(wbstats)
 
 # Population for every country from 1960 until present
-d <- wb_data("SP.POP.TOTL")
+d <- wb(country = "all", "SP.POP.TOTL")
     
 head(d)
 ```
@@ -49,15 +49,24 @@ library(tidyverse)
 library(wbstats)
 
 my_indicators <- c(
-  life_exp = "SP.DYN.LE00.IN", 
-  gdp_capita ="NY.GDP.PCAP.CD", 
-  pop = "SP.POP.TOTL"
+  "SP.DYN.LE00.IN", # Life Expectancy
+  "NY.GDP.PCAP.CD", # GDP
+  "SP.POP.TOTL" # Total Population
   )
 
-d <- wb_data(my_indicators, start_date = 2016)
+## Extracting the data from world bank, using the restful api via the wb()
+d <- wb(country = "all", my_indicators, startdate = 2016, enddate = 2016)
 
+## data cleaning and rearranging
+d <- d %>% 
+  select(-indicator) %>% 
+  spread(indicatorID, value) %>% 
+  rename(life_exp = SP.DYN.LE00.IN, gdp_capita = NY.GDP.PCAP.CD, pop = SP.POP.TOTL) %>% 
+  left_join(wbcountries(), "iso3c")
+
+
+## Data visualization
 d %>%
-  left_join(wb_countries(), "iso3c") %>%
   ggplot() +
   geom_point(
     aes(
@@ -99,14 +108,15 @@ library(tidyverse)
 library(wbstats)
 
 ind <- "SL.EMP.SELF.ZS"
-indicator_info <- filter(wb_cachelist$indicators, indicator_id == ind)
+indicator_info <- filter(wb_cachelist$indicators, indicatorID == ind)
 
 ne_countries(returnclass = "sf") %>%
   left_join(
-    wb_data(
-      c(self_employed = ind), 
-         mrnev = 1
-          ),
+    wb(country = "all",
+      ind
+          ) %>% 
+      select(-indicatorID, -indicator) %>% 
+      rename(self_employed = value),
     c("iso_a3" = "iso3c")
   ) %>%
   filter(iso_a3 != "ATA") %>% # remove Antarctica
@@ -117,7 +127,7 @@ ne_countries(returnclass = "sf") %>%
   labs(
     title = indicator_info$indicator,
     fill = NULL,
-    caption = paste("Source:", indicator_info$source_org) 
+    caption = paste("Source:", indicator_info$sourceOrg) 
   )
   
 ```
