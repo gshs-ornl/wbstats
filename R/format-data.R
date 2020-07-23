@@ -115,7 +115,8 @@ format_wb_country <- function(x, cache) {
 
 
   if (any(x_lower %in% c("countries", "countries_only", "countries only")))
-    cn_params <- unique_na(cache_cn$iso3c[cache_cn$region != "Aggregates"])
+    # it is actually faster and more reliable to request 'all' and then filter afterwards
+    cn_params <- "all"
 
   else if (any(x_lower %in% c("regions", "regions_only", "regions only")))
     cn_params <- unique_na(cache_cn$region_iso3c)

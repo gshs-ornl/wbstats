@@ -14,6 +14,8 @@ vignette: >
 
 
 
+
+
 # wbstats: An R package for searching and downloading data from the World Bank API.
 
 You can install:
@@ -61,14 +63,14 @@ library(wbstats)
 
 str(wb_cachelist, max.level = 1)
 #> List of 8
-#>  $ countries    :Classes 'tbl_df', 'tbl' and 'data.frame':	304 obs. of  18 variables:
-#>  $ indicators   :Classes 'tbl_df', 'tbl' and 'data.frame':	16496 obs. of  8 variables:
-#>  $ sources      :Classes 'tbl_df', 'tbl' and 'data.frame':	59 obs. of  9 variables:
-#>  $ topics       :Classes 'tbl_df', 'tbl' and 'data.frame':	21 obs. of  3 variables:
-#>  $ regions      :Classes 'tbl_df', 'tbl' and 'data.frame':	48 obs. of  4 variables:
-#>  $ income_levels:Classes 'tbl_df', 'tbl' and 'data.frame':	7 obs. of  3 variables:
-#>  $ lending_types:Classes 'tbl_df', 'tbl' and 'data.frame':	4 obs. of  3 variables:
-#>  $ languages    :Classes 'tbl_df', 'tbl' and 'data.frame':	23 obs. of  3 variables:
+#>  $ countries    : tibble [304 x 18] (S3: tbl_df/tbl/data.frame)
+#>  $ indicators   : tibble [16,607 x 8] (S3: tbl_df/tbl/data.frame)
+#>  $ sources      : tibble [61 x 9] (S3: tbl_df/tbl/data.frame)
+#>  $ topics       : tibble [21 x 3] (S3: tbl_df/tbl/data.frame)
+#>  $ regions      : tibble [48 x 4] (S3: tbl_df/tbl/data.frame)
+#>  $ income_levels: tibble [7 x 3] (S3: tbl_df/tbl/data.frame)
+#>  $ lending_types: tibble [4 x 3] (S3: tbl_df/tbl/data.frame)
+#>  $ languages    : tibble [23 x 3] (S3: tbl_df/tbl/data.frame)
 ```
 
 ## Accessing updated available data with `wb_cache()`
@@ -208,12 +210,12 @@ head(pop_data)
 #> # A tibble: 6 x 9
 #>   iso2c iso3c country    date SP.POP.TOTL unit  obs_status footnote last_updated
 #>   <chr> <chr> <chr>     <dbl>       <dbl> <chr> <chr>      <chr>    <date>      
-#> 1 AW    ABW   Aruba      2000       90853 <NA>  <NA>       <NA>     2020-02-27  
-#> 2 AW    ABW   Aruba      2001       92898 <NA>  <NA>       <NA>     2020-02-27  
-#> 3 AW    ABW   Aruba      2002       94992 <NA>  <NA>       <NA>     2020-02-27  
-#> 4 AF    AFG   Afghanis~  2000    20779953 <NA>  <NA>       <NA>     2020-02-27  
-#> 5 AF    AFG   Afghanis~  2001    21606988 <NA>  <NA>       <NA>     2020-02-27  
-#> 6 AF    AFG   Afghanis~  2002    22600770 <NA>  <NA>       <NA>     2020-02-27
+#> 1 AW    ABW   Aruba      2000       90853 <NA>  <NA>       <NA>     2020-07-01  
+#> 2 AW    ABW   Aruba      2001       92898 <NA>  <NA>       <NA>     2020-07-01  
+#> 3 AW    ABW   Aruba      2002       94992 <NA>  <NA>       <NA>     2020-07-01  
+#> 4 AF    AFG   Afghanis~  2000    20779953 <NA>  <NA>       <NA>     2020-07-01  
+#> 5 AF    AFG   Afghanis~  2001    21606988 <NA>  <NA>       <NA>     2020-07-01  
+#> 6 AF    AFG   Afghanis~  2002    22600770 <NA>  <NA>       <NA>     2020-07-01
 ```
 
 If you are interested in only some subset of countries or regions you can pass along the specific codes to the `country` parameter. The country and region codes and names that can be passed to the `country` parameter as well, most prominently the coded values from the `iso2c` and `iso3c` from the `countries` data frame in `wb_cachelist` or the return of `wb_cache()`. Any values from the above columns can mixed together and passed to the same call
@@ -224,7 +226,7 @@ library(wbstats)
 # you can mix different ids and they are case insensitive
 # you can even use SpOnGeBoB CaSe if that's the kind of thing you're into
 # iso3c, iso2c, country, region_iso3c, admin_region_iso3c, admin_region, income_level
-example_geos <- c("ABW","AF", "albania", "SSF", "eca", "South Asia", "HiGh InComE")
+example_geos <- c("ABW","AF", "albania", "SSF", "eca", "South Asia", "HiGh InCoMe")
 pop_data <- wb_data("SP.POP.TOTL", country = example_geos,
                     start_date = 2012, end_date = 2012)
 
@@ -232,18 +234,18 @@ pop_data
 #> # A tibble: 7 x 9
 #>   iso2c iso3c country    date SP.POP.TOTL unit  obs_status footnote last_updated
 #>   <chr> <chr> <chr>     <dbl>       <dbl> <chr> <chr>      <chr>    <date>      
-#> 1 AW    ABW   Aruba      2012      102560 <NA>  <NA>       <NA>     2020-02-27  
-#> 2 AF    AFG   Afghanis~  2012    31161376 <NA>  <NA>       <NA>     2020-02-27  
-#> 3 AL    ALB   Albania    2012     2900401 <NA>  <NA>       <NA>     2020-02-27  
-#> 4 7E    ECA   Europe &~  2012   403265869 <NA>  <NA>       <NA>     2020-02-27  
-#> 5 8S    SAS   South As~  2012  1683747130 <NA>  <NA>       <NA>     2020-02-27  
-#> 6 ZG    SSF   Sub-Saha~  2012   917726973 <NA>  <NA>       <NA>     2020-02-27  
-#> 7 XD    HIC   High inc~  2012  1170223344 <NA>  <NA>       <NA>     2020-02-27
+#> 1 AW    ABW   Aruba      2012      102560 <NA>  <NA>       <NA>     2020-07-01  
+#> 2 AF    AFG   Afghanis~  2012    31161376 <NA>  <NA>       <NA>     2020-07-01  
+#> 3 AL    ALB   Albania    2012     2900401 <NA>  <NA>       <NA>     2020-07-01  
+#> 4 7E    ECA   Europe &~  2012   382509766 <NA>  <NA>       <NA>     2020-07-01  
+#> 5 8S    SAS   South As~  2012  1683747130 <NA>  <NA>       <NA>     2020-07-01  
+#> 6 ZG    SSF   Sub-Saha~  2012   917726973 <NA>  <NA>       <NA>     2020-07-01  
+#> 7 XD    HIC   High inc~  2012  1191504227 <NA>  <NA>       <NA>     2020-07-01
 ```
 
 As of `wbstats 1.0` queries are now returned in wide format. This was a request made by multiple users and is in line with the principles of [tidy data](https://www.jstatsoft.org/article/view/v059i10). If you would like to return the data in a long format, you can set `return_wide = FALSE`   
 
-Now that each indicator is it's own column, we can implement a great suggestion by [vincentarelbundock](https://github.com/nset-ornl/wbstats/issues/12) to allow custom names for the indicators 
+Now that each indicator is it's own column, we can allow custom names for the indicators 
 
 ```r
 library(wbstats)
@@ -261,8 +263,8 @@ head(pop_gdp)
 #> 2 AW    ABW   Aruba        2011  2549720670.   102046
 #> 3 AW    ABW   Aruba        2012  2534636872.   102560
 #> 4 AF    AFG   Afghanistan  2010 15856574731. 29185507
-#> 5 AF    AFG   Afghanistan  2011 17804280538. 30117413
-#> 6 AF    AFG   Afghanistan  2012 20001615789. 31161376
+#> 5 AF    AFG   Afghanistan  2011 17804292964. 30117413
+#> 6 AF    AFG   Afghanistan  2012 20001598506. 31161376
 ```
 
 You'll notice that when you query only one indicator, as in the first two examples above, it returns the extra fields `unit`, `obs_status`, `footnote`, and `last_updated`, but when we queried multiple indicators at once, as in our last example, they are dropped. This is because those extra fields are tied to a specific observation of a single indicator and when we have multiple indciator values in a single row, they are no longer consistent with the tidy data format. If you would like that information for multiple indicators, you can use `return_wide = FALSE`
@@ -279,12 +281,12 @@ head(pop_gdp_long)
 #> # A tibble: 6 x 11
 #>   indicator_id indicator iso2c iso3c country  date  value unit  obs_status
 #>   <chr>        <chr>     <chr> <chr> <chr>   <dbl>  <dbl> <chr> <chr>     
-#> 1 SP.POP.TOTL  Populati~ AW    ABW   Aruba    2012 1.03e5 <NA>  <NA>      
-#> 2 SP.POP.TOTL  Populati~ AW    ABW   Aruba    2011 1.02e5 <NA>  <NA>      
-#> 3 SP.POP.TOTL  Populati~ AW    ABW   Aruba    2010 1.02e5 <NA>  <NA>      
-#> 4 SP.POP.TOTL  Populati~ AF    AFG   Afghan~  2012 3.12e7 <NA>  <NA>      
-#> 5 SP.POP.TOTL  Populati~ AF    AFG   Afghan~  2011 3.01e7 <NA>  <NA>      
-#> 6 SP.POP.TOTL  Populati~ AF    AFG   Afghan~  2010 2.92e7 <NA>  <NA>      
+#> 1 SP.POP.TOTL  Populati~ AF    AFG   Afghan~  2012 3.12e7 <NA>  <NA>      
+#> 2 SP.POP.TOTL  Populati~ AF    AFG   Afghan~  2011 3.01e7 <NA>  <NA>      
+#> 3 SP.POP.TOTL  Populati~ AF    AFG   Afghan~  2010 2.92e7 <NA>  <NA>      
+#> 4 SP.POP.TOTL  Populati~ AL    ALB   Albania  2012 2.90e6 <NA>  <NA>      
+#> 5 SP.POP.TOTL  Populati~ AL    ALB   Albania  2011 2.91e6 <NA>  <NA>      
+#> 6 SP.POP.TOTL  Populati~ AL    ALB   Albania  2010 2.91e6 <NA>  <NA>      
 #> # ... with 2 more variables: footnote <chr>, last_updated <date>
 ```
 
@@ -302,12 +304,12 @@ head(gdp_capita)
 #> # A tibble: 6 x 9
 #>   iso2c iso3c country  date NY.GDP.PCAP.CD unit  obs_status footnote
 #>   <chr> <chr> <chr>   <dbl>          <dbl> <chr> <chr>      <chr>   
-#> 1 AW    ABW   Aruba    2018            NA  <NA>  <NA>       <NA>    
-#> 2 AF    AFG   Afghan~  2018           521. <NA>  <NA>       <NA>    
-#> 3 AO    AGO   Angola   2018          3432. <NA>  <NA>       <NA>    
-#> 4 AL    ALB   Albania  2018          5269. <NA>  <NA>       <NA>    
-#> 5 AD    AND   Andorra  2018         42030. <NA>  <NA>       <NA>    
-#> 6 AE    ARE   United~  2018         43005. <NA>  <NA>       <NA>    
+#> 1 AW    ABW   Aruba    2019            NA  <NA>  <NA>       <NA>    
+#> 2 AF    AFG   Afghan~  2019           502. <NA>  <NA>       <NA>    
+#> 3 AO    AGO   Angola   2019          2974. <NA>  <NA>       <NA>    
+#> 4 AL    ALB   Albania  2019          5353. <NA>  <NA>       <NA>    
+#> 5 AD    AND   Andorra  2019         40886. <NA>  <NA>       <NA>    
+#> 6 AE    ARE   United~  2019         43103. <NA>  <NA>       <NA>    
 #> # ... with 1 more variable: last_updated <date>
 ```
 
@@ -322,25 +324,25 @@ head(gdp_capita)
 #> # A tibble: 6 x 8
 #>   iso2c iso3c country       date NY.GDP.PCAP.CD obs_status footnote last_updated
 #>   <chr> <chr> <chr>        <dbl>          <dbl> <chr>      <chr>    <date>      
-#> 1 AW    ABW   Aruba         2017         25630. <NA>       <NA>     2020-02-27  
-#> 2 AF    AFG   Afghanistan   2018           521. <NA>       <NA>     2020-02-27  
-#> 3 AO    AGO   Angola        2018          3432. <NA>       <NA>     2020-02-27  
-#> 4 AL    ALB   Albania       2018          5269. <NA>       <NA>     2020-02-27  
-#> 5 AD    AND   Andorra       2018         42030. <NA>       <NA>     2020-02-27  
-#> 6 AE    ARE   United Arab~  2018         43005. <NA>       <NA>     2020-02-27
+#> 1 AW    ABW   Aruba         2017         29008. <NA>       <NA>     2020-07-01  
+#> 2 AF    AFG   Afghanistan   2019           502. <NA>       <NA>     2020-07-01  
+#> 3 AO    AGO   Angola        2019          2974. <NA>       <NA>     2020-07-01  
+#> 4 AL    ALB   Albania       2019          5353. <NA>       <NA>     2020-07-01  
+#> 5 AD    AND   Andorra       2019         40886. <NA>       <NA>     2020-07-01  
+#> 6 AE    ARE   United Arab~  2019         43103. <NA>       <NA>     2020-07-01
 ```
 
 ### Dates
 Because the majority of data available from the World Bank is at the annual resolution, by default dates in `wbstats` are returned as `numeric`s. This default makes common tasks like filtering easier. If you would like the date field to be of class `Date` you can set `date_as_class_date = TRUE`
 
 # Some Sharp Corners
-There are a few behaviors of the World Bank API that being aware of could help explain some potentially unexpected results. These results are known but no special actions are taken to mitigate them as they are the result of the API itself and artifically limiting the inputs or results could potentially causes problems or create unnecessary rescrictions in the future. 
+There are a few behaviors of the World Bank API that being aware of could help explain some potentially unexpected results. These results are known but no special actions are taken to mitigate them as they are the result of the API itself and artifically limiting the inputs or results could potentially causes problems or create unnecessary rescrictions in the future.
+ 
 
 ## Searching in other languages
 Not all data sources support all languages. If an indicator does not have a translation for a particular language, the non-supported fields will return as `NA`. This could potentially result in a differing number of matching indicators from `wb_search()`
 
 ```r
-
 library(wbstats)
 
 # english
@@ -351,7 +353,7 @@ sum(is.na(cache_en$indicators$indicator))
 # spanish
 cache_es <- wb_cache(lang = "es")
 sum(is.na(cache_es$indicators$indicator))
-#> [1] 14628
+#> [1] 14749
 ```
 
 

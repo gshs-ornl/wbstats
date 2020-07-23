@@ -12,6 +12,8 @@ vignette: >
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+
+
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -69,7 +71,7 @@ str(wb_cachelist, max.level = 1)
 
 For the most recent information on available data from the World Bank API `wb_cache()` downloads an updated version of the information stored in `wb_cachelist`. `wb_cachelist` is simply a saved return of `wb_cache(lang = "en")`. To use this updated information in  `wb_search()` or `wb_data()`, set the `cache` parameter to the saved `list` returned from `wb_cache()`. It is always a good idea to use this updated information to insure that you have access to the latest available information, such as newly added indicators or data sources. There are also cases in which indicators that were previously available from the API have been removed or deprecated.
 
-```{r}
+```{r, eval=FALSE}
 library(wbstats)
 
 # default language is english
@@ -163,7 +165,7 @@ library(wbstats)
 # you can mix different ids and they are case insensitive
 # you can even use SpOnGeBoB CaSe if that's the kind of thing you're into
 # iso3c, iso2c, country, region_iso3c, admin_region_iso3c, admin_region, income_level
-example_geos <- c("ABW","AF", "albania", "SSF", "eca", "South Asia", "HiGh InComE")
+example_geos <- c("ABW","AF", "albania", "SSF", "eca", "South Asia", "HiGh InCoMe")
 pop_data <- wb_data("SP.POP.TOTL", country = example_geos,
                     start_date = 2012, end_date = 2012)
 
@@ -172,7 +174,7 @@ pop_data
 
 As of `wbstats 1.0` queries are now returned in wide format. This was a request made by multiple users and is in line with the principles of [tidy data](https://www.jstatsoft.org/article/view/v059i10). If you would like to return the data in a long format, you can set `return_wide = FALSE`   
 
-Now that each indicator is it's own column, we can implement a great suggestion by [vincentarelbundock](https://github.com/nset-ornl/wbstats/issues/12) to allow custom names for the indicators 
+Now that each indicator is it's own column, we can allow custom names for the indicators 
 ```{r}
 library(wbstats)
 
@@ -227,7 +229,6 @@ There are a few behaviors of the World Bank API that being aware of could help e
 ## Searching in other languages
 Not all data sources support all languages. If an indicator does not have a translation for a particular language, the non-supported fields will return as `NA`. This could potentially result in a differing number of matching indicators from `wb_search()`
 ```{r}
-
 library(wbstats)
 
 # english

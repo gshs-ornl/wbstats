@@ -1,7 +1,16 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-wbstats: An R package for searching and downloading data from the World Bank API.
-=================================================================================
+wbstats: An R package for searching and downloading data from the World Bank API
+================================================================================
+
+<!-- badges: start -->
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/wbstats)](https://CRAN.R-project.org/package=wbstats)
+[![Monthly](https://cranlogs.r-pkg.org/badges/wbstats)](https://cran.rstudio.com/web/packages/wbstats/index.html)
+[![Lifecycle:
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+<!-- badges: end -->
 
 You can install:
 
@@ -30,15 +39,14 @@ d <- wb_data("SP.POP.TOTL")
     
 head(d)
 #> # A tibble: 6 x 9
-#>   iso2c iso3c country  date SP.POP.TOTL unit  obs_status footnote
-#>   <chr> <chr> <chr>   <dbl>       <dbl> <chr> <chr>      <chr>   
-#> 1 AW    ABW   Aruba    2019          NA <NA>  <NA>       <NA>    
-#> 2 AW    ABW   Aruba    2018      105845 <NA>  <NA>       <NA>    
-#> 3 AW    ABW   Aruba    2017      105366 <NA>  <NA>       <NA>    
-#> 4 AW    ABW   Aruba    2016      104872 <NA>  <NA>       <NA>    
-#> 5 AW    ABW   Aruba    2015      104341 <NA>  <NA>       <NA>    
-#> 6 AW    ABW   Aruba    2014      103774 <NA>  <NA>       <NA>    
-#> # ... with 1 more variable: last_updated <date>
+#>   iso2c iso3c country    date SP.POP.TOTL unit  obs_status footnote last_updated
+#>   <chr> <chr> <chr>     <dbl>       <dbl> <chr> <chr>      <chr>    <date>      
+#> 1 AF    AFG   Afghanis~  2019    38041754 <NA>  <NA>       <NA>     2020-07-01  
+#> 2 AF    AFG   Afghanis~  2018    37172386 <NA>  <NA>       <NA>     2020-07-01  
+#> 3 AF    AFG   Afghanis~  2017    36296400 <NA>  <NA>       <NA>     2020-07-01  
+#> 4 AF    AFG   Afghanis~  2016    35383128 <NA>  <NA>       <NA>     2020-07-01  
+#> 5 AF    AFG   Afghanis~  2015    34413603 <NA>  <NA>       <NA>     2020-07-01  
+#> 6 AF    AFG   Afghanis~  2014    33370794 <NA>  <NA>       <NA>     2020-07-01
 ```
 
 Hans Rosling’s Gapminder using `wbstats`

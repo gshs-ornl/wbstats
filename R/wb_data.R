@@ -136,14 +136,6 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
 
   if (missing(cache)) cache <- wbstats::wb_cachelist
 
-  # TODO: 1. add deperated warning to old functions http://r-pkgs.had.co.nz/release.html
-              # mixing annual and monthly data in one call
-  #       2. BUG: wb_data(country = c("CHN", "IND"), indicator = c("DPANUSSPB", "DPANUSSPF", "SP.POP.TOTL"), start_date = "2010M02", end_date = "2018M01")
-  #       3. for none wdi indicators, iso3c is NA and iso3 codes are in iso2 field. Maybe check for NA iso3 and pull from countries df
-  #       3. the "lending_types_only" doesn't work
-  #       3. check query options?
-  #       4. Do the cache
-  #
   base_url <- wb_api_parameters$base_url
 
   # format country ----------------------------------------------------------
@@ -227,7 +219,17 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
       path_list = path_list, query_list = query_list
     )
 
-  d_list <- lapply(ind_url, fetch_wb_url)
+  # d_list <- lapply(ind_url, fetch_wb_url)
+  d_list <- lapply(seq_along(ind_url),
+                   FUN = function(i){
+                     fetch_wb_url(
+                       url_string = ind_url[i],
+                       indicator = indicator[i]
+                     )
+                    }
+                   )
+  d_list <- d_list[sapply(d_list, is.data.frame)]
+
   d <- do.call(rbind, d_list)
   if(!is.data.frame(d)) {
     warning("No data was returned for your query. Returning an empty tibble")
@@ -235,6 +237,18 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
   }
 
   d <- format_wb_data(d, end_point = "data")
+
+  # country_only actually requests 'all' from the API, now remove non-countries
+  if (any(tolower(country) %in% c("countries", "countries_only", "countries only"))) {
+    country_only_iso3c <- unique_na(cache$countries$iso3c[cache$countries$region != "Aggregates"])
+    d <- d[d$iso3c %in% country_only_iso3c, ]
+  }
+
+  if(nrow(d) == 0) {
+    warning("No data was returned for your query. Returning an empty tibble")
+    return(tibble::tibble())
+  }
+
 
   if (return_wide) {
     context_cols <- c("iso2c", "iso3c", "country", "date")
@@ -286,11 +300,13 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
     # these columns are reordered for readability
     col_order <- c("indicator_id", "indicator", "iso2c", "iso3c", "country", "date",
                    "value", "unit", "obs_status", "footnote", "last_updated")
-    d <- d[ , col_order]
+    col_order2 <- col_order[col_order %in% names(d)]
+
+    d <- d[ , col_order2]
   }
 
   if (date_as_class_date)  d <- format_wb_dates(d)
-  else d$date <- as.numeric(d$date)
+  else if (!any(grepl("M|Q", d$date, ignore.case = TRUE))) d$date <- as.numeric(d$date)
 
   # for indicators that are not apart of the World Development Indicators dataset
   # iso3c values are passed in the iso2c column while the iso3c column is NA

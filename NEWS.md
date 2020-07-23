@@ -1,3 +1,14 @@
+# wbstats 1.0.1
+
+Release `1.0.1` fixes a handful of minor issues
+
+## Changes:
+* Lowered the per_page limit on API requests to the indicators endpoint in functions
+  `wb_indicators()` and `wb_cache()`. This should result in fewer timeouts.
+
+## Bug fixes:
+* Resolved error when `unit` field is missing in certain `wb_data()` calls
+
 
 # wbstats 1.0.0
 

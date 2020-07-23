@@ -38,7 +38,8 @@ build_get_url <- function(end_point, lang) {
   )
 
   query_list <- list(
-    per_page = wb_api_parameters$per_page,
+   # per_page = wb_api_parameters$per_page,
+    per_page = ifelse(end_point == "indicator", 500, wb_api_parameters$per_page),
     format   = wb_api_parameters$format
   )
 
@@ -63,11 +64,12 @@ fetch_wb_url <- function(url_string, indicator) {
 
     message_list <- return_list[[1]]$message[[1]]
 
-    stop(sprintf("World Bank API request failed for indicator %s The following message was returned from the server\nid: %s\nkey: %s\nvalue: %s",
+    stop(sprintf("World Bank API request failed for indicator %s The following message was returned from the server\nid: %s\nkey: %s\nvalue: %s\n\nfailed request:\n%s",
                  indicator,
                  message_list$id,
                  message_list$key,
-                 message_list$value),
+                 message_list$value,
+                 url_string),
          call. = FALSE)
 
   }
@@ -123,7 +125,7 @@ fetch_wb_url_content <- function(url_string, indicator) {
 
   # add api_token here if/when that is supported
 
-  get_return <- httr::GET(url_string, ua)
+  get_return <- httr::GET(url_string, ua, httr::timeout(20))
 
   if (httr::http_error(get_return)) {
 
