@@ -30,6 +30,7 @@ Imports:
 Suggests:
     ggplot2,
     knitr,
+    markdown,
     rmarkdown
 VignetteBuilder: 
     knitr
