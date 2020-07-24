@@ -126,14 +126,14 @@
 <span id="cb3-2"><a href="#cb3-2"></a></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(wb_cachelist, <span class="dt">max.level =</span> <span class="dv">1</span>)</span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; List of 8</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt;  $ countries    :Classes 'tbl_df', 'tbl' and 'data.frame':   304 obs. of  18 variables:</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;  $ indicators   :Classes 'tbl_df', 'tbl' and 'data.frame':   16607 obs. of  8 variables:</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt;  $ sources      :Classes 'tbl_df', 'tbl' and 'data.frame':   61 obs. of  9 variables:</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt;  $ topics       :Classes 'tbl_df', 'tbl' and 'data.frame':   21 obs. of  3 variables:</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;  $ regions      :Classes 'tbl_df', 'tbl' and 'data.frame':   48 obs. of  4 variables:</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt;  $ income_levels:Classes 'tbl_df', 'tbl' and 'data.frame':   7 obs. of  3 variables:</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt;  $ lending_types:Classes 'tbl_df', 'tbl' and 'data.frame':   4 obs. of  3 variables:</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt;  $ languages    :Classes 'tbl_df', 'tbl' and 'data.frame':   23 obs. of  3 variables:</span></span></code></pre></div>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt;  $ countries    : tibble [304 x 18] (S3: tbl_df/tbl/data.frame)</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;  $ indicators   : tibble [16,607 x 8] (S3: tbl_df/tbl/data.frame)</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt;  $ sources      : tibble [61 x 9] (S3: tbl_df/tbl/data.frame)</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt;  $ topics       : tibble [21 x 3] (S3: tbl_df/tbl/data.frame)</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;  $ regions      : tibble [48 x 4] (S3: tbl_df/tbl/data.frame)</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt;  $ income_levels: tibble [7 x 3] (S3: tbl_df/tbl/data.frame)</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt;  $ lending_types: tibble [4 x 3] (S3: tbl_df/tbl/data.frame)</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt;  $ languages    : tibble [23 x 3] (S3: tbl_df/tbl/data.frame)</span></span></code></pre></div>
 </div>
 <div id="accessing-updated-available-data-with-wb_cache" class="section level2">
 <h2 class="hasAnchor">
@@ -150,18 +150,11 @@
 <a href="#search-available-data-with-wb_search" class="anchor"></a>Search available data with <code>wb_search()</code>
 </h2>
 <p><code><a href="../reference/wb_search.html">wb_search()</a></code> searches through the <code>indicators</code> data frame to find indicators that match a search pattern. An example of the structure of this data frame is below</p>
-<pre><code>#&gt;         indicator_id         indicator unit
-#&gt; 9617  NY.GDP.MKTP.CD GDP (current US$)   NA
-#&gt; 15176    SP.POP.TOTL Population, total   NA
-#&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              indicator_desc
-#&gt; 9617  GDP at purchaser's prices is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsidies not included in the value of the products. It is calculated without making deductions for depreciation of fabricated assets or for depletion and degradation of natural resources. Data are in current U.S. dollars. Dollar figures for GDP are converted from domestic currencies using single year official exchange rates. For a few countries where the official exchange rate does not reflect the rate effectively applied to actual foreign exchange transactions, an alternative conversion factor is used.
-#&gt; 15176                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Total population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship. The values shown are midyear estimates.
-#&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                  source_org
-#&gt; 9617                                                                                                                                                                                                                                                                                                                                                                              World Bank national accounts data, and OECD National Accounts data files.
-#&gt; 15176 (1) United Nations Population Division. World Population Prospects: 2019 Revision. (2) Census reports and other statistical publications from national statistical offices, (3) Eurostat: Demographic Statistics, (4) United Nations Statistical Division. Population and Vital Statistics Reprot (various years), (5) U.S. Census Bureau: International Database, and (6) Secretariat of the Pacific Community: Statistics and Demography Programme.
-#&gt;                               topics source_id                       source
-#&gt; 9617             3, Economy &amp; Growth         2 World Development Indicators
-#&gt; 15176 19, 8, Climate Change, Health          2 World Development Indicators</code></pre>
+<pre><code>#&gt; # A tibble: 2 x 8
+#&gt;   indicator_id indicator unit  indicator_desc source_org topics source_id source
+#&gt;   &lt;chr&gt;        &lt;chr&gt;     &lt;lgl&gt; &lt;chr&gt;          &lt;chr&gt;      &lt;list&gt;     &lt;dbl&gt; &lt;chr&gt; 
+#&gt; 1 NY.GDP.MKTP~ GDP (cur~ NA    GDP at purcha~ World Ban~ &lt;df[,~         2 World~
+#&gt; 2 SP.POP.TOTL  Populati~ NA    Total populat~ (1) Unite~ &lt;df[,~         2 World~</code></pre>
 <p>By default the search is done over the <code>indicator_id</code>, <code>indicator</code>, and <code>indicator_desc</code> fields and returns the those 3 columns of the matching rows. The <code>indicator_id</code> values are inputs into <code><a href="../reference/wb_data.html">wb_data()</a></code>, the function for downloading the data. To return all columns for the <code>indicators</code> data frame, you can set <code>extra = TRUE</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</span>
 <span id="cb6-2"><a href="#cb6-2"></a></span>
@@ -220,24 +213,10 @@
 <span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt; 4 6.0.GDP_usd     GDP (constant 2005 $)    GDP is the sum of gross value added ~</span></span>
 <span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt; 5 6.0.GDPpc_cons~ GDP per capita, PPP (co~ GDP per capita based on purchasing p~</span></span>
 <span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt; 6 BI.WAG.TOTL.GD~ Wage bill as a percenta~ &lt;NA&gt;</span></span></code></pre></div>
-<p>The default cached data in <code>wb_cachelist</code> is in English. To search indicators in a different language, you can download an updated copy of <code>wb_cachelist</code> using <code><a href="../reference/wb_cache.html">wb_cache()</a></code>, with the <code>lang</code> parameter set to the language of interest and then set this as the <code>cache</code> parameter in <code><a href="../reference/wb_search.html">wb_search()</a></code>. Other languages are supported in so far as they are supported by the original data sources. Some sources provide full support for other languages, while some have very limited support. If the data source does not have a translation for a certain field or indicator then the result is <code>NA</code>, this may result in a varying number matches depending upon the language you select.</p>
+<p>The default cached data in <code>wb_cachelist</code> is in English. To search indicators in a different language, you can download an updated copy of <code>wb_cachelist</code> using <code><a href="../reference/wb_cache.html">wb_cache()</a></code>, with the <code>lang</code> parameter set to the language of interest and then set this as the <code>cache</code> parameter in <code><a href="../reference/wb_search.html">wb_search()</a></code>. Other languages are supported in so far as they are supported by the original data sources. Some sources provide full support for other languages, while some have very limited support. If the data source does not have a translation for a certain field or indicator then the result is <code>NA</code>, this may result in a varying number matches depending upon the language you select. To see a list of availabe languages call <code><a href="../reference/wb_end_point_info.html">wb_languages()</a></code></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(wbstats)</span>
 <span id="cb10-2"><a href="#cb10-2"></a></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="co"># download wb_cache in spanish</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a>wb_cachelist_es &lt;-<span class="st"> </span><span class="kw"><a href="../reference/wb_cache.html">wb_cache</a></span>(<span class="dt">lang =</span> <span class="st">"es"</span>)</span>
-<span id="cb10-5"><a href="#cb10-5"></a></span>
-<span id="cb10-6"><a href="#cb10-6"></a>gini_inds &lt;-<span class="st"> </span><span class="kw"><a href="../reference/wb_search.html">wb_search</a></span>(<span class="dt">pattern =</span> <span class="st">"Coeficiente de Gini"</span>, <span class="dt">cache =</span> wb_cachelist_es)</span>
-<span id="cb10-7"><a href="#cb10-7"></a></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(gini_inds)</span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt; # A tibble: 6 x 3</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt;   indicator_id   indicator                indicator_desc                        </span></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt;   &lt;chr&gt;          &lt;chr&gt;                    &lt;chr&gt;                                 </span></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt; 1 3.0.Gini       Coeficiente de Gini      El coeficiente de Gini es la medida d~</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a><span class="co">#&gt; 2 3.0.Gini_noze~ Coeficiente de Gini (In~ El coeficiente de Gini es la medida d~</span></span>
-<span id="cb10-14"><a href="#cb10-14"></a><span class="co">#&gt; 3 3.0.TheilInd1  Índice de Theil, GE(1)   El Índice de Theil es parte de una gr~</span></span>
-<span id="cb10-15"><a href="#cb10-15"></a><span class="co">#&gt; 4 3.1.Gini       Gini, Rural              El coeficiente de Gini es la medida d~</span></span>
-<span id="cb10-16"><a href="#cb10-16"></a><span class="co">#&gt; 5 3.1.TheilInd1  Índice de Theil, GE(1),~ El Índice de Theil es parte de una gr~</span></span>
-<span id="cb10-17"><a href="#cb10-17"></a><span class="co">#&gt; 6 3.2.Gini       Gini, Urbano             El coeficiente de Gini es la medida d~</span></span></code></pre></div>
+<span id="cb10-3"><a href="#cb10-3"></a>wb_langs &lt;-<span class="st"> </span><span class="kw"><a href="../reference/wb_end_point_info.html">wb_languages</a></span>()</span></code></pre></div>
 </div>
 <div id="downloading-data-with-wb_data" class="section level2">
 <h2 class="hasAnchor">

@@ -228,7 +228,7 @@ return does not support your requested language by default it will return <code>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>tibble</a> of all available requested data.</p>
+    <p>a <a href='https://tibble.tidyverse.org/reference/tibble-package.html'>tibble</a> of all available requested data.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -243,7 +243,7 @@ that data point is "forecast".</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples">
 
 <span class='co'># gdp for all countries for all available dates</span>
 <span class='no'>df_gdp</span> <span class='kw'>&lt;-</span> <span class='fu'>wb_data</span>(<span class='st'>"NY.GDP.MKTP.CD"</span>)
@@ -309,7 +309,7 @@ that data point is "forecast".</p>
 <span class='co'># note that not all indicators have translations for all languages</span>
 <span class='no'>df_names_long_bg</span> <span class='kw'>&lt;-</span> <span class='fu'>wb_data</span>(<span class='no'>my_indicators</span>, <span class='kw'>country</span> <span class='kw'>=</span> <span class='st'>"world"</span>,
                             <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='fl'>2010</span>, <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='fl'>2014</span>,
-                            <span class='kw'>return_wide</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>lang</span> <span class='kw'>=</span> <span class='st'>"bg"</span>)</div></pre>
+                            <span class='kw'>return_wide</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>lang</span> <span class='kw'>=</span> <span class='st'>"bg"</span>)</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
