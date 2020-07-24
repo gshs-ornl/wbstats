@@ -81,7 +81,7 @@ wb_languages <- function() {
 
 #' Download Avialable Indicators from the World Bank
 #'
-#' This function returns a [tibble][tibble::tibble] of indicator IDs and related information
+#' This function returns a [tibble][tibble::tibble-package] of indicator IDs and related information
 #' that are available for download from the World Bank API
 #'
 #' @inheritParams wb_cache
@@ -155,10 +155,10 @@ wb_indicators <- function(lang, include_archive = FALSE) {
 #' # the default is english. To specify another language use argument lang
 #'
 #' # spanish
-#' \donttest{wb_cache(lang = "es")}
+#' \donttest{es_cache <- wb_cache(lang = "es")}
 #'
 #' # korean
-#' \donttest{wb_cache(lang = "ko")}
+#' \donttest{ko_cache <- wb_cache(lang = "ko")}
 #'
 #' # possible values of lang are in the iso2 column in the languages data frame
 #' \donttest{example_iso2 <- wb_languages()$iso2[1]}

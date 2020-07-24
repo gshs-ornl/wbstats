@@ -43,10 +43,10 @@ replaces the default cached version \link{wb_cachelist} that comes with the pack
 # the default is english. To specify another language use argument lang
 
 # spanish
-\donttest{wb_cache(lang = "es")}
+\donttest{es_cache <- wb_cache(lang = "es")}
 
 # korean
-\donttest{wb_cache(lang = "ko")}
+\donttest{ko_cache <- wb_cache(lang = "ko")}
 
 # possible values of lang are in the iso2 column in the languages data frame
 \donttest{example_iso2 <- wb_languages()$iso2[1]}

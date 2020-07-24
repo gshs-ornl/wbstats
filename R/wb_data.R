@@ -49,7 +49,7 @@
 #' Default is `FALSE`
 #' @inheritParams wb_cache
 #'
-#' @return A [tibble][tibble::tbl_df] of all available requested data.
+#' @return a [tibble][tibble::tibble-package] of all available requested data.
 #'
 #' @details
 #' ## `obs_status` column

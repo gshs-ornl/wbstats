@@ -84,7 +84,7 @@ all data returns have support for langauges other than english. If the specific
 return does not support your requested language by default it will return \code{NA}.}
 }
 \value{
-A \link[tibble:tbl_df]{tibble} of all available requested data.
+a \link[tibble:tibble-package]{tibble} of all available requested data.
 }
 \description{
 This function downloads the requested information using the World Bank API

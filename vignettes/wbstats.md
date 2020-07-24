@@ -172,26 +172,12 @@ head(gdp_no_trade_inds)
 ```
 
 
-The default cached data in `wb_cachelist` is in English. To search indicators in a different language, you can download an updated copy of `wb_cachelist` using `wb_cache()`, with the `lang` parameter set to the language of interest and then set this as the `cache` parameter in `wb_search()`. Other languages are supported in so far as they are supported by the original data sources. Some sources provide full support for other languages, while some have very limited support. If the data source does not have a translation for a certain field or indicator then the result is `NA`, this may result in a varying number matches depending upon the language you select.
+The default cached data in `wb_cachelist` is in English. To search indicators in a different language, you can download an updated copy of `wb_cachelist` using `wb_cache()`, with the `lang` parameter set to the language of interest and then set this as the `cache` parameter in `wb_search()`. Other languages are supported in so far as they are supported by the original data sources. Some sources provide full support for other languages, while some have very limited support. If the data source does not have a translation for a certain field or indicator then the result is `NA`, this may result in a varying number matches depending upon the language you select. To see a list of availabe languages call `wb_languages()`
 
 ```r
 library(wbstats)
 
-# download wb_cache in spanish
-wb_cachelist_es <- wb_cache(lang = "es")
-
-gini_inds <- wb_search(pattern = "Coeficiente de Gini", cache = wb_cachelist_es)
-
-head(gini_inds)
-#> # A tibble: 6 x 3
-#>   indicator_id   indicator                indicator_desc                        
-#>   <chr>          <chr>                    <chr>                                 
-#> 1 3.0.Gini       Coeficiente de Gini      El coeficiente de Gini es la medida d~
-#> 2 3.0.Gini_noze~ Coeficiente de Gini (In~ El coeficiente de Gini es la medida d~
-#> 3 3.0.TheilInd1  Índice de Theil, GE(1)   El Índice de Theil es parte de una gr~
-#> 4 3.1.Gini       Gini, Rural              El coeficiente de Gini es la medida d~
-#> 5 3.1.TheilInd1  Índice de Theil, GE(1),~ El Índice de Theil es parte de una gr~
-#> 6 3.2.Gini       Gini, Urbano             El coeficiente de Gini es la medida d~
+wb_langs <- wb_languages()
 ```
 
 ## Downloading data with `wb_data()`

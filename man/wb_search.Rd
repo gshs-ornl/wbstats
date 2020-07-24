@@ -31,28 +31,28 @@ if \code{TRUE}, case is ignored during matching. Default is \code{TRUE}}
 \item{...}{Any additional \code{\link[=grep]{grep()}} agruments you which to pass}
 }
 \value{
-A \link[tibble:tbl_df]{tibble} with indicators that match the search pattern.
+a \link[tibble:tibble-package]{tibble} with indicators that match the search pattern.
 }
 \description{
 This function allows finds indicators that match a search term and returns
 a data frame of matching results
 }
 \examples{
-wb_search(pattern = "education")
+\donttest{wb_search(pattern = "education")}
 
-wb_search(pattern = "Food and Agriculture Organization", fields = "source_org")
+\donttest{wb_search(pattern = "Food and Agriculture Organization", fields = "source_org")}
 
 # with regular expression operators
 # 'poverty' OR 'unemployment' OR 'employment'
-wb_search(pattern = "poverty|unemployment|employment")
+\donttest{wb_search(pattern = "poverty|unemployment|employment")}
 
 # pass any other grep argument along as well
 # everything without 'education'
-wb_search(pattern = "education", invert = TRUE)
+\donttest{wb_search(pattern = "education", invert = TRUE)}
 
 # contains "gdp" AND "trade"
-wb_search("^(?=.*gdp)(?=.*trade).*", perl = TRUE)
+\donttest{wb_search("^(?=.*gdp)(?=.*trade).*", perl = TRUE)}
 
 # contains "gdp" and NOT "trade"
-wb_search("^(?=.*gdp)(?!.*trade).*", perl = TRUE)
+\donttest{wb_search("^(?=.*gdp)(?!.*trade).*", perl = TRUE)}
 }

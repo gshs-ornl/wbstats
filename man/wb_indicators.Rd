@@ -19,7 +19,7 @@ indicators are not available through the standard API and querying them
 using \code{\link[=wb_data]{wb_data()}} will not return data. Default is \code{FALSE}.}
 }
 \description{
-This function returns a \link[tibble:tibble]{tibble} of indicator IDs and related information
+This function returns a \link[tibble:tibble-package]{tibble} of indicator IDs and related information
 that are available for download from the World Bank API
 }
 \examples{
