@@ -7,7 +7,7 @@ wbstats: An R package for searching and downloading data from the World Bank API
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/wbstats)](https://CRAN.R-project.org/package=wbstats)
-[![Monthly](https://cranlogs.r-pkg.org/badges/wbstats)](https://cran.rstudio.com/web/packages/wbstats/index.html)
+[![Monthly](https://cranlogs.r-pkg.org/badges/wbstats)](https://CRAN.R-project.org/package=wbstats)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
