@@ -1,7 +1,7 @@
 Type: Package
 Package: wbstats
 Title: Programmatic Access to Data and Statistics from the World Bank API
-Version: 1.0.1.9002
+Version: 1.0.2
 Authors@R: 
     c(person(given = "Jesse",
              family = "Piburn",
