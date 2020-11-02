@@ -16,23 +16,23 @@
 #' @return a [tibble][tibble::tibble-package] with indicators that match the search pattern.
 #' @md
 #' @examples
-#' \donttest{wb_search(pattern = "education")}
+#' \donttest{d <- wb_search(pattern = "education")}
 #'
-#' \donttest{wb_search(pattern = "Food and Agriculture Organization", fields = "source_org")}
+#' \donttest{d <- wb_search(pattern = "Food and Agriculture Organization", fields = "source_org")}
 #'
 #' # with regular expression operators
 #' # 'poverty' OR 'unemployment' OR 'employment'
-#' \donttest{wb_search(pattern = "poverty|unemployment|employment")}
+#' \donttest{d <- wb_search(pattern = "poverty|unemployment|employment")}
 #'
 #' # pass any other grep argument along as well
 #' # everything without 'education'
-#' \donttest{wb_search(pattern = "education", invert = TRUE)}
+#' \donttest{d <- wb_search(pattern = "education", invert = TRUE)}
 #'
 #' # contains "gdp" AND "trade"
-#' \donttest{wb_search("^(?=.*gdp)(?=.*trade).*", perl = TRUE)}
+#' \donttest{d <- wb_search("^(?=.*gdp)(?=.*trade).*", perl = TRUE)}
 #'
 #' # contains "gdp" and NOT "trade"
-#' \donttest{wb_search("^(?=.*gdp)(?!.*trade).*", perl = TRUE)}
+#' \donttest{d <- wb_search("^(?=.*gdp)(?!.*trade).*", perl = TRUE)}
 #' @export
 wb_search <- function(pattern, fields = c("indicator_id", "indicator", "indicator_desc"),
                       extra = FALSE, cache, ignore.case = TRUE, ...){
