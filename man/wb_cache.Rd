@@ -39,17 +39,3 @@ supported languages by data source please see \code{\link[=wb_languages]{wb_lang
 Saving this return and using it has the \code{cache} parameter in \code{\link[=wb_data]{wb_data()}} and \code{\link[=wb_search]{wb_search()}}
 replaces the default cached version \link{wb_cachelist} that comes with the package itself
 }
-\examples{
-# the default is english. To specify another language use argument lang
-
-# spanish
-\donttest{es_cache <- wb_cache(lang = "es")}
-
-# korean
-\donttest{ko_cache <- wb_cache(lang = "ko")}
-
-# possible values of lang are in the iso2 column in the languages data frame
-\donttest{example_iso2 <- wb_languages()$iso2[1]}
-\donttest{wb_cache(lang = example_iso2)}
-
-}

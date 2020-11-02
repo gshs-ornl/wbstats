@@ -30,10 +30,6 @@ that are available for download from the World Bank API
 # or by running the wb_indicators() function directly
 \donttest{fresh_indicators <- wb_indicators()}
 
-# fresh indicators but in spanish
-# a note of warning, please see the lang parameter description
-\donttest{fresco_indicators <- wb_indicators("es")}
-
 # include archived indicators
 # see include_archive parameter description
 \donttest{indicators_with_achrive <- wb_indicators(include_archive = TRUE)}

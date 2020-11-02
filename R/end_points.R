@@ -98,10 +98,6 @@ wb_languages <- function() {
 #' # or by running the wb_indicators() function directly
 #' \donttest{fresh_indicators <- wb_indicators()}
 #'
-#' # fresh indicators but in spanish
-#' # a note of warning, please see the lang parameter description
-#' \donttest{fresco_indicators <- wb_indicators("es")}
-#'
 #' # include archived indicators
 #' # see include_archive parameter description
 #' \donttest{indicators_with_achrive <- wb_indicators(include_archive = TRUE)}
@@ -151,18 +147,6 @@ wb_indicators <- function(lang, include_archive = FALSE) {
 #'
 #' Saving this return and using it has the `cache` parameter in [wb_data()] and [wb_search()]
 #' replaces the default cached version [wb_cachelist] that comes with the package itself
-#' @examples
-#' # the default is english. To specify another language use argument lang
-#'
-#' # spanish
-#' \donttest{es_cache <- wb_cache(lang = "es")}
-#'
-#' # korean
-#' \donttest{ko_cache <- wb_cache(lang = "ko")}
-#'
-#' # possible values of lang are in the iso2 column in the languages data frame
-#' \donttest{example_iso2 <- wb_languages()$iso2[1]}
-#' \donttest{wb_cache(lang = example_iso2)}
 #'
 #' @export
 #' @md
