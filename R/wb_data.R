@@ -58,6 +58,7 @@
 #' that data point is "forecast".
 #'
 #' @export
+#' @importFrom rlang .data
 #' @md
 #'
 #'
@@ -246,13 +247,13 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
     # be the same value across mutliple subnational units
     d <- d %>%
       dplyr::mutate(
-        iso3c = as.character(iso3c),
-        iso2c = as.character(iso2c),
-        iso3c = dplyr::if_else(is.na(iso3c), iso2c, iso3c)
+        iso3c = as.character(.data$iso3c),
+        iso2c = as.character(.data$iso2c),
+        iso3c = dplyr::if_else(is.na(.data$iso3c), .data$iso2c, .data$iso3c)
       ) %>%
-      dplyr::select(-iso2c) %>%
+      dplyr::select(-.data$iso2c) %>%
       dplyr::left_join(
-        dplyr::select(cache$countries, iso3c, iso2c),
+        dplyr::select(cache$countries, .data$iso3c, .data$iso2c),
         by = "iso3c"
       )
   }
