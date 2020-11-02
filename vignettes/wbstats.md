@@ -91,10 +91,10 @@ new_cache <- wb_cache()
 
 ```
 #> # A tibble: 2 x 8
-#>   indicator_id indicator unit  indicator_desc source_org topics source_id source
-#>   <chr>        <chr>     <lgl> <chr>          <chr>      <list>     <dbl> <chr> 
-#> 1 NY.GDP.MKTP~ GDP (cur~ NA    GDP at purcha~ World Ban~ <df[,~         2 World~
-#> 2 SP.POP.TOTL  Populati~ NA    Total populat~ (1) Unite~ <df[,~         2 World~
+#>   indicator_id  indicator    unit  indicator_desc                                            source_org                                            topics   source_id source     
+#>   <chr>         <chr>        <lgl> <chr>                                                     <chr>                                                 <list>       <dbl> <chr>      
+#> 1 NY.GDP.MKTP.~ GDP (curren~ NA    GDP at purchaser's prices is the sum of gross value adde~ World Bank national accounts data, and OECD National~ <df[,2]~         2 World Deve~
+#> 2 SP.POP.TOTL   Population,~ NA    Total population is based on the de facto definition of ~ (1) United Nations Population Division. World Popula~ <df[,2]~         2 World Deve~
 ```
 
 By default the search is done over the `indicator_id`, `indicator`, and `indicator_desc` fields and returns the those 3 columns of the matching rows. The `indicator_id` values are inputs into `wb_data()`, the function for downloading the data. To return all columns for the `indicators` data frame, you can set `extra = TRUE`.
@@ -106,14 +106,14 @@ unemploy_inds<- wb_search("unemployment")
 
 head(unemploy_inds)
 #> # A tibble: 6 x 3
-#>   indicator_id indicator                       indicator_desc                   
-#>   <chr>        <chr>                           <chr>                            
-#> 1 fin37.t.a    Received government transfers ~ The percentage of respondents wh~
-#> 2 fin37.t.a.1  Received government transfers ~ The percentage of respondents wh~
-#> 3 fin37.t.a.10 Received government transfers ~ The percentage of respondents wh~
-#> 4 fin37.t.a.11 Received government transfers ~ The percentage of respondents wh~
-#> 5 fin37.t.a.2  Received government transfers ~ The percentage of respondents wh~
-#> 6 fin37.t.a.3  Received government transfers ~ The percentage of respondents wh~
+#>   indicator_id indicator                                           indicator_desc                                                                                                
+#>   <chr>        <chr>                                               <chr>                                                                                                         
+#> 1 fin37.t.a    Received government transfers in the past year (% ~ The percentage of respondents who report personally receiving any financial support from the government in th~
+#> 2 fin37.t.a.1  Received government transfers in the past year, ma~ The percentage of respondents who report personally receiving any financial support from the government in th~
+#> 3 fin37.t.a.10 Received government transfers in the past year, in~ The percentage of respondents who report personally receiving any financial support from the government in th~
+#> 4 fin37.t.a.11 Received government transfers in the past year, ou~ The percentage of respondents who report personally receiving any financial support from the government in th~
+#> 5 fin37.t.a.2  Received government transfers in the past year, fe~ The percentage of respondents who report personally receiving any financial support from the government in th~
+#> 6 fin37.t.a.3  Received government transfers in the past year, yo~ The percentage of respondents who report personally receiving any financial support from the government in th~
 ```
 
 Other fields can be searched by simply changing the `fields` parameter. For example
@@ -125,10 +125,10 @@ blmbrg_vars <- wb_search("Bloomberg", fields = "source_org")
 
 head(blmbrg_vars)
 #> # A tibble: 2 x 3
-#>   indicator_id indicator              indicator_desc                            
-#>   <chr>        <chr>                  <chr>                                     
-#> 1 GFDD.OM.02   Stock market return (~ Stock market return is the growth rate of~
-#> 2 GFDD.SM.01   Stock price volatility Stock price volatility is the average of ~
+#>   indicator_id indicator                      indicator_desc                                                                                                                     
+#>   <chr>        <chr>                          <chr>                                                                                                                              
+#> 1 GFDD.OM.02   Stock market return (%, year-~ Stock market return is the growth rate of annual average stock market index. Annual average stock market index is constructed by t~
+#> 2 GFDD.SM.01   Stock price volatility         Stock price volatility is the average of the 360-day volatility of the national stock market index.
 ```
 
 Regular expressions are also supported
@@ -141,14 +141,14 @@ povemply_inds <- wb_search(pattern = "poverty|unemployment|employment")
 
 head(povemply_inds)
 #> # A tibble: 6 x 3
-#>   indicator_id     indicator             indicator_desc                         
-#>   <chr>            <chr>                 <chr>                                  
-#> 1 1.0.HCount.1.90~ Poverty Headcount ($~ The poverty headcount index measures t~
-#> 2 1.0.HCount.2.5u~ Poverty Headcount ($~ The poverty headcount index measures t~
-#> 3 1.0.HCount.Mid1~ Middle Class ($10-50~ The poverty headcount index measures t~
-#> 4 1.0.HCount.Ofcl  Official Moderate Po~ The poverty headcount index measures t~
-#> 5 1.0.HCount.Poor~ Poverty Headcount ($~ The poverty headcount index measures t~
-#> 6 1.0.HCount.Vul4~ Vulnerable ($4-10 a ~ The poverty headcount index measures t~
+#>   indicator_id        indicator                       indicator_desc                                                                                                             
+#>   <chr>               <chr>                           <chr>                                                                                                                      
+#> 1 1.0.HCount.1.90usd  Poverty Headcount ($1.90 a day) The poverty headcount index measures the proportion of the population with daily per capita income (in 2011 PPP) below the~
+#> 2 1.0.HCount.2.5usd   Poverty Headcount ($2.50 a day) The poverty headcount index measures the proportion of the population with daily per capita income (in 2005 PPP) below the~
+#> 3 1.0.HCount.Mid10to~ Middle Class ($10-50 a day) He~ The poverty headcount index measures the proportion of the population with daily per capita income (in 2005 PPP) below the~
+#> 4 1.0.HCount.Ofcl     Official Moderate Poverty Rate~ The poverty headcount index measures the proportion of the population with daily per capita income below the official pove~
+#> 5 1.0.HCount.Poor4uds Poverty Headcount ($4 a day)    The poverty headcount index measures the proportion of the population with daily per capita income (in 2005 PPP) below the~
+#> 6 1.0.HCount.Vul4to10 Vulnerable ($4-10 a day) Headc~ The poverty headcount index measures the proportion of the population with daily per capita income (in 2005 PPP) below the~
 ```
 
 As well as any `grep` function argument
@@ -161,14 +161,14 @@ gdp_no_trade_inds <- wb_search("^(?=.*gdp)(?!.*trade).*", perl = TRUE)
 
 head(gdp_no_trade_inds)
 #> # A tibble: 6 x 3
-#>   indicator_id    indicator                indicator_desc                       
-#>   <chr>           <chr>                    <chr>                                
-#> 1 5.51.01.10.gdp  Per capita GDP growth    GDP per capita is the sum of gross v~
-#> 2 6.0.GDP_current GDP (current $)          GDP is the sum of gross value added ~
-#> 3 6.0.GDP_growth  GDP growth (annual %)    Annual percentage growth rate of GDP~
-#> 4 6.0.GDP_usd     GDP (constant 2005 $)    GDP is the sum of gross value added ~
-#> 5 6.0.GDPpc_cons~ GDP per capita, PPP (co~ GDP per capita based on purchasing p~
-#> 6 BI.WAG.TOTL.GD~ Wage bill as a percenta~ <NA>
+#>   indicator_id     indicator                             indicator_desc                                                                                                          
+#>   <chr>            <chr>                                 <chr>                                                                                                                   
+#> 1 5.51.01.10.gdp   Per capita GDP growth                 GDP per capita is the sum of gross value added by all resident producers in the economy plus any product taxes (less su~
+#> 2 6.0.GDP_current  GDP (current $)                       GDP is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsi~
+#> 3 6.0.GDP_growth   GDP growth (annual %)                 Annual percentage growth rate of GDP at market prices based on constant local currency. Aggregates are based on constan~
+#> 4 6.0.GDP_usd      GDP (constant 2005 $)                 GDP is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsi~
+#> 5 6.0.GDPpc_const~ GDP per capita, PPP (constant 2011 i~ GDP per capita based on purchasing power parity (PPP). PPP GDP is gross domestic product converted to international dol~
+#> 6 BI.WAG.TOTL.GD.~ Wage bill as a percentage of GDP      <NA>
 ```
 
 
@@ -194,14 +194,14 @@ pop_data <- wb_data("SP.POP.TOTL", start_date = 2000, end_date = 2002)
 
 head(pop_data)
 #> # A tibble: 6 x 9
-#>   iso2c iso3c country    date SP.POP.TOTL unit  obs_status footnote last_updated
-#>   <chr> <chr> <chr>     <dbl>       <dbl> <chr> <chr>      <chr>    <date>      
-#> 1 AW    ABW   Aruba      2000       90853 <NA>  <NA>       <NA>     2020-07-01  
-#> 2 AW    ABW   Aruba      2001       92898 <NA>  <NA>       <NA>     2020-07-01  
-#> 3 AW    ABW   Aruba      2002       94992 <NA>  <NA>       <NA>     2020-07-01  
-#> 4 AF    AFG   Afghanis~  2000    20779953 <NA>  <NA>       <NA>     2020-07-01  
-#> 5 AF    AFG   Afghanis~  2001    21606988 <NA>  <NA>       <NA>     2020-07-01  
-#> 6 AF    AFG   Afghanis~  2002    22600770 <NA>  <NA>       <NA>     2020-07-01
+#>   iso2c iso3c country      date SP.POP.TOTL unit  obs_status footnote last_updated
+#>   <chr> <chr> <chr>       <dbl>       <dbl> <chr> <chr>      <chr>    <date>      
+#> 1 AW    ABW   Aruba        2000       90853 <NA>  <NA>       <NA>     2020-10-15  
+#> 2 AW    ABW   Aruba        2001       92898 <NA>  <NA>       <NA>     2020-10-15  
+#> 3 AW    ABW   Aruba        2002       94992 <NA>  <NA>       <NA>     2020-10-15  
+#> 4 AF    AFG   Afghanistan  2000    20779953 <NA>  <NA>       <NA>     2020-10-15  
+#> 5 AF    AFG   Afghanistan  2001    21606988 <NA>  <NA>       <NA>     2020-10-15  
+#> 6 AF    AFG   Afghanistan  2002    22600770 <NA>  <NA>       <NA>     2020-10-15
 ```
 
 If you are interested in only some subset of countries or regions you can pass along the specific codes to the `country` parameter. The country and region codes and names that can be passed to the `country` parameter as well, most prominently the coded values from the `iso2c` and `iso3c` from the `countries` data frame in `wb_cachelist` or the return of `wb_cache()`. Any values from the above columns can mixed together and passed to the same call
@@ -218,15 +218,15 @@ pop_data <- wb_data("SP.POP.TOTL", country = example_geos,
 
 pop_data
 #> # A tibble: 7 x 9
-#>   iso2c iso3c country    date SP.POP.TOTL unit  obs_status footnote last_updated
-#>   <chr> <chr> <chr>     <dbl>       <dbl> <chr> <chr>      <chr>    <date>      
-#> 1 AW    ABW   Aruba      2012      102560 <NA>  <NA>       <NA>     2020-07-01  
-#> 2 AF    AFG   Afghanis~  2012    31161376 <NA>  <NA>       <NA>     2020-07-01  
-#> 3 AL    ALB   Albania    2012     2900401 <NA>  <NA>       <NA>     2020-07-01  
-#> 4 7E    ECA   Europe &~  2012   382509766 <NA>  <NA>       <NA>     2020-07-01  
-#> 5 8S    SAS   South As~  2012  1683747130 <NA>  <NA>       <NA>     2020-07-01  
-#> 6 ZG    SSF   Sub-Saha~  2012   917726973 <NA>  <NA>       <NA>     2020-07-01  
-#> 7 XD    HIC   High inc~  2012  1191504227 <NA>  <NA>       <NA>     2020-07-01
+#>   iso2c iso3c country                                        date SP.POP.TOTL unit  obs_status footnote last_updated
+#>   <chr> <chr> <chr>                                         <dbl>       <dbl> <chr> <chr>      <chr>    <date>      
+#> 1 AW    ABW   Aruba                                          2012      102560 <NA>  <NA>       <NA>     2020-10-15  
+#> 2 AF    AFG   Afghanistan                                    2012    31161376 <NA>  <NA>       <NA>     2020-10-15  
+#> 3 AL    ALB   Albania                                        2012     2900401 <NA>  <NA>       <NA>     2020-10-15  
+#> 4 7E    ECA   Europe & Central Asia (excluding high income)  2012   382509766 <NA>  <NA>       <NA>     2020-10-15  
+#> 5 8S    SAS   South Asia                                     2012  1683747130 <NA>  <NA>       <NA>     2020-10-15  
+#> 6 ZG    SSF   Sub-Saharan Africa                             2012   917726973 <NA>  <NA>       <NA>     2020-10-15  
+#> 7 XD    HIC   High income                                    2012  1191504227 <NA>  <NA>       <NA>     2020-10-15
 ```
 
 As of `wbstats 1.0` queries are now returned in wide format. This was a request made by multiple users and is in line with the principles of [tidy data](https://www.jstatsoft.org/article/view/v059i10). If you would like to return the data in a long format, you can set `return_wide = FALSE`   
@@ -265,15 +265,14 @@ pop_gdp_long <- wb_data(my_indicators, start_date = 2010, end_date = 2012, retur
 
 head(pop_gdp_long)
 #> # A tibble: 6 x 11
-#>   indicator_id indicator iso2c iso3c country  date  value unit  obs_status
-#>   <chr>        <chr>     <chr> <chr> <chr>   <dbl>  <dbl> <chr> <chr>     
-#> 1 SP.POP.TOTL  Populati~ AF    AFG   Afghan~  2012 3.12e7 <NA>  <NA>      
-#> 2 SP.POP.TOTL  Populati~ AF    AFG   Afghan~  2011 3.01e7 <NA>  <NA>      
-#> 3 SP.POP.TOTL  Populati~ AF    AFG   Afghan~  2010 2.92e7 <NA>  <NA>      
-#> 4 SP.POP.TOTL  Populati~ AL    ALB   Albania  2012 2.90e6 <NA>  <NA>      
-#> 5 SP.POP.TOTL  Populati~ AL    ALB   Albania  2011 2.91e6 <NA>  <NA>      
-#> 6 SP.POP.TOTL  Populati~ AL    ALB   Albania  2010 2.91e6 <NA>  <NA>      
-#> # ... with 2 more variables: footnote <chr>, last_updated <date>
+#>   indicator_id indicator         iso2c iso3c country      date    value unit  obs_status footnote last_updated
+#>   <chr>        <chr>             <chr> <chr> <chr>       <dbl>    <dbl> <chr> <chr>      <chr>    <date>      
+#> 1 SP.POP.TOTL  Population, total AF    AFG   Afghanistan  2012 31161376 <NA>  <NA>       <NA>     2020-10-15  
+#> 2 SP.POP.TOTL  Population, total AF    AFG   Afghanistan  2011 30117413 <NA>  <NA>       <NA>     2020-10-15  
+#> 3 SP.POP.TOTL  Population, total AF    AFG   Afghanistan  2010 29185507 <NA>  <NA>       <NA>     2020-10-15  
+#> 4 SP.POP.TOTL  Population, total AL    ALB   Albania      2012  2900401 <NA>  <NA>       <NA>     2020-10-15  
+#> 5 SP.POP.TOTL  Population, total AL    ALB   Albania      2011  2905195 <NA>  <NA>       <NA>     2020-10-15  
+#> 6 SP.POP.TOTL  Population, total AL    ALB   Albania      2010  2913021 <NA>  <NA>       <NA>     2020-10-15
 ```
 
 
@@ -288,15 +287,14 @@ gdp_capita <- wb_data("NY.GDP.PCAP.CD", mrv = 1)
 
 head(gdp_capita)
 #> # A tibble: 6 x 9
-#>   iso2c iso3c country  date NY.GDP.PCAP.CD unit  obs_status footnote
-#>   <chr> <chr> <chr>   <dbl>          <dbl> <chr> <chr>      <chr>   
-#> 1 AW    ABW   Aruba    2019            NA  <NA>  <NA>       <NA>    
-#> 2 AF    AFG   Afghan~  2019           502. <NA>  <NA>       <NA>    
-#> 3 AO    AGO   Angola   2019          2974. <NA>  <NA>       <NA>    
-#> 4 AL    ALB   Albania  2019          5353. <NA>  <NA>       <NA>    
-#> 5 AD    AND   Andorra  2019         40886. <NA>  <NA>       <NA>    
-#> 6 AE    ARE   United~  2019         43103. <NA>  <NA>       <NA>    
-#> # ... with 1 more variable: last_updated <date>
+#>   iso2c iso3c country               date NY.GDP.PCAP.CD unit  obs_status footnote last_updated
+#>   <chr> <chr> <chr>                <dbl>          <dbl> <chr> <chr>      <chr>    <date>      
+#> 1 AW    ABW   Aruba                 2019            NA  <NA>  <NA>       <NA>     2020-10-15  
+#> 2 AF    AFG   Afghanistan           2019           502. <NA>  <NA>       <NA>     2020-10-15  
+#> 3 AO    AGO   Angola                2019          2974. <NA>  <NA>       <NA>     2020-10-15  
+#> 4 AL    ALB   Albania               2019          5353. <NA>  <NA>       <NA>     2020-10-15  
+#> 5 AD    AND   Andorra               2019         40886. <NA>  <NA>       <NA>     2020-10-15  
+#> 6 AE    ARE   United Arab Emirates  2019         43103. <NA>  <NA>       <NA>     2020-10-15
 ```
 
 Often it is the case that the latest available data is different from country to country. There may be 2020 estimates for one location, while another only has estimates up to 2019. This is especially true for survey data. When you would like to return the latest avialble data for each country regardless of its temporal misalignment, you can use the `mrnev` instead of `mrnev`. `mrnev` stands for most recent non empty value.
@@ -308,14 +306,14 @@ gdp_capita <- wb_data("NY.GDP.PCAP.CD", mrnev = 1)
 
 head(gdp_capita)
 #> # A tibble: 6 x 8
-#>   iso2c iso3c country       date NY.GDP.PCAP.CD obs_status footnote last_updated
-#>   <chr> <chr> <chr>        <dbl>          <dbl> <chr>      <chr>    <date>      
-#> 1 AW    ABW   Aruba         2017         29008. <NA>       <NA>     2020-07-01  
-#> 2 AF    AFG   Afghanistan   2019           502. <NA>       <NA>     2020-07-01  
-#> 3 AO    AGO   Angola        2019          2974. <NA>       <NA>     2020-07-01  
-#> 4 AL    ALB   Albania       2019          5353. <NA>       <NA>     2020-07-01  
-#> 5 AD    AND   Andorra       2019         40886. <NA>       <NA>     2020-07-01  
-#> 6 AE    ARE   United Arab~  2019         43103. <NA>       <NA>     2020-07-01
+#>   iso2c iso3c country               date NY.GDP.PCAP.CD obs_status footnote last_updated
+#>   <chr> <chr> <chr>                <dbl>          <dbl> <chr>      <chr>    <date>      
+#> 1 AW    ABW   Aruba                 2017         29008. <NA>       <NA>     2020-10-15  
+#> 2 AF    AFG   Afghanistan           2019           502. <NA>       <NA>     2020-10-15  
+#> 3 AO    AGO   Angola                2019          2974. <NA>       <NA>     2020-10-15  
+#> 4 AL    ALB   Albania               2019          5353. <NA>       <NA>     2020-10-15  
+#> 5 AD    AND   Andorra               2019         40886. <NA>       <NA>     2020-10-15  
+#> 6 AE    ARE   United Arab Emirates  2019         43103. <NA>       <NA>     2020-10-15
 ```
 
 ### Dates
@@ -339,7 +337,7 @@ sum(is.na(cache_en$indicators$indicator))
 # spanish
 cache_es <- wb_cache(lang = "es")
 sum(is.na(cache_es$indicators$indicator))
-#> [1] 14749
+#> [1] 14791
 ```
 
 
