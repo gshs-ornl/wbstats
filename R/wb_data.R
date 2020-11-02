@@ -60,6 +60,7 @@
 #' @export
 #' @md
 #'
+#'
 #' @examples
 #'
 #'
@@ -238,6 +239,25 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
 
   d <- format_wb_data(d, end_point = "data")
 
+  if (any(is.na(d$iso3c))) {
+
+    # country names are not replaced with with cached versions b/c
+    # some country names are subnational values where the iso3c and iso2c would
+    # be the same value across mutliple subnational units
+    d <- d %>%
+      dplyr::mutate(
+        iso3c = as.character(iso3c),
+        iso2c = as.character(iso2c),
+        iso3c = dplyr::if_else(is.na(iso3c), iso2c, iso3c)
+      ) %>%
+      dplyr::select(-iso2c) %>%
+      dplyr::left_join(
+        dplyr::select(cache$countries, iso3c, iso2c),
+        by = "iso3c"
+      )
+  }
+
+
   # country_only actually requests 'all' from the API, now remove non-countries
   if (any(tolower(country) %in% c("countries", "countries_only", "countries only"))) {
     country_only_iso3c <- unique_na(cache$countries$iso3c[cache$countries$region != "Aggregates"])
@@ -307,18 +327,6 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
 
   if (date_as_class_date)  d <- format_wb_dates(d)
   else if (!any(grepl("M|Q", d$date, ignore.case = TRUE))) d$date <- as.numeric(d$date)
-
-  # for indicators that are not apart of the World Development Indicators dataset
-  # iso3c values are passed in the iso2c column while the iso3c column is NA
-  # check for those and standardize the returns
-  if (any(is.na(d$iso3c))) {
-
-    d_country_index <- sapply(d$country, function(i) which(cache$countries$country == i))
-    new_iso_values <- cache$countries[d_country_index, c("iso2c", "iso3c")]
-
-    d$iso2c <- new_iso_values$iso2c
-    d$iso3c <- new_iso_values$iso3c
-  }
 
 
   d

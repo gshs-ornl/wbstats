@@ -19,7 +19,7 @@ format_wb_tidy_names <- function(x, end_point) {
 
 
 #' @noRd
-format_wb_data <- function(x, end_point) {
+   format_wb_data <- function(x, end_point) {
 
   x_field_types <- format_wb_get_col_type(x)
   col_index <- which(x_field_types %in% "character")

@@ -26,7 +26,8 @@ Imports:
     readr,
     stringr,
     tibble,
-    tidyr
+    tidyr,
+    magrittr
 Suggests:
     ggplot2,
     knitr,
