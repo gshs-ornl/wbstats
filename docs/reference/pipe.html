@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download an updated list of country, indicator, and source information — wb_cache • wbstats</title>
+<title>Pipe operator — %&gt;% • wbstats</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -32,11 +32,9 @@
 
 
 
-<meta property="og:title" content="Download an updated list of country, indicator, and source information — wb_cache" />
+<meta property="og:title" content="Pipe operator — %&gt;%" />
 
-<meta property="og:description" content="Download an updated list of information regarding countries, indicators,
-sources, regions, indicator topics, lending types, income levels, and
-supported languages from the World Bank API" />
+<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,67 +109,25 @@ supported languages from the World Bank API" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Download an updated list of country, indicator, and source information</h1>
-    <small class="dont-index">Source: <a href='https://github.com/nset-ornl/wbstats/blob/master/R/end_points.R'><code>R/end_points.R</code></a></small>
-    <div class="hidden name"><code>wb_cache.Rd</code></div>
+    <h1>Pipe operator</h1>
+    <small class="dont-index">Source: <a href='https://github.com/nset-ornl/wbstats/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
+    <div class="hidden name"><code>pipe.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Download an updated list of information regarding countries, indicators,
-sources, regions, indicator topics, lending types, income levels, and
-supported languages from the World Bank API</p>
+    <p>See <code>magrittr::%&gt;%</code> for details.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>wb_cache</span>(<span class='no'>lang</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>lang</th>
-      <td><p>Language in which to return the results. If <code>lang</code> is unspecified,
-english is the default. For supported languages see <code><a href='wb_end_point_info.html'>wb_languages()</a></code>.
-Possible values of <code>lang</code> are in the <code>iso2</code> column. A note of warning, not
-all data returns have support for langauges other than english. If the specific
-return does not support your requested language by default it will return <code>NA</code>.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A list containing the following items:</p><ul>
-<li><p><code>countries</code>: The result of calling <code><a href='wb_end_point_info.html'>wb_countries()</a></code></p></li>
-<li><p><code>indicators</code>: The result of calling <code><a href='wb_indicators.html'>wb_indicators()</a></code></p></li>
-<li><p><code>sources</code>: The result of calling <code><a href='wb_end_point_info.html'>wb_sources()</a></code></p></li>
-<li><p><code>topics</code>: The result of calling <code><a href='wb_end_point_info.html'>wb_topics()</a></code></p></li>
-<li><p><code>regions</code>: The result of calling <code><a href='wb_end_point_info.html'>wb_regions()</a></code></p></li>
-<li><p><code>income_levels</code>: The result of calling <code><a href='wb_end_point_info.html'>wb_income_levels()</a></code></p></li>
-<li><p><code>lending_types</code>: The result of calling <code><a href='wb_end_point_info.html'>wb_lending_types()</a></code></p></li>
-<li><p><code>languages</code>: The result of calling <code><a href='wb_end_point_info.html'>wb_languages()</a></code></p></li>
-</ul>
-
-    
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    <p>Not all data returns have support for langauges other than english. If the specific return
-does not support your requested language by default it will return <code>NA</code>. For an enumeration of
-supported languages by data source please see <code><a href='wb_end_point_info.html'>wb_languages()</a></code></p>
-<p>Saving this return and using it has the <code>cache</code> parameter in <code><a href='wb_data.html'>wb_data()</a></code> and <code><a href='wb_search.html'>wb_search()</a></code>
-replaces the default cached version <a href='wb_cachelist.html'>wb_cachelist</a> that comes with the package itself</p>
-    
+    <pre class="usage"><span class='no'>lhs</span> <span class='kw'>%&gt;%</span> <span class='no'>rhs</span></pre>
+        
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#note">Note</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

@@ -1,3 +1,9 @@
+# wbstats 1.0.2
+
+## Bug fixes:
+* Now precomputes vignettes to better align with CRAN policies regarding internet access
+
+
 # wbstats 1.0.1
 
 Release `1.0.1` fixes a handful of minor issues

@@ -67,7 +67,7 @@ a data frame of matching results" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wbstats</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
       </span>
     </div>
 
@@ -170,23 +170,23 @@ if <code>TRUE</code>, case is ignored during matching. Default is <code>TRUE</co
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='fu'>wb_search</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"education"</span>)
+    <pre class="examples"><span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'>wb_search</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"education"</span>)
 
-<span class='fu'>wb_search</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"Food and Agriculture Organization"</span>, <span class='kw'>fields</span> <span class='kw'>=</span> <span class='st'>"source_org"</span>)
+<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'>wb_search</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"Food and Agriculture Organization"</span>, <span class='kw'>fields</span> <span class='kw'>=</span> <span class='st'>"source_org"</span>)
 
 <span class='co'># with regular expression operators</span>
 <span class='co'># 'poverty' OR 'unemployment' OR 'employment'</span>
-<span class='fu'>wb_search</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"poverty|unemployment|employment"</span>)
+<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'>wb_search</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"poverty|unemployment|employment"</span>)
 
 <span class='co'># pass any other grep argument along as well</span>
 <span class='co'># everything without 'education'</span>
-<span class='fu'>wb_search</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"education"</span>, <span class='kw'>invert</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'>wb_search</span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"education"</span>, <span class='kw'>invert</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># contains "gdp" AND "trade"</span>
-<span class='fu'>wb_search</span>(<span class='st'>"^(?=.*gdp)(?=.*trade).*"</span>, <span class='kw'>perl</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'>wb_search</span>(<span class='st'>"^(?=.*gdp)(?=.*trade).*"</span>, <span class='kw'>perl</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># contains "gdp" and NOT "trade"</span>
-<span class='fu'>wb_search</span>(<span class='st'>"^(?=.*gdp)(?!.*trade).*"</span>, <span class='kw'>perl</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'>wb_search</span>(<span class='st'>"^(?=.*gdp)(?!.*trade).*"</span>, <span class='kw'>perl</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
