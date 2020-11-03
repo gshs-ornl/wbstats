@@ -7,7 +7,7 @@ vignette: >
   %\VignetteIndexEntry{wbstats}
   %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
-    
+
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -36,9 +36,9 @@ devtools::install_github("nset-ornl/wbstats")
 
 # Introduction
 
-The World Bank^[<http://www.worldbank.org/>] is a tremendous source of global socio-economic data; spanning several decades and dozens of topics, it has the potential to shed light on numerous global issues. To help provide access to this rich source of information, The World Bank themselves, provide a well structured RESTful API^[<http://data.worldbank.org/developers>]. While this API is very useful for integration into web services and other high-level applications, it becomes quickly overwhelming for researchers who have neither the time nor the expertise to develop software to interface with the API. This leaves the researcher to rely on manual bulk downloads of spreadsheets of the data they are interested in. This too is can quickly become overwhelming, as the work is manual, time consuming, and not easily reproducible. The goal of the `wbstats` R-package is to provide a bridge between these alternatives and allow researchers to focus on their research questions and not the question of accessing the data. The `wbstats` R-package allows researchers to quickly search and download the data of their particular interest in a programmatic and reproducible fashion; this facilitates a seamless integration into their workflow and allows analysis to be quickly rerun on different areas of interest and with realtime access to the latest available data.
+The World Bank^[<https://www.worldbank.org/>] is a tremendous source of global socio-economic data; spanning several decades and dozens of topics, it has the potential to shed light on numerous global issues. To help provide access to this rich source of information, The World Bank themselves, provide a well structured RESTful API. While this API is very useful for integration into web services and other high-level applications, it becomes quickly overwhelming for researchers who have neither the time nor the expertise to develop software to interface with the API. This leaves the researcher to rely on manual bulk downloads of spreadsheets of the data they are interested in. This too is can quickly become overwhelming, as the work is manual, time consuming, and not easily reproducible. The goal of the `wbstats` R-package is to provide a bridge between these alternatives and allow researchers to focus on their research questions and not the question of accessing the data. The `wbstats` R-package allows researchers to quickly search and download the data of their particular interest in a programmatic and reproducible fashion; this facilitates a seamless integration into their workflow and allows analysis to be quickly rerun on different areas of interest and with realtime access to the latest available data.
 
-### Highlighted features of the `wbstats` R-package: 
+### Highlighted features of the `wbstats` R-package:
 
 - Uses version 2 of the World Bank API that provides access to more indicators and metadata than the previous API version
 - Access to all annual, quarterly, and monthly data available in the API
@@ -64,8 +64,8 @@ library(wbstats)
 str(wb_cachelist, max.level = 1)
 #> List of 8
 #>  $ countries    : tibble [304 x 18] (S3: tbl_df/tbl/data.frame)
-#>  $ indicators   : tibble [16,607 x 8] (S3: tbl_df/tbl/data.frame)
-#>  $ sources      : tibble [61 x 9] (S3: tbl_df/tbl/data.frame)
+#>  $ indicators   : tibble [16,649 x 8] (S3: tbl_df/tbl/data.frame)
+#>  $ sources      : tibble [63 x 9] (S3: tbl_df/tbl/data.frame)
 #>  $ topics       : tibble [21 x 3] (S3: tbl_df/tbl/data.frame)
 #>  $ regions      : tibble [48 x 4] (S3: tbl_df/tbl/data.frame)
 #>  $ income_levels: tibble [7 x 3] (S3: tbl_df/tbl/data.frame)
@@ -226,17 +226,17 @@ pop_data
 #> 4 7E    ECA   Europe & Central Asia (excluding high income)  2012   382509766 <NA>  <NA>       <NA>     2020-10-15  
 #> 5 8S    SAS   South Asia                                     2012  1683747130 <NA>  <NA>       <NA>     2020-10-15  
 #> 6 ZG    SSF   Sub-Saharan Africa                             2012   917726973 <NA>  <NA>       <NA>     2020-10-15  
-#> 7 XD    HIC   High income                                    2012  1191504227 <NA>  <NA>       <NA>     2020-10-15
+#> 7 <NA>  XD    High income                                    2012  1191504227 <NA>  <NA>       <NA>     2020-10-15
 ```
 
-As of `wbstats 1.0` queries are now returned in wide format. This was a request made by multiple users and is in line with the principles of [tidy data](https://www.jstatsoft.org/article/view/v059i10). If you would like to return the data in a long format, you can set `return_wide = FALSE`   
+As of `wbstats 1.0` queries are now returned in wide format. This was a request made by multiple users and is in line with the principles of [tidy data](https://www.jstatsoft.org/article/view/v059i10). If you would like to return the data in a long format, you can set `return_wide = FALSE`
 
-Now that each indicator is it's own column, we can allow custom names for the indicators 
+Now that each indicator is it's own column, we can allow custom names for the indicators
 
 ```r
 library(wbstats)
 
-my_indicators = c("pop" = "SP.POP.TOTL", 
+my_indicators = c("pop" = "SP.POP.TOTL",
                   "gdp" = "NY.GDP.MKTP.CD")
 
 pop_gdp <- wb_data(my_indicators, start_date = 2010, end_date = 2012)
@@ -258,7 +258,7 @@ You'll notice that when you query only one indicator, as in the first two exampl
 ```r
 library(wbstats)
 
-my_indicators = c("pop" = "SP.POP.TOTL", 
+my_indicators = c("pop" = "SP.POP.TOTL",
                   "gdp" = "NY.GDP.MKTP.CD")
 
 pop_gdp_long <- wb_data(my_indicators, start_date = 2010, end_date = 2012, return_wide = FALSE)
@@ -321,7 +321,7 @@ Because the majority of data available from the World Bank is at the annual reso
 
 # Some Sharp Corners
 There are a few behaviors of the World Bank API that being aware of could help explain some potentially unexpected results. These results are known but no special actions are taken to mitigate them as they are the result of the API itself and artifically limiting the inputs or results could potentially causes problems or create unnecessary rescrictions in the future.
- 
+
 
 ## Searching in other languages
 Not all data sources support all languages. If an indicator does not have a translation for a particular language, the non-supported fields will return as `NA`. This could potentially result in a differing number of matching indicators from `wb_search()`
