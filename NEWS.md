@@ -1,3 +1,6 @@
+# wbstats 1.0.3
+* Fixes issues with examples taking too long to run
+
 # wbstats 1.0.2
 
 ## Bug fixes:
