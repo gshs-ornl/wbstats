@@ -104,67 +104,79 @@ that data point is "forecast".
 \donttest{df_gdp <- wb_data("NY.GDP.MKTP.CD")}
 
 # Brazilian gdp for all available dates
-df_brazil <- wb_data("NY.GDP.MKTP.CD", country = "br")
+\donttest{df_brazil <- wb_data("NY.GDP.MKTP.CD", country = "br")}
 
 # Brazilian gdp for 2006
-df_brazil_1 <- wb_data("NY.GDP.MKTP.CD", country = "brazil",
-                       start_date = 2006)
+\donttest{
+df_brazil_1 <- wb_data("NY.GDP.MKTP.CD", country = "brazil", start_date = 2006)
+}
 
 # Brazilian gdp for 2006-2010
+\donttest{
 df_brazil_2 <- wb_data("NY.GDP.MKTP.CD", country = "BRA",
                        start_date = 2006, end_date = 2010)
+}
 
 # Population, GDP, Unemployment Rate, Birth Rate (per 1000 people)
+\donttest{
 my_indicators <- c("SP.POP.TOTL",
                    "NY.GDP.MKTP.CD",
                    "SL.UEM.TOTL.ZS",
                    "SP.DYN.CBRT.IN")
+}
 
 \donttest{df <- wb_data(my_indicators)}
 
 # you pass multiple country ids of different types
 # Albania (iso2c), Georgia (iso3c), and Mongolia
+\donttest{
 my_countries <- c("AL", "Geo", "mongolia")
 df <- wb_data(my_indicators, country = my_countries,
               start_date = 2005, end_date = 2007)
+}
 
 # same data as above, but in long format
+\donttest{
 df_long <- wb_data(my_indicators, country = my_countries,
                    start_date = 2005, end_date = 2007,
                    return_wide = FALSE)
-
+}
 
 # regional population totals
 # regions correspond to the region column in wb_cachelist$countries
+\donttest{
 df_region <- wb_data("SP.POP.TOTL", country = "regions_only",
                      start_date = 2010, end_date = 2014)
-
+}
 
 # a specific region
+\donttest{
 df_world <- wb_data("SP.POP.TOTL", country = "world",
                     start_date = 2010, end_date = 2014)
-
+}
 
 # if the indicator is part of a named vector the name will be the column name
 my_indicators <- c("pop" = "SP.POP.TOTL",
                    "gdp" = "NY.GDP.MKTP.CD",
                    "unemployment_rate" = "SL.UEM.TOTL.ZS",
                    "birth_rate" = "SP.DYN.CBRT.IN")
-
+\donttest{
 df_names <- wb_data(my_indicators, country = "world",
                     start_date = 2010, end_date = 2014)
-
+}
 
 # custom names are ignored if returning in long format
+\donttest{
 df_names_long <- wb_data(my_indicators, country = "world",
                          start_date = 2010, end_date = 2014,
                          return_wide = FALSE)
+}
 
 # same as above but in Bulgarian
 # note that not all indicators have translations for all languages
+\donttest{
 df_names_long_bg <- wb_data(my_indicators, country = "world",
                             start_date = 2010, end_date = 2014,
                             return_wide = FALSE, lang = "bg")
-
-
+}
 }
