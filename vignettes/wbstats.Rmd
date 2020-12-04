@@ -91,10 +91,10 @@ new_cache <- wb_cache()
 
 ```
 #> # A tibble: 2 x 8
-#>   indicator_id  indicator    unit  indicator_desc                                            source_org                                            topics   source_id source     
-#>   <chr>         <chr>        <lgl> <chr>                                                     <chr>                                                 <list>       <dbl> <chr>      
-#> 1 NY.GDP.MKTP.~ GDP (curren~ NA    GDP at purchaser's prices is the sum of gross value adde~ World Bank national accounts data, and OECD National~ <df[,2]~         2 World Deve~
-#> 2 SP.POP.TOTL   Population,~ NA    Total population is based on the de facto definition of ~ (1) United Nations Population Division. World Popula~ <df[,2]~         2 World Deve~
+#>   indicator_id  indicator   unit  indicator_desc                                    source_org                                   topics   source_id source     
+#>   <chr>         <chr>       <lgl> <chr>                                             <chr>                                        <list>       <dbl> <chr>      
+#> 1 NY.GDP.MKTP.~ GDP (curre~ NA    GDP at purchaser's prices is the sum of gross va~ World Bank national accounts data, and OECD~ <df[,2]~         2 World Deve~
+#> 2 SP.POP.TOTL   Population~ NA    Total population is based on the de facto defini~ (1) United Nations Population Division. Wor~ <df[,2]~         2 World Deve~
 ```
 
 By default the search is done over the `indicator_id`, `indicator`, and `indicator_desc` fields and returns the those 3 columns of the matching rows. The `indicator_id` values are inputs into `wb_data()`, the function for downloading the data. To return all columns for the `indicators` data frame, you can set `extra = TRUE`.
@@ -106,14 +106,14 @@ unemploy_inds<- wb_search("unemployment")
 
 head(unemploy_inds)
 #> # A tibble: 6 x 3
-#>   indicator_id indicator                                           indicator_desc                                                                                                
-#>   <chr>        <chr>                                               <chr>                                                                                                         
-#> 1 fin37.t.a    Received government transfers in the past year (% ~ The percentage of respondents who report personally receiving any financial support from the government in th~
-#> 2 fin37.t.a.1  Received government transfers in the past year, ma~ The percentage of respondents who report personally receiving any financial support from the government in th~
-#> 3 fin37.t.a.10 Received government transfers in the past year, in~ The percentage of respondents who report personally receiving any financial support from the government in th~
-#> 4 fin37.t.a.11 Received government transfers in the past year, ou~ The percentage of respondents who report personally receiving any financial support from the government in th~
-#> 5 fin37.t.a.2  Received government transfers in the past year, fe~ The percentage of respondents who report personally receiving any financial support from the government in th~
-#> 6 fin37.t.a.3  Received government transfers in the past year, yo~ The percentage of respondents who report personally receiving any financial support from the government in th~
+#>   indicator_id indicator                                         indicator_desc                                                                                
+#>   <chr>        <chr>                                             <chr>                                                                                         
+#> 1 fin37.t.a    Received government transfers in the past year (~ The percentage of respondents who report personally receiving any financial support from the ~
+#> 2 fin37.t.a.1  Received government transfers in the past year, ~ The percentage of respondents who report personally receiving any financial support from the ~
+#> 3 fin37.t.a.10 Received government transfers in the past year, ~ The percentage of respondents who report personally receiving any financial support from the ~
+#> 4 fin37.t.a.11 Received government transfers in the past year, ~ The percentage of respondents who report personally receiving any financial support from the ~
+#> 5 fin37.t.a.2  Received government transfers in the past year, ~ The percentage of respondents who report personally receiving any financial support from the ~
+#> 6 fin37.t.a.3  Received government transfers in the past year, ~ The percentage of respondents who report personally receiving any financial support from the ~
 ```
 
 Other fields can be searched by simply changing the `fields` parameter. For example
@@ -125,10 +125,10 @@ blmbrg_vars <- wb_search("Bloomberg", fields = "source_org")
 
 head(blmbrg_vars)
 #> # A tibble: 2 x 3
-#>   indicator_id indicator                      indicator_desc                                                                                                                     
-#>   <chr>        <chr>                          <chr>                                                                                                                              
-#> 1 GFDD.OM.02   Stock market return (%, year-~ Stock market return is the growth rate of annual average stock market index. Annual average stock market index is constructed by t~
-#> 2 GFDD.SM.01   Stock price volatility         Stock price volatility is the average of the 360-day volatility of the national stock market index.
+#>   indicator_id indicator                     indicator_desc                                                                                                    
+#>   <chr>        <chr>                         <chr>                                                                                                             
+#> 1 GFDD.OM.02   Stock market return (%, year~ Stock market return is the growth rate of annual average stock market index. Annual average stock market index is~
+#> 2 GFDD.SM.01   Stock price volatility        Stock price volatility is the average of the 360-day volatility of the national stock market index.
 ```
 
 Regular expressions are also supported
@@ -141,14 +141,14 @@ povemply_inds <- wb_search(pattern = "poverty|unemployment|employment")
 
 head(povemply_inds)
 #> # A tibble: 6 x 3
-#>   indicator_id        indicator                       indicator_desc                                                                                                             
-#>   <chr>               <chr>                           <chr>                                                                                                                      
-#> 1 1.0.HCount.1.90usd  Poverty Headcount ($1.90 a day) The poverty headcount index measures the proportion of the population with daily per capita income (in 2011 PPP) below the~
-#> 2 1.0.HCount.2.5usd   Poverty Headcount ($2.50 a day) The poverty headcount index measures the proportion of the population with daily per capita income (in 2005 PPP) below the~
-#> 3 1.0.HCount.Mid10to~ Middle Class ($10-50 a day) He~ The poverty headcount index measures the proportion of the population with daily per capita income (in 2005 PPP) below the~
-#> 4 1.0.HCount.Ofcl     Official Moderate Poverty Rate~ The poverty headcount index measures the proportion of the population with daily per capita income below the official pove~
-#> 5 1.0.HCount.Poor4uds Poverty Headcount ($4 a day)    The poverty headcount index measures the proportion of the population with daily per capita income (in 2005 PPP) below the~
-#> 6 1.0.HCount.Vul4to10 Vulnerable ($4-10 a day) Headc~ The poverty headcount index measures the proportion of the population with daily per capita income (in 2005 PPP) below the~
+#>   indicator_id       indicator                     indicator_desc                                                                                              
+#>   <chr>              <chr>                         <chr>                                                                                                       
+#> 1 1.0.HCount.1.90usd Poverty Headcount ($1.90 a d~ The poverty headcount index measures the proportion of the population with daily per capita income (in 2011~
+#> 2 1.0.HCount.2.5usd  Poverty Headcount ($2.50 a d~ The poverty headcount index measures the proportion of the population with daily per capita income (in 2005~
+#> 3 1.0.HCount.Mid10t~ Middle Class ($10-50 a day) ~ The poverty headcount index measures the proportion of the population with daily per capita income (in 2005~
+#> 4 1.0.HCount.Ofcl    Official Moderate Poverty Ra~ The poverty headcount index measures the proportion of the population with daily per capita income below th~
+#> 5 1.0.HCount.Poor4u~ Poverty Headcount ($4 a day)  The poverty headcount index measures the proportion of the population with daily per capita income (in 2005~
+#> 6 1.0.HCount.Vul4to~ Vulnerable ($4-10 a day) Hea~ The poverty headcount index measures the proportion of the population with daily per capita income (in 2005~
 ```
 
 As well as any `grep` function argument
@@ -161,14 +161,14 @@ gdp_no_trade_inds <- wb_search("^(?=.*gdp)(?!.*trade).*", perl = TRUE)
 
 head(gdp_no_trade_inds)
 #> # A tibble: 6 x 3
-#>   indicator_id     indicator                             indicator_desc                                                                                                          
-#>   <chr>            <chr>                                 <chr>                                                                                                                   
-#> 1 5.51.01.10.gdp   Per capita GDP growth                 GDP per capita is the sum of gross value added by all resident producers in the economy plus any product taxes (less su~
-#> 2 6.0.GDP_current  GDP (current $)                       GDP is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsi~
-#> 3 6.0.GDP_growth   GDP growth (annual %)                 Annual percentage growth rate of GDP at market prices based on constant local currency. Aggregates are based on constan~
-#> 4 6.0.GDP_usd      GDP (constant 2005 $)                 GDP is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsi~
-#> 5 6.0.GDPpc_const~ GDP per capita, PPP (constant 2011 i~ GDP per capita based on purchasing power parity (PPP). PPP GDP is gross domestic product converted to international dol~
-#> 6 BI.WAG.TOTL.GD.~ Wage bill as a percentage of GDP      <NA>
+#>   indicator_id     indicator                            indicator_desc                                                                                         
+#>   <chr>            <chr>                                <chr>                                                                                                  
+#> 1 5.51.01.10.gdp   Per capita GDP growth                GDP per capita is the sum of gross value added by all resident producers in the economy plus any produ~
+#> 2 6.0.GDP_current  GDP (current $)                      GDP is the sum of gross value added by all resident producers in the economy plus any product taxes an~
+#> 3 6.0.GDP_growth   GDP growth (annual %)                Annual percentage growth rate of GDP at market prices based on constant local currency. Aggregates are~
+#> 4 6.0.GDP_usd      GDP (constant 2005 $)                GDP is the sum of gross value added by all resident producers in the economy plus any product taxes an~
+#> 5 6.0.GDPpc_const~ GDP per capita, PPP (constant 2011 ~ GDP per capita based on purchasing power parity (PPP). PPP GDP is gross domestic product converted to ~
+#> 6 BI.WAG.TOTL.GD.~ Wage bill as a percentage of GDP     <NA>
 ```
 
 
