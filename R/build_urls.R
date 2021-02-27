@@ -121,17 +121,32 @@ fetch_wb_url_content <- function(url_string, indicator) {
   indicator <- if_missing(indicator)
 
   # move this to data-raw eventually
-  ua <- httr::user_agent("https://github.com/nset-ornl/wbstats")
+  ua <- httr::user_agent("https://github.com/gshs-ornl/wbstats")
 
   # add api_token here if/when that is supported
 
   get_return <- httr::GET(url_string, ua, httr::timeout(20))
 
+  # there is a known issue with some sources without metadata failing when
+  # the footnote field is requested. Since we can't know ahead of time
+  # if metadata has been added to a source, this is a quick check to see
+  # if the same request works when not requesting the footnote field
   if (httr::http_error(get_return)) {
+    footnote_pattern <- "footnote=y"
+    error_status <- httr::http_status(get_return)
 
-    error_status<- httr::http_status(get_return)
+    if (error_status$reason == "Bad Request" & grepl(footnote_pattern, url_string)) {
+      url_string_retry <- gsub(footnote_pattern, "footnote=n", url_string)
+      get_return_retry <- httr::GET(url_string_retry, ua, httr::timeout(20))
 
-    stop(sprintf("World Bank API request failed for indicator %s\nmessage: %s\ncategory: %s\nreason: %s \nurl: %s\nSetting return_wide = F may help for some indicators.",
+      # if this one returns successfully, then replace the original
+      if (!httr::http_error(get_return_retry)) get_return <- get_return_retry
+    }
+  }
+
+  # throw error if still returns error
+  if (httr::http_error(get_return)) {
+    stop(sprintf("World Bank API request failed for indicator %s\nmessage: %s\ncategory: %s\nreason: %s \nurl: %s",
                  indicator,
                  error_status$message,
                  error_status$category,

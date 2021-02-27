@@ -244,8 +244,8 @@ wb_data <- function(indicator, country = "countries_only", start_date, end_date,
                    )
   d_list <- d_list[sapply(d_list, is.data.frame)]
 
-  d <- do.call(rbind, d_list)
-  if(!is.data.frame(d)) {
+  d <- dplyr::bind_rows(d_list)
+  if(!is.data.frame(d) | nrow(d) == 0) {
     warning("No data was returned for your query. Returning an empty tibble")
     return(tibble::tibble())
   }
