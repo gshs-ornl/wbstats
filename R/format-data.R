@@ -39,7 +39,7 @@ format_wb_tidy_names <- function(x, end_point) {
     if("value" %in% x_names) x$value <- as.numeric(x$value)
     if("unit" %in% x_names) x$unit <- as.character(x$unit)
     if("obs_status" %in% x_names) x$obs_status <- as.character(x$obs_status)
-    if("obs_status" %in% x_names) x$footnote <- as.character(x$footnote)
+    if("footnote" %in% x_names) x$footnote <- as.character(x$footnote)
   }
 
   if (end_point == "country") x[x$iso3c == "NAM", "iso2c"] <- "NA"

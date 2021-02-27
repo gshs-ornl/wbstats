@@ -131,7 +131,7 @@ fetch_wb_url_content <- function(url_string, indicator) {
 
     error_status<- httr::http_status(get_return)
 
-    stop(sprintf("World Bank API request failed for indicator %s\nmessage: %s\ncategory: %s\nreason: %s \nurl: %s",
+    stop(sprintf("World Bank API request failed for indicator %s\nmessage: %s\ncategory: %s\nreason: %s \nurl: %s\nSetting return_wide = F may help for some indicators.",
                  indicator,
                  error_status$message,
                  error_status$category,
