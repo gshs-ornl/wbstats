@@ -297,7 +297,7 @@ head(gdp_capita)
 #> 6 AE    ARE   United Arab Emirates  2019         43103. <NA>  <NA>       <NA>     2020-10-15
 ```
 
-Often it is the case that the latest available data is different from country to country. There may be 2020 estimates for one location, while another only has estimates up to 2019. This is especially true for survey data. When you would like to return the latest avialble data for each country regardless of its temporal misalignment, you can use the `mrnev` instead of `mrnev`. `mrnev` stands for most recent non empty value.
+Often it is the case that the latest available data is different from country to country. There may be 2020 estimates for one location, while another only has estimates up to 2019. This is especially true for survey data. When you would like to return the latest avialble data for each country regardless of its temporal misalignment, you can use the `mrnev` instead of `mrv`. `mrnev` stands for most recent non empty value.
 
 ```r
 library(wbstats)
